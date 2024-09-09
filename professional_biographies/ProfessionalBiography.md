@@ -22,5 +22,4 @@
 ---
 
 ## Project Sought
--
-
+I am seeking a capstone project that allows me to use my strengths which are cloud computing and web development. Through many coops I have built a strong foundation and now I wish to use that to create a capstone project where I can finally put my skills to use for something that I want to do.
