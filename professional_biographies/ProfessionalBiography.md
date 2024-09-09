@@ -3,27 +3,7 @@
 
 ---
 
-
-
-## SKILLS
-- **Programming Languages:** C++, Java, C, MATLAB, Python, Tailwind CSS, Next.js, LabVIEW, Power BI, Microsoft Office
-- **Web Development:** HTML/CSS, PHP, Python, Java
-- **Databases:** Microsoft Access w/ C++, MySQL
-- **Software Tools:** Visual Studio, Spyder, Power BI, R Studio
-- **Cloud Platform/Services:** Microsoft Azure
-
----
-
-## PROJECTS
-**Meerkat Project, Cincinnati, OH**  
-*August 2023 – Present*  
-- Created a website for engineering students at UC to simplify navigation compared to previous years.
-- Utilized HTML for creating navigation tabs and functions.
-- Used C++ and Visual Studio Code for backend development.
-
----
-
-## EXPERIENCE
+## COOP WORK EXPERIENCE
 **Intern at Idaho National Laboratory**  
 *January 2024 – August 2024*  
 - Worked as a full-stack developer for the first 3 months, focusing on front-end development using Next.js, Tailwind CSS, and Python.
@@ -39,4 +19,8 @@
 - Tutored and guided students for academic success.
 - Graded assignments, including homework, quizzes, and exams.
 
+---
+
+## Project Sought
+-
 
