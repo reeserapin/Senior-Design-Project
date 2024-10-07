@@ -17,3 +17,12 @@
 | 13 | Develop front-end code based on Figma wireframes | Minha Raza | 35  |
 | 14 | Split up responsibilities in the form of tickets/issues on GitHub | Vaishakh Nair | 5   |
 | 15 | Set up GitHub actions to automate continuous integration | Reese Rapin | 6   |
+
+### Estimated Total Hours per Team Lead:
+- **Reese Rapin**: estimated 12-15 hours per week (on average)
+- **Vaishakh Nair**: estimated 12-15 hours per week (on average)
+- **Minha Raza**: estimated 12-15 hours per week (on average)
+- **Neha Annareddy**: estimated 12-15 hours per week (on average)
+- **Ayush Sunkad**: estimated 12-15 hours per week (on average)
+
+**Everyone will help each other out as needed + to learn more about other aspects of the project**
