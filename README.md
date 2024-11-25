@@ -7,7 +7,7 @@
 > Neha Annareddy (annarenr@mail.uc.edu), CS<br>
 > Ayush Sunkad (sunkadah@mail.uc.edu), CS<br>
 
-> Advised by INSERT_PROFESSORS_NAME PhD (INSERT_PROFESSORS_EMAIL), Department of CS
+> Advised by Jillian Aurisano PhD aurisajm@ucmail.uc.edu, Department of CS
 
 ## Topic
 
