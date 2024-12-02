@@ -1,6 +1,6 @@
 # Senior-Design-Project
 
-# INSERT_PROJECT_NAME
+# Pick Me Puppy
 
 > Reese Rapin (rapinre@mail.uc.edu), CS<br>
 > Minha Raza (razamh@mail.uc.edu), CS<br>
