@@ -6,6 +6,7 @@
 > Minha Raza (razamh@mail.uc.edu), CS<br>
 > Neha Annareddy (annarenr@mail.uc.edu), CS<br>
 > Ayush Sunkad (sunkadah@mail.uc.edu), CS<br>
+> Vaishakh Nair (vibudhvh@mail.uc.edu), CS<br>
 
 > Advised by Jillian Aurisano PhD aurisajm@ucmail.uc.edu, Department of CS
 
