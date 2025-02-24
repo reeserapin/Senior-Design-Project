@@ -1,16 +1,20 @@
-// src/components/TopBar.jsx
 import React from 'react';
 
 function TopBar() {
   return (
     <div className="topbar">
+      <h1>Pet-igree</h1>
       <div className="topbar-content">
-        <h1>Pet-igree</h1>
-        {/* <img
-          src="/path/to/your/image.jpg" // Replace with the correct image path
-          alt="Profile"
-          className="profile-image"
-        /> */}
+         <div className="cat-image">
+          <img
+            src="/public/cat4.jpg"
+            alt="Profile"
+            className="profile-image"
+          />
+        </div>
+        <div className="search-container">
+          <input type="text" placeholder="Search..." className="search-bar" />
+        </div>
       </div>
     </div>
   );

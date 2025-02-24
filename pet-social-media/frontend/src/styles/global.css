@@ -1,19 +1,53 @@
+/* Topbar Styles */
 .topbar {
     background-color: #B9E7F9;
     color: white;
     padding: 10px 20px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     height: 60px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    position: fixed; 
+    position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000; 
-    transition: top 0.3s ease; 
+    width: 100%;
+    z-index: 1000;
 }
+
+.topbar-content {
+    display: flex;
+    justify-content: space-between; /* Space between image, title, and search bar */
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Optional: Limit max width of the content */
+    padding: 0 20px; /* Adds some padding */
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+h1 {
+    flex-grow: 1; /* This ensures the title stays centered */
+    text-align: center;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 200px;
+    margin-left: auto; /* Pushes the search bar to the far right */
+}
+
 
 /* Sidebar Styles */
 .sidebar {
