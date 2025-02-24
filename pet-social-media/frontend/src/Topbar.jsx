@@ -6,11 +6,11 @@ function TopBar() {
     <div className="topbar">
       <div className="topbar-content">
         <h1>Pet-igree</h1>
-        <img
+        {/* <img
           src="/path/to/your/image.jpg" // Replace with the correct image path
           alt="Profile"
           className="profile-image"
-        />
+        /> */}
       </div>
     </div>
   );

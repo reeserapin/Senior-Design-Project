@@ -1,37 +1,40 @@
-/* src/styles/global.css */
 .topbar {
-    background-color: #B9E7F9; /* Updated to match lighter topbar color */
-    color: white; /* Changed to black for better contrast */
+    background-color: #B9E7F9;
+    color: white;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 60px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Ensure it spans the full width */
-    position: fixed; /* Keeps the topbar fixed at the top */
+    width: 100%;
+    position: fixed; 
     top: 0;
     left: 0;
-    z-index: 1000; /* Ensures it stays above other content */
+    z-index: 1000; 
+    transition: top 0.3s ease; 
 }
 
+/* Sidebar Styles */
 .sidebar {
-    background-color: #E1F7FF; /* Lighter sidebar color to match the screenshot */
+    background-color: #E1F7FF; 
     color: black;
     padding: 20px 10px;
     width: 100px;
     height: 100vh;
     display: flex;
-    position : fixed;
+    position: fixed; 
     flex-direction: column;
     align-items: center;
     gap: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    margin-top: 60px; /* Adjust for fixed topbar height */
+    margin-top: 60px; 
+    top: 0;
+    left: 0;
 }
 
 .sidebar ul {
-    list-style: none; /* Removes bullet points */
+    list-style: none; 
     padding: 0;
     margin: 0;
     width: 100%;
@@ -39,15 +42,15 @@
 
 .sidebar li {
     display: flex;
-    flex-direction: column; /* Stack image and text vertically */
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
-    margin: 30px 0; /* Adds space above and below each item */
+    margin: 30px 0; 
 }
 
 .sidebar a {
     display: flex;
-    flex-direction: column; /* Stack icon and text vertically */
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
     color: black;
@@ -55,7 +58,7 @@
     font-size: 16px;
     text-align: center;
     text-decoration: none;
-    gap: 10px; /* Space between image and text */
+    gap: 10px; 
 }
 
 .sidebar img,
@@ -72,31 +75,31 @@
     color: #535bf2;
 }
 
-
-
+/* Content Styles */
 .content {
     flex-grow: 1;
-    padding: 200px;
+    padding: 200px 20px; 
     background-color: #f4f4f4;
     overflow-y: auto;
-    margin-top: 60px; /* Adjust for fixed topbar height */
+    margin-left: 100px;
 }
 
-.app {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+/* Responsiveness: Adjust for smaller screens */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px; 
+    }
+    .sidebar img,
+    .sidebar .nav-icon {
+        width: 40px;
+        height: 40px;
+    }
+    .content {
+        padding: 100px 10px;
+        margin-left: 80px; 
+    }
+    .topbar {
+        padding: 10px;
+        height: 50px; 
+    }
 }
-
-.main-content {
-    display: flex;
-    flex-grow: 1;
-    overflow: hidden;
-}
-
-.menu-icon {
-    font-size: 24px;
-    cursor: pointer;
-}
-
-
