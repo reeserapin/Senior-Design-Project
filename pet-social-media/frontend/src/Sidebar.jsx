@@ -33,19 +33,19 @@ function Sidebar() {
         </li>
         <li>
           <Link to="/alert">
-            <img src="/public/home.png" alt="Alert" className="nav-icon" />
+            <img src="/public/heart.png" alt="Alert" className="nav-icon" />
             Alert
           </Link>
         </li>
         <li>
           <Link to="/petshop">
-            <img src="/public/home.png" alt="Pet Shop" className="nav-icon" />
+            <img src="/public/bag.png" alt="Pet Shop" className="nav-icon" />
             Pet Shop
           </Link>
         </li>
         <li>
           <Link to="/settings">
-            <img src="/public/home.png" alt="Settings" className="nav-icon" />
+            <img src="/public/settings.png" alt="Settings" className="nav-icon" />
             Settings
           </Link>
         </li>
