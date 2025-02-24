@@ -1,0 +1,81 @@
+/* src/styles/global.css */
+.topbar {
+    background-color: #B9E7F9; /* Updated to match lighter topbar color */
+    color: white; /* Changed to black for better contrast */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensure it spans the full width */
+    position: fixed; /* Keeps the topbar fixed at the top */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensures it stays above other content */
+}
+
+.sidebar {
+    background-color: #E1F7FF; /* Lighter sidebar color to match the screenshot */
+    color: black;
+    padding: 20px 10px;
+    width: 150px;
+    height: 100vh;
+    display: flex;
+    position : fixed;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 60px; /* Adjust for fixed topbar height */
+}
+
+.sidebar img,
+.sidebar .icon {
+    width: 40px;
+    height: 40px;
+    /* border-radius: 50%; */
+}
+
+.sidebar a {
+    color: black;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 20px;
+    text-align: center;
+}
+
+.sidebar a:hover {
+    color: #646cff;
+}
+
+.sidebar a.active {
+    color: #535bf2;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 200px;
+    background-color: #f4f4f4;
+    overflow-y: auto;
+    margin-top: 60px; /* Adjust for fixed topbar height */
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main-content {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
