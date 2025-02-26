@@ -1,4 +1,3 @@
-// src/pages/SettingsPage.jsx
 import React from 'react';
 
 function SettingsPage() {

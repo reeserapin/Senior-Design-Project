@@ -1,6 +1,6 @@
 /* Topbar Styles */
 .topbar {
-    background-color: #B9E7F9;
+    background-color: #9DD8EA;
     color: white;
     padding: 10px 20px;
     display: flex;
@@ -16,11 +16,18 @@
 
 .topbar-content {
     display: flex;
-    justify-content: space-between; /* Space between image, title, and search bar */
+    justify-content: space-between; 
     align-items: center;
     width: 100%;
-    max-width: 1200px; /* Optional: Limit max width of the content */
-    padding: 0 20px; /* Adds some padding */
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.cat-image {
+    display: flex;
+    justify-content: center; 
+    width: 100%; 
+    max-width: 80px; 
 }
 
 .profile-image {

@@ -1,4 +1,4 @@
-// src/components/Sidebar.jsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ function Sidebar() {
     <div className="sidebar">
       <Link to="/profile">
         <img
-          src="/public/linkedGirl.jpg" // Correct path in 'public' folder
+          src="/public/linkedGirl.jpg"
           alt="Profile"
           className="profile-image"
         />
