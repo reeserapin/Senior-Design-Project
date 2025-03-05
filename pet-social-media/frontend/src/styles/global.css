@@ -13,49 +13,36 @@
     width: 100%;
     z-index: 1000;
 }
-
-.topbar-content {
+  
+.left-content {
     display: flex;
-    justify-content: space-between; 
     align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    padding: 0 20px;
-}
-
-.cat-image {
-    display: flex;
-    justify-content: center; 
-    width: 100%; 
-    max-width: 80px; 
-}
-
-.profile-image {
+    gap: 15px;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .profile-image,
+  .plus-icon {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    object-fit: cover;
-}
-
-h1 {
-    flex-grow: 1; /* This ensures the title stays centered */
-    text-align: center;
-}
-
-.search-container {
-    display: flex;
-    align-items: center;
-}
-
+    cursor: pointer;
+  }
+  
 .search-bar {
-    padding: 8px 12px;
+    position: absolute;
+    right: 50px;
+    padding: 8px;
+    border-radius: 15px;
     border: 1px solid #ccc;
-    border-radius: 20px;
-    width: 200px;
-    margin-left: auto; /* Pushes the search bar to the far right */
-}
-
-
+    outline: none;
+    width: 200px; 
+  }
+  
 /* Sidebar Styles */
 .sidebar {
     background-color: #E1F7FF; 
