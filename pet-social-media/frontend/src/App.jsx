@@ -10,8 +10,6 @@ import PetShopPage from './pages/PetShoppage';
 import ProfilePage from './pages/Profilepage';
 import SettingsPage from './pages/Settingspage';
 
-import './styles/global.css';  // Import global styles
-
 function App() {
   return (
     <Router>
