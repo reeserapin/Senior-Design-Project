@@ -12,17 +12,17 @@ const posts = [
     bgColor: "bg-blue"
   },
   {
-    user: "Mason Animal Shelter",
-    avatar: "shelter-avatar.png",
-    images: ["rocky.png"],
+    user: "SPCA",
+    avatar: "./spca/spca_logo.png",
+    images: ["./spca/Spca_post.webp"],
     petNames: ["Rocky"],
     title: "Rocky",
     bgColor: "bg-green"
   },
   {
-    user: "Grace Hopper",
-    avatar: "grace-avatar.png",
-    images: ["kittens.png"],
+    user: "Diya Sharma",
+    avatar: "./kitten_breeder/Diya_Sharma.jpg",
+    images: ["./kitten_breeder/three_kittens.jpg"],
     petNames: ["kittens"],
     title: "kittens",
     bgColor: "bg-yellow"
@@ -54,12 +54,13 @@ const PetPost = ({ user, avatar, images, petNames, title, bgColor }) => {
 
 const PetPosts = () => {
   return (
-    <div className="flex flex-col items-center space-y-4 p-4">
+    <div className="posts-container">
       {posts.map((post, index) => (
         <PetPost key={index} {...post} />
       ))}
     </div>
   );
 };
+
 
 export default PetPosts;

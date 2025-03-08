@@ -4,7 +4,6 @@
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 1rem;
-    overflow: hidden;
   }
   
   .pet-header {
@@ -58,4 +57,15 @@
   .bg-yellow {
     background: #fff9c4;
   }
+
+  .posts-container {
+    display: flex;
+    flex-direction: column; /* Stack posts vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    min-height: 100vh; /* Ensure full screen height */
+    gap: 1.5rem; /* Space between posts */
+    padding: 80px 1rem 1rem; /* Top padding accounts for the fixed topbar */
+}
+
   
