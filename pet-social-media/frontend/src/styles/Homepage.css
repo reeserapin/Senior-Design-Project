@@ -1,0 +1,61 @@
+.pet-card {
+    width: 24rem; /* Adjust width */
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    overflow: hidden;
+  }
+  
+  .pet-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .pet-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .pet-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  
+  .pet-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .pet-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+  }
+  
+  .pet-icon {
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .pet-icon:hover {
+    transform: scale(1.2);
+  }
+  
+  .bg-blue {
+    background: #e3f2fd;
+  }
+  
+  .bg-green {
+    background: #e8f5e9;
+  }
+  
+  .bg-yellow {
+    background: #fff9c4;
+  }
+  

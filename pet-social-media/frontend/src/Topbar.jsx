@@ -43,7 +43,7 @@ function TopBar() {
       <div className="left-content">
         <h1 className="logo">Pet-igree</h1>
         <Link to="/petprofile" className="profile-link">
-          <img src="/cat4.jpg" alt="Profile" className="profile-image" />
+          <img src="/golden_retriever_pfp.jpg" alt="Profile" className="profile-image" />
         </Link>
         {catImages.map((image, index) => (
           <Link to={`/petprofile/${index}`} key={index} className="profile-link">
@@ -74,7 +74,10 @@ function TopBar() {
       {isPopupOpen && (
         <div className="popup">
           <div className="popup-content">
-            <h2>Add a new cat image</h2>
+            <h2>New Pet?</h2>
+            <h4>Enter a code to transfer pet account or create a new account by uploading pet info.</h4>
+            <h3>What is your pet's name?</h3>
+            <h3>Upload a profile picture:</h3>
             <input
               type="file"
               accept="image/*"
@@ -88,7 +91,7 @@ function TopBar() {
               </div>
             )}
             <button onClick={handleAddImage} className="popup-button">
-              Add Image
+              Add Pet
             </button>
             <button onClick={() => setIsPopupOpen(false)} className="popup-close">
               Close
