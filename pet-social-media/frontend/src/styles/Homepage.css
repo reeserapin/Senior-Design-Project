@@ -47,15 +47,15 @@
   }
   
   .bg-blue {
-    background: #e3f2fd;
+    background: #099EC8;
   }
   
   .bg-green {
-    background: #e8f5e9;
+    background: #84BC41;
   }
   
   .bg-yellow {
-    background: #fff9c4;
+    background: #F9C416;
   }
 
   .posts-container {
@@ -132,4 +132,48 @@
     font-size: 14px;
     color: #333;
   }
+
+  .image-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .image-nav {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .image-nav.left {
+    left: 5px;
+  }
+  
+  .image-nav.right {
+    right: 5px;
+  }
+  
+  .pet-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .text-gray-500 {
+    color: black;
+  }
+  
+  .text-red-500 {
+    color: red;
+  }
+  
+  
+  .comment-username {
+    font-weight: bold;
+  }
+  
   

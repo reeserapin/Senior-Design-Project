@@ -1,6 +1,6 @@
 /* Topbar Styles */
 .topbar {
-    background-color: #9DD8EA;
+    background-color: #099EC8;
     color: white;
     padding: 10px 20px;
     display: flex;
@@ -155,7 +155,7 @@
   
 /* Sidebar Styles */
 .sidebar {
-    background-color: #E1F7FF; 
+    background-color: #9DD8EA; 
     color: black;
     padding: 40px 10px 20px 10px;
     width: 60px;
@@ -227,8 +227,8 @@
 
 .content {
     flex-grow: 1;
-    padding: 60px 20px; /* Reduce top padding */
-    background-color: #f4f4f4;
+    padding: 20px 20px; /* Reduce top padding */
+    background-color: #E8FAFF;
     overflow-y: auto;
     margin-left: 100px;
 }
