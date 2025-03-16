@@ -1,47 +1,9 @@
 import React, { useState } from "react";
 import { FaPaw, FaFlag, FaComment, FaPaperPlane, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import postsData from "../pages/posts.json"; // Import JSON data
 import "../styles/Homepage.css";
 
-const postsData = [
-  {
-    user: "Leslie Mosier",
-    avatar: "/doug_the_pug/LeslieMosier.jpg",
-    images: ["/doug_the_pug/doug_post.jpg"],
-    petNames: ["Teddy", "Daisy"],
-    title: "Doug the Pug",
-    bgColor: "bg-blue",
-    comments: [
-      { username: "JohnDoe", pfp: "/users/john_doe.jpg", text: "Doug is so adorable! ❤️" },
-      { username: "PetLover99", pfp: "/users/pet_lover.jpg", text: "Aww, I love pugs!" }
-    ]
-  },
-  {
-    user: "SPCA",
-    avatar: "/spca/spca_logo.png",
-    images: ["/spca/Spca_post.webp"],
-    petNames: ["Rocky"],
-    title: "Rocky",
-    bgColor: "bg-green",
-    comments: [
-      { username: "EmmaWatts", pfp: "/users/emma_watts.jpg", text: "Rocky deserves a loving home! 🐶" },
-      { username: "AdoptMe", pfp: "/users/adopt_me.jpg", text: "Where is he located? I’d love to adopt!" }
-    ]
-  },
-  {
-    user: "Diya Sharma",
-    avatar: "/kitten_breeder/Diya_Sharma.jpg",
-    images: ["/kitten_breeder/three_kittens.jpg", "/kitten_breeder/three_kittens2.jpg", "/kitten_breeder/three_kittens3.jpg"],
-    petNames: ["Kittens"],
-    title: "Kittens",
-    bgColor: "bg-yellow",
-    comments: [
-      { username: "MeowMeow", pfp: "/users/meow_meow.jpg", text: "These kittens are too cute! 😻" },
-      { username: "CatFanatic", pfp: "/users/cat_fan.jpg", text: "I want them all!!" }
-    ]
-  }
-];
-
-const PetPost = ({ user, avatar, images, title, bgColor, comments }) => {
+const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
   const [showComments, setShowComments] = useState(false);
   const [commentList, setCommentList] = useState(comments);
   const [newComment, setNewComment] = useState("");
@@ -74,12 +36,14 @@ const PetPost = ({ user, avatar, images, title, bgColor, comments }) => {
         <p className="pet-title">{user}</p>
       </div>
 
-      <h2 className="pet-title">{title}</h2>
-
-      <div className="image-container">
-        {images.length > 1 && <button className="image-nav left" onClick={prevImage}><FaArrowLeft /></button>}
-        <img src={images[currentImageIndex]} alt={title} className="pet-image" />
-        {images.length > 1 && <button className="image-nav right" onClick={nextImage}><FaArrowRight /></button>}
+      <div className="pet-content-box">
+        <img src={pfp} alt={title} className="pet-pfp" />
+        <p className="pet-title">{title}</p>
+        <div className="image-container">
+          {images.length > 1 && <button className="image-nav left" onClick={prevImage}><FaArrowLeft /></button>}
+          <img src={images[currentImageIndex]} alt={title} className="pet-image" />
+          {images.length > 1 && <button className="image-nav right" onClick={nextImage}><FaArrowRight /></button>}
+        </div>
       </div>
 
       <div className="pet-actions">
@@ -113,18 +77,17 @@ const PetPost = ({ user, avatar, images, title, bgColor, comments }) => {
                 </div>
               </div>
             ))}
+            </div>
           </div>
-        </div>
       )}
     </div>
   );
 };
 
-
-const PetPosts = ({ posts = postsData }) => {
+const PetPosts = () => {
   return (
     <div className="posts-container">
-      {posts.map((post, index) => (
+      {postsData.map((post, index) => (
         <PetPost key={index} {...post} />
       ))}
     </div>

@@ -1,27 +1,40 @@
 .pet-card {
-    width: 24rem; /* Adjust width */
+    width: 26rem; /* Adjust width */
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 1rem;
   }
   
+  .pet-content-box {
+    width: 24rem; /* Adjust width */
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+  }
+
   .pet-header {
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    align-items: center; /* Aligns items vertically */
+    gap: 10px; /* Adds spacing between image and text */
   }
-  
+
   .pet-avatar {
-    width: 40px;
+    width: 40px; /* Adjust size as needed */
     height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
+    border-radius: 50%; /* Makes the image circular */
   }
-  
+
+  .pet-pfp{
+    width: 40px; /* Adjust size as needed */
+    height: 40px;
+    border-radius: 50%; /* Makes the image circular */
+  }
+
   .pet-title {
+    font-size: 1rem;
     font-weight: bold;
-    font-size: 1.1rem;
   }
   
   .pet-image {
@@ -65,7 +78,7 @@
     justify-content: center; /* Center vertically */
     min-height: 100vh; /* Ensure full screen height */
     gap: 1.5rem; /* Space between posts */
-    padding: 80px 1rem 1rem; /* Top padding accounts for the fixed topbar */
+    padding: 80px;/* Top padding accounts for the fixed topbar */
 }
 
 .comment-section {
