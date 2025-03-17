@@ -1,0 +1,29 @@
+[
+    {
+      "user": "Leslie Mosier",
+      "avatar": "/doug_the_pug/LeslieMosier.jpg",
+      "pfp": "/doug_the_pug/doug.jpg",
+      "images": ["/doug_the_pug/doug_post.jpg"],
+      "petNames": ["Doug"],
+      "title": "Doug the Pug",
+      "bgColor": "bg-blue",
+      "comments": [
+        { "username": "JohnDoe", "pfp": "/users/john_doe.jpg", "text": "Doug is so adorable! ❤️" },
+        { "username": "PetLover99", "pfp": "/users/pet_lover.jpg", "text": "Aww, I love pugs!" }
+      ]
+    },
+    {
+      "user": "SPCA",
+      "avatar": "/spca/spca_logo.png",
+      "pfp": "/doug_the_pug/doug.jpg",
+      "images": ["/spca/Spca_post.webp"],
+      "petNames": ["Rocky"],
+      "title": "Rocky",
+      "bgColor": "bg-green",
+      "comments": [
+        { "username": "EmmaWatts", "pfp": "/users/emma_watts.jpg", "text": "Rocky deserves a loving home! 🐶" },
+        { "username": "AdoptMe", "pfp": "/users/adopt_me.jpg", "text": "Where is he located? I’d love to adopt!" }
+      ]
+    }
+  ]
+  
