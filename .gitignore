@@ -1,1 +1,16 @@
-node_modules
+# Ignore dependencies
+node_modules/
+venv/
+__pycache__/
+
+# Ignore Docker build files
+backend/__pycache__/
+backend/*.pyc
+frontend/build/
+frontend/.parcel-cache/
+frontend/.next/
+frontend/dist/
+
+# Ignore system files
+.DS_Store
+.env
