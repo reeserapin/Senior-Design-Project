@@ -1,6 +1,6 @@
 # Senior-Design-Project
 
-# Pick Me Puppy
+# Pet-igree (Social Media Website for Pets/Owners)
 
 > Reese Rapin (rapinre@mail.uc.edu), CS<br>
 > Minha Raza (razamh@mail.uc.edu), CS<br>
