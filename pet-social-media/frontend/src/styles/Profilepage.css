@@ -222,7 +222,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 60px;
+  gap: 180px;
   margin-top: 60px;
   margin-bottom: 30px;
   margin-left: -100px;
@@ -249,4 +249,181 @@
 .stat-label {
   font-size: 14px;
   margin-top: 4px;
+}
+
+.bio-container {
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  max-width: 800px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.bio-text {
+  font-size: 16px;
+  color: #2c2828;
+  transition: background 0.2s;
+}
+
+.bio-container:hover .bio-text {
+  background-color: #f0f0f0;
+}
+
+.bio-edit {
+  width: 100%;
+  min-height: 80px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  resize: vertical;
+}
+
+
+.pets-section {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.pets-list {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.pet-button {
+  background-color: #c0dbe7;
+  border: none;
+  border-radius: 100px;
+  padding: 15px;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+.pet-button img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.pet-button:hover {
+  transform: scale(1.05);
+}
+
+/* Popup Styling */
+.pet-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.pet-popup {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  text-align: center;
+}
+.pets-bubble-container {
+  background-color: #85cbe9;
+  border-radius: 100px;
+  padding: 30px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  width: fit-content;
+  margin: 0 auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pets-following-wrapper {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.pets-following-wrapper h2 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.pets-following-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #92d6ef;
+  border-radius: 100px;
+  padding: 20px 30px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.followed-pets-container {
+  display: flex;
+  gap: 50px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.followed-pets-container::-webkit-scrollbar {
+  display: none;
+}
+
+.followed-pet {
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.followed-pet img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.followed-pet span {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.scroll-btn {
+  background-color: #6a64ff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.scroll-btn:hover {
+  background-color: #5548e6;
 }
