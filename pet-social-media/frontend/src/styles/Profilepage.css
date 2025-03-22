@@ -1,0 +1,122 @@
+/* General Profile Page Layout */
+.profile-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f5faff;
+}
+
+.profile-main {
+  width: calc(100% - 80px);
+  margin-left: 80px;
+  padding: 20px;
+  margin-top: 60px;
+}
+
+/* Banner Section */
+.profile-banner {
+  width: 90%;
+  max-width: 2000px;
+  height: 250px;
+  background-color: #e0f7ff;
+  border-radius: 25px;
+  position: relative;
+  margin: 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Banner Image */
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Upload Button */
+.upload-button {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.upload-button:hover {
+  background-color: #45a049;
+}
+
+/* Cropping Modal */
+.cropper-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  background: white;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  z-index: 1000;
+}
+
+/* Cropping Background Overlay */
+.cropper-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+}
+
+/* Cropper Container */
+.cropper-container {
+  width: 100%;
+  height: 250px;
+  margin-bottom: 20px;
+}
+
+/* Cropping Buttons */
+.cropper-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.cancel-button {
+  background-color: #e74c3c;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background-color: #c0392b;
+}
+
+.apply-button {
+  background-color: #2ecc71;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.apply-button:hover {
+  background-color: #27ae60;
+}
