@@ -16,6 +16,8 @@ function ProfilePage() {
   const [isEditingBio, setIsEditingBio] = useState(false);
   const [activePet, setActivePet] = useState(null);
   const scrollRef = useRef(null);
+  const [activeFollowedPet, setActiveFollowedPet] = useState(null);
+
 
   const scrollLeft = () => {
     scrollRef.current.scrollBy({ left: -150, behavior: "smooth" });
@@ -25,16 +27,16 @@ function ProfilePage() {
     scrollRef.current.scrollBy({ left: 150, behavior: "smooth" });
   };
   
-  const followedPets = [
-    { name: "Millie", image: "/millie.jpg" },
-    { name: "Milo", image: "/milo.jpg" },
-    { name: "Burrito", image: "/burrito.jpg" },
-    { name: "Autumn", image: "/autumn.jpg" },
-    { name: "Luna", image: "/luna.jpg" },
-    { name: "Donut", image: "/donut.jpg" },
-    { name: "Buddy", image: "/buddy.jpg" },
-    { name: "Nala", image: "/nala.jpg" }
-  ];
+  // const followedPets = [
+  //   { name: "Millie", image: "/millie.jpg" },
+  //   { name: "Milo", image: "/milo.jpg" },
+  //   { name: "Burrito", image: "/burrito.jpg" },
+  //   { name: "Autumn", image: "/autumn.jpg" },
+  //   { name: "Luna", image: "/luna.jpg" },
+  //   { name: "Donut", image: "/donut.jpg" },
+  //   { name: "Buddy", image: "/buddy.jpg" },
+  //   { name: "Nala", image: "/nala.jpg" }
+  // ];
   
 
 const pets = [
@@ -126,7 +128,6 @@ const pets = [
 </div>
 
 
-
           <div className="profile-photo-container">
             <img
               src={profileImage || "/user.jpg"}
@@ -151,6 +152,8 @@ const pets = [
           <h2 className="profile-name">Joe Schmoe</h2>
 
           <div
+
+           
   className="bio-container"
   onClick={() => setIsEditingBio(true)}
 >
@@ -194,27 +197,103 @@ const pets = [
   )}
 </div>
 
+
+
 <div className="pets-following-wrapper">
   <h2>Pets You Follow</h2>
   <div className="pets-following-section">
-    <button className="scroll-btn left" onClick={scrollLeft}>❮</button>
-
     <div className="followed-pets-container" ref={scrollRef}>
-      {followedPets.map((pet, i) => (
-        <div className="followed-pet" key={i}>
-          <img src={pet.image} alt={pet.name} />
-          <span>{pet.name}</span>
-        </div>
+      {[
+      { name: "Millie", image: "https://unsplash.it/201/200" },
+      { name: "Milo", image: "https://unsplash.it/200/200" },
+      { name: "Burrito", image: "https://placedog.net/200/200" },
+      { name: "Autumn", image: "https://placedog.net/201/200" },
+      { name: "Luna", image: "https://placedog.net/202/200" },
+      { name: "Donut", image: "https://placedog.net/203/200" },
+      { name: "Buddy", image: "https://placedog.net/204/200" },
+      { name: "Nala", image: "https://unsplash.it/202/200" },
+      { name: "Pickles", image: "https://unsplash.it/203/200" },
+      { name: "Shadow", image: "https://placedog.net/205/200" },
+      { name: "Pumpkin", image: "https://unsplash.it/204/200" },
+      { name: "Ziggy", image: "https://placedog.net/206/200" },
+      { name: "Taco", image: "https://placedog.net/207/200" },
+      { name: "Ginger", image: "https://unsplash.it/205/200" },
+      { name: "Snowball", image: "https://unsplash.it/206/200" },
+      { name: "Rocco", image: "https://placedog.net/208/200" },
+      { name: "Mochi", image: "https://unsplash.it/207/200" },
+      { name: "Juno", image: "https://placedog.net/209/200" },
+      { name: "Kiwi", image: "https://unsplash.it/208/200" },
+      { name: "Pebbles", image: "https://placedog.net/210/200" },
+      { name: "Zara", image: "https://unsplash.it/209/200" },
+      { name: "Churro", image: "https://placedog.net/211/200" },
+      { name: "Smokey", image: "https://unsplash.it/210/200" },
+      { name: "Olive", image: "https://placedog.net/212/200" },
+      { name: "Banjo", image: "https://placedog.net/213/200" },
+      { name: "Pudding", image: "https://unsplash.it/211/200" },
+      { name: "Clover", image: "https://unsplash.it/212/200" },
+      { name: "Teddy", image: "https://placedog.net/214/200" },
+      { name: "Buttons", image: "https://unsplash.it/213/200" },
+      { name: "Goose", image: "https://placedog.net/215/200" },
+      { name: "Miso", image: "https://unsplash.it/214/200" },
+      { name: "Scout", image: "https://placedog.net/216/200" },
+      { name: "Nugget", image: "https://unsplash.it/215/200" },
+      ].map((pet, index) => (
+        <button
+  key={index}
+  className="followed-pet"
+  onClick={() => setActiveFollowedPet(pet)}
+>
+  <img src={pet.image} alt={pet.name} />
+  <span>{pet.name}</span>
+</button>
+
       ))}
     </div>
-
-    <button className="scroll-btn right" onClick={scrollRight}>❯</button>
+  </div>
+  <div className="your-posts-section">
+  <h2>Your Posts</h2>
+  <div className="posts-grid">
+    {Array.from({ length: 9 }).map((_, index) => (
+      <div key={index} className="post-card">
+        <img
+          className="post-image"
+          src="https://images.unsplash.com/photo-1601758123927-1961e4cd67c2"
+          alt="Post"
+        />
+        <div className="post-info">
+          <div className="post-icons">
+            <span>🐾</span>
+            <span>🖥️</span>
+            <span>✈️</span>
+          </div>
+          <div className="post-text">
+            <p><strong>Sparky doing tricks!</strong></p>
+            <p className="timestamp">20 minutes ago</p>
+          </div>
+          <img
+            className="post-profile"
+            src="/user.jpg"
+            alt="User"
+          />
+        </div>
+      </div>
+    ))}
   </div>
 </div>
 
-
+</div>
 
         </div>
+        {activeFollowedPet && (
+  <div className="pet-popup-overlay" onClick={() => setActiveFollowedPet(null)}>
+    <div className="pet-popup" onClick={(e) => e.stopPropagation()}>
+      <h3>{activeFollowedPet.name}</h3>
+      <img src={activeFollowedPet.image} alt={activeFollowedPet.name} />
+      <p>This is a pet you're following!</p>
+      <button onClick={() => setActiveFollowedPet(null)}>Close</button>
+    </div>
+  </div>
+)}
 
         {/* Cropping Modal */}
         {cropping && (

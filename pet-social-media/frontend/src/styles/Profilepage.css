@@ -365,27 +365,29 @@
 
 .pets-following-wrapper h2 {
   margin-bottom: 20px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
 }
 
 .pets-following-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #92d6ef;
+  background-color: #85cbe9;
   border-radius: 100px;
-  padding: 20px 30px;
-  max-width: 700px;
+  padding: 30px 40px;
+  max-width: 900px;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .followed-pets-container {
   display: flex;
-  gap: 50px;
+  gap: 30px;
   overflow-x: auto;
   scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .followed-pets-container::-webkit-scrollbar {
@@ -393,37 +395,89 @@
 }
 
 .followed-pet {
-  text-align: center;
+  all: unset; /* 🔥 resets all default button styles */
   flex: 0 0 auto;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
+
 .followed-pet img {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .followed-pet span {
   display: block;
   margin-top: 8px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
 }
 
-.scroll-btn {
-  background-color: #6a64ff;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 20px;
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
-  flex-shrink: 0;
+.your-posts-section {
+  margin-top: 60px;
+  text-align: center;
 }
 
-.scroll-btn:hover {
-  background-color: #5548e6;
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
+.post-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.post-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.post-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.post-icons span {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.post-text {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: gray;
+  margin-top: 4px;
+}
+
+.post-profile {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 10px;
+}
+
