@@ -10,6 +10,8 @@ function ProfilePage() {
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const fileInputRef = useRef(null);
+  const [profileImage, setProfileImage] = useState(null);
+  const profileFileInputRef = useRef(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -27,7 +29,18 @@ function ProfilePage() {
 
   const handleApplyCrop = () => {
     setCropping(false);
-    // Optionally: Crop image using canvas here
+    // You could add canvas logic here if you want to crop the image manually
+  };
+
+  const handleProfileImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -54,7 +67,24 @@ function ProfilePage() {
           </div>
 
           <div className="profile-photo-container">
-            <img src="/user.jpg" alt="Profile" className="profile-photo" />
+            <img
+              src={profileImage || "/user.jpg"}
+              alt="Profile"
+              className="profile-photo"
+            />
+            <div
+              className="upload-overlay"
+              onClick={() => profileFileInputRef.current.click()}
+            >
+              <span className="upload-text">Upload</span>
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              ref={profileFileInputRef}
+              onChange={handleProfileImageChange}
+            />
           </div>
         </div>
 
@@ -68,7 +98,7 @@ function ProfilePage() {
                   image={banner}
                   crop={crop}
                   zoom={zoom}
-                  aspect={3} // wide banner
+                  aspect={3}
                   onCropChange={setCrop}
                   onZoomChange={setZoom}
                   onCropComplete={handleCropComplete}
