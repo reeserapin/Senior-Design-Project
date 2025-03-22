@@ -21,42 +21,46 @@ function ProfilePage() {
     }
   };
 
-  const handleCropComplete = (croppedArea, croppedAreaPixels) => {
-    setCroppedAreaPixels(croppedAreaPixels);
+  const handleCropComplete = (_, croppedPixels) => {
+    setCroppedAreaPixels(croppedPixels);
   };
 
   const handleApplyCrop = () => {
-    // Crop the image using canvas (or backend)
     setCropping(false);
+    // Optionally: Crop image using canvas here
   };
 
   return (
     <div className="profile-container">
       <Sidebar />
       <main className="profile-main">
-        {/* Banner Section */}
-        <div className="profile-banner">
-          {banner ? (
-            <img src={banner} alt="Banner" className="banner-image" />
-          ) : (
-            <span>Upload a banner</span>
-          )}
-          <button className="upload-button" onClick={() => fileInputRef.current.click()}>
-            Upload
-          </button>
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            style={{ display: "none" }}
-          />
+        <div className="profile-banner-container">
+          <div className="profile-banner">
+            {banner ? (
+              <img src={banner} alt="Banner" className="banner-image" />
+            ) : (
+              <p>Upload a banner</p>
+            )}
+            <button className="upload-button" onClick={() => fileInputRef.current.click()}>
+              Upload
+            </button>
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              onChange={handleFileChange}
+            />
+          </div>
+
+          <div className="profile-photo-container">
+            <img src="/user.jpg" alt="Profile" className="profile-photo" />
+          </div>
         </div>
 
         {/* Cropping Modal */}
         {cropping && (
-          <>
-            <div className="cropper-overlay"></div>
+          <div className="cropper-overlay">
             <div className="cropper-modal">
               <h3>Adjust Your Banner</h3>
               <div className="cropper-container">
@@ -64,7 +68,7 @@ function ProfilePage() {
                   image={banner}
                   crop={crop}
                   zoom={zoom}
-                  aspect={3} // Keep aspect ratio wide like a banner
+                  aspect={3} // wide banner
                   onCropChange={setCrop}
                   onZoomChange={setZoom}
                   onCropComplete={handleCropComplete}
@@ -79,7 +83,7 @@ function ProfilePage() {
                 </button>
               </div>
             </div>
-          </>
+          </div>
         )}
       </main>
     </div>
