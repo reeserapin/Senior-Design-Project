@@ -49,6 +49,7 @@ function ProfilePage() {
       <main className="profile-main">
         <div className="profile-banner-container">
           <div className="profile-banner">
+            
             {banner ? (
               <img src={banner} alt="Banner" className="banner-image" />
             ) : (
@@ -66,6 +67,22 @@ function ProfilePage() {
             />
           </div>
 
+          <div className="profile-stats">
+  <div className="stat-circle">
+    <div className="stat-number">20.3K</div>
+    <div className="stat-label">Followers</div>
+  </div>
+  <div className="stat-circle">
+    <div className="stat-number">489</div>
+    <div className="stat-label">Following</div>
+  </div>
+  <div className="stat-circle">
+    <div className="stat-number">308</div>
+    <div className="stat-label">Posts</div>
+  </div>
+</div>
+
+
           <div className="profile-photo-container">
             <img
               src={profileImage || "/user.jpg"}
@@ -78,14 +95,16 @@ function ProfilePage() {
             >
               <span className="upload-text">Upload</span>
             </div>
+            
             <input
               type="file"
               accept="image/*"
               style={{ display: "none" }}
               ref={profileFileInputRef}
               onChange={handleProfileImageChange}
-            />
+            /> 
           </div>
+          <h2 className="profile-name">Joe Schmoe</h2>
         </div>
 
         {/* Cropping Modal */}
