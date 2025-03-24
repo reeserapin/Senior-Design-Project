@@ -26,33 +26,22 @@ function ProfilePage() {
   const scrollRight = () => {
     scrollRef.current.scrollBy({ left: 150, behavior: "smooth" });
   };
-  
-  // const followedPets = [
-  //   { name: "Millie", image: "/millie.jpg" },
-  //   { name: "Milo", image: "/milo.jpg" },
-  //   { name: "Burrito", image: "/burrito.jpg" },
-  //   { name: "Autumn", image: "/autumn.jpg" },
-  //   { name: "Luna", image: "/luna.jpg" },
-  //   { name: "Donut", image: "/donut.jpg" },
-  //   { name: "Buddy", image: "/buddy.jpg" },
-  //   { name: "Nala", image: "/nala.jpg" }
-  // ];
-  
+
 
 const pets = [
   {
     name: "Sparky",
-    image: "/pets/sparky.jpg",
+    image: "https://arrowtpets.com/wp-content/uploads/2023/05/Understanding-Goldendoodle-Behavior_-Common-Traits-and-Personality.png",
     description: "Sparky loves running in the park and chasing tennis balls."
   },
   {
     name: "Spot",
-    image: "/pets/spot.jpg",
+    image: "https://www.humaneworld.org/sites/default/files/styles/responsive_3_4_500w/public/2020-07/dog-509745.jpg.webp?itok=tVo9pIsi",
     description: "Spot is a goofy pup who loves cuddles and treats."
   },
   {
     name: "Snowy",
-    image: "/pets/snowy.jpg",
+    image: "https://puzzlemania-154aa.kxcdn.com/products/2024/puzzle-ravensburger-1500-pieces-white-kitten.webp",
     description: "Snowy is the quietest and fluffiest kitten you'll meet!"
   }
 ];
@@ -173,17 +162,18 @@ const pets = [
 <div className="pets-section">
   <h2>Your Pets</h2>
   <div className="pets-bubble-container">
-    {pets.map((pet, index) => (
+  {pets.map((pet, index) => (
+    <div key={index} style={{ textAlign: "center" }}>
       <button
-        key={index}
         className="pet-button"
         onClick={() => setActivePet(pet)}
       >
-        <img src={pet.image} alt={pet.name} />
-        <span>{pet.name}</span>
+        <img className="pet-image" src={pet.image} alt={pet.name} />
       </button>
-    ))}
-  </div>
+      <span className="pet-name">{pet.name}</span>
+    </div>
+  ))}
+</div>
 
   {activePet && (
     <div className="pet-popup-overlay" onClick={() => setActivePet(null)}>
