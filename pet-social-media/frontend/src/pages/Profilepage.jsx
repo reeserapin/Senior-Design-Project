@@ -5,6 +5,9 @@ import "../styles/Profilepage.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { FaPaw } from "react-icons/fa";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const postImages = [
   [
@@ -23,7 +26,7 @@ const postImages = [
     "https://media.graphassets.com/resize=height:360,width:938/output=format:webp/9JrMeDVZTbO7AKMsI5NL?width=938"
   ],
   [
-    "https://placedog.net/500/300?id=7",
+    "https://premierpups.com/azure/premierphotos/photogallery/85db4ef0-ecd6-42d9-8335-08e06824e9d3.jpeg?preset=detail",
     "https://placedog.net/500/300?id=8",
     "https://placedog.net/500/300?id=9"
   ],
@@ -123,7 +126,9 @@ function ProfilePage() {
   const [activePet, setActivePet] = useState(null);
   const scrollRef = useRef(null);
   const [activeFollowedPet, setActiveFollowedPet] = useState(null);
-
+  const [username, setUsername] = useState("Joe Schmoe");
+  const [isEditingName, setIsEditingName] = useState(false);
+  
 
   const scrollLeft = () => {
     scrollRef.current.scrollBy({ left: -150, behavior: "smooth" });
@@ -244,7 +249,24 @@ const pets = [
               onChange={handleProfileImageChange}
             /> 
           </div>
-          <h2 className="profile-name">Joe Schmoe</h2>
+          <div className="profile-name-edit">
+  {isEditingName ? (
+    <input
+      className="name-input"
+      value={username}
+      onChange={(e) => setUsername(e.target.value)}
+      onBlur={() => setIsEditingName(false)}
+      autoFocus
+    />
+  ) : (
+    <>
+      <h2 className="profile-name">{username}</h2>
+      <button className="edit-name-button" onClick={() => setIsEditingName(true)}>
+        <img src="/pencil-edit-button.svg" alt="Edit name" />
+      </button>
+    </>
+  )}
+</div>
 
           <div
 

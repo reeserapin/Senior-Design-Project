@@ -517,18 +517,45 @@
   object-fit: cover;
   margin-left: 10px;
 }
-/* 
-.pet-image-wrapper {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-bottom: 10px;
-} */
 
-/* .pet-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-} */
+
+.profile-name-edit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 5px;
+  margin-top: -40px;
+}
+
+.profile-name {
+  font-size: 25px;
+  font-weight: 600;
+  color: #333;
+}
+
+.edit-name-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  margin-left: -170px;   /* horizontal spacing */
+  margin-top: -135px;    /* vertical spacing */
+}
+
+
+.edit-name-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.name-input {
+  font-size: 22px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-left: 10px;   /* horizontal spacing */
+  margin-top: -135px;
+}
