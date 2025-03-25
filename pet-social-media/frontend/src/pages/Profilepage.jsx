@@ -2,6 +2,112 @@ import React, { useState, useRef } from "react";
 import Cropper from "react-easy-crop";
 import Sidebar from "../Sidebar";
 import "../styles/Profilepage.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+const postImages = [
+  [
+    "https://www.warrenphotographic.co.uk/photography/bigs/44826-Blue-point-Birman-cross-cat-and-Goldendoodle-puppy-white-background.jpg",
+    "https://images.squarespace-cdn.com/content/v1/5b5499a13c3a53487c250d73/1548212711672-14PLK00UM15YHKBXHOWK/golden2.jpg",
+    "https://preview.redd.it/anyones-else-doodle-think-hes-a-soccer-play-he-uses-his-v0-8geu6iyc3n9b1.jpg?width=640&crop=smart&auto=webp&s=da46ffc4ec1a641af6f877bbf85f1934faf58fb5"
+  ],
+  [
+    "https://images.unsplash.com/photo-1566927467984-6332be7377d0?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2F0JTIwYmlydGhkYXl8ZW58MHx8MHx8fDA%3D",
+    "https://image.petmd.com/files/inline-images/white-cat-breeds-munchkin.jpg?VersionId=.uzqQ5bbncHjG38rNmx18EzEEGPIe6H0",
+    "https://preview.redd.it/whats-your-cats-favourite-toy-mine-gets-so-easily-bored-of-v0-f918p0n68as81.jpg?width=1080&crop=smart&auto=webp&s=3c8838a69d24f1859e9b554e3cde8a3e657cc28a"
+  ],
+  [
+    "https://i0.pickpik.com/photos/18/674/411/game-animals-dog-cat-white-cat-preview.jpg",
+    "https://ilovemychi.com/wp-content/uploads/2015/11/Jim-And-Sandy.jpg",
+    "https://media.graphassets.com/resize=height:360,width:938/output=format:webp/9JrMeDVZTbO7AKMsI5NL?width=938"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  [
+    "https://placedog.net/500/300?id=7",
+    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=9"
+  ],
+  // Add more posts as needed
+];
+
+const sliderSettings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: false
+};
 
 function ProfilePage() {
   const [banner, setBanner] = useState(null);
@@ -175,16 +281,17 @@ const pets = [
   ))}
 </div>
 
-  {activePet && (
-    <div className="pet-popup-overlay" onClick={() => setActivePet(null)}>
-      <div className="pet-popup" onClick={(e) => e.stopPropagation()}>
-        <h3>{activePet.name}</h3>
-        <img src={activePet.image} alt={activePet.name} />
-        <p>{activePet.description}</p>
-        <button onClick={() => setActivePet(null)}>Close</button>
-      </div>
+{activePet && (
+  <div className="pet-popup-overlay" onClick={() => setActivePet(null)}>
+    <div className="pet-popup" onClick={(e) => e.stopPropagation()}>
+      <h3>{activePet.name}</h3>
+      <img className="pet-popup-image" src={activePet.image} alt={activePet.name} />
+      <p className="pet-popup-desc">{activePet.description}</p>
+      <button className="close-button" onClick={() => setActivePet(null)}>Close</button>
     </div>
-  )}
+  </div>
+)}
+
 </div>
 
 
@@ -243,32 +350,33 @@ const pets = [
   <div className="your-posts-section">
   <h2>Your Posts</h2>
   <div className="posts-grid">
-    {Array.from({ length: 9 }).map((_, index) => (
-      <div key={index} className="post-card">
-        <img
-          className="post-image"
-          src="https://images.unsplash.com/photo-1601758123927-1961e4cd67c2"
-          alt="Post"
-        />
-        <div className="post-info">
-          <div className="post-icons">
-            <span>🐾</span>
-            <span>🖥️</span>
-            <span>✈️</span>
-          </div>
-          <div className="post-text">
-            <p><strong>Sparky doing tricks!</strong></p>
-            <p className="timestamp">20 minutes ago</p>
-          </div>
-          <img
-            className="post-profile"
-            src="/user.jpg"
-            alt="User"
-          />
+  {postImages.map((imageSet, index) => (
+    <div key={index} className="post-card">
+      <Slider {...sliderSettings}>
+        {imageSet.map((imgUrl, i) => (
+          <img key={i} className="post-image" src={imgUrl} alt={`Slide ${i}`} />
+        ))}
+      </Slider>
+      <div className="post-info">
+        <div className="post-icons">
+          <span>🐾</span>
+          <span>🖥️</span>
+          <span>✈️</span>
         </div>
+        <div className="post-text">
+          <p><strong>Sparky doing tricks!</strong></p>
+          <p className="timestamp">20 minutes ago</p>
+        </div>
+        <img
+          className="post-profile"
+          src="/user.jpg"
+          alt="User"
+        />
       </div>
-    ))}
-  </div>
+    </div>
+  ))}
+</div>
+
 </div>
 
 </div>
