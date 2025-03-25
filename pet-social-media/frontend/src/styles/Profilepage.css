@@ -281,6 +281,40 @@
   resize: vertical;
 }
 
+.pets-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.add-pet-float {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -60px;
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius: 50%;
+  border: 3px solid #85cbe9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.add-pet-float:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.add-pet-float img {
+  width: 24px;
+  height: 24px;
+}
+
 
 .pets-section {
   text-align: center;
@@ -392,29 +426,6 @@
   margin: 0 auto;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
-.pets-bubble-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.add-pet-button {
-  position: absolute;
-  right: 350px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: 36px;
-  height: 36px;
-}
-
-.add-pet-button img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 
 .pets-following-wrapper {
   margin-top: 40px;
@@ -540,18 +551,45 @@
   object-fit: cover;
   margin-left: 10px;
 }
-/* 
-.pet-image-wrapper {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-bottom: 10px;
-} */
 
-/* .pet-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-} */
+
+.profile-name-edit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 5px;
+  margin-top: -40px;
+}
+
+.profile-name {
+  font-size: 25px;
+  font-weight: 600;
+  color: #333;
+}
+
+.edit-name-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  margin-left: -170px;   /* horizontal spacing */
+  margin-top: -135px;    /* vertical spacing */
+}
+
+
+.edit-name-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.name-input {
+  font-size: 22px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-left: 10px;   /* horizontal spacing */
+  margin-top: -135px;
+}
