@@ -5,9 +5,8 @@ import "../styles/Profilepage.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { FaPaw } from "react-icons/fa";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import AddPetModal from "./AddPetModal";
+
 
 const postImages = [
   [
@@ -26,7 +25,7 @@ const postImages = [
     "https://media.graphassets.com/resize=height:360,width:938/output=format:webp/9JrMeDVZTbO7AKMsI5NL?width=938"
   ],
   [
-    "https://premierpups.com/azure/premierphotos/photogallery/85db4ef0-ecd6-42d9-8335-08e06824e9d3.jpeg?preset=detail",
+    "https://placedog.net/500/300?id=7",
     "https://placedog.net/500/300?id=8",
     "https://placedog.net/500/300?id=9"
   ],
@@ -126,9 +125,7 @@ function ProfilePage() {
   const [activePet, setActivePet] = useState(null);
   const scrollRef = useRef(null);
   const [activeFollowedPet, setActiveFollowedPet] = useState(null);
-  const [username, setUsername] = useState("Joe Schmoe");
-  const [isEditingName, setIsEditingName] = useState(false);
-  
+
 
   const scrollLeft = () => {
     scrollRef.current.scrollBy({ left: -150, behavior: "smooth" });
@@ -139,23 +136,30 @@ function ProfilePage() {
   };
 
 
-const pets = [
-  {
-    name: "Sparky",
-    image: "https://arrowtpets.com/wp-content/uploads/2023/05/Understanding-Goldendoodle-Behavior_-Common-Traits-and-Personality.png",
-    description: "Sparky loves running in the park and chasing tennis balls."
-  },
-  {
-    name: "Spot",
-    image: "https://www.humaneworld.org/sites/default/files/styles/responsive_3_4_500w/public/2020-07/dog-509745.jpg.webp?itok=tVo9pIsi",
-    description: "Spot is a goofy pup who loves cuddles and treats."
-  },
-  {
-    name: "Snowy",
-    image: "https://puzzlemania-154aa.kxcdn.com/products/2024/puzzle-ravensburger-1500-pieces-white-kitten.webp",
-    description: "Snowy is the quietest and fluffiest kitten you'll meet!"
-  }
-];
+  const [pets, setPets] = useState([
+    {
+      name: "Sparky",
+      image: "https://arrowtpets.com/wp-content/uploads/2023/05/Understanding-Goldendoodle-Behavior_-Common-Traits-and-Personality.png",
+      description: "Sparky loves running in the park and chasing tennis balls."
+    },
+    {
+      name: "Spot",
+      image: "https://www.humaneworld.org/sites/default/files/styles/responsive_3_4_500w/public/2020-07/dog-509745.jpg.webp?itok=tVo9pIsi",
+      description: "Spot is a goofy pup who loves cuddles and treats."
+    },
+    {
+      name: "Snowy",
+      image: "https://puzzlemania-154aa.kxcdn.com/products/2024/puzzle-ravensburger-1500-pieces-white-kitten.webp",
+      description: "Snowy is the quietest and fluffiest kitten you'll meet!"
+    }
+  ]);
+
+  const [showAddModal, setShowAddModal] = useState(false);
+
+const handleAddPet = (newPet) => {
+  setPets([...pets, { ...newPet, description: "Newly added pet!" }]);
+};
+
 
 
   const handleFileChange = (event) => {
@@ -249,24 +253,7 @@ const pets = [
               onChange={handleProfileImageChange}
             /> 
           </div>
-          <div className="profile-name-edit">
-  {isEditingName ? (
-    <input
-      className="name-input"
-      value={username}
-      onChange={(e) => setUsername(e.target.value)}
-      onBlur={() => setIsEditingName(false)}
-      autoFocus
-    />
-  ) : (
-    <>
-      <h2 className="profile-name">{username}</h2>
-      <button className="edit-name-button" onClick={() => setIsEditingName(true)}>
-        <img src="/pencil-edit-button.svg" alt="Edit name" />
-      </button>
-    </>
-  )}
-</div>
+          <h2 className="profile-name">Joe Schmoe</h2>
 
           <div
 
@@ -289,19 +276,32 @@ const pets = [
 
 <div className="pets-section">
   <h2>Your Pets</h2>
+  <div className="pets-bubble-wrapper">
   <div className="pets-bubble-container">
-  {pets.map((pet, index) => (
-    <div key={index} style={{ textAlign: "center" }}>
-      <button
-        className="pet-button"
-        onClick={() => setActivePet(pet)}
-      >
-        <img className="pet-image" src={pet.image} alt={pet.name} />
-      </button>
-      <span className="pet-name">{pet.name}</span>
-    </div>
-  ))}
+    {pets.map((pet, index) => (
+      <div key={index} style={{ textAlign: "center" }}>
+        <button className="pet-button" onClick={() => setActivePet(pet)}>
+          <img className="pet-image" src={pet.image} alt={pet.name} />
+        </button>
+        <span className="pet-name">{pet.name}</span>
+      </div>
+    ))}
+  </div>
+
+  {/* Add Pet Button (outside the bubble container) */}
+  <button className="add-pet-button" onClick={() => setShowAddModal(true)}>
+    <img src="/pluscircle.png" alt="Add" />
+  </button>
 </div>
+
+{/* Render Modal */}
+{showAddModal && (
+  <AddPetModal
+    onClose={() => setShowAddModal(false)}
+    onSave={handleAddPet}
+  />
+)}
+
 
 {activePet && (
   <div className="pet-popup-overlay" onClick={() => setActivePet(null)}>
