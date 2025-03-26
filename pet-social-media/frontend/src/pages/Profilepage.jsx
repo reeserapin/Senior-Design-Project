@@ -114,6 +114,36 @@ const sliderSettings = {
   arrows: false
 };
 
+const getCroppedImg = (imageSrc, pixelCrop) => {
+  const canvas = document.createElement("canvas");
+  const img = new Image();
+
+  return new Promise((resolve, reject) => {
+    img.onload = () => {
+      canvas.width = pixelCrop.width;
+      canvas.height = pixelCrop.height;
+      const ctx = canvas.getContext("2d");
+
+      ctx.drawImage(
+        img,
+        pixelCrop.x,
+        pixelCrop.y,
+        pixelCrop.width,
+        pixelCrop.height,
+        0,
+        0,
+        pixelCrop.width,
+        pixelCrop.height
+      );
+
+      resolve(canvas.toDataURL("image/jpeg"));
+    };
+    img.onerror = reject;
+    img.src = imageSrc;
+  });
+};
+
+
 function ProfilePage() {
   const [banner, setBanner] = useState(null);
   const [cropping, setCropping] = useState(false);
@@ -175,10 +205,16 @@ function ProfilePage() {
     setCroppedAreaPixels(croppedPixels);
   };
 
-  const handleApplyCrop = () => {
-    setCropping(false);
-    // You could add canvas logic here if you want to crop the image manually
+  const handleApplyCrop = async () => {
+    try {
+      const croppedImage = await getCroppedImg(banner, croppedAreaPixels);
+      setBanner(croppedImage);
+      setCropping(false);
+    } catch (e) {
+      console.error("Crop failed:", e);
+    }
   };
+  
 
   const handleProfileImageChange = (event) => {
     const file = event.target.files[0];
