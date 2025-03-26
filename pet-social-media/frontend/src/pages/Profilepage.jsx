@@ -5,10 +5,47 @@ import "../styles/Profilepage.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { FaPaw } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AddPetModal from "./AddPetModal";
+import { FaPaw, FaComment } from "react-icons/fa";
+import { TbSend } from "react-icons/tb";
+
+const generatePostDate = (index) => {
+  const daysAgo = index * 2 + Math.floor(Math.random() * 2); // Spread out by ~2 days per post
+  const postDate = new Date();
+  postDate.setDate(postDate.getDate() - daysAgo);
+  return postDate.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+};
+
+
+
+const captions = [
+  "Caught mid-zoomies! 🐾",
+  "New trick unlocked ✨",
+  "This face = instant treat 🎯",
+  "Snuggle mode: activated 😴",
+  "Who wore it best? 🎉",
+  "Say “cheese!” 📸",
+  "Just vibin’ in the sun ☀️",
+  "Someone’s ready for walkies 🐕",
+  "That look when it’s treat time 👀",
+  "Besties forever 🐶🐱",
+  "Meow or never 😼",
+  "Weekend energy 💥",
+  "Party animal alert 🎈",
+  "Fetch? More like fashion! 💁‍♀️",
+  "Snow day adventures ❄️",
+  "The grass is paw-some 🌱",
+  "Tongue out Tuesday 😋",
+  "Too cute to handle 💖",
+  "Caught being paws-itively adorable 💅",
+  "Tail wags & good vibes 🌈"
+];
 
 
 const postImages = [
@@ -38,69 +75,69 @@ const postImages = [
     "https://placedog.net/500/300?id=9"
   ],
   [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
+    "https://placedog.net/500/300?id=10",
+    "https://placedog.net/500/300?id=11",
+    "https://placedog.net/500/300?id=12"
+  ],
+  [
+    "https://placedog.net/500/300?id=13",
+    "https://placedog.net/500/300?id=14",
+    "https://placedog.net/500/300?id=15"
+  ],
+  [
+    "https://placedog.net/500/300?id=16",
+    "https://placedog.net/500/300?id=17",
     "https://placedog.net/500/300?id=9"
   ],
   [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
+    "https://placedog.net/500/300?id=18",
+    "https://placedog.net/500/300?id=19",
+    "https://placedog.net/500/300?id=20"
   ],
   [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
+    "https://placedog.net/500/300?id=21",
+    "https://placedog.net/500/300?id=22",
+    "https://placedog.net/500/300?id=23"
   ],
   [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
+    "https://placedog.net/500/300?id=24",
+    "https://placedog.net/500/300?id=25",
+    "https://placedog.net/500/300?id=26"
   ],
   [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
+    "https://placedog.net/500/300?id=27",
+    "https://placedog.net/500/300?id=28",
+    "https://placedog.net/500/300?id=29"
   ],
   [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
+    "https://placedog.net/500/300?id=30",
+    "https://placedog.net/500/300?id=31",
+    "https://placedog.net/500/300?id=32"
   ],
   [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
+    "https://placedog.net/500/300?id=33",
+    "https://placedog.net/500/300?id=34",
+    "https://placedog.net/500/300?id=35"
   ],
   [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
+    "https://placedog.net/500/300?id=36",
+    "https://placedog.net/500/300?id=37",
+    "https://placedog.net/500/300?id=38"
   ],
   [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
+    "https://placedog.net/500/300?id=39",
+    "https://placedog.net/500/300?id=40",
+    "https://placedog.net/500/300?id=41"
   ],
   [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
+    "https://placedog.net/500/300?id=42",
+    "https://placedog.net/500/300?id=43",
+    "https://placedog.net/500/300?id=44"
   ],
   [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
-  ],
-  [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
-  ],
-  [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
+    "https://placedog.net/500/300?id=45",
+    "https://placedog.net/500/300?id=46",
+    "https://placedog.net/500/300?id=47"
   ],
   // Add more posts as needed
 ];
@@ -426,21 +463,20 @@ const handleAddPet = (newPet) => {
         ))}
       </Slider>
       <div className="post-info">
-        <div className="post-icons">
-          <span>🐾</span>
-          <span>🖥️</span>
-          <span>✈️</span>
-        </div>
-        <div className="post-text">
-          <p><strong>Sparky doing tricks!</strong></p>
-          <p className="timestamp">20 minutes ago</p>
-        </div>
-        <img
-          className="post-profile"
-          src="/user.jpg"
-          alt="User"
-        />
-      </div>
+  <div className="post-text-icon-row">
+    <div className="post-icons">
+      <button className="icon-button"><FaPaw /></button>
+      <button className="icon-button"><FaComment /></button>
+      <button className="icon-button"><TbSend /></button>
+    </div>
+    <div className="post-text">
+      <p><strong>{captions[index % captions.length]}</strong></p>
+      <p className="timestamp">{generatePostDate(index)}</p>
+    </div>
+  </div>
+  <img className="post-profile" src="/user.jpg" alt="User" />
+</div>
+
     </div>
   ))}
 </div>
