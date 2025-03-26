@@ -17,8 +17,8 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
     e.preventDefault();
     if (newComment.trim() !== "") {
       const newCommentObj = {
-        username: "CurrentUser",
-        pfp: "/users/default_pfp.jpg",
+        username: "Molly McKay",
+        pfp: "/linkedGIRL.jpg",
         text: newComment
       };
       setCommentList([...commentList, newCommentObj]);
@@ -56,7 +56,7 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
       {showComments && (
         <div className="comment-section">
           <form onSubmit={handleCommentSubmit} className="comment-form">
-            <img src="/users/default_pfp.jpg" alt="User" className="comment-pfp" />
+            <img src="/linkedGIRL.jpg" alt="User" className="comment-pfp" />
             <input
               type="text"
               value={newComment}
