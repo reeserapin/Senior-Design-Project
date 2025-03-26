@@ -217,15 +217,15 @@
   background-color: #27ae60;
 }
 
-
 .profile-stats {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 180px;
+  gap: 170px; /* optional: adjust spacing */
   margin-top: 60px;
   margin-bottom: 30px;
-  margin-left: -100px;
+  margin-left: auto; /* <-- center horizontally */
+  margin-right: auto; /* <-- center horizontally */
 }
 
 .stat-circle {
@@ -291,9 +291,9 @@
 
 .add-pet-float {
   position: absolute;
-  top: 50%;
+  top: -20%;
   transform: translateY(-50%);
-  right: -60px;
+  right: 580px;
   width: 50px;
   height: 50px;
   background-color: white;
@@ -592,4 +592,30 @@
   border: 1px solid #ccc;
   margin-left: 10px;   /* horizontal spacing */
   margin-top: -135px;
+}
+
+.edit-banner-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  background-color: #f97068; /* red/pinkish tone */
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-banner-button:hover {
+  background-color: #e14e4e;
+}
+
+.edit-banner-button img {
+  width: 22px;
+  height: 22px;
 }

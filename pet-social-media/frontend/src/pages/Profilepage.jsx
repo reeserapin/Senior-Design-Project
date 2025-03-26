@@ -206,14 +206,14 @@ const handleAddPet = (newPet) => {
         <div className="profile-banner-container">
           <div className="profile-banner">
             
-            {banner ? (
-              <img src={banner} alt="Banner" className="banner-image" />
-            ) : (
-              <p>Upload a banner</p>
-            )}
-            <button className="upload-button" onClick={() => fileInputRef.current.click()}>
-              Upload
-            </button>
+          {banner && (
+  <img src={banner} alt="Banner" className="banner-image" />
+)}
+
+<button className="edit-banner-button" onClick={() => fileInputRef.current.click()}>
+  <img src="/pencil-edit-button.svg" alt="Edit" />
+</button>
+
             <input
               type="file"
               accept="image/*"
@@ -241,7 +241,7 @@ const handleAddPet = (newPet) => {
 
           <div className="profile-photo-container">
             <img
-              src={profileImage || "/user.jpg"}
+              src={profileImage || "/linkedGIRL.jpg"}
               alt="Profile"
               className="profile-photo"
             />
