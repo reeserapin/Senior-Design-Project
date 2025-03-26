@@ -8,22 +8,36 @@
       "title": "Doug the Pug",
       "bgColor": "bg-blue",
       "comments": [
-        { "username": "JohnDoe", "pfp": "/users/john_doe.jpg", "text": "Doug is so adorable! ❤️" },
-        { "username": "PetLover99", "pfp": "/users/pet_lover.jpg", "text": "Aww, I love pugs!" }
+        { "username": "John Rivers", "pfp": "/users/John_Rivers.png", "text": "Doug is so adorable! ❤️" },
+        { "username": "Laila Jackson", "pfp": "/users/Laila_Jackson.jpg", "text": "Aww, I love pugs!" },
+        { "username": "John Rivers", "pfp": "/users/John_Rivers.png", "text": "🔥🔥🔥" }
       ]
     },
     {
       "user": "SPCA",
       "avatar": "/spca/spca_logo.png",
-      "pfp": "/doug_the_pug/doug.jpg",
+      "pfp": "/spca/white_pitbull.jpeg",
       "images": ["/spca/Spca_post.webp"],
       "petNames": ["Rocky"],
       "title": "Rocky",
       "bgColor": "bg-green",
       "comments": [
-        { "username": "EmmaWatts", "pfp": "/users/emma_watts.jpg", "text": "Rocky deserves a loving home! 🐶" },
-        { "username": "AdoptMe", "pfp": "/users/adopt_me.jpg", "text": "Where is he located? I’d love to adopt!" }
+        { "username": "Polly Wyatt", "pfp": "/users/Polly_Wyatt.jpeg", "text": "Rocky deserves a loving home! 🐶" },
+        { "username": "Omar Manfredo", "pfp": "/users/Omar_Manfredo.webp", "text": "Where is he located? I’d love to adopt!" }
       ]
-    }
+    },
+    {
+        "user": "Diya Sharma",
+        "avatar": "/kitten_breeder/Diya_Sharma.jpg",
+        "pfp": "/spca/white_pitbull.jpeg",
+        "images": ["/kitten_breeder/three_kittens.jpg", "/kitten_breeder/three_kittens2.jpg", "/kitten_breeder/three_kittens3.jpg"],
+        "petNames": ["Kittens"],
+        "title": "Kittens",
+        "bgColor": "bg-yellow",
+        "comments": [
+          { "username": "Subira Awa", "pfp": "/users/Subira_Awa.jpg", "text": "They are so adorable!! 💖 The one in the middle looks like my sisters cat." },
+          { "username": "John Rivers", "pfp": "/users/John_Rivers.png", "text": "I am interested in getting a kitten 👀 will be reaching out soon." }
+        ]
+      }
   ]
   
