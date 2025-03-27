@@ -36,15 +36,18 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
         <p className="pet-title">{user}</p>
       </div>
 
-      <div className="pet-content-box">
+    <div className="pet-content-box">
+      <div className="pet-info">
         <img src={pfp} alt={title} className="pet-pfp" />
         <p className="pet-title">{title}</p>
-        <div className="image-container">
-          {images.length > 1 && <button className="image-nav left" onClick={prevImage}><FaArrowLeft /></button>}
-          <img src={images[currentImageIndex]} alt={title} className="pet-image" />
-          {images.length > 1 && <button className="image-nav right" onClick={nextImage}><FaArrowRight /></button>}
-        </div>
       </div>
+      <div className="image-container">
+        {images.length > 1 && <button className="image-nav left" onClick={prevImage}><FaArrowLeft /></button>}
+        <img src={images[currentImageIndex]} alt={title} className="pet-image" />
+        {images.length > 1 && <button className="image-nav right" onClick={nextImage}><FaArrowRight /></button>}
+      </div>
+    </div>
+
 
       <div className="pet-actions">
         <FaPaw className={`pet-icon ${liked ? "text-red-500" : "text-gray-500"}`} onClick={toggleLike} />

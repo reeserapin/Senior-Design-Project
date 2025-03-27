@@ -8,6 +8,7 @@
   
   .pet-content-box {
     width: 24rem; /* Adjust width */
+    /* display: flex; */
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -26,16 +27,24 @@
     border-radius: 50%; /* Makes the image circular */
   }
 
-  .pet-pfp{
-    width: 40px; /* Adjust size as needed */
-    height: 40px;
-    border-radius: 50%; /* Makes the image circular */
+  .pet-info {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    gap: 10px; /* Space between pfp and title */
   }
-
+  
+  .pet-pfp {
+    width: 50px; /* Adjust size */
+    height: 50px;
+    border-radius: 50%;
+  }
+  
   .pet-title {
-    font-size: 1rem;
+    font-size: 1.2em;
     font-weight: bold;
+    white-space: nowrap; /* Prevents text wrapping */
   }
+  
   
   .pet-image {
     width: 100%;
