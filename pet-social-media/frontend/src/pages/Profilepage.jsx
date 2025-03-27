@@ -10,6 +10,8 @@ import "slick-carousel/slick/slick-theme.css";
 import AddPetModal from "./AddPetModal";
 import { FaPaw, FaComment } from "react-icons/fa";
 import { TbSend } from "react-icons/tb";
+import PetProfileModal from "./PetProfileModal";
+
 
 const generatePostDate = (index) => {
   const daysAgo = index * 2 + Math.floor(Math.random() * 2); // Spread out by ~2 days per post
@@ -407,7 +409,36 @@ const handleAddPet = (newPet) => {
     <div className="followed-pets-container" ref={scrollRef}>
       {[
       { name: "Millie", image: "https://unsplash.it/201/200" },
-      { name: "Milo", image: "https://unsplash.it/200/200" },
+      {
+        name: "Milo",
+        image: "https://cdn2.thecatapi.com/images/bpc.jpg",
+        breed: "Manx",
+        age: "3 years",
+        gender: "Boy",
+        weight: "9.3 lbs",
+        vaccinated: true,
+        spayedNeutered: true,
+        medicalConditions: "None",
+        personality: { temperament: "Playful", energyLevel: "High" },
+        lifestyle: {
+          goodWithKids: true,
+          goodWithPets: true,
+          indoorOutdoor: "Indoor",
+          pottyTrained: true,
+          crateTrained: false
+        },
+        favoriteActivities: "Chasing lasers, sleeping on laptops, knocking over water.",
+        careRoutine: "Brushed twice a week. Loves tuna treats. Needs daily cuddles.",
+        bio: "Meet Milo, a fun-loving cat with a heart full of mischief and a tail that never stops swaying. Whether she's chasing sunbeams across the living room floor or attempting daring leaps onto countertops she definitely shouldn't be on, her playful spirit brings laughter to everyone around her. 🐾",
+        taggedImages: ["url1", "url2", "url3"],
+          // ✅ Add this galleryImages array here:
+  galleryImages: [
+    "https://cdn2.thecatapi.com/images/bpc.jpg",
+    "https://cdn2.thecatapi.com/images/c3h.jpg",
+    "https://cdn2.thecatapi.com/images/4uv.jpg"
+  ]
+      },
+      
       { name: "Burrito", image: "https://placedog.net/200/200" },
       { name: "Autumn", image: "https://placedog.net/201/200" },
       { name: "Luna", image: "https://placedog.net/202/200" },
@@ -487,15 +518,13 @@ const handleAddPet = (newPet) => {
 
         </div>
         {activeFollowedPet && (
-  <div className="pet-popup-overlay" onClick={() => setActiveFollowedPet(null)}>
-    <div className="pet-popup" onClick={(e) => e.stopPropagation()}>
-      <h3>{activeFollowedPet.name}</h3>
-      <img src={activeFollowedPet.image} alt={activeFollowedPet.name} />
-      <p>This is a pet you're following!</p>
-      <button onClick={() => setActiveFollowedPet(null)}>Close</button>
-    </div>
-  </div>
+  <PetProfileModal
+    pet={activeFollowedPet}
+    onClose={() => setActiveFollowedPet(null)}
+    editable={false}
+  />
 )}
+
 
         {/* Cropping Modal */}
         {cropping && (
@@ -528,5 +557,4 @@ const handleAddPet = (newPet) => {
     </div>
   );
 }
-
 export default ProfilePage;
