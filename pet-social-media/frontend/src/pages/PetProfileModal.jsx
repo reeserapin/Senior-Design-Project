@@ -3,9 +3,11 @@ import "../styles/PetProfileModal.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Posts from "./Posts";
 
 
-const PetProfileModal = ({ pet, onClose, editable = false }) => {
+const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
+
   if (!pet) return null;
 
   const {
@@ -23,7 +25,7 @@ const PetProfileModal = ({ pet, onClose, editable = false }) => {
     favoriteActivities,
     careRoutine,
     bio,
-    taggedImages = [],
+
   } = pet;
 
   return (
@@ -51,6 +53,8 @@ const PetProfileModal = ({ pet, onClose, editable = false }) => {
 </div>
 </div> 
 
+<p><strong>Photos of {pet.name}</strong></p>
+
 {pet.galleryImages?.length > 0 && (
   <div className="pet-carousel-scroll">
     {pet.galleryImages.map((img, index) => (
@@ -61,11 +65,16 @@ const PetProfileModal = ({ pet, onClose, editable = false }) => {
   </div>
 )}
 
-
-
-
-
-
+{posts.length > 0 && (
+  <div className="pet-profile-subsection">
+    <h4>{`Posts Featuring ${pet.name}`}</h4>
+    <Posts
+      postImages={posts.map(p => p.images)}
+      captions={posts.map(p => p.caption)}
+      isCarousel={true} // 👈 This enables the horizontal scroll mode!
+    />
+  </div>
+)}
 
 
 
@@ -113,16 +122,6 @@ const PetProfileModal = ({ pet, onClose, editable = false }) => {
           </div>
         )}
 
-        {taggedImages.length > 0 && (
-          <div className="pet-tagged-images">
-            <h4>Tagged Posts</h4>
-            <div className="tagged-img-gallery">
-              {taggedImages.map((img, index) => (
-                <img key={index} src={img} alt={`tagged-${index}`} />
-              ))}
-            </div>
-          </div>
-        )}
 
         <button className="close-button" onClick={onClose}>Close</button>
       </div>

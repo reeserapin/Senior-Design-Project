@@ -11,6 +11,8 @@ import AddPetModal from "./AddPetModal";
 import { FaPaw, FaComment } from "react-icons/fa";
 import { TbSend } from "react-icons/tb";
 import PetProfileModal from "./PetProfileModal";
+import Posts from "./Posts";
+
 
 
 const generatePostDate = (index) => {
@@ -489,34 +491,9 @@ const handleAddPet = (newPet) => {
   </div>
   <div className="your-posts-section">
   <h2>Your Posts</h2>
-  <div className="posts-grid">
-  {postImages.map((imageSet, index) => (
-    <div key={index} className="post-card">
-      <Slider {...sliderSettings}>
-        {imageSet.map((imgUrl, i) => (
-          <img key={i} className="post-image" src={imgUrl} alt={`Slide ${i}`} />
-        ))}
-      </Slider>
-      <div className="post-info">
-  <div className="post-text-icon-row">
-    <div className="post-icons">
-      <button className="icon-button"><FaPaw /></button>
-      <button className="icon-button"><FaComment /></button>
-      <button className="icon-button"><TbSend /></button>
-    </div>
-    <div className="post-text">
-      <p><strong>{captions[index % captions.length]}</strong></p>
-      <p className="timestamp">{generatePostDate(index)}</p>
-    </div>
-  </div>
-  <img className="post-profile" src="/user.jpg" alt="User" />
+  <Posts postImages={postImages} captions={captions} />
 </div>
 
-    </div>
-  ))}
-</div>
-
-</div>
 
 </div>
 
@@ -526,8 +503,14 @@ const handleAddPet = (newPet) => {
     pet={activeFollowedPet}
     onClose={() => setActiveFollowedPet(null)}
     editable={false}
+    posts={postImages.map((images, index) => ({
+      images,
+      caption: captions[index % captions.length],
+      date: generatePostDate(index),
+    }))}
   />
 )}
+
 
 
         {/* Cropping Modal */}
