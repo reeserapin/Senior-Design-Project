@@ -77,6 +77,16 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
 )}
 
 
+{pet.adoptionStory && (
+  <div className="pet-profile-subsection">
+    <h4>Adoption Story:</h4>
+    <div className="pet-adoption-story">
+      <p>{pet.adoptionStory}</p>
+    </div>
+  </div>
+)}
+
+
 
 
 <div className="pet-profile-details">

@@ -280,6 +280,26 @@
   .pet-posts-carousel {
     padding: 0 20px;
   }
+
+  .pet-profile-subsection h4 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .pet-adoption-story {
+    background-color: white;
+    padding: 20px 30px;
+    margin: 0 auto;
+    max-width: 90%;
+    border-radius: 20px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: left;
+  }
   
   
   

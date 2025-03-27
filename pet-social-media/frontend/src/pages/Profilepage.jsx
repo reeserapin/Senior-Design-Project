@@ -418,6 +418,8 @@ const handleAddPet = (newPet) => {
         age: "3 years",
         gender: "Boy",
         weight: "9.3 lbs",
+        adoptionStory: "Milo was found as a tiny kitten curled up under a porch during a rainstorm, shivering and alone. A kind neighbor rescued him and brought him to the local shelter, where he quickly charmed everyone with his playful energy and big green eyes. After just a few weeks, he was adopted by a young couple who instantly fell in love with his goofy personality and endless curiosity. Now, Milo spends his days exploring sunbeams, cuddling on the couch, and reminding his family just how lucky they are to have found him.",
+
         vaccinated: true,
         spayedNeutered: true,
         medicalConditions: "None",
