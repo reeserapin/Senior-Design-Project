@@ -381,7 +381,21 @@ const handleAddPet = (newPet) => {
     <div className="pets-bubble-container">
       {pets.map((pet, index) => (
         <div key={index} style={{ textAlign: "center" }}>
-          <button className="pet-button" onClick={() => setActivePet(pet)}>
+          <button
+  className="pet-button"
+  onClick={() =>
+    setActivePet({
+      ...pet,
+      onHealthUpdate: (field, value) => {
+        const updatedPets = pets.map((p) =>
+          p.name === pet.name ? { ...p, [field]: value } : p
+        );
+        setPets(updatedPets);
+      },
+    })
+  }
+>
+
             <img className="pet-image" src={pet.image} alt={pet.name} />
           </button>
           <span className="pet-name">{pet.name}</span>
@@ -403,6 +417,13 @@ const handleAddPet = (newPet) => {
   )}
 </div>
 
+{activePet && (
+  <PetProfileModal
+    pet={activePet}
+    onClose={() => setActivePet(null)}
+    editable={true}
+  />
+)}
 
 
 <div className="pets-following-wrapper">

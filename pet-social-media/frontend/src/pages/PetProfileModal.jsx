@@ -86,18 +86,72 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
   </div>
 )}
 
+<div className="pet-health-box">
+  <h3>Health History</h3>
 
+  <div className="health-field-row">
+    <div>
+      <strong>Vaccination Status</strong>
+      {editable ? (
+        <div className="toggle-options">
+          <button
+            className={vaccinated ? "selected" : ""}
+            onClick={() => pet.onHealthUpdate("vaccinated", true)}
+          >
+            ✅
+          </button>
+          <button
+            className={!vaccinated ? "selected" : ""}
+            onClick={() => pet.onHealthUpdate("vaccinated", false)}
+          >
+            ❌
+          </button>
+        </div>
+      ) : (
+        <p>{vaccinated ? "✅ Yes" : "❌ No"}</p>
+      )}
+    </div>
 
+    <div>
+      <strong>Spayed/Neutered</strong>
+      {editable ? (
+        <div className="toggle-options">
+          <button
+            className={spayedNeutered ? "selected" : ""}
+            onClick={() => pet.onHealthUpdate("spayedNeutered", true)}
+          >
+            ✅
+          </button>
+          <button
+            className={!spayedNeutered ? "selected" : ""}
+            onClick={() => pet.onHealthUpdate("spayedNeutered", false)}
+          >
+            ❌
+          </button>
+        </div>
+      ) : (
+        <p>{spayedNeutered ? "✅ Yes" : "❌ No"}</p>
+      )}
+    </div>
+  </div>
 
-<div className="pet-profile-details">
-  <p><strong>Vaccinated:</strong> {vaccinated ? "Yes" : "No"}</p>
-  <p><strong>Spayed/Neutered:</strong> {spayedNeutered ? "Yes" : "No"}</p>
-  {medicalConditions && (
-    <p><strong>Medical Conditions:</strong> {medicalConditions}</p>
-  )}
+  <div className="medical-section">
+    <strong>Medical Conditions</strong>
+    {editable ? (
+      <textarea
+        className="medical-textarea"
+        defaultValue={medicalConditions}
+        placeholder="Enter any medical conditions..."
+        onBlur={(e) =>
+          pet.onHealthUpdate("medicalConditions", e.target.value)
+        }
+      />
+    ) : (
+      <p>{medicalConditions || "None"}</p>
+    )}
+  </div>
 </div>
-        
-       
+
 
         {personality && (
           <div className="pet-profile-subsection">

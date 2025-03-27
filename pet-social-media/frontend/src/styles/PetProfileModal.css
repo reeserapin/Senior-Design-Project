@@ -301,5 +301,68 @@
     text-align: left;
   }
   
+  .pet-health-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px auto;
+    max-width: 90%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
   
+  .pet-health-box h3 {
+    font-size: 20px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  .health-field-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  
+  .health-field-row > div {
+    flex: 1 1 45%;
+    text-align: center;
+  }
+  
+  .toggle-options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  
+  .toggle-options button {
+    font-size: 20px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .toggle-options button.selected {
+    background-color: #b2f2bb;
+    border-color: #38a169;
+  }
+  
+  .medical-section {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .medical-textarea {
+    width: 80%;
+    min-height: 60px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-top: 8px;
+    resize: vertical;
+  }
   
