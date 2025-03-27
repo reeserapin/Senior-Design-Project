@@ -68,6 +68,7 @@ class Pet(db.Model):
     gender = db.Column(db.String(20), nullable=True)  # Male, Female, Other
     size = db.Column(db.String(20), nullable=True)  # Small, Medium, Large
     weight = db.Column(db.Float, nullable=True)
+    color = db.Column(db.String(50), nullable=True) 
 
     temperament = db.Column(db.String(255), nullable=True)
     favorite_activities = db.Column(db.String(255), nullable=True)
@@ -82,6 +83,14 @@ class Pet(db.Model):
 
     previous_owners = db.Column(db.Text, nullable=True)  # Store list of previous owner IDs
     lost_status = db.Column(db.Boolean, default=False)  # Mark as lost or found
+
+    location = db.Column(db.String(255), nullable=True)           # City, State, etc.
+    about = db.Column(db.Text, nullable=True)                      # Description of pet (bio)
+    contact_email = db.Column(db.String(255), nullable=True)       # Contact for adoption
+    contact_phone = db.Column(db.String(20), nullable=True)        # Optional: shelter phone
+    adoption_posted = db.Column(db.Boolean, default=False)         # Is pet listed for adoption?
+    adoption_images = db.Column(db.PickleType, nullable=True)      # List of image URLs
+    vaccinated = db.Column(db.Boolean, default=False)              # Vaccination badge
 
 
 def create_admin():

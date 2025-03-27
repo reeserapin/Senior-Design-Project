@@ -778,9 +778,9 @@ def unfollow_pet(pet_id):
     db.session.commit()
     return jsonify({'message': f'You unfollowed {pet.username}'}), 200
 
-##############
-# USER FEED
-##############
+#################
+# FOLLOWING FEED
+#################
 
 @views.route('/feed', methods=['GET'])
 @login_required
@@ -821,6 +821,73 @@ def get_feed():
         })
 
     return jsonify({'feed': posts_data}), 200
+
+###############
+# EXPLORE FEED
+###############
+
+@views.route('/explore_feed', methods=['GET'])
+@swag_from({
+    'tags': ['Feed'],
+    'summary': 'Explore Feed',
+    'description': 'Returns every post on the platform in descending order by creation date.',
+    'responses': {
+        200: {
+            'description': 'List of all posts',
+            'schema': {
+                'type': 'array',
+                'items': {
+                    'type': 'object',
+                    'properties': {
+                        'id': {'type': 'integer'},
+                        'caption': {'type': 'string'},
+                        'user': {'type': 'string'},
+                        'main_pet': {'type': 'string'},
+                        'tagged_pets': {'type': 'array', 'items': {'type': 'string'}},
+                        'image_urls': {'type': 'array', 'items': {'type': 'string'}},
+                        'timestamp': {'type': 'string'},
+                        'likes': {'type': 'integer'},
+                        'comments': {'type': 'array', 'items': {
+                            'type': 'object',
+                            'properties': {
+                                'user': {'type': 'string'},
+                                'content': {'type': 'string'},
+                                'timestamp': {'type': 'string'}
+                            }
+                        }}
+                    }
+                }
+            }
+        }
+    }
+})
+def explore_feed():
+    """Returns all posts across the platform in reverse chronological order."""
+    posts = Post.query.order_by(Post.created_at.desc()).all()
+
+    posts_data = []
+    for post in posts:
+        posts_data.append({
+            "id": post.id,
+            "caption": post.caption,
+            "user": post.user.username,
+            "main_pet": post.main_pet.username if post.main_pet else None,
+            "tagged_pets": [pet.username for pet in post.tagged_pets],
+            "image_urls": [img.image_url for img in post.images],
+            "timestamp": post.created_at.isoformat(),
+            "likes": len(post.post_likes),
+            "comments": [
+                {
+                    "user": comment.user.username,
+                    "content": comment.content,
+                    "timestamp": comment.timestamp.isoformat()
+                }
+                for comment in post.post_comments
+            ]
+        })
+
+    return jsonify({'explore': posts_data}), 200
+
 
 #############
 # LIKE POST
@@ -1003,3 +1070,212 @@ def get_post_comments(post_id):
         for comment in post.post_comments 
     ]
     return jsonify({'comments': comments_data}), 200
+
+
+#############
+# LIST PET
+#############
+
+@views.route('/list_pet_for_adoption/<string:pet_username>', methods=['PUT'])
+@login_required
+@swag_from({
+    'tags': ['Adoption'],
+    'summary': 'List Pet for Adoption',
+    'description': 'Allows a user or shelter to list their pet on the marketplace.',
+    'parameters': [
+        {'name': 'pet_username', 'in': 'path', 'type': 'string', 'required': True},
+        {
+            'name': 'body',
+            'in': 'body',
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'about': {'type': 'string'},
+                    'location': {'type': 'string'},
+                    'contact_email': {'type': 'string'},
+                    'contact_phone': {'type': 'string'},
+                    'adoption_images': {
+                        'type': 'array',
+                        'items': {'type': 'string'}
+                    },
+                    'vaccinated': {'type': 'boolean'}
+                },
+                'required': ['about', 'location', 'contact_email']
+            }
+        }
+    ],
+    'responses': {
+        200: {'description': 'Pet listed for adoption'},
+        403: {'description': 'Unauthorized'},
+        404: {'description': 'Pet not found'}
+    }
+})
+def list_pet_for_adoption(pet_username):
+    pet = Pet.query.filter_by(username=pet_username, owner_id=current_user.id).first()
+    if not pet:
+        return jsonify({'error': 'Pet not found or unauthorized'}), 404
+
+    data = request.get_json()
+    pet.about = data.get('about')
+    pet.location = data.get('location')
+    pet.contact_email = data.get('contact_email')
+    pet.contact_phone = data.get('contact_phone')
+    pet.adoption_images = data.get('adoption_images', [])
+    pet.vaccinated = data.get('vaccinated', False)
+    pet.adoption_posted = True
+
+    db.session.commit()
+    return jsonify({'message': f'{pet.name} listed for adoption'}), 200
+
+####################
+# GET PET ADOPTIONS
+####################
+
+@views.route('/adoption_market', methods=['GET'])
+@swag_from({
+    'tags': ['Adoption'],
+    'summary': 'Get Pets Listed for Adoption (Filterable)',
+    'description': 'Returns adoptable pets, with optional filters for species, breed, age, size, gender, and location.',
+    'parameters': [
+        {'name': 'species', 'in': 'query', 'type': 'string'},
+        {'name': 'breed', 'in': 'query', 'type': 'string'},
+        {'name': 'age', 'in': 'query', 'type': 'integer'},
+        {'name': 'size', 'in': 'query', 'type': 'string'},
+        {'name': 'gender', 'in': 'query', 'type': 'string'},
+        {'name': 'location', 'in': 'query', 'type': 'string'},
+        {'name': 'sort_by', 'in': 'query', 'type': 'string', 'enum': ['newest', 'oldest', 'age_asc', 'age_desc']}
+    ],
+    'responses': {200: {'description': 'Filtered list of pets'}}
+})
+def get_adoption_market():
+    query = Pet.query.filter_by(adoption_posted=True)
+
+    # Filtering
+    species = request.args.get('species')
+    breed = request.args.get('breed')
+    age = request.args.get('age', type=int)
+    size = request.args.get('size')
+    gender = request.args.get('gender')
+    location = request.args.get('location')
+    sort_by = request.args.get('sort_by', 'newest')
+
+    if species:
+        query = query.filter_by(species=species)
+    if breed:
+        query = query.filter_by(breed=breed)
+    if age is not None:
+        query = query.filter_by(age=age)
+    if size:
+        query = query.filter_by(size=size)
+    if gender:
+        query = query.filter_by(gender=gender)
+    if location:
+        query = query.filter(Pet.location.ilike(f"%{location}%"))
+
+    # Sorting
+    if sort_by == 'newest':
+        query = query.order_by(Pet.id.desc())
+    elif sort_by == 'oldest':
+        query = query.order_by(Pet.id.asc())
+    elif sort_by == 'age_asc':
+        query = query.order_by(Pet.age.asc())
+    elif sort_by == 'age_desc':
+        query = query.order_by(Pet.age.desc())
+
+    pets = query.all()
+
+    pet_list = [{
+        'name': pet.name,
+        'username': pet.username,
+        'species': pet.species,
+        'breed': pet.breed,
+        'age': pet.age,
+        'size': pet.size,
+        'color': pet.color,
+        'weight': pet.weight,
+        'gender': pet.gender,
+        'vaccinated': pet.vaccinated,
+        'about': pet.about,
+        'location': pet.location,
+        'adoption_images': pet.adoption_images or [],
+        'contact_email': pet.contact_email,
+        'contact_phone': pet.contact_phone,
+        'shelter': pet.owner.username if pet.owner else None
+    } for pet in pets]
+
+    return jsonify({'pets': pet_list}), 200
+
+####################
+# SEARCH ACCOUNTS
+####################
+
+@views.route('/search_accounts', methods=['GET'])
+@swag_from({
+    'tags': ['User'],
+    'summary': 'Search Users, Shelters, or Pets',
+    'description': 'Search accounts based on username, first/last name, or email, with optional filters by type.',
+    'parameters': [
+        {'name': 'q', 'in': 'query', 'type': 'string', 'required': True},
+        {'name': 'type', 'in': 'query', 'type': 'string', 'enum': ['User', 'Shelter', 'Pet']}
+    ],
+    'responses': {
+        200: {'description': 'Search results including account type'}
+    }
+})
+def search_accounts():
+    q = request.args.get('q', '')
+    account_type = request.args.get('type')  # Optional
+
+    user_query = User.query.filter(
+        (User.username.ilike(f"%{q}%")) |
+        (User.full_name.ilike(f"%{q}%")) |
+        (User.email.ilike(f"%{q}%"))
+    )
+    pet_query = Pet.query.filter(
+        (Pet.username.ilike(f"%{q}%")) |
+        (Pet.name.ilike(f"%{q}%"))
+    )
+
+    if account_type == 'User':
+        user_query = user_query.filter(User.user_type == 'User')
+        users = user_query.all()
+        results = [{'type': 'User', 'username': u.username, 'name': u.full_name} for u in users]
+    elif account_type == 'Shelter':
+        user_query = user_query.filter(User.user_type == 'Shelter')
+        shelters = user_query.all()
+        results = [{'type': 'Shelter', 'username': s.username, 'name': s.full_name} for s in shelters]
+    elif account_type == 'Pet':
+        pets = pet_query.all()
+        results = [{'type': 'Pet', 'username': p.username, 'name': p.name} for p in pets]
+    else:
+        # Mixed results
+        users = user_query.all()
+        pets = pet_query.all()
+        results = (
+            [{'type': 'User' if u.user_type == 'User' else 'Shelter', 'username': u.username, 'name': u.full_name} for u in users] +
+            [{'type': 'Pet', 'username': p.username, 'name': p.name} for p in pets]
+        )
+
+    return jsonify({'results': results}), 200
+
+####################
+# SORT PET ADOPTIONS
+####################
+
+
+
+####################
+# SORT PET ADOPTIONS
+####################
+
+
+
+####################
+# SORT PET ADOPTIONS
+####################
+
+
+
+####################
+# SORT PET ADOPTIONS
+####################
