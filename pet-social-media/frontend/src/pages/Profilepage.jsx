@@ -432,11 +432,15 @@ const handleAddPet = (newPet) => {
         bio: "Meet Milo, a fun-loving cat with a heart full of mischief and a tail that never stops swaying. Whether she's chasing sunbeams across the living room floor or attempting daring leaps onto countertops she definitely shouldn't be on, her playful spirit brings laughter to everyone around her. 🐾",
         taggedImages: ["url1", "url2", "url3"],
           // ✅ Add this galleryImages array here:
-  galleryImages: [
-    "https://cdn2.thecatapi.com/images/bpc.jpg",
-    "https://cdn2.thecatapi.com/images/c3h.jpg",
-    "https://cdn2.thecatapi.com/images/4uv.jpg"
-  ]
+          galleryImages: [
+            "https://cdn2.thecatapi.com/images/bpc.jpg",
+            "https://cdn2.thecatapi.com/images/c3h.jpg",
+            "https://cdn2.thecatapi.com/images/4uv.jpg",
+            "https://cdn2.thecatapi.com/images/9j5.jpg",
+            "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg",
+            "https://cdn2.thecatapi.com/images/2oo.jpg"
+          ]
+          
       },
       
       { name: "Burrito", image: "https://placedog.net/200/200" },

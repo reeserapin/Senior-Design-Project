@@ -52,23 +52,18 @@ const PetProfileModal = ({ pet, onClose, editable = false }) => {
 </div> 
 
 {pet.galleryImages?.length > 0 && (
-  <div className="pet-carousel">
-    <Slider
-      dots={true}
-      infinite={true}
-      speed={500}
-      slidesToShow={1}
-      slidesToScroll={1}
-      arrows={false}
-    >
-      {pet.galleryImages.map((img, index) => (
-        <div className="carousel-image-wrapper" key={index}>
-          <img className="carousel-image" src={img} alt={`Gallery ${index}`} />
-        </div>
-      ))}
-    </Slider>
+  <div className="pet-carousel-scroll">
+    {pet.galleryImages.map((img, index) => (
+      <div className="scroll-image-wrapper" key={index}>
+        <img className="scroll-image" src={img} alt={`Gallery ${index}`} />
+      </div>
+    ))}
   </div>
 )}
+
+
+
+
 
 
 
