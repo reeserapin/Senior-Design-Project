@@ -29,7 +29,7 @@
     {
         "user": "Diya Sharma",
         "avatar": "/kitten_breeder/Diya_Sharma.jpg",
-        "pfp": "/spca/white_pitbull.jpeg",
+        "pfp": ["/kitten_breeder/orange_kitten.webp", "/kitten_breeder/brown_kitten.avif", "/kitten_breeder/brown_and_white_kitten.jpg"],
         "images": ["/kitten_breeder/three_kittens.jpg", "/kitten_breeder/three_kittens2.jpg", "/kitten_breeder/three_kittens3.jpg"],
         "petNames": ["Kittens"],
         "title": "Kittens",

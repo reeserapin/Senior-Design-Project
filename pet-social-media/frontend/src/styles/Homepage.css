@@ -17,34 +17,48 @@
 
   .pet-header {
     display: flex;
-    align-items: center; /* Aligns items vertically */
-    gap: 10px; /* Adds spacing between image and text */
+    align-items: center; 
+    gap: 10px; 
   }
 
   .pet-avatar {
-    width: 40px; /* Adjust size as needed */
+    width: 40px;
     height: 40px;
-    border-radius: 50%; /* Makes the image circular */
+    border-radius: 50%; 
   }
 
   .pet-info {
     display: flex;
-    align-items: center; /* Align items vertically */
-    gap: 10px; /* Space between pfp and title */
+    align-items: center; 
+    gap: 10px; 
+  }
+  
+  .pet-pfp-container {
+    display: flex;
+    align-items: center;
   }
   
   .pet-pfp {
-    width: 50px; /* Adjust size */
+    width: 50px; /* Adjust as needed */
     height: 50px;
     border-radius: 50%;
+    margin-left: -15px; /* Creates the overlapping effect */
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .pet-pfp:first-child {
+    margin-left: 0; /* Ensures the first image starts normally */
+  }
+  
+  .pet-pfp:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
   }
   
   .pet-title {
     font-size: 1.2em;
     font-weight: bold;
-    white-space: nowrap; /* Prevents text wrapping */
+    white-space: nowrap; 
   }
-  
   
   .pet-image {
     width: 100%;
