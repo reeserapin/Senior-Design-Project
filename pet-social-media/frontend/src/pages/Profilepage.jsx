@@ -426,6 +426,7 @@ const handleAddPet = (newPet) => {
 )}
 
 
+
 <div className="pets-following-wrapper">
   <h2>Pets You Follow</h2>
   <div className="pets-following-section">
