@@ -1,4 +1,3 @@
-
 import React from "react";
 import "../styles/PetProfileModal.css";
 import Slider from "react-slick";
@@ -20,7 +19,13 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
     spayedNeutered,
     medicalConditions,
     personality = {},
-    lifestyle,
+    lifestyle = {
+      goodWithKids: null,
+      goodWithPets: null,
+      indoorOutdoor: null,
+      pottyTrained: null,
+      crateTrained: null,
+    },
     favoriteActivities,
     careRoutine,
     bio,
@@ -37,6 +42,7 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
   return (
     <div className="pet-profile-overlay" onClick={onClose}>
       <div className="pet-profile-modal" onClick={(e) => e.stopPropagation()}>
+        {/* Header */}
         <div className="pet-header">
           <div className="pet-image-column">
             <img className="pet-image" src={image} alt={name} />
@@ -54,6 +60,7 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
           </div>
         </div>
 
+        {/* Gallery */}
         {galleryImages?.length > 0 && (
           <>
             <p><strong>Photos of {name}</strong></p>
@@ -67,6 +74,7 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
           </>
         )}
 
+        {/* Posts */}
         {posts.length > 0 && (
           <div className="pet-profile-subsection">
             <h4>{`Posts Featuring ${name}`}</h4>
@@ -78,6 +86,7 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
           </div>
         )}
 
+        {/* Adoption Story */}
         {adoptionStory && (
           <div className="pet-profile-subsection">
             <h4>Adoption Story:</h4>
@@ -87,6 +96,7 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
           </div>
         )}
 
+        {/* Health */}
         <div className="pet-health-box">
           <h3>Health History</h3>
           <div className="health-field-row">
@@ -94,40 +104,19 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
               <strong>Vaccination Status</strong>
               {editable ? (
                 <div className="toggle-options">
-                  <button
-                    className={vaccinated ? "selected" : ""}
-                    onClick={() => onHealthUpdate("vaccinated", true)}
-                  >
-                    ✅
-                  </button>
-                  <button
-                    className={!vaccinated ? "selected" : ""}
-                    onClick={() => onHealthUpdate("vaccinated", false)}
-                  >
-                    ❌
-                  </button>
+                  <button className={vaccinated ? "selected" : ""} onClick={() => onHealthUpdate("vaccinated", true)}>✅</button>
+                  <button className={!vaccinated ? "selected" : ""} onClick={() => onHealthUpdate("vaccinated", false)}>❌</button>
                 </div>
               ) : (
                 <p>{vaccinated ? "✅ Yes" : "❌ No"}</p>
               )}
             </div>
-
             <div>
               <strong>Spayed/Neutered</strong>
               {editable ? (
                 <div className="toggle-options">
-                  <button
-                    className={spayedNeutered ? "selected" : ""}
-                    onClick={() => onHealthUpdate("spayedNeutered", true)}
-                  >
-                    ✅
-                  </button>
-                  <button
-                    className={!spayedNeutered ? "selected" : ""}
-                    onClick={() => onHealthUpdate("spayedNeutered", false)}
-                  >
-                    ❌
-                  </button>
+                  <button className={spayedNeutered ? "selected" : ""} onClick={() => onHealthUpdate("spayedNeutered", true)}>✅</button>
+                  <button className={!spayedNeutered ? "selected" : ""} onClick={() => onHealthUpdate("spayedNeutered", false)}>❌</button>
                 </div>
               ) : (
                 <p>{spayedNeutered ? "✅ Yes" : "❌ No"}</p>
@@ -150,64 +139,128 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
           </div>
         </div>
 
+        {/* Personality */}
         <div className="pet-profile-subsection personality-box">
-  <h4>Personality</h4>
+          <h4>Personality</h4>
 
-  {/* Temperament */}
-  <div className="slider-section">
-    <label htmlFor="temperament"><strong>Temperament</strong></label>
-    <div className="slider-wrapper">
-      <input
-        id="temperament"
-        type="range"
-        min="1"
-        max="10"
-        value={personality.temperament || 5}
-        disabled={!editable}
-        onChange={(e) => handleSliderChange("temperament", e.target.value)}
+          {/* Temperament */}
+          <div className="slider-section">
+            <label htmlFor="temperament"><strong>Temperament</strong></label>
+            <div className="slider-wrapper">
+              <input
+                id="temperament"
+                type="range"
+                min="1"
+                max="10"
+                value={personality.temperament || 5}
+                disabled={!editable}
+                onChange={(e) => handleSliderChange("temperament", e.target.value)}
+              />
+              <div className="slider-label-row">
+                <span>😐</span>
+                <span>😆</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Energy Level */}
+          <div className="slider-section">
+            <label htmlFor="energyLevel"><strong>Energy Level</strong></label>
+            <div className="slider-wrapper">
+              <input
+                id="energyLevel"
+                type="range"
+                min="1"
+                max="10"
+                value={personality.energyLevel || 5}
+                disabled={!editable}
+                onChange={(e) => handleSliderChange("energyLevel", e.target.value)}
+              />
+              <div className="slider-label-row">
+                <span>😴</span>
+                <span>🏃‍♂️</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Favorite Activities */}
+          <div className="pet-profile-subsection">
+            <h4>Favorite Activities</h4>
+            {editable ? (
+              <textarea
+                className="favorite-textarea"
+                defaultValue={favoriteActivities}
+                placeholder="Enter favorite activities..."
+                onBlur={(e) => onHealthUpdate("favoriteActivities", e.target.value)}
+              />
+            ) : (
+              <p>{favoriteActivities || "Not provided"}</p>
+            )}
+          </div>
+        </div>
+
+        {/* Lifestyle Section */}
+        {(editable || lifestyle) && (
+          <div className="pet-profile-subsection lifestyle-box">
+            <h4>Lifestyle</h4>
+            {[
+              { label: "Good with Kids", field: "goodWithKids" },
+              { label: "Good with Other Pets", field: "goodWithPets" },
+              { label: "Indoor/Outdoor?", field: "indoorOutdoor" },
+              { label: "Potty Trained / Litter Trained?", field: "pottyTrained" },
+              { label: "Crate Trained?", field: "crateTrained" },
+            ].map(({ label, field }) => (
+              <div key={field} className="lifestyle-row">
+                <span>{label}</span>
+                {editable ? (
+                  <div className="toggle-options">
+                    <button
+                      className={lifestyle[field] === false ? "selected red" : ""}
+                      onClick={() =>
+                        onHealthUpdate("lifestyle", {
+                          ...lifestyle,
+                          [field]: false,
+                        })
+                      }
+                    >
+                      ❌
+                    </button>
+                    <button
+                      className={lifestyle[field] === true ? "selected green" : ""}
+                      onClick={() =>
+                        onHealthUpdate("lifestyle", {
+                          ...lifestyle,
+                          [field]: true,
+                        })
+                      }
+                    >
+                      ✅
+                    </button>
+                  </div>
+                ) : (
+                  <span>{lifestyle[field] === true ? "✅" : "❌"}</span>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Care Routine */}
+{editable || careRoutine ? (
+  <div className="pet-profile-subsection care-box">
+    <h4>Care Routine</h4>
+    {editable ? (
+      <textarea
+        className="favorite-textarea"
+        defaultValue={careRoutine}
+        placeholder="Describe this pet's daily care needs..."
+        onBlur={(e) => onHealthUpdate("careRoutine", e.target.value)}
       />
-      <div className="slider-label-row">
-        <span>😐</span>
-        <span>😆</span>
-      </div>
-    </div>
+    ) : (
+      <p>{careRoutine || "Not provided"}</p>
+    )}
   </div>
-
-  {/* Energy Level */}
-  <div className="slider-section">
-    <label htmlFor="energyLevel"><strong>Energy Level</strong></label>
-    <div className="slider-wrapper">
-      <input
-        id="energyLevel"
-        type="range"
-        min="1"
-        max="10"
-        value={personality.energyLevel || 5}
-        disabled={!editable}
-        onChange={(e) => handleSliderChange("energyLevel", e.target.value)}
-      />
-      <div className="slider-label-row">
-        <span>😴</span>
-        <span>🏃‍♂️</span>
-      </div>
-    </div>
-  </div>
-
-  <div className="pet-profile-subsection">
-  <h4>Favorite Activities</h4>
-  {editable ? (
-    <textarea
-      className="favorite-textarea"
-      defaultValue={favoriteActivities}
-      placeholder="Enter favorite activities..."
-      onBlur={(e) => onHealthUpdate("favoriteActivities", e.target.value)}
-    />
-  ) : (
-    <p>{favoriteActivities || "Not provided"}</p>
-  )}
-</div>
-
-</div>
+) : null}
 
 
         <button className="close-button" onClick={onClose}>Close</button>

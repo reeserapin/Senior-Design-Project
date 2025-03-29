@@ -452,4 +452,52 @@
     resize: vertical;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   }
-    
+
+  .lifestyle-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px auto;
+    max-width: 90%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: left;
+  }
+  
+  .lifestyle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  
+  .lifestyle-row span:first-child {
+    flex: 1;
+  }
+  
+  .lifestyle-box .toggle-options {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .toggle-options button.red {
+    background-color: #fbd3d3;
+  }
+  
+  .toggle-options button.green {
+    background-color: #d0f5d8;
+  }
+  
+  .care-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px auto;
+    max-width: 90%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: left;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  
