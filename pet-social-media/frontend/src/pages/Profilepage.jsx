@@ -14,7 +14,6 @@ import PetProfileModal from "./PetProfileModal";
 import Posts from "./Posts";
 
 
-
 const generatePostDate = (index) => {
   const daysAgo = index * 2 + Math.floor(Math.random() * 2); // Spread out by ~2 days per post
   const postDate = new Date();
@@ -201,7 +200,8 @@ function ProfilePage() {
   const [activeFollowedPet, setActiveFollowedPet] = useState(null);
   const [username, setUsername] = useState("Joe Schmoe");
   const [isEditingName, setIsEditingName] = useState(false);
-  
+  const [editable, setEditable] = useState(false);
+
 
   const scrollLeft = () => {
     scrollRef.current.scrollBy({ left: -150, behavior: "smooth" });
@@ -420,10 +420,22 @@ const handleAddPet = (newPet) => {
 {activePet && (
   <PetProfileModal
     pet={activePet}
-    onClose={() => setActivePet(null)}
-    editable={true}
+    onClose={() => {
+      setActivePet(null);
+      setEditable(false); // reset on close
+    }}
+    
+    editable={editable}
+    onToggleEdit={() => setEditable((prev) => !prev)}
+    showEditButton={true}
+    posts={postImages.map((images, index) => ({
+      images,
+      caption: captions[index % captions.length],
+      date: generatePostDate(index),
+    }))}
   />
 )}
+
 
 
 

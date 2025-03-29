@@ -4,8 +4,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Posts from "./Posts";
+import { FaEdit } from "react-icons/fa";
 
-const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
+
+const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditButton = false, onToggleEdit }) => {
   if (!pet) return null;
 
   const {
@@ -42,6 +44,12 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
   return (
     <div className="pet-profile-overlay" onClick={onClose}>
       <div className="pet-profile-modal" onClick={(e) => e.stopPropagation()}>
+      {showEditButton && (
+  <button className="edit-button" onClick={onToggleEdit}>
+    <FaEdit />
+  </button>
+)}
+
         {/* Header */}
         <div className="pet-header">
           <div className="pet-image-column">
@@ -89,8 +97,8 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [] }) => {
         {/* Adoption Story */}
         {adoptionStory && (
           <div className="pet-profile-subsection">
-            <h4>Adoption Story:</h4>
             <div className="pet-adoption-story">
+            <h4>Adoption Story:</h4>
               <p>{adoptionStory}</p>
             </div>
           </div>
