@@ -3,7 +3,7 @@
       "user": "Leslie Mosier",
       "avatar": "/doug_the_pug/LeslieMosier.jpg",
       "pfp": "/doug_the_pug/doug.jpg",
-      "images": ["/doug_the_pug/doug_post.jpg"],
+      "images": ["/doug_the_pug/doug_post.jpg", "/doug_the_pug/doug_flowers.jpg", "/doug_the_pug/doug_heart.jpg"],
       "petNames": ["Doug"],
       "title": "Doug the Pug",
       "bgColor": "bg-blue",
@@ -37,6 +37,33 @@
         "comments": [
           { "username": "Subira Awa", "pfp": "/users/Subira_Awa.jpg", "text": "They are so adorable!! 💖 The one in the middle looks like my sisters cat." },
           { "username": "John Rivers", "pfp": "/users/John_Rivers.png", "text": "I am interested in getting a kitten 👀 will be reaching out soon." }
+        ]
+      },
+      {
+        "user": "Furry Friends United",
+        "avatar": "/furry_friends_united/FFU.jpg",
+        "pfp": "/furry_friends_united/black_dog_6.jpeg",
+        "images": ["/furry_friends_united/black_dog_3.jpeg", "/furry_friends_united/black_dog_2.jpeg", "/furry_friends_united/black_dog_1.jpeg", "/furry_friends_united/black_dog_4.jpeg"],
+        "petNames": ["Enzo"],
+        "title": "Enzo",
+        "bgColor": "bg-green",
+        "comments": [
+          { "username": "Polly Wyatt", "pfp": "/users/Polly_Wyatt.jpeg", "text": "Enzo looks so playful 🧸🥺" },
+          { "username": "Omar Manfredo", "pfp": "/users/Omar_Manfredo.webp", "text": "Hope he finds a loving home 🏠" }
+        ]
+      },
+      {
+        "user": "佐藤 敦子 (Sato Atsuko)",
+        "avatar": "/doge/Atsuko_Sato.jpg",
+        "pfp": "/doge/doge_pfp.jpg",
+        "images": ["/doge/cute_doge.jpg", "/doge/rip_doge.jpg", "/doge/sweater_doge.jpg"],
+        "petNames": ["かぼすママ"],
+        "title": "かぼすママ (Kabosu Mama) Doge",
+        "bgColor": "bg-blue",
+        "comments": [
+          { "username": "John Rivers", "pfp": "/users/John_Rivers.png", "text": "🌸 BEAUTIFUL 🌸" },
+          { "username": "Laila Jackson", "pfp": "/users/Laila_Jackson.jpg", "text": "🤩🤩🤩🤩🤩🤩🤩🤩" },
+          { "username": "John Rivers", "pfp": "/users/John_Rivers.png", "text": "💖💐 Sweet!" }
         ]
       }
   ]
