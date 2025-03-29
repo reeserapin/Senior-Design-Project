@@ -63,6 +63,17 @@
     color: #333;
     margin: 0;
   }
+
+  .pet-name-input {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 10px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    width: 80%;
+  }
+  
   
   .pet-bio-box {
     background: white;
@@ -143,6 +154,63 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
   
+  .pet-carousel-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+    gap: 12px;
+  }
+  
+  .scroll-image-wrapper {
+    position: relative;
+  }
+  
+  .scroll-image {
+    height: 160px;
+    border-radius: 20px;
+    object-fit: cover;
+  }
+  .delete-photo-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: white; /* or transparent if needed */
+    border: none;
+    border-radius: 100%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+  }
+  
+  .delete-photo-button:hover {
+    transform: scale(1.1);
+  }
+  
+  
+  .upload-photo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 160px;
+    background: #ade788;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 2rem;
+  }
+  
+  .upload-label {
+    cursor: pointer;
+  }
+  
+
   .stat-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;

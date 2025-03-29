@@ -5,6 +5,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Posts from "./Posts";
 import { FaEdit } from "react-icons/fa";
+import { IoIosRemoveCircleOutline } from "react-icons/io";
+import { MdAddPhotoAlternate } from "react-icons/md";
 
 
 const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditButton = false, onToggleEdit }) => {
@@ -40,6 +42,23 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
   const handleSliderChange = (field, value) => {
     onPersonalityUpdate(field, parseInt(value));
   };
+  const handleDeleteImage = (index) => {
+    const updated = [...galleryImages];
+    updated.splice(index, 1);
+    onHealthUpdate("galleryImages", updated);
+  };
+  
+  const handleUploadImage = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        onHealthUpdate("galleryImages", [...(galleryImages || []), reader.result]);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  
 
   return (
     <div className="pet-profile-overlay" onClick={onClose}>
@@ -54,33 +73,121 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
         <div className="pet-header">
           <div className="pet-image-column">
             <img className="pet-image" src={image} alt={name} />
-            <h2 className="pet-name">{name}</h2>
+            {editable ? (
+  <input
+    type="text"
+    className="pet-edit-input pet-name-input"
+    defaultValue={name}
+    onBlur={(e) => onHealthUpdate("name", e.target.value)}
+  />
+) : (
+  <h2 className="pet-name">{name}</h2>
+)}
+
             <div className="pet-info-box">
-              <p><strong>Breed:</strong> {breed || "N/A"}</p>
-              <p><strong>Age:</strong> {age || "N/A"}</p>
-              <p><strong>Gender:</strong> {gender || "N/A"}</p>
-              <p><strong>Weight:</strong> {weight || "N/A"}</p>
-            </div>
+  <p><strong>Breed:</strong>{" "}
+    {editable ? (
+      <input
+        className="pet-edit-input"
+        type="text"
+        defaultValue={breed}
+        onBlur={(e) => onHealthUpdate("breed", e.target.value)}
+      />
+    ) : (
+      breed || "N/A"
+    )}
+  </p>
+
+  <p><strong>Age:</strong>{" "}
+    {editable ? (
+      <input
+        className="pet-edit-input"
+        type="text"
+        defaultValue={age}
+        onBlur={(e) => onHealthUpdate("age", e.target.value)}
+      />
+    ) : (
+      age || "N/A"
+    )}
+  </p>
+
+  <p><strong>Gender:</strong>{" "}
+    {editable ? (
+      <input
+        className="pet-edit-input"
+        type="text"
+        defaultValue={gender}
+        onBlur={(e) => onHealthUpdate("gender", e.target.value)}
+      />
+    ) : (
+      gender || "N/A"
+    )}
+  </p>
+
+  <p><strong>Weight:</strong>{" "}
+    {editable ? (
+      <input
+        className="pet-edit-input"
+        type="text"
+        defaultValue={weight}
+        onBlur={(e) => onHealthUpdate("weight", e.target.value)}
+      />
+    ) : (
+      weight || "N/A"
+    )}
+  </p>
+</div>
+
           </div>
           <div className="pet-bio-box">
-            <h3 className="bio-title">About {name}:</h3>
-            <p>{bio}</p>
+          <h3 className="bio-title">About {name}:</h3>
+{editable ? (
+  <textarea
+    className="favorite-textarea"
+    defaultValue={bio}
+    onBlur={(e) => onHealthUpdate("bio", e.target.value)}
+    placeholder="Write a short bio..."
+  />
+) : (
+  <p>{bio}</p>
+)}
+
           </div>
         </div>
-
-        {/* Gallery */}
-        {galleryImages?.length > 0 && (
-          <>
-            <p><strong>Photos of {name}</strong></p>
-            <div className="pet-carousel-scroll">
-              {galleryImages.map((img, index) => (
-                <div className="scroll-image-wrapper" key={index}>
-                  <img className="scroll-image" src={img} alt={`Gallery ${index}`} />
-                </div>
-              ))}
-            </div>
-          </>
+        <div className="pet-profile-subsection">
+  <h4>Photos of {name}</h4>
+  <div className="pet-carousel-scroll">
+    {galleryImages?.map((img, index) => (
+      <div className="scroll-image-wrapper" key={index}>
+        <img className="scroll-image" src={img} alt={`Gallery ${index}`} />
+        {editable && (
+          <button
+            className="delete-photo-button"
+            onClick={() => handleDeleteImage(index)}
+          >
+            <IoIosRemoveCircleOutline size={50} color="crimson" />
+          </button>
         )}
+      </div>
+    ))}
+    {editable && (
+      <div className="upload-photo-wrapper">
+        <label className="upload-label">
+        <MdAddPhotoAlternate size={40}/>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleUploadImage(e)}
+            style={{ display: "none" }}
+          />
+        </label>
+      </div>
+    )}
+  </div>
+</div>
+
+
+  
 
         {/* Posts */}
         {posts.length > 0 && (

@@ -226,7 +226,15 @@ function ProfilePage() {
     {
       name: "Snowy",
       image: "https://puzzlemania-154aa.kxcdn.com/products/2024/puzzle-ravensburger-1500-pieces-white-kitten.webp",
-      description: "Snowy is the quietest and fluffiest kitten you'll meet!"
+      description: "Snowy is the quietest and fluffiest kitten you'll meet!",
+      galleryImages: [
+        "https://cdn2.thecatapi.com/images/bpc.jpg",
+        "https://cdn2.thecatapi.com/images/c3h.jpg",
+        "https://cdn2.thecatapi.com/images/4uv.jpg",
+        "https://cdn2.thecatapi.com/images/9j5.jpg",
+        "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg",
+        "https://cdn2.thecatapi.com/images/2oo.jpg"
+      ]
     }
   ]);
 
