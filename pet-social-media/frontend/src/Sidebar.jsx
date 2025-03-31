@@ -22,7 +22,7 @@ function Sidebar() {
           </Link>
         </li>
         <li>
-          <Link to="/profile">
+          <Link to="/pedigree">
             <img src="/public/checkcircle.png" alt="Pedigree" className="nav-icon" />
             Pedigree
           </Link>

@@ -3,7 +3,7 @@
       "user": "Leslie Mosier",
       "avatar": "/doug_the_pug/LeslieMosier.jpg",
       "pfp": "/doug_the_pug/doug.jpg",
-      "images": ["/doug_the_pug/doug_post.jpg", "/doug_the_pug/doug_flowers.jpg", "/doug_the_pug/doug_heart.jpg"],
+      "images": ["/doug_the_pug/doug_post.jpg", "/doug_the_pug/doug_heart.jpg"],
       "petNames": ["Doug"],
       "title": "Doug the Pug",
       "bgColor": "bg-blue",

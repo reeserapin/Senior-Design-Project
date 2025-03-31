@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaPaw, FaFlag, FaComment, FaPaperPlane, FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import postsData from "../pages/posts.json"; // Import JSON data
+import postsData from "../pages/posts.json";
 import "../styles/Homepage.css";
 
 const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
