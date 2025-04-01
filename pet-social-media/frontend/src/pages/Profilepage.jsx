@@ -23,6 +23,22 @@ const generatePostDate = (index) => {
   });
 };
 
+const personalityLevels = {
+  temperament: {
+    Calm: 1,
+    Friendly: 2,
+    Playful: 3,
+    Energetic: 4,
+    Hyper: 5
+  },
+  energyLevel: {
+    Low: 1,
+    Chill: 2,
+    Moderate: 3,
+    High: 4,
+    Hyperactive: 5
+  }
+};
 
 
 const captions = [
@@ -496,7 +512,7 @@ const handleAddPet = (newPet) => {
         vaccinated: true,
         spayedNeutered: true,
         medicalConditions: "None",
-        personality: { temperament: "Playful", energyLevel: "High" },
+        personality: { temperament: 3, energyLevel: 5 },
         lifestyle: {
           goodWithKids: true,
           goodWithPets: true,
