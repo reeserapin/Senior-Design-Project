@@ -26,20 +26,19 @@
     height: 18px;
     color: #333;
   }  
-  
-.pet-header {
+  .pet-header {
     display: flex;
+    justify-content: space-between;
     align-items: flex-start;
-    gap: 40px;
+    gap: 20px;
     margin-bottom: 20px;
-    text-align: left;
   }
   
-.pet-image-column {
+  .pet-image-column {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 0 0 200px;
+    flex: 0 0 45%;
   }
   
   .pet-image-name {
@@ -58,11 +57,12 @@
   }
   
   .pet-name {
-    font-size: 24px;
-    font-weight: 600;
-    color: #333;
-    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin: 10px 0;
   }
+  
 
   .pet-name-input {
     font-size: 24px;
@@ -77,16 +77,28 @@
   
   .pet-bio-box {
     background: white;
-    padding: 20px 25px;
-    border-radius: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    font-size: 16px;
-    color: #333;
-    line-height: 1.6;
-    word-break: break-word;
-    flex: 1;
+    padding: 16px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    width: 100%;
+    max-width: 240px;
   }
 
+  .pet-info-box p {
+    margin: 8px 0;
+    font-size: 14px;
+    text-align: left;
+  }
+  
+  .pet-edit-input {
+    width: 100%;
+    padding: 6px 8px;
+    margin-top: 4px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
   
 .pet-profile-overlay {
     position: fixed;
@@ -522,15 +534,17 @@
   
   
   .favorite-textarea {
-    width: 100%;
-    min-height: 60px;
+    width: 90%;
+    height: 100px;
     padding: 10px;
-    border-radius: 8px;
-    font-size: 15px;
+    border-radius: 10px;
+    font-size: 14px;
     border: 1px solid #ccc;
-    resize: vertical;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    resize: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   }
+  
+
 
   .lifestyle-box {
     background-color: white;
@@ -573,13 +587,27 @@
     padding: 20px;
     border-radius: 20px;
     margin: 20px auto;
-    max-width: 90%;
+    max-width: 100%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     text-align: left;
     font-size: 15px;
     line-height: 1.6;
   }
   
+  .pet-profile-subsection.care-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px auto;
+    max-width: 90%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+
   .not-selected-readonly {
     filter: grayscale(100%) brightness(1.1);
     opacity: 0.6;
