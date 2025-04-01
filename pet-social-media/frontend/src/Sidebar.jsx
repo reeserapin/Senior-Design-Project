@@ -19,8 +19,8 @@ function Sidebar() {
           </Link>
         </li>
         <li>
-          <Link to="/profile">
-            <img src="/checkcircle.png" alt="Pedigree" className="nav-icon" />
+          <Link to="/pedigree">
+            <img src="/public/checkcircle.png" alt="Pedigree" className="nav-icon" />
             Pedigree
           </Link>
         </li>

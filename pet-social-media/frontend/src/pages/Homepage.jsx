@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaPaw, FaFlag, FaComment, FaPaperPlane, FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import postsData from "../pages/posts.json"; // Import JSON data
+import postsData from "../pages/posts.json";
 import "../styles/Homepage.css";
 
 const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
@@ -17,8 +17,8 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
     e.preventDefault();
     if (newComment.trim() !== "") {
       const newCommentObj = {
-        username: "CurrentUser",
-        pfp: "/users/default_pfp.jpg",
+        username: "Molly McKay",
+        pfp: "/linkedGIRL.jpg",
         text: newComment
       };
       setCommentList([...commentList, newCommentObj]);
@@ -37,14 +37,26 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
       </div>
 
       <div className="pet-content-box">
+  <div className="pet-info">
+    <div className="pet-pfp-container">
+      {Array.isArray(pfp) ? (
+        pfp.map((pic, index) => (
+          <img key={index} src={pic} alt={`pfp-${index}`} className="pet-pfp" />
+        ))
+      ) : (
         <img src={pfp} alt={title} className="pet-pfp" />
-        <p className="pet-title">{title}</p>
-        <div className="image-container">
-          {images.length > 1 && <button className="image-nav left" onClick={prevImage}><FaArrowLeft /></button>}
-          <img src={images[currentImageIndex]} alt={title} className="pet-image" />
-          {images.length > 1 && <button className="image-nav right" onClick={nextImage}><FaArrowRight /></button>}
-        </div>
-      </div>
+      )}
+    </div>
+    <p className="pet-title">{title}</p>
+  </div>
+  <div className="image-container">
+    {images.length > 1 && <button className="image-nav left" onClick={prevImage}><FaArrowLeft /></button>}
+    <img src={images[currentImageIndex]} alt={title} className="pet-image" />
+    {images.length > 1 && <button className="image-nav right" onClick={nextImage}><FaArrowRight /></button>}
+  </div>
+</div>
+
+
 
       <div className="pet-actions">
         <FaPaw className={`pet-icon ${liked ? "text-red-500" : "text-gray-500"}`} onClick={toggleLike} />
@@ -56,7 +68,7 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
       {showComments && (
         <div className="comment-section">
           <form onSubmit={handleCommentSubmit} className="comment-form">
-            <img src="/users/default_pfp.jpg" alt="User" className="comment-pfp" />
+            <img src="/linkedGIRL.jpg" alt="User" className="comment-pfp" />
             <input
               type="text"
               value={newComment}
