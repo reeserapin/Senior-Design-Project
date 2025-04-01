@@ -9,6 +9,8 @@ import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { MdAddPhotoAlternate } from "react-icons/md";
 import { FaFaceFrown } from "react-icons/fa6";
 import { FaSmile } from "react-icons/fa";
+import { MdAddAPhoto } from "react-icons/md";
+
 
 
 
@@ -71,11 +73,51 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
     <FaEdit />
   </button>
 )}
+{/* Header */}
+<div className="pet-header">
+  <div className="pet-image-column">
+    <div className="pet-image-wrapper">
+      <img className="pet-image" src={image} alt={name} />
+      {editable && (
+        <div
+          className="upload-overlay-pet"
+          onClick={() =>
+            document.getElementById("pet-photo-input").click()
+          }
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "4px"
+            }}
+          >
+            <MdAddAPhoto size={24} />
+            <span className="upload-text"></span>
+          </div>
+          <input
+            type="file"
+            id="pet-photo-input"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                  onHealthUpdate("image", reader.result);
+                };
+                reader.readAsDataURL(file);
+              }
+            }}
+          />
+        </div>
+      )}
+    </div>
 
-        {/* Header */}
-        <div className="pet-header">
-          <div className="pet-image-column">
-            <img className="pet-image" src={image} alt={name} />
+
+
             {editable ? (
   <input
     type="text"

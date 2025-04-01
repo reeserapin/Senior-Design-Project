@@ -594,19 +594,19 @@
     line-height: 1.6;
   }
   
-  .pet-profile-subsection.care-box {
-    background-color: white;
-    padding: 20px;
-    border-radius: 20px;
-    margin: 20px auto;
-    max-width: 90%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
+.pet-profile-subsection.care-box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 20px auto;
+  max-width: 90%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
   .not-selected-readonly {
     filter: grayscale(100%) brightness(1.1);
@@ -660,5 +660,46 @@
   
   .rating-button.selected {
     box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .pet-image-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+  }
+  
+  .pet-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .upload-overlay-pet {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .pet-image-wrapper:hover .upload-overlay-pet {
+    opacity: 1;
+  }
+  
+  .upload-text {
+    pointer-events: none;
   }
   

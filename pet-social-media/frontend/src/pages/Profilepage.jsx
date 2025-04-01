@@ -4,12 +4,12 @@ import Sidebar from "../Sidebar";
 import "../styles/Profilepage.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AddPetModal from "./AddPetModal";
 import PetProfileModal from "./PetProfileModal";
 import Posts from "./Posts";
+import { MdAddAPhoto } from "react-icons/md";
 
 
 const generatePostDate = (index) => {
@@ -23,22 +23,6 @@ const generatePostDate = (index) => {
   });
 };
 
-const personalityLevels = {
-  temperament: {
-    Calm: 1,
-    Friendly: 2,
-    Playful: 3,
-    Energetic: 4,
-    Hyper: 5
-  },
-  energyLevel: {
-    Low: 1,
-    Chill: 2,
-    Moderate: 3,
-    High: 4,
-    Hyperactive: 5
-  }
-};
 
 
 const captions = [
@@ -348,7 +332,7 @@ const handleAddPet = (newPet) => {
               className="upload-overlay"
               onClick={() => profileFileInputRef.current.click()}
             >
-              <span className="upload-text">Upload</span>
+              <span className="upload-text"><MdAddAPhoto /></span>
             </div>
             
             <input
