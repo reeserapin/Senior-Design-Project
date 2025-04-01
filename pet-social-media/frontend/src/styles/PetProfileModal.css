@@ -170,24 +170,22 @@
     border-radius: 20px;
     object-fit: cover;
   }
+  
   .delete-photo-button {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background-color: white; /* or transparent if needed */
-    border: none;
-    border-radius: 100%;
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease;
-  }
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
   
   .delete-photo-button:hover {
     transform: scale(1.1);

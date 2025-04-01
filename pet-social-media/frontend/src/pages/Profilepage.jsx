@@ -8,8 +8,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AddPetModal from "./AddPetModal";
-import { FaPaw, FaComment } from "react-icons/fa";
-import { TbSend } from "react-icons/tb";
 import PetProfileModal from "./PetProfileModal";
 import Posts from "./Posts";
 
@@ -399,9 +397,11 @@ const handleAddPet = (newPet) => {
           p.name === pet.name ? { ...p, [field]: value } : p
         );
         setPets(updatedPets);
+        setActivePet((prev) => ({ ...prev, [field]: value }));
       },
     })
   }
+   
 >
 
             <img className="pet-image" src={pet.image} alt={pet.name} />
@@ -430,9 +430,8 @@ const handleAddPet = (newPet) => {
     pet={activePet}
     onClose={() => {
       setActivePet(null);
-      setEditable(false); // reset on close
+      setEditable(false);
     }}
-    
     editable={editable}
     onToggleEdit={() => setEditable((prev) => !prev)}
     showEditButton={true}
@@ -441,8 +440,18 @@ const handleAddPet = (newPet) => {
       caption: captions[index % captions.length],
       date: generatePostDate(index),
     }))}
+    onHealthUpdate={(field, value) => {
+      const updatedPets = pets.map((p) =>
+        p.name === activePet.name
+          ? { ...p, [field]: value }
+          : p
+      );
+      setPets(updatedPets);
+      setActivePet((prev) => ({ ...prev, [field]: value })); // keep modal in sync
+    }}
   />
 )}
+
 
 
 
