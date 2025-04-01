@@ -7,6 +7,9 @@ import Posts from "./Posts";
 import { FaEdit } from "react-icons/fa";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { MdAddPhotoAlternate } from "react-icons/md";
+import { FaFaceFrown } from "react-icons/fa6";
+import { FaSmile } from "react-icons/fa";
+
 
 
 const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditButton = false, onToggleEdit }) => {
@@ -219,22 +222,22 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
               <strong>Vaccination Status</strong>
               {editable ? (
                 <div className="toggle-options">
-                  <button className={vaccinated ? "selected" : ""} onClick={() => onHealthUpdate("vaccinated", true)}>✅</button>
-                  <button className={!vaccinated ? "selected" : ""} onClick={() => onHealthUpdate("vaccinated", false)}>❌</button>
+                  <button className={vaccinated ? "selected green" : ""} onClick={() => onHealthUpdate("vaccinated", true)}><FaSmile /></button>
+                  <button className={!vaccinated ? "selected red" : ""} onClick={() => onHealthUpdate("vaccinated", false)}><FaFaceFrown /></button>
                 </div>
               ) : (
-                <p>{vaccinated ? "✅ Yes" : "❌ No"}</p>
+                <p>{vaccinated ? <FaSmile /> : <FaFaceFrown />}</p>
               )}
             </div>
             <div>
               <strong>Spayed/Neutered</strong>
               {editable ? (
                 <div className="toggle-options">
-                  <button className={spayedNeutered ? "selected" : ""} onClick={() => onHealthUpdate("spayedNeutered", true)}>✅</button>
-                  <button className={!spayedNeutered ? "selected" : ""} onClick={() => onHealthUpdate("spayedNeutered", false)}>❌</button>
+                  <button className={spayedNeutered ? "selected green" : ""} onClick={() => onHealthUpdate("spayedNeutered", true)}><FaSmile /></button>
+                  <button className={!spayedNeutered ? "selected red" : ""} onClick={() => onHealthUpdate("spayedNeutered", false)}><FaFaceFrown /></button>
                 </div>
               ) : (
-                <p>{spayedNeutered ? "✅ Yes" : "❌ No"}</p>
+                <p>{spayedNeutered ? <FaSmile /> : <FaFaceFrown />}</p>
               )}
             </div>
           </div>
@@ -254,49 +257,75 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
           </div>
         </div>
 
-        {/* Personality */}
-        <div className="pet-profile-subsection personality-box">
-          <h4>Personality</h4>
+  {/* Personality */}
+<div className="pet-profile-subsection personality-box">
+  <h4>Personality</h4>
 
-          {/* Temperament */}
-          <div className="slider-section">
-            <label htmlFor="temperament"><strong>Temperament</strong></label>
-            <div className="slider-wrapper">
-              <input
-                id="temperament"
-                type="range"
-                min="1"
-                max="10"
-                value={personality.temperament || 5}
-                disabled={!editable}
-                onChange={(e) => handleSliderChange("temperament", e.target.value)}
-              />
-              <div className="slider-label-row">
-                <span>😐</span>
-                <span>😆</span>
-              </div>
-            </div>
-          </div>
+  {/* Temperament */}
+<div className="slider-section">
+  <label><strong>Temperament</strong></label>
+  {editable ? (
+  <div className="button-row">
+    {[1, 2, 3, 4, 5].map((value) => (
+      <button
+        key={value}
+        className={`rating-button level-${value} ${personality.temperament === value ? "selected" : ""}`}
+        onClick={() => onPersonalityUpdate("temperament", value)}
+      >
+        {value}
+      </button>
+    ))}
+  </div>
+) : (
+  <div className="button-row">
+    {[1, 2, 3, 4, 5].map((value) => (
+      <button
+        key={value}
+        className={`rating-button level-${value} ${
+          personality.temperament === value ? "selected" : "not-selected-readonly"
+        }`}
+        disabled
+      >
+        {value}
+      </button>
+    ))}
+  </div>
+)}
 
-          {/* Energy Level */}
-          <div className="slider-section">
-            <label htmlFor="energyLevel"><strong>Energy Level</strong></label>
-            <div className="slider-wrapper">
-              <input
-                id="energyLevel"
-                type="range"
-                min="1"
-                max="10"
-                value={personality.energyLevel || 5}
-                disabled={!editable}
-                onChange={(e) => handleSliderChange("energyLevel", e.target.value)}
-              />
-              <div className="slider-label-row">
-                <span>😴</span>
-                <span>🏃‍♂️</span>
-              </div>
-            </div>
-          </div>
+</div>
+
+{/* Energy Level */}
+<div className="slider-section">
+  <label><strong>Energy Level</strong></label>
+  {editable ? (
+  <div className="button-row">
+    {[1, 2, 3, 4, 5].map((value) => (
+      <button
+        key={value}
+        className={`rating-button level-${value} ${personality.energyLevel === value ? "selected" : ""}`}
+        onClick={() => onPersonalityUpdate("energyLevel", value)}
+      >
+        {value}
+      </button>
+    ))}
+  </div>
+) : (
+  <div className="button-row">
+    {[1, 2, 3, 4, 5].map((value) => (
+      <button
+        key={value}
+        className={`rating-button level-${value} ${
+          personality.energyLevel === value ? "selected" : "not-selected-readonly"
+        }`}
+        disabled
+      >
+        {value}
+      </button>
+    ))}
+  </div>
+)}
+
+</div>
 
           {/* Favorite Activities */}
           <div className="pet-profile-subsection">
@@ -338,7 +367,7 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
                         })
                       }
                     >
-                      ❌
+                      <FaFaceFrown />
                     </button>
                     <button
                       className={lifestyle[field] === true ? "selected green" : ""}
@@ -349,11 +378,11 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
                         })
                       }
                     >
-                      ✅
+                      <FaSmile />
                     </button>
                   </div>
                 ) : (
-                  <span>{lifestyle[field] === true ? "✅" : "❌"}</span>
+                  <span>{lifestyle[field] === true ? <FaSmile /> : <FaFaceFrown />}</span>
                 )}
               </div>
             ))}

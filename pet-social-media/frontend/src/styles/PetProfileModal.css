@@ -250,7 +250,9 @@
     display: flex;
     align-items: center;
     gap: 8px;
+
   }
+  
   
   .check-icon {
     color: green;
@@ -518,23 +520,7 @@
     cursor: pointer;
   }
   
-  /* Default display mode (not editable) */
-  .slider-readonly {
-    position: relative;
-    height: 10px;
-    background: black;
-    border-radius: 5px;
-    margin: 8px 0;
-  }
   
-  .slider-readonly-thumb {
-    position: absolute;
-    top: -6px;
-    height: 18px;
-    width: 18px;
-    background: #4caf50;
-    border-radius: 50%;
-  }
   .favorite-textarea {
     width: 100%;
     min-height: 60px;
@@ -592,5 +578,59 @@
     text-align: left;
     font-size: 15px;
     line-height: 1.6;
+  }
+  
+  .not-selected-readonly {
+    filter: grayscale(100%) brightness(1.1);
+    opacity: 0.6;
+  }  
+  
+  .button-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 12px;
+  }
+  
+  .rating-button {
+    width: 40px;
+    height: 40px;
+    font-weight: bold;
+    border-radius: 50%;
+    margin: 4px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+  }
+  
+  .rating-button:disabled {
+    cursor: default;
+    opacity: 0.9;
+  }
+  
+  .rating-button.level-1 {
+    background: linear-gradient(to bottom right, #72c6ef, #5a9be1);
+  }
+  
+  .rating-button.level-2 {
+    background: linear-gradient(to bottom right, #63e2f0, #50c4d3);
+  }
+  
+  .rating-button.level-3 {
+    background: linear-gradient(to bottom right, #90e66c, #63cc4e);
+  }
+  
+  .rating-button.level-4 {
+    background: linear-gradient(to bottom right, #ffd76e, #ffc93c);
+  }
+  
+  .rating-button.level-5 {
+    background: linear-gradient(to bottom right, #ff6868, #ff4e4e);
+  }
+  
+  .rating-button.selected {
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
   }
   

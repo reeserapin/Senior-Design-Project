@@ -426,31 +426,53 @@ const handleAddPet = (newPet) => {
 </div>
 
 {activePet && (
-  <PetProfileModal
-    pet={activePet}
-    onClose={() => {
-      setActivePet(null);
-      setEditable(false);
-    }}
-    editable={editable}
-    onToggleEdit={() => setEditable((prev) => !prev)}
-    showEditButton={true}
-    posts={postImages.map((images, index) => ({
-      images,
-      caption: captions[index % captions.length],
-      date: generatePostDate(index),
-    }))}
-    onHealthUpdate={(field, value) => {
-      const updatedPets = pets.map((p) =>
-        p.name === activePet.name
-          ? { ...p, [field]: value }
-          : p
-      );
-      setPets(updatedPets);
-      setActivePet((prev) => ({ ...prev, [field]: value })); // keep modal in sync
-    }}
-  />
-)}
+    <PetProfileModal
+      pet={{
+        ...activePet,
+        onHealthUpdate: (field, value) => {
+          const updatedPets = pets.map((p) =>
+            p.name === activePet.name ? { ...p, [field]: value } : p
+          );
+          setPets(updatedPets);
+          setActivePet((prev) => ({ ...prev, [field]: value }));
+        },
+        onPersonalityUpdate: (field, value) => {
+          const updatedPets = pets.map((p) =>
+            p.name === activePet.name
+              ? {
+                  ...p,
+                  personality: {
+                    ...p.personality,
+                    [field]: value,
+                  },
+                }
+              : p
+          );
+          setPets(updatedPets);
+          setActivePet((prev) => ({
+            ...prev,
+            personality: {
+              ...prev.personality,
+              [field]: value,
+            },
+          }));
+        },
+      }}
+      onClose={() => {
+        setActivePet(null);
+        setEditable(false);
+      }}
+      editable={editable}
+      onToggleEdit={() => setEditable((prev) => !prev)}
+      showEditButton={true}
+      posts={postImages.map((images, index) => ({
+        images,
+        caption: captions[index % captions.length],
+        date: generatePostDate(index),
+      }))}
+    />
+  )}
+  
 
 
 
