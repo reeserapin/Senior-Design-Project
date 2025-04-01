@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import Cropper from "react-easy-crop";
-import Sidebar from "../Sidebar";
+import Sidebar from "./Sidebar";
 import "../styles/Profilepage.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
