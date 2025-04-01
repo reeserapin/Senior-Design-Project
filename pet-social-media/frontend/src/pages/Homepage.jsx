@@ -51,7 +51,7 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
   </div>
   <div className="image-container">
     {images.length > 1 && <button className="image-nav left" onClick={prevImage}><FaArrowLeft /></button>}
-    <img src={images[currentImageIndex]} alt={title} className="pet-image" />
+    <img src={images[currentImageIndex]} alt={title} className="homepage-image" />
     {images.length > 1 && <button className="image-nav right" onClick={nextImage}><FaArrowRight /></button>}
   </div>
 </div>

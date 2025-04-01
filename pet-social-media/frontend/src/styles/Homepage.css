@@ -60,11 +60,12 @@
     white-space: nowrap; 
   }
   
-  .pet-image {
+  .homepage-image {
     width: 100%;
+    height: auto;
+    object-fit: cover;
     border-radius: 8px;
-    margin-bottom: 10px;
-  }
+  }   
   
   .pet-actions {
     display: flex;
