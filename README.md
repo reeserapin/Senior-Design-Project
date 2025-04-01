@@ -1,7 +1,6 @@
 # Senior-Design-Project
 
-# Pick Me Puppy
-
+# Pet-igree
 > Reese Rapin (rapinre@mail.uc.edu), CS<br>
 > Minha Raza (razamh@mail.uc.edu), CS<br>
 > Neha Annareddy (annarenr@mail.uc.edu), CS<br>
