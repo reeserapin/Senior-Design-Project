@@ -10,6 +10,8 @@ import { MdAddPhotoAlternate } from "react-icons/md";
 import { FaFaceFrown } from "react-icons/fa6";
 import { FaSmile } from "react-icons/fa";
 import { MdAddAPhoto } from "react-icons/md";
+import { FaTree } from "react-icons/fa6";
+import { BsHouseHeartFill } from "react-icons/bs";
 
 
 
@@ -33,7 +35,6 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
       goodWithPets: null,
       indoorOutdoor: null,
       pottyTrained: null,
-      crateTrained: null,
     },
     favoriteActivities,
     careRoutine,
@@ -117,7 +118,7 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
     </div>
 
 
-
+    <div className="pet-name-info-wrapper">
             {editable ? (
   <input
     type="text"
@@ -182,6 +183,7 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
     )}
   </p>
 </div>
+</div>
 
           </div>
           <div className="pet-bio-box">
@@ -231,9 +233,6 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
   </div>
 </div>
 
-
-  
-
         {/* Posts */}
         {posts.length > 0 && (
           <div className="pet-profile-subsection">
@@ -268,7 +267,10 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
                   <button className={!vaccinated ? "selected red" : ""} onClick={() => onHealthUpdate("vaccinated", false)}><FaFaceFrown /></button>
                 </div>
               ) : (
-                <p>{vaccinated ? <FaSmile /> : <FaFaceFrown />}</p>
+                <p>
+                {vaccinated === true ? <FaSmile /> : vaccinated === false ? <FaFaceFrown /> : "N/A"}
+              </p>
+
               )}
             </div>
             <div>
@@ -279,7 +281,10 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
                   <button className={!spayedNeutered ? "selected red" : ""} onClick={() => onHealthUpdate("spayedNeutered", false)}><FaFaceFrown /></button>
                 </div>
               ) : (
-                <p>{spayedNeutered ? <FaSmile /> : <FaFaceFrown />}</p>
+                <p>
+                {spayedNeutered === true ? <FaSmile /> : spayedNeutered === false ? <FaFaceFrown /> : "N/A"}
+              </p>
+
               )}
             </div>
           </div>
@@ -294,7 +299,7 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
                 onBlur={(e) => onHealthUpdate("medicalConditions", e.target.value)}
               />
             ) : (
-              <p>{medicalConditions || "None"}</p>
+              <p>{medicalConditions?.trim() ? medicalConditions : "N/A"}</p>
             )}
           </div>
         </div>
@@ -390,44 +395,53 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
           <div className="pet-profile-subsection lifestyle-box">
             <h4>Lifestyle</h4>
             {[
-              { label: "Good with Kids", field: "goodWithKids" },
-              { label: "Good with Other Pets", field: "goodWithPets" },
-              { label: "Indoor/Outdoor?", field: "indoorOutdoor" },
-              { label: "Potty Trained / Litter Trained?", field: "pottyTrained" },
-              { label: "Crate Trained?", field: "crateTrained" },
-            ].map(({ label, field }) => (
-              <div key={field} className="lifestyle-row">
-                <span>{label}</span>
-                {editable ? (
-                  <div className="toggle-options">
-                    <button
-                      className={lifestyle[field] === false ? "selected red" : ""}
-                      onClick={() =>
-                        onHealthUpdate("lifestyle", {
-                          ...lifestyle,
-                          [field]: false,
-                        })
-                      }
-                    >
-                      <FaFaceFrown />
-                    </button>
-                    <button
-                      className={lifestyle[field] === true ? "selected green" : ""}
-                      onClick={() =>
-                        onHealthUpdate("lifestyle", {
-                          ...lifestyle,
-                          [field]: true,
-                        })
-                      }
-                    >
-                      <FaSmile />
-                    </button>
-                  </div>
-                ) : (
-                  <span>{lifestyle[field] === true ? <FaSmile /> : <FaFaceFrown />}</span>
-                )}
-              </div>
-            ))}
+  { label: "Good with Kids", field: "goodWithKids" },
+  { label: "Good with Other Pets", field: "goodWithPets" },
+  { label: "Outdoor or Indoor?", field: "indoorOutdoor" },
+  { label: "Potty Trained or Not?", field: "pottyTrained" },
+].map(({ label, field }) => (
+  <div key={field} className="lifestyle-row">
+    <span>{label}</span>
+
+    {editable ? (
+      <div className="toggle-options">
+        <button
+          className={lifestyle[field] === false ? "selected red" : ""}
+          onClick={() =>
+            onHealthUpdate("lifestyle", {
+              ...lifestyle,
+              [field]: false,
+            })
+          }
+        >
+          {field === "indoorOutdoor" ? <FaTree /> : <FaFaceFrown />}
+        </button>
+        <button
+          className={lifestyle[field] === true ? "selected green" : ""}
+          onClick={() =>
+            onHealthUpdate("lifestyle", {
+              ...lifestyle,
+              [field]: true,
+            })
+          }
+        >
+          {field === "indoorOutdoor" ? <BsHouseHeartFill /> : <FaSmile />}
+        </button>
+      </div>
+    ) : (
+      <span>
+        {lifestyle[field] === true ? (
+          field === "indoorOutdoor" ? <BsHouseHeartFill /> : <FaSmile />
+        ) : lifestyle[field] === false ? (
+          field === "indoorOutdoor" ? <FaTree /> : <FaFaceFrown />
+        ) : (
+          "N/A"
+        )}
+      </span>
+    )}
+  </div>
+))}
+
           </div>
         )}
 

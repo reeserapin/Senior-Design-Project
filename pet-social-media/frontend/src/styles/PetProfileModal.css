@@ -84,11 +84,31 @@
     max-width: 240px;
   }
 
-  .pet-info-box p {
-    margin: 8px 0;
+  .pet-info-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+    margin-left: center;
+    margin-right: auto;
+    margin-top: 12px;
+    max-width: 240px;
     font-size: 14px;
+  }
+
+  .pet-name-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  
+  .pet-info-box p {
+    margin: 0;
     text-align: left;
   }
+  
   
   .pet-edit-input {
     width: 100%;
