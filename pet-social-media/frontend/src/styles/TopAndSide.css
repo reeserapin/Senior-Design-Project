@@ -31,6 +31,7 @@
     height: 50px;
     border-radius: 50%;
     margin: 5px;
+    border: 2px solid black;
 }
 
 /* Plus Icon */
@@ -151,10 +152,14 @@
 }
 
 .sidebar ul {
-    list-style: none; 
+    list-style: none;
     padding: 0;
     margin: 0;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
 }
 
 .sidebar li {
@@ -162,10 +167,10 @@
     flex-direction: column; 
     align-items: center;
     justify-content: center;
-    margin: 30px 0; 
+    margin: 0;
 }
 
-.sidebar a {
+.nav-link {
     display: flex;
     flex-direction: column; 
     align-items: center;
@@ -176,35 +181,68 @@
     text-align: center;
     text-decoration: none;
     gap: 10px; 
+    transition: all 0.3s ease;
 }
 
-.sidebar img,
-.sidebar .nav-icon {
+.nav-icon {
     width: 30px;
     height: 30px;
+    transition: all 0.3s ease;
 }
 
-.sidebar .profile-image {
-    width: 50px; 
-    height: 50px; 
-    border-radius: 50%; 
-    border: 2px solid black; 
-}
-
-.sidebar a:hover {
+.nav-link:hover {
     color: #646cff;
+    transform: translateY(-2px);
 }
 
-.sidebar a.active {
-    color: #535bf2;
+.nav-link:hover .nav-icon {
+    transform: scale(1.1);
+}
+
+.chat-link:hover .chat-icon {
+    color: #4a90e2;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-link {
+    color: #dc3545;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+    padding: 5px 0;
+    margin-bottom: 10px;
+}
+
+
+.logout-link:hover .nav-icon {
+    color: #dc3545;
+}
+
+.logout-link span {
+    font-size: 12px;
+    font-weight: 500;
 }
 
 .content {
     flex-grow: 1;
-    padding: 80px 20px 20px; /* Increased top padding to avoid overlap */
+    padding: 80px 20px 20px;
     background-color: #E8FAFF;
     overflow-y: auto;
-    margin-left: 80px;
+    margin-left: 70px;
 }
 
 /* Global Fixes */
@@ -216,20 +254,15 @@ html, body {
 /* Responsiveness */
 @media (max-width: 768px) {
     .sidebar {
-        width: 80px; 
-    }
-    .sidebar img,
-    .sidebar .nav-icon {
-        width: 40px;
-        height: 40px;
+        width: 70px;
     }
     .content {
         padding: 80px 20px;
-        margin-left: 80px; 
+        margin-left: 70px;
     }
     .topbar {
         padding: 10px;
-        height: 50px; 
+        height: 50px;
     }
 }
 

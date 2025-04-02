@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaCheckCircle, FaMessage, FaShoppingBag, FaCog, FaUser } from 'react-icons/fa';
+import { FaHome, FaCheckCircle, FaComments, FaShoppingBag, FaCog, FaUser, FaSignOutAlt } from 'react-icons/fa';
+import { TbBinaryTree } from 'react-icons/tb';    
 import './styles/TopAndSide.css'; 
 
 function Sidebar() {
@@ -15,36 +16,42 @@ function Sidebar() {
       </Link>
       <ul>
         <li>
-          <Link to="/">
+          <Link to="/" className="nav-link">
             <FaHome className="nav-icon" />
             Home
           </Link>
         </li>
         <li>
-          <Link to="/pedigree">
-            <FaCheckCircle className="nav-icon" />
+          <Link to="/pedigree" className="nav-link">
+            <TbBinaryTree className="nav-icon" />
             Pedigree
           </Link>
         </li>
         <li>
-          <Link to="/post" className="chat-link">
-            <FaMessage className="nav-icon chat-icon" />
+          <Link to="/messsages" className="nav-link chat-link">
+            <FaComments className="nav-icon chat-icon" />
             Messages
           </Link>
         </li>
         <li>
-          <Link to="/petshop">
+          <Link to="/petshop" className="nav-link">
             <FaShoppingBag className="nav-icon" />
             Pet Shop
           </Link>
         </li>
         <li>
-          <Link to="/settings">
+          <Link to="/settings" className="nav-link">
             <FaCog className="nav-icon" />
             Settings
           </Link>
         </li>
       </ul>
+      <div className="sidebar-footer">
+        <Link to="/logout" className="nav-link logout-link">
+          <FaSignOutAlt className="nav-icon" />
+          Logout
+        </Link>
+      </div>
     </div>
   );
 }
