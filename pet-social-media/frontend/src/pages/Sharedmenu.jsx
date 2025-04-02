@@ -11,7 +11,7 @@ const SharePopup = ({ users, onShare, onClose }) => {
   return (
     <div className="share-section">
       <div className="share-header">
-        <span className="share-title">Share with</span>
+        <span className="share-title">Share with...</span>
         <button 
           className="close-button"
           onClick={onClose}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaPaw, FaFlag, FaComment, FaPaperPlane, FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import SharePopup from "./Sharedmenu"; // Fixed import path
+import SharePopup from "./Sharedmenu";
+import ReportMenu from "./Reportmenu";
 import postsData from "../pages/posts.json";
 import "../styles/Homepage.css";
 
@@ -11,6 +12,7 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
   const [liked, setLiked] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isReportOpen, setIsReportOpen] = useState(false);
 
   const toggleComments = () => setShowComments(!showComments);
   const toggleLike = () => setLiked(!liked);
@@ -37,9 +39,9 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
 
   // Dummy user list for sharing
   const users = [
-    { id: 1, name: "Alice Doe", image: "/alice.jpg" },
-    { id: 2, name: "Bob Smith", image: "/bob.jpg" },
-    { id: 3, name: "Charlie Brown", image: "/charlie.jpg" }
+    { id: 1, name: "Laila Jackson", image: "/users/Laila_Jackson.jpg" },
+    { id: 2, name: "Subira Awa", image: "/users/Subira_Awa.jpg" },
+    { id: 3, name: "Omar Manfredo", image: "/users/Omar_Manfredo.webp" }
   ];
 
   return (
@@ -74,11 +76,21 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
         <FaPaw className={`pet-icon ${liked ? "text-red-500" : "text-gray-500"}`} onClick={toggleLike} />
         <FaComment className="pet-icon" onClick={toggleComments} />
         <FaPaperPlane className="pet-icon" onClick={() => setIsShareOpen(!isShareOpen)} />
-        <FaFlag className="pet-icon text-gray-500" />
+        <FaFlag className="pet-icon text-gray-500" onClick={() => setIsReportOpen(!isReportOpen)} />
       </div>
 
       {isShareOpen && (
-        <SharePopup users={users} onShare={handleShare} onClose={() => setIsShareOpen(false)} />
+        <SharePopup 
+          users={users} 
+          onShare={handleShare} 
+          onClose={() => setIsShareOpen(false)} 
+        />
+      )}
+
+      {isReportOpen && (
+        <ReportMenu 
+          onClose={() => setIsReportOpen(false)} 
+        />
       )}
 
       {showComments && (
