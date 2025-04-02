@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaPaw, FaFlag, FaComment, FaPaperPlane, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import SharePopup from "./Sharedmenu";
 import ReportMenu from "./Reportmenu";
+import SidePanels from "../components/SidePanels";
 import postsData from "../pages/posts.json";
 import "../styles/Homepage.css";
 
@@ -135,10 +136,13 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
 
 const PetPosts = () => {
   return (
-    <div className="posts-container">
-      {postsData.map((post, index) => (
-        <PetPost key={index} {...post} />
-      ))}
+    <div className="homepage-container">
+      <div className="posts-container">
+        {postsData.map((post, index) => (
+          <PetPost key={index} {...post} />
+        ))}
+      </div>
+      <SidePanels />
     </div>
   );
 };
