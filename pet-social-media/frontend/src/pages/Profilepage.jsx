@@ -181,7 +181,7 @@ const getCroppedImg = (imageSrc, pixelCrop) => {
 };
 
 
-function ProfilePage() {
+function ProfilePage({ pets, setPets }) {
   const [banner, setBanner] = useState(null);
   const [cropping, setCropping] = useState(false);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -207,35 +207,6 @@ function ProfilePage() {
   const scrollRight = () => {
     scrollRef.current.scrollBy({ left: 150, behavior: "smooth" });
   };
-
-
-  const [pets, setPets] = useState([
-    {
-      name: "Sparky",
-      image: "https://arrowtpets.com/wp-content/uploads/2023/05/Understanding-Goldendoodle-Behavior_-Common-Traits-and-Personality.png",
-      description: "Sparky loves running in the park and chasing tennis balls."
-    },
-    {
-      name: "Spot",
-      image: "https://www.humaneworld.org/sites/default/files/styles/responsive_3_4_500w/public/2020-07/dog-509745.jpg.webp?itok=tVo9pIsi",
-      description: "Spot is a goofy pup who loves cuddles and treats."
-    },
-    {
-      name: "Snowy",
-      image: "https://puzzlemania-154aa.kxcdn.com/products/2024/puzzle-ravensburger-1500-pieces-white-kitten.webp",
-      description: "Snowy is the quietest and fluffiest kitten you'll meet!",
-      galleryImages: [
-        "https://cdn2.thecatapi.com/images/bpc.jpg",
-        "https://cdn2.thecatapi.com/images/c3h.jpg",
-        "https://cdn2.thecatapi.com/images/4uv.jpg",
-        "https://cdn2.thecatapi.com/images/9j5.jpg",
-        "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg",
-        "https://cdn2.thecatapi.com/images/2oo.jpg"
-      ]
-    }
-  ]);
-
-
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
