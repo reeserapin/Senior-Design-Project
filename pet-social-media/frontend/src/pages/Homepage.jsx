@@ -6,15 +6,24 @@ import postsData from "../pages/posts.json";
 import "../styles/Homepage.css";
 
 const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
-  const [showComments, setShowComments] = useState(false);
+  const [activePanel, setActivePanel] = useState(null); // null, 'comments', 'share', or 'report'
   const [commentList, setCommentList] = useState(comments);
   const [newComment, setNewComment] = useState("");
   const [liked, setLiked] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isShareOpen, setIsShareOpen] = useState(false);
-  const [isReportOpen, setIsReportOpen] = useState(false);
 
-  const toggleComments = () => setShowComments(!showComments);
+  const toggleComments = () => {
+    setActivePanel(activePanel === 'comments' ? null : 'comments');
+  };
+
+  const toggleShare = () => {
+    setActivePanel(activePanel === 'share' ? null : 'share');
+  };
+
+  const toggleReport = () => {
+    setActivePanel(activePanel === 'report' ? null : 'report');
+  };
+
   const toggleLike = () => setLiked(!liked);
 
   const handleCommentSubmit = (e) => {
@@ -74,26 +83,26 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
 
       <div className="pet-actions">
         <FaPaw className={`pet-icon ${liked ? "text-red-500" : "text-gray-500"}`} onClick={toggleLike} />
-        <FaComment className="pet-icon" onClick={toggleComments} />
-        <FaPaperPlane className="pet-icon" onClick={() => setIsShareOpen(!isShareOpen)} />
-        <FaFlag className="pet-icon text-gray-500" onClick={() => setIsReportOpen(!isReportOpen)} />
+        <FaComment className={`pet-icon ${activePanel === 'comments' ? 'text-blue-500' : ''}`} onClick={toggleComments} />
+        <FaPaperPlane className={`pet-icon ${activePanel === 'share' ? 'text-blue-500' : ''}`} onClick={toggleShare} />
+        <FaFlag className={`pet-icon ${activePanel === 'report' ? 'text-blue-500' : 'text-gray-500'}`} onClick={toggleReport} />
       </div>
 
-      {isShareOpen && (
+      {activePanel === 'share' && (
         <SharePopup 
           users={users} 
           onShare={handleShare} 
-          onClose={() => setIsShareOpen(false)} 
+          onClose={() => setActivePanel(null)} 
         />
       )}
 
-      {isReportOpen && (
+      {activePanel === 'report' && (
         <ReportMenu 
-          onClose={() => setIsReportOpen(false)} 
+          onClose={() => setActivePanel(null)} 
         />
       )}
 
-      {showComments && (
+      {activePanel === 'comments' && (
         <div className="comment-section">
           <form onSubmit={handleCommentSubmit} className="comment-form">
             <img src="/linkedGIRL.jpg" alt="User" className="comment-pfp" />

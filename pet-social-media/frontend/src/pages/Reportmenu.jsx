@@ -22,12 +22,6 @@ const ReportMenu = ({ onClose }) => {
     <div className="report-section">
       <div className="report-header">
         <span className="report-title">Report Post</span>
-        <button 
-          className="close-button"
-          onClick={onClose}
-        >
-          ×
-        </button>
       </div>
       <form onSubmit={handleSubmit} className="report-form">
         <div className="report-reasons">
@@ -67,28 +61,12 @@ const ReportMenu = ({ onClose }) => {
         }
 
         .report-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
           margin-bottom: 10px;
         }
 
         .report-title {
           font-weight: bold;
           font-size: 14px;
-        }
-
-        .close-button {
-          background: none;
-          border: none;
-          font-size: 20px;
-          cursor: pointer;
-          color: #666;
-          padding: 0 4px;
-        }
-
-        .close-button:hover {
-          color: #333;
         }
 
         .report-form {
