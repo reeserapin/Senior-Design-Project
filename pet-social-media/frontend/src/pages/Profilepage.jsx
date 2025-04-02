@@ -4,8 +4,6 @@ import Sidebar from "./Sidebar";
 import "../styles/Profilepage.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import AddPetModal from "./AddPetModal";
 import PetProfileModal from "./PetProfileModal";
 import Posts from "./Posts";
