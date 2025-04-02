@@ -10,6 +10,7 @@ import AddPetModal from "./AddPetModal";
 import PetProfileModal from "./PetProfileModal";
 import Posts from "./Posts";
 import { MdAddAPhoto } from "react-icons/md";
+import { useUser } from '../UserContext';
 
 
 const generatePostDate = (index) => {
@@ -189,7 +190,7 @@ function ProfilePage() {
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const fileInputRef = useRef(null);
-  const [profileImage, setProfileImage] = useState(null);
+  const { profileImage, setProfileImage: setGlobalProfileImage } = useUser();
   const profileFileInputRef = useRef(null);
   const [bio, setBio] = useState("Update Bio.");
   const [isEditingBio, setIsEditingBio] = useState(false);
@@ -268,12 +269,12 @@ function ProfilePage() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setProfileImage(reader.result);
+        setGlobalProfileImage(reader.result); // ✅ sync with sidebar
       };
       reader.readAsDataURL(file);
     }
   };
-
+  
   const [showAddModal, setShowAddModal] = useState(false);
 
 const handleAddPet = (newPet) => {

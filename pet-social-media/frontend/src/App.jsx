@@ -1,9 +1,9 @@
 // src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import TopBar from './Topbar';  
+import TopBar from './pages/Topbar';  
 import PetProfilePage from './pages/Petprofilepage';
-import Sidebar from './Sidebar';
+import Sidebar from './pages/Sidebar';
 import HomePage from './pages/Homepage';
 import PedigreePage from './pages/Pedigreepage';
 import PetShopPage from './pages/PetShoppage';
