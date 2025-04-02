@@ -232,3 +232,21 @@ html, body {
         height: 50px; 
     }
 }
+
+.chat-link {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.chat-link:hover {
+  transform: translateX(5px);
+}
+
+.chat-icon {
+  transition: all 0.3s ease;
+}
+
+.chat-link:hover .chat-icon {
+  transform: scale(1.1);
+  color: #4a90e2;
+}

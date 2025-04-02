@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { FaHome, FaCheckCircle, FaMessage, FaShoppingBag, FaCog, FaUser } from 'react-icons/fa';
 import './styles/TopAndSide.css'; 
 
 function Sidebar() {
@@ -17,37 +16,31 @@ function Sidebar() {
       <ul>
         <li>
           <Link to="/">
-            <img src="/public/home.png" alt="Home" className="nav-icon" />
+            <FaHome className="nav-icon" />
             Home
           </Link>
         </li>
         <li>
           <Link to="/pedigree">
-            <img src="/public/checkcircle.png" alt="Pedigree" className="nav-icon" />
+            <FaCheckCircle className="nav-icon" />
             Pedigree
           </Link>
         </li>
         <li>
-          <Link to="/post">
-            <img src="/public/home.png" alt="Post" className="nav-icon" />
-            Post
-          </Link>
-        </li>
-        <li>
-          <Link to="/alert">
-            <img src="/public/heart.png" alt="Alert" className="nav-icon" />
-            Alert
+          <Link to="/post" className="chat-link">
+            <FaMessage className="nav-icon chat-icon" />
+            Messages
           </Link>
         </li>
         <li>
           <Link to="/petshop">
-            <img src="/public/bag.png" alt="Pet Shop" className="nav-icon" />
+            <FaShoppingBag className="nav-icon" />
             Pet Shop
           </Link>
         </li>
         <li>
           <Link to="/settings">
-            <img src="/public/settings.png" alt="Settings" className="nav-icon" />
+            <FaCog className="nav-icon" />
             Settings
           </Link>
         </li>

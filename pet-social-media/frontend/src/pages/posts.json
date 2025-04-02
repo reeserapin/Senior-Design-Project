@@ -17,7 +17,7 @@
       "user": "SPCA",
       "avatar": "/spca/spca_logo.png",
       "pfp": "/spca/white_pitbull.jpeg",
-      "images": ["/spca/Spca_post.webp"],
+      "images": ["/spca/Spca_post.webp", "/spca/white-pitbull2.jpg"],
       "petNames": ["Rocky"],
       "title": "Rocky",
       "bgColor": "bg-green",
