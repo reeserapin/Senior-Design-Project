@@ -1,5 +1,7 @@
 // components/AddPetModal.jsx
 import React, { useState } from "react";
+import { FiPlusCircle } from 'react-icons/fi';
+
 
 function AddPetModal({ onClose, onSave }) {
   const [imagePreview, setImagePreview] = useState(null);
@@ -15,9 +17,17 @@ function AddPetModal({ onClose, onSave }) {
   const handleSave = () => {
     if (petName && imagePreview) {
       onSave({ name: petName, image: imagePreview });
-      onClose();
+      handleClose();
     }
   };
+  
+
+  const handleClose = () => {
+    setPetName("");
+    setImagePreview(null);
+    onClose();
+  };
+  
 
   return (
     <div className="add-pet-modal-overlay" onClick={onClose}>
@@ -39,20 +49,16 @@ function AddPetModal({ onClose, onSave }) {
 
         {/* 👇 PREVIEW IMAGE */}
         {imagePreview && (
-          <div className="image-preview">
-            <img src={imagePreview} alt="Pet Preview" />
-          </div>
-        )}
+            <div className="image-preview">
+              <img src={imagePreview} alt="Pet Preview" />
+            </div>
+          )}
+
 
         <div className="modal-buttons">
-          <button className="cancel" onClick={onClose}>✕</button>
-          <button
-            className="save"
-            onClick={handleSave}
-            disabled={!petName || !imagePreview}
-          >
-            ✓
-          </button>
+        <button className="cancel" onClick={handleClose}>✕</button>
+        <button className="save" onClick={handleSave} disabled={!petName || !imagePreview}>✓</button>
+
         </div>
       </div>
     </div>
@@ -180,6 +186,29 @@ style.innerHTML = `
 
 .icon-button:active {
   transform: scale(0.95);
+}
+
+.image-preview {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 20px auto;
+  background-color: #e0f7fa;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: block; /* ensure it's treated like a block container */
+  position: relative;
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 `;
