@@ -461,6 +461,125 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
   </div>
 ) : null}
 
+{/* 🆕 Extra Pet Info */}
+<div className="pet-profile-subsection extra-info-box">
+<div className="pet-profile-subsection">
+
+  <div className="extra-info-fields">
+
+    {/* Birthday */}
+    <div className="info-item">
+      <strong>Birthday:</strong>
+      {editable ? (
+        <input
+          className="pet-edit-input"
+          type="date"
+          defaultValue={pet.birthday}
+          onBlur={(e) => onHealthUpdate("birthday", e.target.value)}
+        />
+      ) : (
+        <p>{pet.birthday || "N/A"}</p>
+      )}
+    </div>
+
+    {/* Adoption Status */}
+<div className="info-item">
+  <strong>Adoption Status:</strong>
+  {editable ? (
+    <select
+      className="pet-edit-input"
+      defaultValue={pet.adoption_status || ""}
+      onBlur={(e) => onHealthUpdate("adoption_status", e.target.value)}
+    >
+      <option value="">Select Status</option>
+      <option value="Fostering">Fostering</option>
+      <option value="Up for Adoption">Up for Adoption</option>
+      <option value="A Part of My Family">A Part of My Family</option>
+    </select>
+  ) : (
+    <p>{pet.adoption_status || "N/A"}</p>
+  )}
+</div>
+
+
+    {/* Dietary Preferences */}
+    <div className="info-item">
+      <strong>Dietary Preferences:</strong>
+      {editable ? (
+        <textarea
+          className="pet-edit-input"
+          defaultValue={pet.dietary_preferences}
+          onBlur={(e) => onHealthUpdate("dietary_preferences", e.target.value)}
+        />
+      ) : (
+        <p>{pet.dietary_preferences || "N/A"}</p>
+      )}
+    </div>
+
+    {/* Hobbies */}
+    <div className="info-item">
+      <strong>Hobbies:</strong>
+      {editable ? (
+        <textarea
+          className="pet-edit-input"
+          defaultValue={pet.hobbies}
+          onBlur={(e) => onHealthUpdate("hobbies", e.target.value)}
+        />
+      ) : (
+        <p>{pet.hobbies || "N/A"}</p>
+      )}
+    </div>
+
+    {/* Likes / Dislikes */}
+    <div className="info-item">
+      <strong>Likes & Dislikes:</strong>
+      {editable ? (
+        <textarea
+          className="pet-edit-input"
+          defaultValue={pet.likes_dislikes}
+          onBlur={(e) => onHealthUpdate("likes_dislikes", e.target.value)}
+        />
+      ) : (
+        <p>{pet.likes_dislikes || "N/A"}</p>
+      )}
+    </div>
+
+    {/* Vet Info */}
+    <div className="info-item">
+      <strong>Vet Info:</strong>
+      {editable ? (
+        <textarea
+          className="pet-edit-input"
+          defaultValue={pet.vet_info}
+          onBlur={(e) => onHealthUpdate("vet_info", e.target.value)}
+        />
+      ) : (
+        <p>{pet.vet_info || "N/A"}</p>
+      )}
+    </div>
+
+    {/* Lost Status */}
+    <div className="info-item">
+      <strong>Lost?</strong>
+      {editable ? (
+        <div className="toggle-options">
+          <button
+            className={pet.lost_status === true ? "selected red" : ""}
+            onClick={() => onHealthUpdate("lost_status", true)}
+          >Yes</button>
+          <button
+            className={pet.lost_status === false ? "selected green" : ""}
+            onClick={() => onHealthUpdate("lost_status", false)}
+          >No</button>
+        </div>
+      ) : (
+        <p>{pet.lost_status === true ? "Yes" : pet.lost_status === false ? "No" : "N/A"}</p>
+      )}
+    </div>
+
+  </div>
+</div>
+</div>
 
         <button className="close-button" onClick={onClose}>Close</button>
       </div>
@@ -1199,5 +1318,28 @@ style.innerHTML =  `
     pointer-events: none;
   }
   
+.extra-info-fields .info-item input,
+.extra-info-fields .info-item textarea {
+  width: 100%;
+  padding: 6px 10px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 14px;
+  resize: vertical;
+}
+.extra-info-fields .info-item select {
+  width: 100%;
+  padding: 6px 10px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 14px;
+  background: white;
+}
+
+
 `;
 document.head.appendChild(style); 
