@@ -7,22 +7,20 @@ import AddPetModal from "./AddPetModal";
 import PetProfileModal from "./PetProfileModal";
 import Posts from "./Posts";
 import { MdAddAPhoto } from "react-icons/md";
-import { useUser } from '../UserContext';
+import { useUser } from "../UserContext";
 import { GiCrossedBones } from "react-icons/gi";
 
-
+// Helper function for generating post dates
 const generatePostDate = (index) => {
-  const daysAgo = index * 2 + Math.floor(Math.random() * 2); // Spread out by ~2 days per post
+  const daysAgo = index * 2 + Math.floor(Math.random() * 2);
   const postDate = new Date();
   postDate.setDate(postDate.getDate() - daysAgo);
   return postDate.toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
-    year: "numeric"
+    year: "numeric",
   });
 };
-
-
 
 const captions = [
   "Caught mid-zoomies! 🐾",
@@ -44,142 +42,87 @@ const captions = [
   "Tongue out Tuesday 😋",
   "Too cute to handle 💖",
   "Caught being paws-itively adorable 💅",
-  "Tail wags & good vibes 🌈"
+  "Tail wags & good vibes 🌈",
 ];
-
 
 const postImages = [
   [
     "https://www.warrenphotographic.co.uk/photography/bigs/44826-Blue-point-Birman-cross-cat-and-Goldendoodle-puppy-white-background.jpg",
     "https://images.squarespace-cdn.com/content/v1/5b5499a13c3a53487c250d73/1548212711672-14PLK00UM15YHKBXHOWK/golden2.jpg",
-    "https://preview.redd.it/anyones-else-doodle-think-hes-a-soccer-play-he-uses-his-v0-8geu6iyc3n9b1.jpg?width=640&crop=smart&auto=webp&s=da46ffc4ec1a641af6f877bbf85f1934faf58fb5"
+    "https://preview.redd.it/anyones-else-doodle-think-hes-a-soccer-play-he-uses-his-v0-8geu6iyc3n9b1.jpg?width=640&crop=smart&auto=webp&s=da46ffc4ec1a641af6f877bbf85f1934faf58fb5",
   ],
-  [
-    "https://images.unsplash.com/photo-1566927467984-6332be7377d0?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2F0JTIwYmlydGhkYXl8ZW58MHx8MHx8fDA%3D",
-    "https://image.petmd.com/files/inline-images/white-cat-breeds-munchkin.jpg?VersionId=.uzqQ5bbncHjG38rNmx18EzEEGPIe6H0",
-    "https://preview.redd.it/whats-your-cats-favourite-toy-mine-gets-so-easily-bored-of-v0-f918p0n68as81.jpg?width=1080&crop=smart&auto=webp&s=3c8838a69d24f1859e9b554e3cde8a3e657cc28a"
-  ],
-  [
-    "https://i0.pickpik.com/photos/18/674/411/game-animals-dog-cat-white-cat-preview.jpg",
-    "https://ilovemychi.com/wp-content/uploads/2015/11/Jim-And-Sandy.jpg",
-    "https://media.graphassets.com/resize=height:360,width:938/output=format:webp/9JrMeDVZTbO7AKMsI5NL?width=938"
-  ],
-  [
-    "https://premierpups.com/azure/premierphotos/photogallery/85db4ef0-ecd6-42d9-8335-08e06824e9d3.jpeg?preset=detail",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
-  ],
-  [
-    "https://placedog.net/500/300?id=7",
-    "https://placedog.net/500/300?id=8",
-    "https://placedog.net/500/300?id=9"
-  ],
-  [
-    "https://placedog.net/500/300?id=10",
-    "https://placedog.net/500/300?id=11",
-    "https://placedog.net/500/300?id=12"
-  ],
-  [
-    "https://placedog.net/500/300?id=13",
-    "https://placedog.net/500/300?id=14",
-    "https://placedog.net/500/300?id=15"
-  ],
-  [
-    "https://placedog.net/500/300?id=16",
-    "https://placedog.net/500/300?id=17",
-    "https://placedog.net/500/300?id=9"
-  ],
-  [
-    "https://placedog.net/500/300?id=18",
-    "https://placedog.net/500/300?id=19",
-    "https://placedog.net/500/300?id=20"
-  ],
-  [
-    "https://placedog.net/500/300?id=21",
-    "https://placedog.net/500/300?id=22",
-    "https://placedog.net/500/300?id=23"
-  ],
-  [
-    "https://placedog.net/500/300?id=24",
-    "https://placedog.net/500/300?id=25",
-    "https://placedog.net/500/300?id=26"
-  ],
-  [
-    "https://placedog.net/500/300?id=27",
-    "https://placedog.net/500/300?id=28",
-    "https://placedog.net/500/300?id=29"
-  ],
-  [
-    "https://placedog.net/500/300?id=30",
-    "https://placedog.net/500/300?id=31",
-    "https://placedog.net/500/300?id=32"
-  ],
-  [
-    "https://placedog.net/500/300?id=33",
-    "https://placedog.net/500/300?id=34",
-    "https://placedog.net/500/300?id=35"
-  ],
-  [
-    "https://placedog.net/500/300?id=36",
-    "https://placedog.net/500/300?id=37",
-    "https://placedog.net/500/300?id=38"
-  ],
-  [
-    "https://placedog.net/500/300?id=39",
-    "https://placedog.net/500/300?id=40",
-    "https://placedog.net/500/300?id=41"
-  ],
-  [
-    "https://placedog.net/500/300?id=42",
-    "https://placedog.net/500/300?id=43",
-    "https://placedog.net/500/300?id=44"
-  ],
-  [
-    "https://placedog.net/500/300?id=45",
-    "https://placedog.net/500/300?id=46",
-    "https://placedog.net/500/300?id=47"
-  ],
-  // Add more posts as needed
+  // ... other postImages arrays
 ];
 
-const sliderSettings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: false
-};
+// Define initial followed pets array
+const initialFollowedPets = [
+  { name: "Millie", image: "https://unsplash.it/201/200" },
+  {
+    name: "Milo",
+    image: "https://cdn2.thecatapi.com/images/bpc.jpg",
+    breed: "Manx",
+    age: "3 years",
+    gender: "Boy",
+    weight: "9.3 lbs",
+    adoptionStory:
+      "Milo was found as a tiny kitten curled up under a porch during a rainstorm, shivering and alone. A kind neighbor rescued him and brought him to the local shelter.",
+    vaccinated: true,
+    spayedNeutered: true,
+    medicalConditions: "None",
+    personality: { temperament: 3, energyLevel: 5 },
+    lifestyle: {
+      goodWithKids: true,
+      goodWithPets: true,
+      indoorOutdoor: "Indoor",
+      pottyTrained: true,
+      crateTrained: false,
+    },
+    favoriteActivities: "Chasing lasers, sleeping on laptops, knocking over water.",
+    bio: "Meet Milo, a fun-loving cat with a heart full of mischief.",
+    galleryImages: [
+      "https://cdn2.thecatapi.com/images/bpc.jpg",
+      "https://cdn2.thecatapi.com/images/c3h.jpg",
+      "https://cdn2.thecatapi.com/images/4uv.jpg",
+      "https://cdn2.thecatapi.com/images/9j5.jpg",
+      "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg",
+      "https://cdn2.thecatapi.com/images/2oo.jpg",
+    ],
+  },
+  
+  { name: "Burrito", image: "https://placedog.net/200/200" },
+  { name: "Autumn", image: "https://placedog.net/201/200" },
+  { name: "Luna", image: "https://placedog.net/202/200" },
+  { name: "Donut", image: "https://placedog.net/203/200" },
+  { name: "Buddy", image: "https://placedog.net/204/200" },
+  { name: "Nala", image: "https://unsplash.it/202/200" },
+  { name: "Pickles", image: "https://unsplash.it/203/200" },
+  { name: "Shadow", image: "https://placedog.net/205/200" },
+  { name: "Pumpkin", image: "https://unsplash.it/204/200" },
+  { name: "Ziggy", image: "https://placedog.net/206/200" },
+  { name: "Taco", image: "https://placedog.net/207/200" },
+  { name: "Ginger", image: "https://unsplash.it/205/200" },
+  { name: "Snowball", image: "https://unsplash.it/206/200" },
+  { name: "Rocco", image: "https://placedog.net/208/200" },
+  { name: "Mochi", image: "https://unsplash.it/207/200" },
+  { name: "Juno", image: "https://placedog.net/209/200" },
+  { name: "Kiwi", image: "https://unsplash.it/208/200" },
+  { name: "Pebbles", image: "https://placedog.net/210/200" },
+  { name: "Zara", image: "https://unsplash.it/209/200" },
+  { name: "Churro", image: "https://placedog.net/211/200" },
+  { name: "Smokey", image: "https://unsplash.it/210/200" },
+  { name: "Olive", image: "https://placedog.net/212/200" },
+  { name: "Banjo", image: "https://placedog.net/213/200" },
+  { name: "Pudding", image: "https://unsplash.it/211/200" },
+  { name: "Clover", image: "https://unsplash.it/212/200" },
+  { name: "Teddy", image: "https://placedog.net/214/200" },
+  { name: "Buttons", image: "https://unsplash.it/213/200" },
+  { name: "Goose", image: "https://placedog.net/215/200" },
+  { name: "Miso", image: "https://unsplash.it/214/200" },
+  { name: "Scout", image: "https://placedog.net/216/200" },
+  { name: "Nugget", image: "https://unsplash.it/215/200" },
 
-const getCroppedImg = (imageSrc, pixelCrop) => {
-  const canvas = document.createElement("canvas");
-  const img = new Image();
-
-  return new Promise((resolve, reject) => {
-    img.onload = () => {
-      canvas.width = pixelCrop.width;
-      canvas.height = pixelCrop.height;
-      const ctx = canvas.getContext("2d");
-
-      ctx.drawImage(
-        img,
-        pixelCrop.x,
-        pixelCrop.y,
-        pixelCrop.width,
-        pixelCrop.height,
-        0,
-        0,
-        pixelCrop.width,
-        pixelCrop.height
-      );
-
-      resolve(canvas.toDataURL("image/jpeg"));
-    };
-    img.onerror = reject;
-    img.src = imageSrc;
-  });
-};
-
+  
+];
 
 function ProfilePage({ pets, setPets }) {
   const [banner, setBanner] = useState(null);
@@ -199,11 +142,13 @@ function ProfilePage({ pets, setPets }) {
   const [isEditingName, setIsEditingName] = useState(false);
   const [editable, setEditable] = useState(false);
 
+  // State for followed pets
+  const [followedPets, setFollowedPets] = useState(initialFollowedPets);
 
   const scrollLeft = () => {
     scrollRef.current.scrollBy({ left: -150, behavior: "smooth" });
   };
-  
+
   const scrollRight = () => {
     scrollRef.current.scrollBy({ left: 150, behavior: "smooth" });
   };
@@ -231,26 +176,41 @@ function ProfilePage({ pets, setPets }) {
       console.error("Crop failed:", e);
     }
   };
-  
 
   const handleProfileImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setGlobalProfileImage(reader.result); // ✅ sync with sidebar
+        setGlobalProfileImage(reader.result);
       };
       reader.readAsDataURL(file);
     }
   };
-  
+
   const [showAddModal, setShowAddModal] = useState(false);
 
-const handleAddPet = (newPet) => {
-  setPets([...pets, { ...newPet, description: "Newly added pet!" }]);
-  setShowAddModal(false);
-};
+  const handleAddPet = (newPet) => {
+    setPets([...pets, { ...newPet, description: "Newly added pet!" }]);
+    setShowAddModal(false);
+  };
 
+  // Callback passed to PetProfileModal to update the followedPets state
+  const handleToggleFollow = (pet, newFollowState) => {
+    if (!newFollowState) {
+      // Remove pet if unfollowed
+      setFollowedPets((prev) => prev.filter((p) => p.name !== pet.name));
+      setActiveFollowedPet(null); // Optionally close modal
+    } else {
+      // Optionally add pet if followed back
+      setFollowedPets((prev) => {
+        if (!prev.some((p) => p.name === pet.name)) {
+          return [...prev, pet];
+        }
+        return prev;
+      });
+    }
+  };
 
   return (
     <div className="profile-container">
@@ -258,15 +218,15 @@ const handleAddPet = (newPet) => {
       <main className="profile-main">
         <div className="profile-banner-container">
           <div className="profile-banner">
-            
-          {banner && (
-  <img src={banner} alt="Banner" className="banner-image" />
-)}
-
-<button className="edit-banner-button" onClick={() => fileInputRef.current.click()}>
-  <img src="/pencil-edit-button.svg" alt="Edit" />
-</button>
-
+            {banner && (
+              <img src={banner} alt="Banner" className="banner-image" />
+            )}
+            <button
+              className="edit-banner-button"
+              onClick={() => fileInputRef.current.click()}
+            >
+              <img src="/pencil-edit-button.svg" alt="Edit" />
+            </button>
             <input
               type="file"
               accept="image/*"
@@ -277,20 +237,19 @@ const handleAddPet = (newPet) => {
           </div>
 
           <div className="profile-stats">
-  <div className="stat-circle">
-    <div className="stat-number">20.3K</div>
-    <div className="stat-label">Followers</div>
-  </div>
-  <div className="stat-circle">
-    <div className="stat-number">489</div>
-    <div className="stat-label">Following</div>
-  </div>
-  <div className="stat-circle">
-    <div className="stat-number">308</div>
-    <div className="stat-label">Posts</div>
-  </div>
-</div>
-
+            <div className="stat-circle">
+              <div className="stat-number">20.3K</div>
+              <div className="stat-label">Followers</div>
+            </div>
+            <div className="stat-circle">
+              <div className="stat-number">489</div>
+              <div className="stat-label">Following</div>
+            </div>
+            <div className="stat-circle">
+              <div className="stat-number">308</div>
+              <div className="stat-label">Posts</div>
+            </div>
+          </div>
 
           <div className="profile-photo-container">
             <img
@@ -302,268 +261,187 @@ const handleAddPet = (newPet) => {
               className="upload-overlay"
               onClick={() => profileFileInputRef.current.click()}
             >
-              <span className="upload-text"><MdAddAPhoto /></span>
+              <span className="upload-text">
+                <MdAddAPhoto />
+              </span>
             </div>
-            
             <input
               type="file"
               accept="image/*"
               style={{ display: "none" }}
               ref={profileFileInputRef}
               onChange={handleProfileImageChange}
-            /> 
+            />
           </div>
+
           <div className="profile-name-edit">
-  {isEditingName ? (
-    <input
-      className="name-input"
-      value={username}
-      onChange={(e) => setUsername(e.target.value)}
-      onBlur={() => setIsEditingName(false)}
-      autoFocus
-    />
-  ) : (
-    <>
-      <h2 className="profile-name">{username}</h2>
-      <button className="edit-name-button" onClick={() => setIsEditingName(true)}>
-        <img src="/pencil-edit-button.svg" alt="Edit name" />
-      </button>
-    </>
-  )}
-</div>
+            {isEditingName ? (
+              <input
+                className="name-input"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                onBlur={() => setIsEditingName(false)}
+                autoFocus
+              />
+            ) : (
+              <>
+                <h2 className="profile-name">{username}</h2>
+                <button
+                  className="edit-name-button"
+                  onClick={() => setIsEditingName(true)}
+                >
+                  <img src="/pencil-edit-button.svg" alt="Edit name" />
+                </button>
+              </>
+            )}
+          </div>
 
-          <div
-
-           
-  className="bio-container"
-  onClick={() => setIsEditingBio(true)}
->
-  {isEditingBio ? (
-    <textarea
-      className="bio-edit"
-      value={bio}
-      onChange={(e) => setBio(e.target.value)}
-      onBlur={() => setIsEditingBio(false)} // Save and exit on blur
-      autoFocus
-    />
-  ) : (
-    <p className="bio-text">{bio || "Click to add a bio..."}</p>
-  )}
-</div>
-
-<div className="pets-section">
-  <div className="your-pets-header">
-    <h2>Your Pets</h2>
-    <button className="add-pet-inline" onClick={() => setShowAddModal(true)}>
-    <GiCrossedBones size={28} style={{ transform: 'rotate(90deg)' }} />
-    </button>
-  </div>
-
-  <div className="pets-wrapper">
-    <div className="pets-bubble-container">
-      {pets.map((pet, index) => (
-        <div key={index} style={{ textAlign: "center" }}>
-          <button
-        className="pet-button"
-        onClick={() => {
-          setActivePet({
-            ...pet,
-            onHealthUpdate: (field, value) => {
-              const updatedPets = pets.map((p) =>
-                p.name === pet.name ? { ...p, [field]: value } : p
-              );
-              setPets(updatedPets);
-              setActivePet((prev) => ({ ...prev, [field]: value }));
-            },
-          });
-          setEditable(false); // ✅ Always reset to view mode when a new pet is selected
-        }}
-      > 
-
-
-            <img className="pet-image" src={pet.image} alt={pet.name} />
-          </button>
-          <span className="pet-name">{pet.name}</span>
+          <div className="bio-container" onClick={() => setIsEditingBio(true)}>
+            {isEditingBio ? (
+              <textarea
+                className="bio-edit"
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                onBlur={() => setIsEditingBio(false)}
+                autoFocus
+              />
+            ) : (
+              <p className="bio-text">{bio || "Click to add a bio..."}</p>
+            )}
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
 
-  {/* 🔥 This was missing! */}
-  {showAddModal && (
-    <AddPetModal
-      onClose={() => setShowAddModal(false)}
-      onSave={handleAddPet}
-    />
-  )}
-</div>
+        <div className="pets-section">
+          <div className="your-pets-header">
+            <h2>Your Pets</h2>
+            <button className="add-pet-inline" onClick={() => setShowAddModal(true)}>
+              <GiCrossedBones size={28} style={{ transform: "rotate(90deg)" }} />
+            </button>
+          </div>
 
-{activePet && (
-    <PetProfileModal
-      pet={{
-        ...activePet,
-        onHealthUpdate: (field, value) => {
-          const updatedPets = pets.map((p) =>
-            p.name === activePet.name ? { ...p, [field]: value } : p
-          );
-          setPets(updatedPets);
-          setActivePet((prev) => ({ ...prev, [field]: value }));
-        },
-        onPersonalityUpdate: (field, value) => {
-          const updatedPets = pets.map((p) =>
-            p.name === activePet.name
-              ? {
-                  ...p,
+          <div className="pets-wrapper">
+            <div className="pets-bubble-container">
+              {pets.map((pet, index) => (
+                <div key={index} style={{ textAlign: "center" }}>
+                  <button
+                    className="pet-button"
+                    onClick={() => {
+                      setActivePet({
+                        ...pet,
+                        onHealthUpdate: (field, value) => {
+                          const updatedPets = pets.map((p) =>
+                            p.name === pet.name ? { ...p, [field]: value } : p
+                          );
+                          setPets(updatedPets);
+                          setActivePet((prev) => ({ ...prev, [field]: value }));
+                        },
+                      });
+                      setEditable(false);
+                    }}
+                  >
+                    <img className="pet-image" src={pet.image} alt={pet.name} />
+                  </button>
+                  <span className="pet-name">{pet.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {showAddModal && (
+            <AddPetModal
+              onClose={() => setShowAddModal(false)}
+              onSave={handleAddPet}
+            />
+          )}
+        </div>
+
+        {/* Followed Pets Carousel */}
+        <div className="pets-following-wrapper">
+          <h2>Pets You Follow</h2>
+          <div className="pets-following-section">
+            <div className="followed-pets-container" ref={scrollRef}>
+              {followedPets.map((pet, index) => (
+                <button
+                  key={index}
+                  className="followed-pet"
+                  onClick={() => setActiveFollowedPet(pet)}
+                >
+                  <img src={pet.image} alt={pet.name} />
+                  <span>{pet.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="your-posts-section">
+          <h2>Your Posts</h2>
+          <Posts postImages={postImages} captions={captions} />
+        </div>
+
+        {activePet && (
+          <PetProfileModal
+            pet={{
+              ...activePet,
+              onHealthUpdate: (field, value) => {
+                const updatedPets = pets.map((p) =>
+                  p.name === activePet.name ? { ...p, [field]: value } : p
+                );
+                setPets(updatedPets);
+                setActivePet((prev) => ({ ...prev, [field]: value }));
+              },
+              onPersonalityUpdate: (field, value) => {
+                const updatedPets = pets.map((p) =>
+                  p.name === activePet.name
+                    ? {
+                        ...p,
+                        personality: {
+                          ...p.personality,
+                          [field]: value,
+                        },
+                      }
+                    : p
+                );
+                setPets(updatedPets);
+                setActivePet((prev) => ({
+                  ...prev,
                   personality: {
-                    ...p.personality,
+                    ...prev.personality,
                     [field]: value,
                   },
-                }
-              : p
-          );
-          setPets(updatedPets);
-          setActivePet((prev) => ({
-            ...prev,
-            personality: {
-              ...prev.personality,
-              [field]: value,
-            },
-          }));
-        },
-      }}
-      onClose={() => {
-        setActivePet(null);
-        setEditable(false);
-      }}
-      editable={editable}
-      onToggleEdit={() => setEditable((prev) => !prev)}
-      showEditButton={true}
-      posts={postImages.map((images, index) => ({
-        images,
-        caption: captions[index % captions.length],
-        date: generatePostDate(index),
-      }))}
-    />
-  )}
-  
+                }));
+              },
+            }}
+            onClose={() => {
+              setActivePet(null);
+              setEditable(false);
+            }}
+            editable={editable}
+            onToggleEdit={() => setEditable((prev) => !prev)}
+            showEditButton={true}
+            posts={postImages.map((images, index) => ({
+              images,
+              caption: captions[index % captions.length],
+              date: generatePostDate(index),
+            }))}
+          />
+        )}
 
-
-
-
-
-<div className="pets-following-wrapper">
-  <h2>Pets You Follow</h2>
-  <div className="pets-following-section">
-    <div className="followed-pets-container" ref={scrollRef}>
-      {[
-      { name: "Millie", image: "https://unsplash.it/201/200" },
-      {
-        name: "Milo",
-        image: "https://cdn2.thecatapi.com/images/bpc.jpg",
-        breed: "Manx",
-        age: "3 years",
-        gender: "Boy",
-        weight: "9.3 lbs",
-        adoptionStory: "Milo was found as a tiny kitten curled up under a porch during a rainstorm, shivering and alone. A kind neighbor rescued him and brought him to the local shelter, where he quickly charmed everyone with his playful energy and big green eyes. After just a few weeks, he was adopted by a young couple who instantly fell in love with his goofy personality and endless curiosity. Now, Milo spends his days exploring sunbeams, cuddling on the couch, and reminding his family just how lucky they are to have found him.",
-
-        vaccinated: true,
-        spayedNeutered: true,
-        medicalConditions: "None",
-        personality: { temperament: 3, energyLevel: 5 },
-        lifestyle: {
-          goodWithKids: true,
-          goodWithPets: true,
-          indoorOutdoor: "Indoor",
-          pottyTrained: true,
-          crateTrained: false
-        },
-        favoriteActivities: "Chasing lasers, sleeping on laptops, knocking over water.",
-        careRoutine: "Brushed twice a week. Loves tuna treats. Needs daily cuddles.",
-        bio: "Meet Milo, a fun-loving cat with a heart full of mischief and a tail that never stops swaying. Whether she's chasing sunbeams across the living room floor or attempting daring leaps onto countertops she definitely shouldn't be on, her playful spirit brings laughter to everyone around her. 🐾",
-        taggedImages: ["url1", "url2", "url3"],
-          // ✅ Add this galleryImages array here:
-          galleryImages: [
-            "https://cdn2.thecatapi.com/images/bpc.jpg",
-            "https://cdn2.thecatapi.com/images/c3h.jpg",
-            "https://cdn2.thecatapi.com/images/4uv.jpg",
-            "https://cdn2.thecatapi.com/images/9j5.jpg",
-            "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg",
-            "https://cdn2.thecatapi.com/images/2oo.jpg"
-          ]
-          
-      },
-      
-      { name: "Burrito", image: "https://placedog.net/200/200" },
-      { name: "Autumn", image: "https://placedog.net/201/200" },
-      { name: "Luna", image: "https://placedog.net/202/200" },
-      { name: "Donut", image: "https://placedog.net/203/200" },
-      { name: "Buddy", image: "https://placedog.net/204/200" },
-      { name: "Nala", image: "https://unsplash.it/202/200" },
-      { name: "Pickles", image: "https://unsplash.it/203/200" },
-      { name: "Shadow", image: "https://placedog.net/205/200" },
-      { name: "Pumpkin", image: "https://unsplash.it/204/200" },
-      { name: "Ziggy", image: "https://placedog.net/206/200" },
-      { name: "Taco", image: "https://placedog.net/207/200" },
-      { name: "Ginger", image: "https://unsplash.it/205/200" },
-      { name: "Snowball", image: "https://unsplash.it/206/200" },
-      { name: "Rocco", image: "https://placedog.net/208/200" },
-      { name: "Mochi", image: "https://unsplash.it/207/200" },
-      { name: "Juno", image: "https://placedog.net/209/200" },
-      { name: "Kiwi", image: "https://unsplash.it/208/200" },
-      { name: "Pebbles", image: "https://placedog.net/210/200" },
-      { name: "Zara", image: "https://unsplash.it/209/200" },
-      { name: "Churro", image: "https://placedog.net/211/200" },
-      { name: "Smokey", image: "https://unsplash.it/210/200" },
-      { name: "Olive", image: "https://placedog.net/212/200" },
-      { name: "Banjo", image: "https://placedog.net/213/200" },
-      { name: "Pudding", image: "https://unsplash.it/211/200" },
-      { name: "Clover", image: "https://unsplash.it/212/200" },
-      { name: "Teddy", image: "https://placedog.net/214/200" },
-      { name: "Buttons", image: "https://unsplash.it/213/200" },
-      { name: "Goose", image: "https://placedog.net/215/200" },
-      { name: "Miso", image: "https://unsplash.it/214/200" },
-      { name: "Scout", image: "https://placedog.net/216/200" },
-      { name: "Nugget", image: "https://unsplash.it/215/200" },
-      ].map((pet, index) => (
-        <button
-  key={index}
-  className="followed-pet"
-  onClick={() => setActiveFollowedPet(pet)}
->
-  <img src={pet.image} alt={pet.name} />
-  <span>{pet.name}</span>
-</button>
-
-      ))}
-    </div>
-  </div>
-  <div className="your-posts-section">
-  <h2>Your Posts</h2>
-  <Posts postImages={postImages} captions={captions} />
-</div>
-
-
-</div>
-
-        </div>
         {activeFollowedPet && (
-  <PetProfileModal
-    pet={activeFollowedPet}
-    isFollowed={true}
-    onClose={() => setActiveFollowedPet(null)}
-    editable={false}
-    posts={postImages.map((images, index) => ({
-      images,
-      caption: captions[index % captions.length],
-      date: generatePostDate(index),
-    }))}
-  />
-)}
+          <PetProfileModal
+            pet={activeFollowedPet}
+            isFollowed={true}
+            onToggleFollow={handleToggleFollow}
+            onClose={() => setActiveFollowedPet(null)}
+            editable={false}
+            posts={postImages.map((images, index) => ({
+              images,
+              caption: captions[index % captions.length],
+              date: generatePostDate(index),
+            }))}
+          />
+        )}
 
-
-
-
-        {/* Cropping Modal */}
         {cropping && (
           <div className="cropper-overlay">
             <div className="cropper-modal">
@@ -594,7 +472,9 @@ const handleAddPet = (newPet) => {
     </div>
   );
 }
+
 export default ProfilePage;
+
 
 /* Embedded CSS */
 const style = document.createElement('style');

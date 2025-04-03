@@ -19,13 +19,20 @@ const PetProfileModal = ({
   posts = [],
   showEditButton = false,
   onToggleEdit,
-  isFollowed = false // Pass true for followed pets
+  isFollowed = false, // initial follow state from parent
+  onToggleFollow // callback: (pet, newFollowState) => {}
 }) => {
   if (!pet) return null;
 
-  // Local state for follow status
+  // Local state to manage follow status
   const [followed, setFollowed] = useState(isFollowed);
-  const toggleFollow = () => setFollowed(!followed);
+  const toggleFollow = () => {
+    const newFollowState = !followed;
+    setFollowed(newFollowState);
+    if (onToggleFollow) {
+      onToggleFollow(pet, newFollowState);
+    }
+  };
 
   // Destructure pet properties
   const {
@@ -87,7 +94,7 @@ const PetProfileModal = ({
         <div className="pet-header">
           <div className="pet-image-column">
             <div className="pet-image-wrapper">
-              {/* Only show follow badge if this pet is a followed pet */}
+              {/* Show follow badge if this pet is from the followed list */}
               {isFollowed && (
                 <div className="following-badge" onClick={toggleFollow}>
                   {followed ? (
@@ -214,6 +221,7 @@ const PetProfileModal = ({
             )}
           </div>
         </div>
+
         <div className="pet-profile-subsection">
           <h4>Photos of {name}</h4>
           <div className="pet-carousel-scroll">
@@ -237,6 +245,7 @@ const PetProfileModal = ({
             )}
           </div>
         </div>
+
         {posts.length > 0 && (
           <div className="pet-profile-subsection">
             <h4>{`Posts Featuring ${name}`}</h4>
@@ -247,6 +256,7 @@ const PetProfileModal = ({
             />
           </div>
         )}
+
         {adoptionStory && (
           <div className="pet-profile-subsection">
             <div className="pet-adoption-story">
@@ -255,6 +265,7 @@ const PetProfileModal = ({
             </div>
           </div>
         )}
+
         <div className="pet-health-box">
           <h3>Health History</h3>
           <div className="health-field-row">
@@ -303,6 +314,7 @@ const PetProfileModal = ({
             )}
           </div>
         </div>
+
         <div className="pet-profile-subsection personality-box">
           <h4>Personality</h4>
           <div className="slider-section">
@@ -381,6 +393,7 @@ const PetProfileModal = ({
             )}
           </div>
         </div>
+
         {(editable || lifestyle) && (
           <div className="pet-profile-subsection lifestyle-box">
             <h4>Lifestyle</h4>
@@ -432,6 +445,7 @@ const PetProfileModal = ({
             ))}
           </div>
         )}
+
         <div className="pet-profile-subsection extra-info-box">
           <h4>Care Information</h4>
           <div className="pet-profile-subsection">
@@ -518,10 +532,16 @@ const PetProfileModal = ({
                 <strong>Lost?</strong>
                 {editable ? (
                   <div className="toggle-options">
-                    <button className={pet.lost_status === true ? "selected red" : ""} onClick={() => onHealthUpdate("lost_status", true)}>
+                    <button
+                      className={pet.lost_status === true ? "selected red" : ""}
+                      onClick={() => onHealthUpdate("lost_status", true)}
+                    >
                       Yes
                     </button>
-                    <button className={pet.lost_status === false ? "selected green" : ""} onClick={() => onHealthUpdate("lost_status", false)}>
+                    <button
+                      className={pet.lost_status === false ? "selected green" : ""}
+                      onClick={() => onHealthUpdate("lost_status", false)}
+                    >
                       No
                     </button>
                   </div>
@@ -532,6 +552,7 @@ const PetProfileModal = ({
             </div>
           </div>
         </div>
+
         <button className="close-button" onClick={onClose}>
           Close
         </button>
@@ -541,6 +562,7 @@ const PetProfileModal = ({
 };
 
 export default PetProfileModal;
+
 
 
 
