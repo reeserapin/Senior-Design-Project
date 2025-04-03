@@ -23,62 +23,62 @@ const SidePanels = () => {
   ];
 
   return (
-    <div className="side-panels">
+    <div className="sp-side-panels">
       {/* Pet News Panel */}
-      <div className="panel pet-news">
+      <div className="sp-panel pet-news">
         <div 
-          className="panel-header"
+          className="sp-panel-header"
           onClick={() => setIsNewsExpanded(!isNewsExpanded)}
         >
-          <h2 className="panel-title">
-            <span className="icon">📰</span> Pet News:
+          <h2 className="sp-panel-title">
+            <span className="sp-icon">📰</span> Pet News:
           </h2>
-          <span className="toggle-icon">
+          <span className="sp-toggle-icon">
             {isNewsExpanded ? <FaChevronUp /> : <FaChevronDown />}
           </span>
         </div>
-        <div className={`panel-content ${isNewsExpanded ? 'expanded' : ''}`}>
-          <div className="news-card">
+        <div className={`sp-panel-content ${isNewsExpanded ? 'expanded' : ''}`}>
+          <div className="sp-news-card">
             <img 
               src={petNews.image} 
               alt={petNews.title} 
-              className="news-image"
+              className="sp-news-image"
             />
-            <div className="news-content">
-              <h3 className="news-title">{petNews.title}</h3>
-              <p className="news-date">{petNews.date}</p>
-              <p className="news-description">{petNews.description}</p>
+            <div className="sp-news-content">
+              <h3 className="sp-news-title">{petNews.title}</h3>
+              <p className="sp-news-date">{petNews.date}</p>
+              <p className="sp-news-description">{petNews.description}</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Missing Pets Panel */}
-      <div className="panel missing-pets">
+      <div className="sp-panel missing-pets">
         <div 
-          className="panel-header"
+          className="sp-panel-header"
           onClick={() => setIsMissingExpanded(!isMissingExpanded)}
         >
-          <h2 className="panel-title">
-            <span className="icon">⚠️</span> Missing Pets
+          <h2 className="sp-panel-title">
+            <span className="sp-icon">⚠️</span> Missing Pets
           </h2>
-          <span className="toggle-icon">
+          <span className="sp-toggle-icon">
             {isMissingExpanded ? <FaChevronUp /> : <FaChevronDown />}
           </span>
         </div>
-        <div className={`panel-content ${isMissingExpanded ? 'expanded' : ''}`}>
+        <div className={`sp-panel-content ${isMissingExpanded ? 'expanded' : ''}`}>
           {missingPets.map((pet, index) => (
-            <div key={index} className="missing-pet-card">
+            <div key={index} className="sp-missing-pet-card">
               <img 
                 src={pet.image} 
                 alt={`Missing pet ${pet.name}`} 
-                className="missing-pet-image"
+                className="sp-missing-pet-image"
               />
-              <div className="missing-pet-info">
-                <h3 className="missing-pet-name">MISSING PET: {pet.name}</h3>
-                <p className="missing-pet-since">SINCE: {pet.since}</p>
+              <div className="sp-missing-pet-info">
+                <h3 className="sp-missing-pet-name">MISSING PET: {pet.name}</h3>
+                <p className="sp-missing-pet-since">SINCE: {pet.since}</p>
                 {pet.reward && (
-                  <p className="missing-pet-reward">{pet.reward}</p>
+                  <p className="sp-missing-pet-reward">{pet.reward}</p>
                 )}
               </div>
             </div>

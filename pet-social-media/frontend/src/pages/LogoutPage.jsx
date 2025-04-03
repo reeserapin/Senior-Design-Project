@@ -32,8 +32,8 @@ function LogoutPage() {
   return (
     <div className="logout-page">
       <div className="logout-container">
-        <div className="grass-background">
-          <div className="dog-illustration"></div>
+        <div className="lg-grass-background">
+          <div className="lg-dog-illustration"></div>
         </div>
         <div className="logout-form">
           <h2>Sign out</h2>

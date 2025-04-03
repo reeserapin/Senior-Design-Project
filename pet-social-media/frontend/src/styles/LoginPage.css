@@ -1,4 +1,4 @@
-.login-page {
+.lg-login-page {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -7,7 +7,7 @@
     padding: 20px;
 }
 
-.login-container {
+.lg-login-container {
     display: flex;
     background: white;
     border-radius: 20px;
@@ -17,14 +17,14 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.grass-background {
+.lg-grass-background {
     flex: 1;
     background: linear-gradient(to bottom, #9DD8EA 0%, #84BC41 100%);
     position: relative;
     overflow: hidden;
 }
 
-.grass-background::before {
+.lg-grass-background::before {
     content: '';
     position: absolute;
     bottom: 0;
@@ -36,7 +36,7 @@
     opacity: 0.3;
 }
 
-.dog-illustration {
+.lg-dog-illustration {
     position: absolute;
     width: 150px;
     height: 150px;
@@ -47,7 +47,7 @@
     background-size: contain;
 }
 
-.login-form {
+.lg-login-form {
     flex: 1;
     padding: 40px;
     display: flex;
@@ -56,24 +56,24 @@
     text-align: left;
 }
 
-.login-form h2 {
+.lg-login-form h2 {
     font-size: 2rem;
     color: #333;
     margin-bottom: 30px;
 }
 
-.form-group {
+.lg-form-group {
     margin-bottom: 20px;
 }
 
-.form-group label {
+.lg-form-group label {
     display: block;
     margin-bottom: 8px;
     color: #333;
     font-weight: 500;
 }
 
-.form-group input {
+.lg-form-group input {
     width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
@@ -82,17 +82,17 @@
     background-color: #f5f5f5;
 }
 
-.form-group input:focus {
+.lg-form-group input:focus {
     outline: none;
     border-color: #099EC8;
     background-color: white;
 }
 
-.password-input {
+.lg-password-input {
     position: relative;
 }
 
-.show-password {
+.lg-show-password {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -102,12 +102,12 @@
     cursor: pointer;
 }
 
-.show-password input[type="checkbox"] {
+.lg-show-password input[type="checkbox"] {
     width: auto;
     margin-right: 5px;
 }
 
-.signup-button {
+.lg-signup-button {
     width: 100%;
     padding: 12px;
     background-color: #099EC8;
@@ -121,23 +121,23 @@
     margin-top: 20px;
 }
 
-.signup-button:hover {
+.lg-signup-button:hover {
     background-color: #0789ac;
 }
 
 @media (max-width: 768px) {
-    .login-container {
+    .lg-login-container {
         flex-direction: column;
         width: 100%;
         max-width: 400px;
         height: auto;
     }
 
-    .grass-background {
+    .lg-grass-background {
         height: 200px;
     }
 
-    .login-form {
+    .lg-login-form {
         padding: 30px 20px;
     }
 } 

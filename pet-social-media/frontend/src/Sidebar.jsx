@@ -14,52 +14,52 @@ function Sidebar() {
   };
 
   return (
-    <div className="sidebar">
+    <div className="ts-sidebar">
       {!isLoginPage && (
         <>
           <Link to="/profile">
             <img
               src="/public/linkedGirl.jpg"
               alt="Profile"
-              className="profile-image"
+              className="ts-profile-image"
             />
           </Link>
           <ul>
             <li>
-              <Link to="/" className="nav-link">
-                <FaHome className="nav-icon" />
-                Home
+              <Link to="/" className="ts-nav-link">
+                <FaHome className="ts-nav-icon" />
+                <span>Home</span>
               </Link>
             </li>
             <li>
-              <Link to="/pedigree" className="nav-link">
-                <TbBinaryTree className="nav-icon" />
-                Pedigree
+              <Link to="/pedigree" className="ts-nav-link">
+                <TbBinaryTree className="ts-nav-icon" />
+                <span>Pedigree</span>
               </Link>
             </li>
             <li>
-              <Link to="/messsages" className="nav-link chat-link">
-                <FaComments className="nav-icon chat-icon" />
-                Messages
+              <Link to="/messsages" className="ts-nav-link ts-chat-link">
+                <FaComments className="ts-nav-icon ts-chat-icon" />
+                <span>Messages</span>
               </Link>
             </li>
             <li>
-              <Link to="/petshop" className="nav-link">
-                <FaShoppingBag className="nav-icon" />
-                Pet Shop
+              <Link to="/petshop" className="ts-nav-link">
+                <FaShoppingBag className="ts-nav-icon" />
+                <span>Pet Shop</span>
               </Link>
             </li>
             <li>
-              <Link to="/settings" className="nav-link">
-                <FaCog className="nav-icon" />
-                Settings
+              <Link to="/settings" className="ts-nav-link">
+                <FaCog className="ts-nav-icon" />
+                <span>Settings</span>
               </Link>
             </li>
           </ul>
-          <div className="sidebar-footer">
-            <button onClick={handleLogout} className="nav-link logout-link">
-              <FaSignOutAlt className="nav-icon" />
-              Logout
+          <div className="ts-sidebar-footer">
+            <button onClick={handleLogout} className="ts-nav-link ts-logout-link">
+              <FaSignOutAlt className="ts-nav-icon" />
+              <span>Logout</span>
             </button>
           </div>
         </>

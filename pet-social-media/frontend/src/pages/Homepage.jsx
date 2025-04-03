@@ -55,38 +55,38 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
   ];
 
   return (
-    <div className={`pet-card ${bgColor} relative`}>
-      <div className="pet-header">
-        <img src={avatar} alt={user} className="pet-avatar" />
-        <p className="pet-title">{user}</p>
+    <div className={`homepage-pet-card ${bgColor === 'bg-blue' ? 'homepage-bg-blue' : bgColor === 'bg-green' ? 'homepage-bg-green' : 'homepage-bg-yellow'} relative`}>
+      <div className="homepage-pet-header">
+        <img src={avatar} alt={user} className="homepage-pet-avatar" />
+        <p className="homepage-pet-title">{user}</p>
       </div>
 
-      <div className="pet-content-box">
-        <div className="pet-info">
-          <div className="pet-pfp-container">
+      <div className="homepage-pet-content-box">
+        <div className="homepage-pet-info">
+          <div className="homepage-pet-pfp-container">
             {Array.isArray(pfp) ? (
               pfp.map((pic, index) => (
-                <img key={index} src={pic} alt={`pfp-${index}`} className="pet-pfp" />
+                <img key={index} src={pic} alt={`pfp-${index}`} className="homepage-pet-pfp" />
               ))
             ) : (
-              <img src={pfp} alt={title} className="pet-pfp" />
+              <img src={pfp} alt={title} className="homepage-pet-pfp" />
             )}
           </div>
-          <p className="pet-title">{title}</p>
+          <p className="homepage-pet-title">{title}</p>
         </div>
 
-        <div className="image-container">
-          {images.length > 1 && <button className="image-nav left" onClick={prevImage}><FaArrowLeft /></button>}
-          <img src={images[currentImageIndex]} alt={title} className="pet-image" />
-          {images.length > 1 && <button className="image-nav right" onClick={nextImage}><FaArrowRight /></button>}
+        <div className="homepage-image-container">
+          {images.length > 1 && <button className="homepage-image-nav left" onClick={prevImage}><FaArrowLeft /></button>}
+          <img src={images[currentImageIndex]} alt={title} className="homepage-pet-image" />
+          {images.length > 1 && <button className="homepage-image-nav right" onClick={nextImage}><FaArrowRight /></button>}
         </div>
       </div>
 
-      <div className="pet-actions">
-        <FaPaw className={`pet-icon ${liked ? "text-red-500" : "text-gray-500"}`} onClick={toggleLike} />
-        <FaComment className={`pet-icon ${activePanel === 'comments' ? 'text-blue-500' : ''}`} onClick={toggleComments} />
-        <FaPaperPlane className={`pet-icon ${activePanel === 'share' ? 'text-blue-500' : ''}`} onClick={toggleShare} />
-        <FaFlag className={`pet-icon ${activePanel === 'report' ? 'text-blue-500' : 'text-gray-500'}`} onClick={toggleReport} />
+      <div className="homepage-pet-actions">
+        <FaPaw className={`homepage-pet-icon ${liked ? "homepage-text-red-500" : "homepage-text-gray-500"}`} onClick={toggleLike} />
+        <FaComment className={`homepage-pet-icon ${activePanel === 'comments' ? 'homepage-text-blue-500' : ''}`} onClick={toggleComments} />
+        <FaPaperPlane className={`homepage-pet-icon ${activePanel === 'share' ? 'homepage-text-blue-500' : ''}`} onClick={toggleShare} />
+        <FaFlag className={`homepage-pet-icon ${activePanel === 'report' ? 'homepage-text-blue-500' : 'homepage-text-gray-500'}`} onClick={toggleReport} />
       </div>
 
       {activePanel === 'share' && (
@@ -104,26 +104,26 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
       )}
 
       {activePanel === 'comments' && (
-        <div className="comment-section">
-          <form onSubmit={handleCommentSubmit} className="comment-form">
-            <img src="/linkedGIRL.jpg" alt="User" className="comment-pfp" />
+        <div className="homepage-comment-section">
+          <form onSubmit={handleCommentSubmit} className="homepage-comment-form">
+            <img src="/linkedGIRL.jpg" alt="User" className="homepage-comment-pfp" />
             <input
               type="text"
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Write a comment..."
-              className="comment-input"
+              className="homepage-comment-input"
             />
-            <button type="submit" className="comment-submit">Post</button>
+            <button type="submit" className="homepage-comment-submit">Post</button>
           </form>
 
-          <div className="comments-list">
+          <div className="homepage-comments-list">
             {commentList.map((comment, index) => (
-              <div key={index} className="comment">
-                <img src={comment.pfp} alt={comment.username} className="comment-pfp" />
+              <div key={index} className="homepage-comment">
+                <img src={comment.pfp} alt={comment.username} className="homepage-comment-pfp" />
                 <div>
-                  <p className="comment-username">{comment.username}</p>
-                  <p className="comment-text">{comment.text}</p>
+                  <p className="homepage-comment-username">{comment.username}</p>
+                  <p className="homepage-comment-text">{comment.text}</p>
                 </div>
               </div>
             ))}
@@ -137,7 +137,7 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
 const PetPosts = () => {
   return (
     <div className="homepage-container">
-      <div className="posts-container">
+      <div className="homepage-posts-container">
         {postsData.map((post, index) => (
           <PetPost key={index} {...post} />
         ))}

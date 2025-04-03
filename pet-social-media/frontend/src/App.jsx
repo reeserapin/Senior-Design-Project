@@ -13,11 +13,11 @@ import LoginPage from './pages/LoginPage';
 
 function AppContent() {
   return (
-    <div className="app">
+    <div className="ts-app">
       <TopBar />
-      <div className="main-content">
+      <div className="ts-main-content">
         <Sidebar />
-        <div className="content">
+        <div className="ts-content">
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<HomePage />} />

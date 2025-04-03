@@ -1,4 +1,4 @@
-.side-panels {
+.sp-side-panels {
   position: fixed;
   right: 2%;
   top: 10vh;
@@ -10,7 +10,7 @@
   padding-top: 2vh;
 }
 
-.panel {
+.sp-panel {
   background: white;
   border-radius: 12px;
   padding: 2%;
@@ -18,7 +18,7 @@
   width: 100%;
 }
 
-.panel-header {
+.sp-panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,11 +27,11 @@
   user-select: none;
 }
 
-.panel-header:hover {
+.sp-panel-header:hover {
   opacity: 0.8;
 }
 
-.panel-title {
+.sp-panel-title {
   font-size: 18px;
   font-weight: bold;
   margin: 0;
@@ -40,30 +40,30 @@
   gap: 8px;
 }
 
-.toggle-icon {
+.sp-toggle-icon {
   color: #666;
   transition: transform 0.3s ease;
 }
 
-.icon {
+.sp-icon {
   font-size: 20px;
 }
 
-.panel-content {
+.sp-panel-content {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease-out;
   opacity: 0;
 }
 
-.panel-content.expanded {
+.sp-panel-content.expanded {
   max-height: 1000px;
   opacity: 1;
   transition: max-height 0.3s ease-in, opacity 0.3s ease-in;
 }
 
 /* Pet News Styles */
-.news-card {
+.sp-news-card {
   background: #f8f9fa;
   border-radius: 8px;
   overflow: hidden;
@@ -72,36 +72,36 @@
   overflow-y: auto;
 }
 
-.news-image {
+.sp-news-image {
   width: 100%;
   height: 15vh;
   object-fit: cover;
 }
 
-.news-content {
+.sp-news-content {
   padding: 2%;
 }
 
-.news-title {
+.sp-news-title {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
-.news-date {
+.sp-news-date {
   font-size: 12px;
   color: #666;
   margin-bottom: 8px;
 }
 
-.news-description {
+.sp-news-description {
   font-size: 14px;
   line-height: 1.4;
   color: #333;
 }
 
 /* Missing Pets Styles */
-.missing-pet-card {
+.sp-missing-pet-card {
   background: #fff4f4;
   border-radius: 8px;
   overflow: visible;
@@ -109,13 +109,13 @@
   height: auto;
 }
 
-.missing-pet-image {
+.sp-missing-pet-image {
   width: 100%;
   height: 18vh;
   object-fit: cover;
 }
 
-.missing-pet-info {
+.sp-missing-pet-info {
   padding: 2%;
   display: flex;
   flex-direction: column;
@@ -123,20 +123,20 @@
   height: auto;
 }
 
-.missing-pet-name {
+.sp-missing-pet-name {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 8px;
   color: #d32f2f;
 }
 
-.missing-pet-since {
+.sp-missing-pet-since {
   font-size: 14px;
   margin-bottom: 8px;
   color: #333;
 }
 
-.missing-pet-reward {
+.sp-missing-pet-reward {
   font-size: 14px;
   color: #d32f2f;
   font-weight: bold;
@@ -144,79 +144,79 @@
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-  .side-panels {
+  .sp-side-panels {
     width: min(280px, 30vw);
     right: 1.5%;
   }
   
-  .panel-content.expanded {
+  .sp-panel-content.expanded {
     max-height: 100vh;
   }
   
-  .news-card {
+  .sp-news-card {
     max-height: 28vh;
   }
   
-  .news-image {
+  .sp-news-image {
     height: 14vh;
   }
   
-  .missing-pet-image {
+  .sp-missing-pet-image {
     height: 16vh;
   }
   
-  .news-content,
-  .missing-pet-info {
+  .sp-news-content,
+  .sp-missing-pet-info {
     padding: 10px;
   }
 }
 
 @media (max-width: 768px) {
-  .side-panels {
+  .sp-side-panels {
     width: min(250px, 35vw);
     right: 1%;
     top: 8vh;
   }
   
-  .panel {
+  .sp-panel {
     padding: 1.5%;
   }
   
-  .panel-content.expanded {
+  .sp-panel-content.expanded {
     max-height: 120vh;
   }
   
-  .news-image {
+  .sp-news-image {
     height: 12vh;
   }
   
-  .missing-pet-image {
+  .sp-missing-pet-image {
     height: 14vh;
   }
   
-  .news-card {
+  .sp-news-card {
     max-height: 25vh;
   }
   
-  .news-content,
-  .missing-pet-info {
+  .sp-news-content,
+  .sp-missing-pet-info {
     padding: 8px;
   }
   
-  .news-title,
-  .missing-pet-name {
+  .sp-news-title,
+  .sp-missing-pet-name {
     font-size: 15px;
   }
   
-  .news-description,
-  .missing-pet-since,
-  .missing-pet-reward {
+  .sp-news-description,
+  .sp-missing-pet-since,
+  .sp-missing-pet-reward {
     font-size: 13px;
   }
 }
 
 @media (max-width: 480px) {
-  .side-panels {
+  .sp-side-panels {
     position: relative;
     width: 100%;
     right: 0;
@@ -224,39 +224,39 @@
     padding: 1%;
   }
   
-  .panel {
+  .sp-panel {
     margin-bottom: 2vh;
   }
   
-  .panel-content.expanded {
+  .sp-panel-content.expanded {
     max-height: none;
   }
   
-  .news-card {
+  .sp-news-card {
     max-height: none;
   }
   
-  .news-image {
+  .sp-news-image {
     height: 20vh;
   }
   
-  .missing-pet-image {
+  .sp-missing-pet-image {
     height: 22vh;
   }
   
-  .news-content,
-  .missing-pet-info {
+  .sp-news-content,
+  .sp-missing-pet-info {
     padding: 12px;
   }
   
-  .news-title,
-  .missing-pet-name {
+  .sp-news-title,
+  .sp-missing-pet-name {
     font-size: 16px;
   }
   
-  .news-description,
-  .missing-pet-since,
-  .missing-pet-reward {
+  .sp-news-description,
+  .sp-missing-pet-since,
+  .sp-missing-pet-reward {
     font-size: 14px;
   }
 } 

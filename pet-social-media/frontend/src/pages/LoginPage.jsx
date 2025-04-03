@@ -42,59 +42,63 @@ function LoginPage() {
   };
 
   return (
-    <div className="login-page">
-      <div className="login-container">
-        <div className="grass-background">
-          <div className="dog-illustration"></div>
+    <div className="lg-login-page">
+      <div className="lg-login-container">
+        <div className="lg-grass-background">
+          <div className="lg-dog-illustration"></div>
         </div>
-        <div className="login-form">
+        <div className="lg-login-form">
           <h2>Sign up</h2>
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label>Email address</label>
+            <div className="lg-form-group">
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
+                id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
               />
             </div>
-            <div className="form-group">
-              <label>Username</label>
+            <div className="lg-form-group">
+              <label htmlFor="username">Username</label>
               <input
                 type="text"
+                id="username"
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
                 required
               />
             </div>
-            <div className="form-group">
-              <label>Password</label>
-              <div className="password-input">
+            <div className="lg-form-group">
+              <label htmlFor="password">Password</label>
+              <div className="lg-password-input">
                 <input
                   type={showPassword ? "text" : "password"}
+                  id="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   required
                 />
-                <label className="show-password">
+                <label className="lg-show-password">
                   <input
                     type="checkbox"
                     checked={showPassword}
                     onChange={() => setShowPassword(!showPassword)}
                   />
-                  Show password
+                  Show Password
                 </label>
               </div>
             </div>
-            <div className="form-group">
-              <label>Retype Password</label>
-              <div className="password-input">
+            <div className="lg-form-group">
+              <label htmlFor="retypePassword">Retype Password</label>
+              <div className="lg-password-input">
                 <input
                   type={showPassword ? "text" : "password"}
+                  id="retypePassword"
                   name="retypePassword"
                   value={formData.retypePassword}
                   onChange={handleChange}
@@ -102,7 +106,7 @@ function LoginPage() {
                 />
               </div>
             </div>
-            <button type="submit" className="signup-button">
+            <button type="submit" className="lg-signup-button">
               Sign up →
             </button>
           </form>
