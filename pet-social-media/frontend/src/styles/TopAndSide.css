@@ -42,6 +42,13 @@
     cursor: pointer;
 }
 
+/* Search Container */
+.ts-search-container {
+    position: relative;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
 /* Search Bar */
 .ts-search-bar {
     position: absolute;
@@ -72,6 +79,109 @@
 .ts-search-icon {
     width: 20px;
     height: 20px;
+}
+
+/* Sidebar Styles */
+.ts-sidebar {
+    background-color: #9DD8EA;
+    color: black;
+    padding: 40px 10px 20px;
+    width: 70px;
+    height: calc(100vh - 60px);
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    top: 60px;
+    left: 0;
+}
+
+.ts-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+}
+
+.ts-sidebar li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.ts-nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-weight: 500;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.ts-nav-icon {
+    width: 30px;
+    height: 30px;
+    transition: all 0.3s ease;
+}
+
+.ts-nav-link:hover {
+    color: #646cff;
+    transform: translateY(-2px);
+}
+
+.ts-nav-link:hover .ts-nav-icon {
+    transform: scale(1.1);
+}
+
+.ts-sidebar-footer {
+    margin-top: auto;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.ts-logout-link {
+    color: #dc3545;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+    padding: 5px 0;
+    margin-bottom: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.ts-logout-link:hover {
+    color: #dc3545;
+}
+
+.ts-logout-link:hover .ts-nav-icon {
+    color: #dc3545;
+    transform: scale(1.1);
 }
 
 /* Popup styles */
@@ -134,132 +244,28 @@
     background-color: #bbb;
 }
 
-/* Sidebar Styles */
-.ts-sidebar {
-    background-color: #9DD8EA; 
-    color: black;
-    padding: 40px 10px 20px;
-    width: 70px;
-    height: calc(100vh - 60px);
-    display: flex;
-    position: fixed; 
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    top: 60px;
-    left: 0;
-}
-
-.ts-sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    flex: 1;
-}
-
-.ts-sidebar li {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-}
-
-.ts-nav-link {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    justify-content: center;
-    color: black;
-    font-weight: 500;
-    font-size: 12px;
-    text-align: center;
-    text-decoration: none;
-    gap: 10px; 
-    transition: all 0.3s ease;
-}
-
-.ts-nav-icon {
-    width: 30px;
-    height: 30px;
-    transition: all 0.3s ease;
-}
-
-.ts-nav-link:hover {
-    color: #646cff;
-    transform: translateY(-2px);
-}
-
-.ts-nav-link:hover .ts-nav-icon {
-    transform: scale(1.1);
-}
-
-<<<<<<< HEAD
-.ts-sidebar-footer {
-    margin-top: auto;
-    padding-top: 10px;
-    padding-bottom: 40px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.ts-logout-link {
-    color: #dc3545;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    width: 100%;
-    padding: 5px 0;
-    margin-bottom: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-.ts-logout-link:hover {
-    color: #dc3545;
-}
-
-.ts-logout-link:hover .ts-nav-icon {
-    color: #dc3545;
-    transform: scale(1.1);
-}
-
 /* Content Styles */
 .ts-content {
-=======
-.sidebar .profile-image {
-    width: 50px; 
-    height: 50px; 
-    border-radius: 50%; 
-    border: 2px solid black; 
-    object-fit: cover;
-    display: block !important; /* Ensures it is always visible */
-    position: relative; /* Avoids any conflicting positioning */
-    z-index: 10; /* Makes sure it's not hidden behind other elements */
-}
-
-
-.content {
->>>>>>> main
     flex-grow: 1;
     padding: 80px 70px 20px;
     background-color: #E8FAFF;
     overflow-y: auto;
     margin-left: 70px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .ts-sidebar {
+        width: 70px;
+    }
+    .ts-content {
+        padding: 80px 20px;
+        margin-left: 70px;
+    }
+    .ts-topbar {
+        padding: 10px;
+        height: 50px;
+    }
 }
 
 /* Login Page Specific Styles */
@@ -287,21 +293,6 @@ html, body {
     display: flex;
     flex: 1;
     margin-top: 0;
-}
-
-/* Responsiveness */
-@media (max-width: 768px) {
-    .ts-sidebar {
-        width: 70px;
-    }
-    .ts-content {
-        padding: 80px 20px;
-        margin-left: 70px;
-    }
-    .ts-topbar {
-        padding: 10px;
-        height: 50px;
-    }
 }
 
 /* Remove these special chat-link styles as they're now redundant */

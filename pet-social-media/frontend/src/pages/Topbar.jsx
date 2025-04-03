@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import AddPetModal from './AddPetModal';
 import { FiPlusCircle } from 'react-icons/fi';
 
-
 function TopBar({ pets, setPets, setActivePet }) {
   const [query, setQuery] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -18,51 +17,47 @@ function TopBar({ pets, setPets, setActivePet }) {
   };
 
   return (
-    <div className="topbar">
-      <div className="left-content">
-        <h1 className="logo">Pet-igree</h1>
+    <div className="ts-topbar">
+      <div className="ts-left-content">
+        <h1 className="ts-logo">Pet-igree</h1>
         {pets.map((pet, index) => (
-  <button
-    key={index}
-    className="profile-link"
-    onClick={() =>
-      setActivePet({
-        ...pet,
-        onHealthUpdate: (field, value) => {
-          const updated = pets.map((p) =>
-            p.name === pet.name ? { ...p, [field]: value } : p
-          );
-          setPets(updated);
-          setActivePet((prev) => ({ ...prev, [field]: value }));
-        },
-      })
-    }
-  >
-    <img src={pet.image} alt={pet.name} className="profile-image" />
-  </button>
-))}
+          <button
+            key={index}
+            className="profile-link"
+            onClick={() =>
+              setActivePet({
+                ...pet,
+                onHealthUpdate: (field, value) => {
+                  const updated = pets.map((p) =>
+                    p.name === pet.name ? { ...p, [field]: value } : p
+                  );
+                  setPets(updated);
+                  setActivePet((prev) => ({ ...prev, [field]: value }));
+                },
+              })
+            }
+          >
+            <img src={pet.image} alt={pet.name} className="ts-profile-image" />
+          </button>
+        ))}
 
-
-
-        <div className="plus-icon" onClick={() => setIsPopupOpen(true)}>
+        <div className="ts-plus-icon" onClick={() => setIsPopupOpen(true)}>
           <FiPlusCircle size={36} />
         </div>
-
       </div>
-      <div className="search-container">
+      <div className="ts-search-container">
         <input
           type="text"
           placeholder="Search..."
-          className="search-bar"
+          className="ts-search-bar"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button className="search-button" onClick={handleSearch}>
-          <img src="/search.png" alt="Search" className="search-icon" />
+        <button className="ts-search-button" onClick={handleSearch}>
+          <img src="/search.png" alt="Search" className="ts-search-icon" />
         </button>
       </div>
 
-      {/* ✅ AddPetModal */}
       {isPopupOpen && (
         <AddPetModal
           onClose={() => setIsPopupOpen(false)}

@@ -1,29 +1,72 @@
 // src/pages/Sidebar.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/TopAndSide.css'; 
-import { useUser } from '../UserContext'; // ✅ correct relative path
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { FaHome, FaCheckCircle, FaComments, FaShoppingBag, FaCog, FaUser, FaSignOutAlt } from 'react-icons/fa';
+import { TbBinaryTree } from 'react-icons/tb';
+import { useUser } from '../UserContext';
+import '../styles/TopAndSide.css';
 
 function Sidebar() {
-  const { profileImage } = useUser(); // ✅ get it from context
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/login';
+  const { profileImage } = useUser();
+
+  const handleLogout = () => {
+    navigate('/login');
+  };
 
   return (
-    <div className="sidebar">
-      <Link to="/profile">
-        <img
-          src={profileImage || "/linkedGirl.jpg"} // ✅ fallback image
-          alt="Profile"
-          className="profile-image"
-        />
-      </Link>
-      <ul>
-        <li><Link to="/"><img src="/home.png" alt="Home" className="nav-icon" /> Home</Link></li>
-        <li><Link to="/pedigree"><img src="/checkcircle.png" alt="Pedigree" className="nav-icon" /> Pedigree</Link></li>
-        <li><Link to="/post"><img src="/home.png" alt="Post" className="nav-icon" /> Post</Link></li>
-        <li><Link to="/alert"><img src="/heart.png" alt="Alert" className="nav-icon" /> Alert</Link></li>
-        <li><Link to="/petshop"><img src="/bag.png" alt="Pet Shop" className="nav-icon" /> Pet Shop</Link></li>
-        <li><Link to="/settings"><img src="/settings.png" alt="Settings" className="nav-icon" /> Settings</Link></li>
-      </ul>
+    <div className="ts-sidebar">
+      {!isLoginPage && (
+        <>
+          <Link to="/profile">
+            <img
+              src={profileImage}
+              alt="Profile"
+              className="ts-profile-image"
+            />
+          </Link>
+          <ul>
+            <li>
+              <Link to="/" className="ts-nav-link">
+                <FaHome className="ts-nav-icon" />
+                <span>Home</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/pedigree" className="ts-nav-link">
+                <TbBinaryTree className="ts-nav-icon" />
+                <span>Pedigree</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/messages" className="ts-nav-link">
+                <FaComments className="ts-nav-icon" />
+                <span>Messages</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/petshop" className="ts-nav-link">
+                <FaShoppingBag className="ts-nav-icon" />
+                <span>Pet Shop</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/settings" className="ts-nav-link">
+                <FaCog className="ts-nav-icon" />
+                <span>Settings</span>
+              </Link>
+            </li>
+          </ul>
+          <div className="ts-sidebar-footer">
+            <button onClick={handleLogout} className="ts-nav-link ts-logout-link">
+              <FaSignOutAlt className="ts-nav-icon" />
+              <span>Logout</span>
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }
