@@ -73,6 +73,7 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
     <FaEdit />
   </button>
 )}
+
 {/* Header */}
 <div className="pet-header">
   <div className="pet-image-column">
@@ -738,7 +739,7 @@ style.innerHTML =  `
     background: #d7f4ff;
     border-radius: 40px;
     width: 90%;
-    max-width: 500px;
+    max-width: 900px;
     max-height: 75vh;
     overflow-y: auto;
     padding: 30px 25px;
