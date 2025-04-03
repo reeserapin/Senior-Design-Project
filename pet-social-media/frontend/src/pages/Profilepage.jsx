@@ -549,6 +549,7 @@ const handleAddPet = (newPet) => {
         {activeFollowedPet && (
   <PetProfileModal
     pet={activeFollowedPet}
+    isFollowed={true}
     onClose={() => setActiveFollowedPet(null)}
     editable={false}
     posts={postImages.map((images, index) => ({
@@ -558,6 +559,7 @@ const handleAddPet = (newPet) => {
     }))}
   />
 )}
+
 
 
 
@@ -596,8 +598,8 @@ export default ProfilePage;
 
 /* Embedded CSS */
 const style = document.createElement('style');
-style.innerHTML =  `
 
+style.innerHTML =  `
 /* General Profile Page Layout */
 .profile-container {
   display: flex;

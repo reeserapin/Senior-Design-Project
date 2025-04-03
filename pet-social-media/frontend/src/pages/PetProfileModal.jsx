@@ -11,12 +11,18 @@ import { FaSmile } from "react-icons/fa";
 import { MdAddAPhoto } from "react-icons/md";
 import { FaTree } from "react-icons/fa6";
 import { BsHouseHeartFill } from "react-icons/bs";
+import { RiUserFollowLine } from "react-icons/ri";
 
-
-
-
-const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditButton = false, onToggleEdit }) => {
+const PetProfileModal = ({ pet, 
+  onClose, 
+  editable = false, 
+  posts = [], 
+  showEditButton = false, 
+  onToggleEdit,
+  isFollowed = false  // Add isFollowed here with a default value if desired
+}) => {
   if (!pet) return null;
+  
 
   const {
     name = "Unknown",
@@ -76,45 +82,51 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
 {/* Header */}
 <div className="pet-header">
   <div className="pet-image-column">
-    <div className="pet-image-wrapper">
-      <img className="pet-image" src={image} alt={name} />
-      {editable && (
-        <div
-          className="upload-overlay-pet"
-          onClick={() =>
-            document.getElementById("pet-photo-input").click()
-          }
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "4px"
-            }}
-          >
-            <MdAddAPhoto size={24} />
-            <span className="upload-text"></span>
-          </div>
-          <input
-            type="file"
-            id="pet-photo-input"
-            accept="image/*"
-            style={{ display: "none" }}
-            onChange={(e) => {
-              const file = e.target.files[0];
-              if (file) {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                  onHealthUpdate("image", reader.result);
-                };
-                reader.readAsDataURL(file);
-              }
-            }}
-          />
-        </div>
-      )}
+  <div className="pet-image-wrapper">
+  {/* Only show badge if this pet is a followed pet */}
+  {isFollowed && (
+    <div className="following-badge">
+      <RiUserFollowLine /> Following
     </div>
+  )}
+
+  <img className="pet-image" src={image} alt={name} />
+  {editable && (
+    <div
+      className="upload-overlay-pet"
+      onClick={() => document.getElementById("pet-photo-input").click()}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "4px"
+        }}
+      >
+        <MdAddAPhoto size={24} />
+        <span className="upload-text"></span>
+      </div>
+      <input
+        type="file"
+        id="pet-photo-input"
+        accept="image/*"
+        style={{ display: "none" }}
+        onChange={(e) => {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              onHealthUpdate("image", reader.result);
+            };
+            reader.readAsDataURL(file);
+          }
+        }}
+      />
+    </div>
+  )}
+</div>
+
 
 
     <div className="pet-name-info-wrapper">
@@ -1288,6 +1300,19 @@ style.innerHTML =  `
     box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
   }
   
+.following-badge {
+  position: absolute;
+  top: 8px;    /* adjust as needed */
+  left: -120px; /* adjust as needed */
+  background-color: #ffffff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
   .pet-image-wrapper {
     position: relative;
     width: 150px;
