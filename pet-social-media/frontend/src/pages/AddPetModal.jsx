@@ -16,6 +16,8 @@ function AddPetModal({ onClose, onSave }) {
   const [phone, setPhone] = useState("");
   const [location, setLocation] = useState("");
   const [weight, setWeight] = useState("");
+  const [adoptionStatus, setAdoptionStatus] = useState("");
+
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -39,7 +41,9 @@ function AddPetModal({ onClose, onSave }) {
         phone,
         location,
         weight,
+        adoption_status: adoptionStatus, // 🆕 here
       });
+      
       
   };
   }
@@ -67,8 +71,8 @@ function AddPetModal({ onClose, onSave }) {
       <div className="form-section">
         <input type="text" placeholder="Pet Name" value={petName} onChange={(e) => setPetName(e.target.value)} />
         <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option><LuDog /> Dog</option>
-          <option><IoLogoOctocat /> Cat</option>
+          <option>Dog</option>
+          <option> Cat</option>
         </select>
         <input
             type="text"
@@ -92,6 +96,15 @@ function AddPetModal({ onClose, onSave }) {
         value={weight}
         onChange={(e) => setWeight(e.target.value)}
       />
+  <select
+    value={adoptionStatus}
+    onChange={(e) => setAdoptionStatus(e.target.value)}
+  >
+    <option value="">Select Adoption Status</option>
+    <option value="Fostering">Fostering</option>
+    <option value="Up for Adoption">Up for Adoption</option>
+    <option value="Part of My Family">Part of My Family</option>
+  </select>
 
       </div>
     </div>
