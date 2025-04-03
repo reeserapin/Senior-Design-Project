@@ -245,7 +245,6 @@ function ProfilePage({ pets, setPets }) {
     if (!newFollowState) {
       // Remove pet if unfollowed
       setFollowedPets((prev) => prev.filter((p) => p.name !== pet.name));
-      setActiveFollowedPet(null); // Optionally close modal
     } else {
       // Optionally add pet if followed back
       setFollowedPets((prev) => {

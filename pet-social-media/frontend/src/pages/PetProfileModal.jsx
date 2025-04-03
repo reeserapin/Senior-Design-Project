@@ -93,19 +93,29 @@ const PetProfileModal = ({
         {/* Header */}
         <div className="pet-header">
           <div className="pet-image-column">
-            <div className="pet-image-wrapper">
-              {/* Show follow badge if this pet is from the followed list */}
-              {isFollowed && (
-                <div className="following-badge" onClick={toggleFollow}>
-                  {followed ? (
-                    <>
-                      <RiUserFollowLine /> Following
-                    </>
-                  ) : (
-                    "Follow"
-                  )}
-                </div>
+          <div className="pet-image-wrapper">   
+
+          {typeof isFollowed === 'boolean' && (
+            <div
+              className="following-badge"
+              onClick={(e) => {
+                e.stopPropagation(); // ✅ Prevent modal close
+                toggleFollow();      // ✅ Toggle follow state only
+              }}
+            >
+              {followed ? (
+                <>
+                  <RiUserFollowLine /> Following
+                </>
+              ) : (
+                "Follow"
               )}
+            </div>
+          )}
+
+
+
+
               <img className="pet-image" src={image} alt={name} />
               {editable && (
                 <div
@@ -560,7 +570,6 @@ const PetProfileModal = ({
     </div>
   );
 };
-
 export default PetProfileModal;
 
 
