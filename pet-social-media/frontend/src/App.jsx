@@ -7,12 +7,13 @@ import PedigreePage from './pages/Pedigreepage';
 import PetShopPage from './pages/PetShoppage';
 import ProfilePage from './pages/Profilepage';
 import SettingsPage from './pages/Settingspage';
+import LoginPage from './pages/LoginPage';
 import PetProfileModal from './pages/PetProfileModal';
 
 const captions = [
   "Caught mid-zoomies! 🐾", "New trick unlocked ✨", "This face = instant treat 🎯",
-  "Snuggle mode: activated 😴", "Who wore it best? 🎉", "Say “cheese!” 📸",
-  "Just vibin’ in the sun ☀️", "Someone’s ready for walkies 🐕", "That look when it’s treat time 👀",
+  "Snuggle mode: activated 😴", "Who wore it best? 🎉", "Say cheese! 📸",
+  "Just vibin' in the sun ☀️", "Someone's ready for walkies 🐕", "That look when it's treat time 👀",
   "Besties forever 🐶🐱", "Meow or never 😼", "Weekend energy 💥",
   "Party animal alert 🎈", "Fetch? More like fashion! 💁‍♀️", "Snow day adventures ❄️",
   "The grass is paw-some 🌱", "Tongue out Tuesday 😋", "Too cute to handle 💖",
@@ -24,7 +25,6 @@ const postImages = [
   ["https://placedog.net/500/300?id=4", "https://placedog.net/500/300?id=5", "https://placedog.net/500/300?id=6"],
   ["https://placedog.net/500/300?id=7", "https://placedog.net/500/300?id=8", "https://placedog.net/500/300?id=9"],
   ["https://placedog.net/500/300?id=10", "https://placedog.net/500/300?id=11", "https://placedog.net/500/300?id=12"],
-  // Add more if needed...
 ];
 
 const generatePostDate = (index) => {
@@ -71,7 +71,7 @@ function App() {
           setPets={setPets}
           setActivePet={(pet) => {
             setActivePet(pet);
-            setEditable(false); // reset to view mode
+            setEditable(false);
           }}
         />
 
@@ -79,6 +79,7 @@ function App() {
           <Sidebar />
           <div className="content">
             <Routes>
+              <Route path="/login" element={<LoginPage />} />
               <Route path="/" element={<HomePage />} />
               <Route
                 path="/profile"
@@ -97,7 +98,6 @@ function App() {
           </div>
         </div>
 
-        {/* ✅ Global Modal for Pet Profile */}
         {activePet && (
           <PetProfileModal
             pet={{
