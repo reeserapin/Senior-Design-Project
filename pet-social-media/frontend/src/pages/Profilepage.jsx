@@ -47,12 +47,57 @@ const captions = [
 
 const postImages = [
   [
-    "https://www.warrenphotographic.co.uk/photography/bigs/44826-Blue-point-Birman-cross-cat-and-Goldendoodle-puppy-white-background.jpg",
-    "https://images.squarespace-cdn.com/content/v1/5b5499a13c3a53487c250d73/1548212711672-14PLK00UM15YHKBXHOWK/golden2.jpg",
-    "https://preview.redd.it/anyones-else-doodle-think-hes-a-soccer-play-he-uses-his-v0-8geu6iyc3n9b1.jpg?width=640&crop=smart&auto=webp&s=da46ffc4ec1a641af6f877bbf85f1934faf58fb5",
+    "https://placedog.net/500/300?id=100",
+    "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg",
+    "https://placedog.net/500/300?id=101"
   ],
-  // ... other postImages arrays
+  [
+    "https://cdn2.thecatapi.com/images/c3h.jpg",
+    "https://placedog.net/500/300?id=102",
+    "https://cdn2.thecatapi.com/images/bpc.jpg"
+  ],
+  [
+    "https://placedog.net/500/300?id=103",
+    "https://cdn2.thecatapi.com/images/4uv.jpg",
+    "https://placedog.net/500/300?id=104"
+  ],
+  [
+    "https://cdn2.thecatapi.com/images/MTg0NjE3OQ.jpg",
+    "https://placedog.net/500/300?id=105",
+    "https://cdn2.thecatapi.com/images/2oo.jpg"
+  ],
+  [
+    "https://placedog.net/500/300?id=106",
+    "https://cdn2.thecatapi.com/images/bbi.jpg",
+    "https://placedog.net/500/300?id=107"
+  ],
+  [
+    "https://cdn2.thecatapi.com/images/4ui.jpg",
+    "https://placedog.net/500/300?id=108",
+    "https://cdn2.thecatapi.com/images/dqh.jpg"
+  ],
+  [
+    "https://placedog.net/500/300?id=109",
+    "https://cdn2.thecatapi.com/images/c8s.jpg",
+    "https://placedog.net/500/300?id=110"
+  ],
+  [
+    "https://cdn2.thecatapi.com/images/8as.jpg",
+    "https://placedog.net/500/300?id=111",
+    "https://cdn2.thecatapi.com/images/9j5.jpg"
+  ],
+  [
+    "https://placedog.net/500/300?id=112",
+    "https://cdn2.thecatapi.com/images/MTU5MTM5Nw.jpg",
+    "https://placedog.net/500/300?id=113"
+  ],
+  [
+    "https://cdn2.thecatapi.com/images/e36.jpg",
+    "https://placedog.net/500/300?id=114",
+    "https://cdn2.thecatapi.com/images/9fl.jpg"
+  ]
 ];
+
 
 // Define initial followed pets array
 const initialFollowedPets = [
