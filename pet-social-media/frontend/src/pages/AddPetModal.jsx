@@ -1,11 +1,20 @@
-// components/AddPetModal.jsx
 import React, { useState } from "react";
-import { FiPlusCircle } from 'react-icons/fi';
-
+import { MdAddAPhoto } from "react-icons/md";
+import { LuDog } from "react-icons/lu";
+import { IoLogoOctocat } from "react-icons/io5";
 
 function AddPetModal({ onClose, onSave }) {
   const [imagePreview, setImagePreview] = useState(null);
   const [petName, setPetName] = useState("");
+  const [age, setAge] = useState("");
+  const [breed, setBreed] = useState("");
+  const [type, setType] = useState("Dog");
+  const [gender, setGender] = useState("Female");
+  const [size, setSize] = useState("Medium");
+  const [about, setAbout] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [location, setLocation] = useState("");
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -16,56 +25,70 @@ function AddPetModal({ onClose, onSave }) {
 
   const handleSave = () => {
     if (petName && imagePreview) {
-      onSave({ name: petName, image: imagePreview });
+      onSave({
+        name: petName,
+        image: imagePreview,
+        age,
+        breed,
+        type,
+        gender,
+        size,
+        about,
+        email,
+        phone,
+        location,
+      });
       handleClose();
     }
   };
-  
 
   const handleClose = () => {
-    setPetName("");
-    setImagePreview(null);
     onClose();
   };
-  
 
   return (
-    <div className="add-pet-modal-overlay" onClick={onClose}>
-      <div className="add-pet-modal" onClick={(e) => e.stopPropagation()}>
-        <h2>Add New Pet</h2>
-        <div className="add-pet-form">
-          <input
-            type="text"
-            placeholder="Enter pet name"
-            value={petName}
-            onChange={(e) => setPetName(e.target.value)}
-          />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-        </div>
-
-        {/* 👇 PREVIEW IMAGE */}
-        {imagePreview && (
-            <div className="image-preview">
-              <img src={imagePreview} alt="Pet Preview" />
-            </div>
+   <div className="add-pet-modal-overlay" onClick={onClose}>
+  <div className="add-pet-modal" onClick={(e) => e.stopPropagation()}>
+    <h2>Add a New Pet</h2>
+    <div className="modal-content">
+      <div className="image-section">
+        <label className="image-upload">
+          {imagePreview ? (
+            <img src={imagePreview} alt="Preview" className="pet-preview" />
+          ) : (
+            <MdAddAPhoto size={30} className="upload-icon" />
           )}
+          <input type="file" accept="image/*" onChange={handleImageChange} />
+        </label>
+      </div>
 
+      <div className="form-section">
+        <input type="text" placeholder="Pet Name" value={petName} onChange={(e) => setPetName(e.target.value)} />
+        <select value={type} onChange={(e) => setType(e.target.value)}>
+          <option><LuDog /> Dog</option>
+          <option><IoLogoOctocat /> Cat</option>
+        </select>
+        <input type="text" placeholder="Age" />
+            <select value={type} onChange={(e) => setType(e.target.value)}>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+        <input type="text" placeholder="Breed" />
+        <input type="text" placeholder="Weight" />
+      </div>
+    </div>
 
-        <div className="modal-buttons">
-        <button className="cancel" onClick={handleClose}>✕</button>
-        <button className="save" onClick={handleSave} disabled={!petName || !imagePreview}>✓</button>
-
-        </div>
+    <div className="modal-buttons">
+      <button className="cancel" onClick={handleClose}>✕</button>
+      <button className="save" onClick={handleSave} disabled={!petName || !imagePreview}>✓</button>
+    </div>
       </div>
     </div>
   );
 }
 
 export default AddPetModal;
+
 
 
 /* Embedded CSS */
@@ -76,10 +99,10 @@ style.innerHTML = `
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(100, 100, 100, 0.4);
-  backdrop-filter: blur(3px);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,53 +110,101 @@ style.innerHTML = `
 }
 
 .add-pet-modal {
-  background-color: #c0ebff;
-  padding: 40px;
-  border-radius: 40px;
-  width: 500px;
-  max-width: 90%;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  background: #c0ebff;
+  padding: 30px;
+  border-radius: 30px;
+  width: 750px;
+  max-width: 95%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-.add-pet-modal h2 {
-  margin-bottom: 20px;
-  color: #222;
-  font-size: 24px;
-  font-weight: 600;
+.modal-content {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
 }
 
-.add-pet-form {
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-upload {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #e0f7fa;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.image-upload:hover {
+  background-color: #b3ecf5;
+}
+
+.image-upload input[type="file"] {
+  display: none;
+}
+
+.pet-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.upload-icon {
+  color: black;
+  font-size: 32px;
+}
+
+.form-section {
+  flex: 2;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
-.add-pet-modal input[type="text"] {
+.form-section input,
+.form-section select,
+.form-section textarea {
+  padding: 12px 16px;
+  border-radius: 20px;
+  border: 1px solid #aaa;
+  font-size: 15px;
   width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+  max-width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  background: white;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.add-pet-modal input[type="file"] {
-  width: 100%;
-  padding: 6px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  background-color: white;
-  font-size: 14px;
-  cursor: pointer;
-  margin-bottom: 20px
+
+.form-section input:focus,
+.form-section select:focus,
+.form-section textarea:focus {
+  border-color: #56cfe1;
+  outline: none;
+  box-shadow: 0 0 5px #a2e3f5;
+}
+
+textarea {
+  min-height: 60px;
 }
 
 .modal-buttons {
   display: flex;
   justify-content: center;
+  margin-top: 25px;
   gap: 40px;
-  margin-top: 20px;
 }
 
 .cancel,
@@ -164,53 +235,6 @@ style.innerHTML = `
   background-color: #ddd;
   cursor: not-allowed;
 }
-
-.post-icons {
-  display: flex;
-  gap: 12px;
-}
-
-.icon-button {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
-}
-
-.icon-button:hover {
-  background-color: #f0f0f0;
-}
-
-.icon-button:active {
-  transform: scale(0.95);
-}
-
-.image-preview {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: 20px auto;
-  background-color: #e0f7fa;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  display: block; /* ensure it's treated like a block container */
-  position: relative;
-}
-
-.image-preview img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
 `;
 
 document.head.appendChild(style);

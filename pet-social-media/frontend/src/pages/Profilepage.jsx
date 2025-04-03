@@ -8,7 +8,7 @@ import PetProfileModal from "./PetProfileModal";
 import Posts from "./Posts";
 import { MdAddAPhoto } from "react-icons/md";
 import { useUser } from '../UserContext';
-import { FiPlusCircle } from "react-icons/fi"; 
+import { GiCrossedBones } from "react-icons/gi";
 
 
 const generatePostDate = (index) => {
@@ -355,7 +355,7 @@ const handleAddPet = (newPet) => {
   <div className="your-pets-header">
     <h2>Your Pets</h2>
     <button className="add-pet-inline" onClick={() => setShowAddModal(true)}>
-      <FiPlusCircle size={28} />
+    <GiCrossedBones size={28} style={{ transform: 'rotate(90deg)' }} />
     </button>
   </div>
 
