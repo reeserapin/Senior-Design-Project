@@ -687,7 +687,7 @@ style.innerHTML =  `
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     width: 100%;
-    max-width: 240px;
+    margin-right: 90px;
   }
 
   .pet-info-box {
