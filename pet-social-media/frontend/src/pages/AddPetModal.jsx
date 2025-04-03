@@ -15,6 +15,7 @@ function AddPetModal({ onClose, onSave }) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [location, setLocation] = useState("");
+  const [weight, setWeight] = useState("");
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -37,10 +38,11 @@ function AddPetModal({ onClose, onSave }) {
         email,
         phone,
         location,
+        weight,
       });
-      handleClose();
-    }
+      
   };
+  }
 
   const handleClose = () => {
     onClose();
@@ -68,13 +70,29 @@ function AddPetModal({ onClose, onSave }) {
           <option><LuDog /> Dog</option>
           <option><IoLogoOctocat /> Cat</option>
         </select>
-        <input type="text" placeholder="Age" />
+        <input
+            type="text"
+            placeholder="Age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+          />
             <select value={type} onChange={(e) => setType(e.target.value)}>
               <option>Male</option>
               <option>Female</option>
             </select>
-        <input type="text" placeholder="Breed" />
-        <input type="text" placeholder="Weight" />
+            <input
+              type="text"
+              placeholder="Breed"
+              value={breed}
+              onChange={(e) => setBreed(e.target.value)}
+            />
+        <input
+        type="text"
+        placeholder="Weight"
+        value={weight}
+        onChange={(e) => setWeight(e.target.value)}
+      />
+
       </div>
     </div>
 
@@ -186,7 +204,6 @@ style.innerHTML = `
   background: white;
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.05);
 }
-
 
 .form-section input:focus,
 .form-section select:focus,
