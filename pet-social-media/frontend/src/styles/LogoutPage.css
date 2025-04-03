@@ -1,0 +1,122 @@
+.logout-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E8FAFF;
+    padding: 20px;
+}
+
+.logout-container {
+    display: flex;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 800px;
+    height: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.grass-background {
+    flex: 1;
+    background: linear-gradient(to bottom, #9DD8EA 0%, #84BC41 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.grass-background::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: url('/grass-pattern.png') repeat;
+    background-size: 200px;
+    opacity: 0.3;
+}
+
+.dog-illustration {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url('/dog-illustration.png') no-repeat center;
+    background-size: contain;
+}
+
+.logout-form {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.logout-form h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.logout-form p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.cancel-button, .logout-button {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancel-button {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.cancel-button:hover {
+    background-color: #eee;
+}
+
+.logout-button {
+    background-color: #099EC8;
+    color: white;
+    border: none;
+}
+
+.logout-button:hover {
+    background-color: #0789ac;
+}
+
+@media (max-width: 768px) {
+    .logout-container {
+        flex-direction: column;
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+    }
+
+    .grass-background {
+        height: 200px;
+    }
+
+    .logout-form {
+        padding: 30px 20px;
+    }
+} 

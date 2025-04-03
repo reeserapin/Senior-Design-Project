@@ -199,10 +199,6 @@
     transform: scale(1.1);
 }
 
-.chat-link:hover .chat-icon {
-    color: #4a90e2;
-}
-
 .sidebar-footer {
     margin-top: auto;
     padding-top: 10px;
@@ -225,23 +221,37 @@
     width: 100%;
     padding: 5px 0;
     margin-bottom: 10px;
-}
-
-
-.logout-link:hover .nav-icon {
-    color: #dc3545;
-}
-
-.logout-link span {
+    background: none;
+    border: none;
+    cursor: pointer;
     font-size: 12px;
     font-weight: 500;
 }
 
+.logout-link:hover {
+    color: #dc3545;
+}
+
+.logout-link:hover .nav-icon {
+    color: #dc3545;
+    transform: scale(1.1);
+}
+
+/* Content Styles */
 .content {
     flex-grow: 1;
-    padding: 80px 20px 20px;
+    padding: 80px 70px 20px;
     background-color: #E8FAFF;
     overflow-y: auto;
+    margin-left: 70px;
+}
+
+/* Login Page Specific Styles */
+.login-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
     margin-left: 70px;
 }
 
@@ -249,6 +259,18 @@
 html, body {
     overflow-x: hidden; 
     width: 100vw;
+}
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+    margin-top: 0;
 }
 
 /* Responsiveness */
@@ -266,20 +288,20 @@ html, body {
     }
 }
 
+/* Remove these special chat-link styles as they're now redundant */
 .chat-link {
-  position: relative;
-  transition: all 0.3s ease;
+    position: relative;
 }
 
 .chat-link:hover {
-  transform: translateX(5px);
+    transform: translateY(-2px);
 }
 
 .chat-icon {
-  transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .chat-link:hover .chat-icon {
-  transform: scale(1.1);
-  color: #4a90e2;
+    transform: scale(1.1);
+    color: #646cff;
 }

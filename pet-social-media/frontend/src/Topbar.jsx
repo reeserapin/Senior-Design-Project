@@ -1,38 +1,35 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './styles/TopAndSide.css';
 
 function TopBar() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/login';
   const [query, setQuery] = useState('');
-  const [isPopupOpen, setIsPopupOpen] = useState(false); // State to manage popup visibility
-  const [selectedImage, setSelectedImage] = useState(null); // State to store the selected image
-  const [catImages, setCatImages] = useState([]); // State to store all uploaded images
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [catImages, setCatImages] = useState([]);
 
   const handleSearch = () => {
-    // Implement your search functionality here
     alert(`Searching for: ${query}`);
   };
 
   const handleImageUpload = (e) => {
-    const file = e.target.files[0]; // Get the first file from the file input
+    const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setSelectedImage(reader.result); // Set the image preview as base64
+        setSelectedImage(reader.result);
       };
-      reader.readAsDataURL(file); // Convert the file to base64
+      reader.readAsDataURL(file);
     }
   };
 
   const handleAddImage = () => {
     if (selectedImage) {
-      // Add the uploaded image to the list of images
-      setCatImages((prevImages) => [
-        ...prevImages,
-        selectedImage,
-      ]);
-      setIsPopupOpen(false); // Close the popup after adding
-      setSelectedImage(null); // Clear the selected image state
+      setCatImages((prevImages) => [...prevImages, selectedImage]);
+      setIsPopupOpen(false);
+      setSelectedImage(null);
     } else {
       alert("Please select an image first.");
     }
@@ -42,36 +39,41 @@ function TopBar() {
     <div className="topbar">
       <div className="left-content">
         <h1 className="logo">Pet-igree</h1>
-        <Link to="/petprofile" className="profile-link">
-          <img src="/golden_retriever_pfp.jpg" alt="Profile" className="profile-image" />
-        </Link>
-        {catImages.map((image, index) => (
-          <Link to={`/petprofile/${index}`} key={index} className="profile-link">
-            <img src={image} alt={`Cat Profile ${index}`} className="profile-image" />
-          </Link>
-        ))}
-        <img
-          src="/pluscircle.png"
-          alt="Add"
-          className="plus-icon"
-          onClick={() => setIsPopupOpen(true)} // Open popup when clicked
-        />
+        {!isLoginPage && (
+          <>
+            <Link to="/petprofile" className="profile-link">
+              <img src="/golden_retriever_pfp.jpg" alt="Profile" className="profile-image" />
+            </Link>
+            {catImages.map((image, index) => (
+              <Link to={`/petprofile/${index}`} key={index} className="profile-link">
+                <img src={image} alt={`Cat Profile ${index}`} className="profile-image" />
+              </Link>
+            ))}
+            <img
+              src="/pluscircle.png"
+              alt="Add"
+              className="plus-icon"
+              onClick={() => setIsPopupOpen(true)}
+            />
+          </>
+        )}
       </div>
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="search-bar"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button className="search-button" onClick={handleSearch}>
-          <img src="/search.png" alt="Search" className="search-icon" />
-        </button>
-      </div>
+      {!isLoginPage && (
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="search-bar"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button className="search-button" onClick={handleSearch}>
+            <img src="/search.png" alt="Search" className="search-icon" />
+          </button>
+        </div>
+      )}
 
-      {/* Popup for adding cat image */}
-      {isPopupOpen && (
+      {!isLoginPage && isPopupOpen && (
         <div className="popup">
           <div className="popup-content">
             <h2>New Pet?</h2>
