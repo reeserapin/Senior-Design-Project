@@ -1,5 +1,107 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import AddPetModal from './AddPetModal';
+import { FiPlusCircle } from 'react-icons/fi';
+
+
+function TopBar({ pets, setPets, setActivePet }) {
+  const [query, setQuery] = useState('');
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handleSearch = () => {
+    alert(`Searching for: ${query}`);
+  };
+
+  const handleAddPet = (newPet) => {
+    setPets([...pets, newPet]);
+    setIsPopupOpen(false);
+  };
+
+  return (
+    <div className="topbar">
+      <div className="left-content">
+        <h1 className="logo">Pet-igree</h1>
+        {pets.map((pet, index) => (
+  <button
+    key={index}
+    className="profile-link"
+    onClick={() =>
+      setActivePet({
+        ...pet,
+        onHealthUpdate: (field, value) => {
+          const updated = pets.map((p) =>
+            p.name === pet.name ? { ...p, [field]: value } : p
+          );
+          setPets(updated);
+          setActivePet((prev) => ({ ...prev, [field]: value }));
+        },
+      })
+    }
+  >
+    <img src={pet.image} alt={pet.name} className="profile-image" />
+  </button>
+))}
+
+
+
+        <div className="plus-icon" onClick={() => setIsPopupOpen(true)}>
+          <FiPlusCircle size={36} />
+        </div>
+
+      </div>
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search..."
+          className="search-bar"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button className="search-button" onClick={handleSearch}>
+          <img src="/search.png" alt="Search" className="search-icon" />
+        </button>
+      </div>
+
+      {/* ✅ AddPetModal */}
+      {isPopupOpen && (
+        <AddPetModal
+          onClose={() => setIsPopupOpen(false)}
+          onSave={handleAddPet}
+        />
+      )}
+    </div>
+  );
+}
+
+export default TopBar;
+
+
+/* Embedded CSS */
+const style = document.createElement('style');
+style.innerHTML =  `
+
+.profile-link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 6px;
+  cursor: pointer;
+}
+
+.profile-link:focus {
+  outline: none;
+}
+
+.profile-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
 /* Topbar Styles */
-.ts-topbar {
+.topbar {
     background-color: #099EC8;
     color: white;
     padding: 10px 20px;
@@ -14,28 +116,27 @@
     z-index: 1000;
 }
 
-.ts-left-content {
+.left-content {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.ts-logo {
+.logo {
     font-size: 24px;
     font-weight: bold;
 }
 
 /* Profile Image */
-.ts-profile-image {
+.profile-image {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     margin: 5px;
-    border: 2px solid black;
 }
 
 /* Plus Icon */
-.ts-plus-icon {
+.plus-icon {
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -43,7 +144,7 @@
 }
 
 /* Search Bar */
-.ts-search-bar {
+.search-bar {
     position: absolute;
     right: 50px;
     top: 50%;
@@ -55,7 +156,7 @@
     transform: translateY(-50%);
 }
 
-.ts-search-button {
+.search-button {
     position: absolute;
     right: 50px;
     background: transparent;
@@ -64,18 +165,18 @@
     transform: translateY(-50%);
 }
 
-.ts-search-button:focus {
+.search-button:focus {
     outline: none;
     box-shadow: none; 
 }
 
-.ts-search-icon {
+.search-icon {
     width: 20px;
     height: 20px;
 }
 
 /* Popup styles */
-.ts-popup {
+.popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -90,7 +191,7 @@
     color: #000;
 }
 
-.ts-popup-content {
+.popup-content {
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -101,7 +202,7 @@
     width: 300px;
 }
 
-.ts-popup-input-file {
+.popup-input-file {
     padding: 10px;
     width: 100%;
     border-radius: 5px;
@@ -109,7 +210,7 @@
     cursor: pointer;
 }
 
-.ts-popup-button {
+.popup-button {
     padding: 10px 20px;
     background-color: #9DD8EA;
     color: white;
@@ -118,11 +219,11 @@
     cursor: pointer;
 }
 
-.ts-popup-button:hover {
+.popup-button:hover {
     background-color: #87bcd8;
 }
 
-.ts-popup-close {
+.popup-close {
     padding: 10px 20px;
     background-color: #ccc;
     border: none;
@@ -130,12 +231,12 @@
     cursor: pointer;
 }
 
-.ts-popup-close:hover {
+.popup-close:hover {
     background-color: #bbb;
 }
 
 /* Sidebar Styles */
-.ts-sidebar {
+.sidebar {
     background-color: #9DD8EA; 
     color: black;
     padding: 40px 10px 20px;
@@ -151,26 +252,22 @@
     left: 0;
 }
 
-.ts-sidebar ul {
-    list-style: none;
+.sidebar ul {
+    list-style: none; 
     padding: 0;
     margin: 0;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    flex: 1;
 }
 
-.ts-sidebar li {
+.sidebar li {
     display: flex;
     flex-direction: column; 
     align-items: center;
     justify-content: center;
-    margin: 0;
+    margin: 30px 0; 
 }
 
-.ts-nav-link {
+.sidebar a {
     display: flex;
     flex-direction: column; 
     align-items: center;
@@ -181,66 +278,29 @@
     text-align: center;
     text-decoration: none;
     gap: 10px; 
-    transition: all 0.3s ease;
 }
 
-.ts-nav-icon {
+.sidebar img,
+.sidebar .nav-icon {
     width: 30px;
     height: 30px;
-    transition: all 0.3s ease;
 }
 
-.ts-nav-link:hover {
+.sidebar .profile-image {
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    border: 2px solid black; 
+}
+
+.sidebar a:hover {
     color: #646cff;
-    transform: translateY(-2px);
 }
 
-.ts-nav-link:hover .ts-nav-icon {
-    transform: scale(1.1);
+.sidebar a.active {
+    color: #535bf2;
 }
 
-<<<<<<< HEAD
-.ts-sidebar-footer {
-    margin-top: auto;
-    padding-top: 10px;
-    padding-bottom: 40px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.ts-logout-link {
-    color: #dc3545;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    width: 100%;
-    padding: 5px 0;
-    margin-bottom: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-.ts-logout-link:hover {
-    color: #dc3545;
-}
-
-.ts-logout-link:hover .ts-nav-icon {
-    color: #dc3545;
-    transform: scale(1.1);
-}
-
-/* Content Styles */
-.ts-content {
-=======
 .sidebar .profile-image {
     width: 50px; 
     height: 50px; 
@@ -254,21 +314,11 @@
 
 
 .content {
->>>>>>> main
     flex-grow: 1;
-    padding: 80px 70px 20px;
+    padding: 80px 20px 20px; /* Increased top padding to avoid overlap */
     background-color: #E8FAFF;
     overflow-y: auto;
-    margin-left: 70px;
-}
-
-/* Login Page Specific Styles */
-.ts-login-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    margin-left: 70px;
+    margin-left: 80px;
 }
 
 /* Global Fixes */
@@ -277,47 +327,25 @@ html, body {
     width: 100vw;
 }
 
-.ts-app {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.ts-main-content {
-    display: flex;
-    flex: 1;
-    margin-top: 0;
-}
-
 /* Responsiveness */
 @media (max-width: 768px) {
-    .ts-sidebar {
-        width: 70px;
+    .sidebar {
+        width: 80px; 
     }
-    .ts-content {
+    .sidebar img,
+    .sidebar .nav-icon {
+        width: 40px;
+        height: 40px;
+    }
+    .content {
         padding: 80px 20px;
-        margin-left: 70px;
+        margin-left: 80px; 
     }
-    .ts-topbar {
+    .topbar {
         padding: 10px;
-        height: 50px;
+        height: 50px; 
     }
 }
 
-/* Remove these special chat-link styles as they're now redundant */
-.ts-chat-link {
-    position: relative;
-}
-
-.ts-chat-link:hover {
-    transform: translateY(-2px);
-}
-
-.ts-chat-icon {
-    transition: all 0.3s ease;
-}
-
-.ts-chat-link:hover .ts-chat-icon {
-    transform: scale(1.1);
-    color: #646cff;
-}
+`;
+document.head.appendChild(style); 

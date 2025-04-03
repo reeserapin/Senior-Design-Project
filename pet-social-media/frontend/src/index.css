@@ -66,3 +66,12 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+/* Global font styles */
+/* Global font */
+body {
+  font-family: 'McLaren', sans-serif;
+}
+.logo {
+  font-family: 'McLaren', cursive;
+}
