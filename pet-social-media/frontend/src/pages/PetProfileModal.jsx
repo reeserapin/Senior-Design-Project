@@ -36,7 +36,6 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
       pottyTrained: null,
     },
     favoriteActivities,
-    careRoutine,
     bio,
     galleryImages,
     adoptionStory,
@@ -445,25 +444,10 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
           </div>
         )}
 
-        {/* Care Routine */}
-{editable || careRoutine ? (
-  <div className="pet-profile-subsection care-box">
-    <h4>Care Routine</h4>
-    {editable ? (
-      <textarea
-        className="favorite-textarea"
-        defaultValue={careRoutine}
-        placeholder="Describe this pet's daily care needs..."
-        onBlur={(e) => onHealthUpdate("careRoutine", e.target.value)}
-      />
-    ) : (
-      <p>{careRoutine || "Not provided"}</p>
-    )}
-  </div>
-) : null}
 
 {/* 🆕 Extra Pet Info */}
 <div className="pet-profile-subsection extra-info-box">
+<h4>Care Information</h4>
 <div className="pet-profile-subsection">
 
   <div className="extra-info-fields">
@@ -560,23 +544,28 @@ const PetProfileModal = ({ pet, onClose, editable = false, posts = [], showEditB
     </div>
 
     {/* Lost Status */}
-    <div className="info-item">
-      <strong>Lost?</strong>
-      {editable ? (
-        <div className="toggle-options">
-          <button
-            className={pet.lost_status === true ? "selected red" : ""}
-            onClick={() => onHealthUpdate("lost_status", true)}
-          >Yes</button>
-          <button
-            className={pet.lost_status === false ? "selected green" : ""}
-            onClick={() => onHealthUpdate("lost_status", false)}
-          >No</button>
-        </div>
-      ) : (
-        <p>{pet.lost_status === true ? "Yes" : pet.lost_status === false ? "No" : "N/A"}</p>
-      )}
+    <div className="info-item lost-item">
+  <strong>Lost?</strong>
+  {editable ? (
+    <div className="toggle-options">
+      <button
+        className={pet.lost_status === true ? "selected red" : ""}
+        onClick={() => onHealthUpdate("lost_status", true)}
+      >
+        Yes
+      </button>
+      <button
+        className={pet.lost_status === false ? "selected green" : ""}
+        onClick={() => onHealthUpdate("lost_status", false)}
+      >
+        No
+      </button>
     </div>
+  ) : (
+    <p>{pet.lost_status === true ? "Yes" : pet.lost_status === false ? "No" : "N/A"}</p>
+  )}
+</div>
+
 
   </div>
 </div>
@@ -594,6 +583,27 @@ export default PetProfileModal;
 /* Embedded CSS */
 const style = document.createElement('style');
 style.innerHTML =  `
+/* Center the entire block for the lost-item */
+.lost-item {
+  text-align: center; 
+}
+
+/* If you want the buttons specifically centered in the row: */
+.lost-item .toggle-options {
+  justify-content: center;
+}
+
+
+.extra-info-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjust spacing between items as needed */
+}
+
+.extra-info-fields .info-item {
+  flex: 1 1 calc(50% - 20px); /* Two columns with a gap */
+}
+
 .edit-button {
     position: absolute;
     top: 20px;
@@ -1339,6 +1349,16 @@ style.innerHTML =  `
   box-sizing: border-box;
   font-size: 14px;
   background: white;
+}
+
+.extra-info-box {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 90%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
 
 
