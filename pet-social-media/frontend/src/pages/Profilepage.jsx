@@ -364,21 +364,22 @@ const handleAddPet = (newPet) => {
       {pets.map((pet, index) => (
         <div key={index} style={{ textAlign: "center" }}>
           <button
-  className="pet-button"
-  onClick={() =>
-    setActivePet({
-      ...pet,
-      onHealthUpdate: (field, value) => {
-        const updatedPets = pets.map((p) =>
-          p.name === pet.name ? { ...p, [field]: value } : p
-        );
-        setPets(updatedPets);
-        setActivePet((prev) => ({ ...prev, [field]: value }));
-      },
-    })
-  }
-   
->
+        className="pet-button"
+        onClick={() => {
+          setActivePet({
+            ...pet,
+            onHealthUpdate: (field, value) => {
+              const updatedPets = pets.map((p) =>
+                p.name === pet.name ? { ...p, [field]: value } : p
+              );
+              setPets(updatedPets);
+              setActivePet((prev) => ({ ...prev, [field]: value }));
+            },
+          });
+          setEditable(false); // ✅ Always reset to view mode when a new pet is selected
+        }}
+      > 
+
 
             <img className="pet-image" src={pet.image} alt={pet.name} />
           </button>

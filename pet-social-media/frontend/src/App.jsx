@@ -9,6 +9,35 @@ import ProfilePage from './pages/Profilepage';
 import SettingsPage from './pages/Settingspage';
 import PetProfileModal from './pages/PetProfileModal';
 
+const captions = [
+  "Caught mid-zoomies! 🐾", "New trick unlocked ✨", "This face = instant treat 🎯",
+  "Snuggle mode: activated 😴", "Who wore it best? 🎉", "Say “cheese!” 📸",
+  "Just vibin’ in the sun ☀️", "Someone’s ready for walkies 🐕", "That look when it’s treat time 👀",
+  "Besties forever 🐶🐱", "Meow or never 😼", "Weekend energy 💥",
+  "Party animal alert 🎈", "Fetch? More like fashion! 💁‍♀️", "Snow day adventures ❄️",
+  "The grass is paw-some 🌱", "Tongue out Tuesday 😋", "Too cute to handle 💖",
+  "Caught being paws-itively adorable 💅", "Tail wags & good vibes 🌈"
+];
+
+const postImages = [
+  ["https://placedog.net/500/300?id=1", "https://placedog.net/500/300?id=2", "https://placedog.net/500/300?id=3"],
+  ["https://placedog.net/500/300?id=4", "https://placedog.net/500/300?id=5", "https://placedog.net/500/300?id=6"],
+  ["https://placedog.net/500/300?id=7", "https://placedog.net/500/300?id=8", "https://placedog.net/500/300?id=9"],
+  ["https://placedog.net/500/300?id=10", "https://placedog.net/500/300?id=11", "https://placedog.net/500/300?id=12"],
+  // Add more if needed...
+];
+
+const generatePostDate = (index) => {
+  const daysAgo = index * 2 + Math.floor(Math.random() * 2);
+  const postDate = new Date();
+  postDate.setDate(postDate.getDate() - daysAgo);
+  return postDate.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+};
+
 function App() {
   const [pets, setPets] = useState([
     {
@@ -28,18 +57,29 @@ function App() {
   const [activePet, setActivePet] = useState(null);
   const [editable, setEditable] = useState(false);
 
+  const posts = postImages.map((images, index) => ({
+    images,
+    caption: captions[index % captions.length],
+    date: generatePostDate(index),
+  }));
+
   return (
     <Router>
       <div className="app">
-        <TopBar pets={pets} setPets={setPets} setActivePet={setActivePet} />
+        <TopBar
+          pets={pets}
+          setPets={setPets}
+          setActivePet={(pet) => {
+            setActivePet(pet);
+            setEditable(false); // reset to view mode
+          }}
+        />
+
         <div className="main-content">
           <Sidebar />
           <div className="content">
             <Routes>
-              <Route
-                path="/"
-                element={<HomePage />}
-              />
+              <Route path="/" element={<HomePage />} />
               <Route
                 path="/profile"
                 element={
@@ -57,7 +97,7 @@ function App() {
           </div>
         </div>
 
-        {/* ✅ Show pet modal if activePet is selected */}
+        {/* ✅ Global Modal for Pet Profile */}
         {activePet && (
           <PetProfileModal
             pet={{
@@ -95,10 +135,10 @@ function App() {
               setActivePet(null);
               setEditable(false);
             }}
-            editable={true}
+            editable={editable}
             showEditButton={true}
             onToggleEdit={() => setEditable((prev) => !prev)}
-            posts={[]} // Add posts if needed
+            posts={posts}
           />
         )}
       </div>
