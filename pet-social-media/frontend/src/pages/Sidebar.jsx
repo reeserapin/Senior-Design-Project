@@ -10,6 +10,8 @@ function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
+  const isSignupPage = location.pathname === '/signup';
+  const hideSidebar = isLoginPage || isSignupPage;
   const { profileImage } = useUser();
 
   const handleLogout = () => {
@@ -18,7 +20,7 @@ function Sidebar() {
 
   return (
     <div className="ts-sidebar">
-      {!isLoginPage && (
+      {!hideSidebar && (
         <>
           <Link to="/profile">
             <img
@@ -41,7 +43,7 @@ function Sidebar() {
               </Link>
             </li>
             <li>
-              <Link to="/messages" className="ts-nav-link">
+              <Link to="/chat" className="ts-nav-link">
                 <FaComments className="ts-nav-icon" />
                 <span>Messages</span>
               </Link>

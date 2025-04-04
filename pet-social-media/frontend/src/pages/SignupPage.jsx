@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/LoginPage.css';
 
-function LoginPage() {
+function SignupPage() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
+    username: '',
     password: '',
+    retypePassword: '',
   });
   const [showPassword, setShowPassword] = useState(false);
 
@@ -21,7 +23,7 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,12 +32,12 @@ function LoginPage() {
       });
 
       if (response.ok) {
-        navigate('/'); // Navigate to home page after successful login
+        navigate('/'); // Navigate to home page after successful signup
       } else {
-        console.error('Login failed');
+        console.error('Signup failed');
       }
     } catch (error) {
-      console.error('Error during login:', error);
+      console.error('Error during signup:', error);
     }
   };
 
@@ -46,7 +48,7 @@ function LoginPage() {
           <div className="lg-dog-illustration"></div>
         </div>
         <div className="lg-login-form">
-          <h2>Sign in</h2>
+          <h2>Sign up</h2>
           <form onSubmit={handleSubmit}>
             <div className="lg-form-group">
               <label htmlFor="email">Email</label>
@@ -55,6 +57,17 @@ function LoginPage() {
                 id="email"
                 name="email"
                 value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="lg-form-group">
+              <label htmlFor="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
                 onChange={handleChange}
                 required
               />
@@ -80,11 +93,24 @@ function LoginPage() {
                 </label>
               </div>
             </div>
+            <div className="lg-form-group">
+              <label htmlFor="retypePassword">Retype Password</label>
+              <div className="lg-password-input">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="retypePassword"
+                  name="retypePassword"
+                  value={formData.retypePassword}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
             <button type="submit" className="lg-signup-button">
-              Sign in →
+              Sign up →
             </button>
             <p style={{ textAlign: 'center', marginTop: '15px' }}>
-              Don't have an account? <Link to="/signup">Sign up</Link>
+              Already have an account? <Link to="/login">Sign in</Link>
             </p>
           </form>
         </div>
@@ -93,4 +119,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage; 
+export default SignupPage; 
