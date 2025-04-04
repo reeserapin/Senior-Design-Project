@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import AddPetModal from './AddPetModal';
 import { FiPlusCircle } from 'react-icons/fi';
+import PostButton from './PostButton';
+
 
 function TopBar({ pets, setPets, setActivePet }) {
   const [query, setQuery] = useState('');
@@ -17,8 +18,9 @@ function TopBar({ pets, setPets, setActivePet }) {
   };
 
   return (
-    <div className="ts-topbar">
-      <div className="ts-left-content">
+    <div className="topbar">
+      {/* Left section: Logo + Pets */}
+      <div className="topbar-left">
         <h1 className="ts-logo">Pet-igree</h1>
         {pets.map((pet, index) => (
           <button
@@ -40,12 +42,18 @@ function TopBar({ pets, setPets, setActivePet }) {
             <img src={pet.image} alt={pet.name} className="ts-profile-image" />
           </button>
         ))}
-
         <div className="ts-plus-icon" onClick={() => setIsPopupOpen(true)}>
           <FiPlusCircle size={36} />
         </div>
       </div>
-      <div className="ts-search-container">
+
+      {/* Center section: Post button */}
+      <div className="topbar-center">
+        <PostButton />
+      </div>
+
+      {/* Right section: Search */}
+      <div className="topbar-right">
         <input
           type="text"
           placeholder="Search..."
@@ -71,9 +79,42 @@ function TopBar({ pets, setPets, setActivePet }) {
 export default TopBar;
 
 
+
 /* Embedded CSS */
 const style = document.createElement('style');
 style.innerHTML =  `
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background-color: #099EC8;
+  height: 60px;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+.topbar-left,
+.topbar-center,
+.topbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.topbar-left {
+  gap: 10px;
+}
+
+.topbar-center {
+  justify-content: center;
+  flex: 1;
+}
+
+.topbar-right {
+  gap: 10px;
+}
 
 .profile-link {
   background: none;
