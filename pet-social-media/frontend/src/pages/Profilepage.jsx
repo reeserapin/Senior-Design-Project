@@ -473,6 +473,7 @@ function ProfilePage({ pets, setPets }) {
               caption: captions[index % captions.length],
               date: generatePostDate(index),
             }))}
+            isOwnPet={true}
           />
         )}
 
