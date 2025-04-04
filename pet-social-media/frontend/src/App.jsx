@@ -95,7 +95,7 @@ function App() {
               <Route path="/pedigree" element={<PedigreePage />} />
               <Route path="/petshop" element={<PetShopPage />} />
               <Route path="/settings" element={<SettingsPage />} />
-              <Route path="/chat" element={<ChatPage />} /> 
+              <Route path="/messages" element={<ChatPage />} /> 
             </Routes>
           </div>
         </div>
