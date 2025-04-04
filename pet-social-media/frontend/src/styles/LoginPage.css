@@ -1,10 +1,12 @@
 .lg-login-page {
-    min-height: 100vh;
+    min-height: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #E8FAFF;
-    padding: 20px;
+    background-color: transparent;
+    padding: 0;
+    overflow: hidden;
 }
 
 .lg-login-container {
@@ -15,6 +17,7 @@
     width: 800px;
     height: 600px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: calc(100vh - 80px);
 }
 
 .lg-grass-background {
@@ -49,26 +52,34 @@
 
 .lg-login-form {
     flex: 1;
-    padding: 40px;
+    padding: 20px 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: left;
 }
 
+.lg-form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: auto 0;
+}
+
 .lg-login-form h2 {
     font-size: 2rem;
     color: #333;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    margin-top: 0;
 }
 
 .lg-form-group {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .lg-form-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     color: #333;
     font-weight: 500;
 }
@@ -96,7 +107,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: 8px;
+    margin-top: 4px;
     font-size: 0.9rem;
     color: #666;
     cursor: pointer;
@@ -118,7 +129,7 @@
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .lg-signup-button:hover {
@@ -139,5 +150,6 @@
 
     .lg-login-form {
         padding: 30px 20px;
+        padding-top: 40px;
     }
 } 

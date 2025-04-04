@@ -46,47 +46,49 @@ function LoginPage() {
           <div className="lg-dog-illustration"></div>
         </div>
         <div className="lg-login-form">
-          <h2>Sign in</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="lg-form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="lg-form-group">
-              <label htmlFor="password">Password</label>
-              <div className="lg-password-input">
+          <div className="lg-form-container">
+            <h2>Login</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="lg-form-group">
+                <label htmlFor="email">Email</label>
                 <input
-                  type={showPassword ? "text" : "password"}
-                  id="password"
-                  name="password"
-                  value={formData.password}
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
                   required
                 />
-                <label className="lg-show-password">
-                  <input
-                    type="checkbox"
-                    checked={showPassword}
-                    onChange={() => setShowPassword(!showPassword)}
-                  />
-                  Show Password
-                </label>
               </div>
-            </div>
-            <button type="submit" className="lg-signup-button">
-              Sign in →
-            </button>
-            <p style={{ textAlign: 'center', marginTop: '15px' }}>
-              Don't have an account? <Link to="/signup">Sign up</Link>
-            </p>
-          </form>
+              <div className="lg-form-group">
+                <label htmlFor="password">Password</label>
+                <div className="lg-password-input">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                  />
+                  <label className="lg-show-password">
+                    <input
+                      type="checkbox"
+                      checked={showPassword}
+                      onChange={() => setShowPassword(!showPassword)}
+                    />
+                    Show Password
+                  </label>
+                </div>
+              </div>
+              <button type="submit" className="lg-signup-button">
+                Login →
+              </button>
+              <p style={{ textAlign: 'center', marginTop: '15px' }}>
+                Don't have an account? <Link to="/signup">Sign up</Link>
+              </p>
+            </form>
+          </div>
         </div>
       </div>
     </div>
