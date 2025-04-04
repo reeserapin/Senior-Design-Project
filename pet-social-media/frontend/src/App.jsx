@@ -8,6 +8,7 @@ import PetShopPage from './pages/PetShoppage';
 import ProfilePage from './pages/Profilepage';
 import SettingsPage from './pages/Settingspage';
 import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import PetProfileModal from './pages/PetProfileModal';
 import ChatPage from './pages/ChatBox';
 
@@ -76,29 +77,37 @@ function App() {
           }}
         />
 
-        <div className="main-content">
-          <Sidebar />
-          <div className="content">
-            <Routes>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/" element={<HomePage />} />
-              <Route
-                path="/profile"
-                element={
-                  <ProfilePage
-                    pets={pets}
-                    setPets={setPets}
-                    setActivePet={setActivePet}
-                  />
-                }
-              />
-              <Route path="/pedigree" element={<PedigreePage />} />
-              <Route path="/petshop" element={<PetShopPage />} />
-              <Route path="/settings" element={<SettingsPage />} />
-              <Route path="/messages" element={<ChatPage />} /> 
-            </Routes>
-          </div>
-        </div>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route
+            path="*"
+            element={
+              <div className="main-content">
+                <Sidebar />
+                <div className="content">
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route
+                      path="/profile"
+                      element={
+                        <ProfilePage
+                          pets={pets}
+                          setPets={setPets}
+                          setActivePet={setActivePet}
+                        />
+                      }
+                    />
+                    <Route path="/pedigree" element={<PedigreePage />} />
+                    <Route path="/petshop" element={<PetShopPage />} />
+                    <Route path="/settings" element={<SettingsPage />} />
+                    <Route path="/chat" element={<ChatPage />} />
+                  </Routes>
+                </div>
+              </div>
+            }
+          />
+        </Routes>
 
         {activePet && (
           <PetProfileModal

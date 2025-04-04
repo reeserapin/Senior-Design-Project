@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import AddPetModal from './AddPetModal';
 import { FiPlusCircle } from 'react-icons/fi';
 
 function TopBar({ pets, setPets, setActivePet }) {
   const [query, setQuery] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/login';
+  const isSignupPage = location.pathname === '/signup';
+  const hideTopbar = isLoginPage || isSignupPage;
 
   const handleSearch = () => {
     alert(`Searching for: ${query}`);
@@ -15,6 +19,10 @@ function TopBar({ pets, setPets, setActivePet }) {
     setPets([...pets, newPet]);
     setIsPopupOpen(false);
   };
+
+  if (hideTopbar) {
+    return null;
+  }
 
   return (
     <div className="ts-topbar">
