@@ -13,7 +13,7 @@ function TopBar({ pets, setPets, setActivePet }) {
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
   const isSignupPage = location.pathname === '/signup';
-  const hideTopbar = isLoginPage || isSignupPage;
+  const isAuthPage = isLoginPage || isSignupPage;
 
   // Sample search categories and items for the dropdown
   const sampleSearchItems = {
@@ -87,83 +87,87 @@ function TopBar({ pets, setPets, setActivePet }) {
     setIsPopupOpen(false);
   };
 
-  if (hideTopbar) {
-    return null;
-  }
-
   return (
-    <div className="ts-topbar">
+    <div className={`ts-topbar ${isAuthPage ? 'auth-page' : ''}`}>
       <div className="ts-left-content">
         <h1 className="ts-logo">Pet-igree</h1>
-        {pets.map((pet, index) => (
-          <button
-            key={index}
-            className="profile-link"
-            onClick={() =>
-              setActivePet({
-                ...pet,
-                onHealthUpdate: (field, value) => {
-                  const updated = pets.map((p) =>
-                    p.name === pet.name ? { ...p, [field]: value } : p
-                  );
-                  setPets(updated);
-                  setActivePet((prev) => ({ ...prev, [field]: value }));
-                },
-              })
-            }
-          >
-            <img src={pet.image} alt={pet.name} className="ts-profile-image" />
-          </button>
-        ))}
-
-        <div className="ts-plus-icon" onClick={() => setIsPopupOpen(true)}>
-          <FiPlusCircle size={36} />
-        </div>
-      </div>
-      <div className="ts-search-container" ref={searchRef}>
-        <div className="ts-search-wrapper">
-          <FiSearch className="ts-search-icon" />
-          <input
-            type="text"
-            placeholder="Search pets, products, services..."
-            className="ts-search-input"
-            value={query}
-            onChange={handleInputChange}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                handleSearch();
-              }
-            }}
-            onFocus={() => query.length > 2 && handleSearch()}
-          />
-        </div>
         
-        {showDropdown && (
-          <div className="ts-search-dropdown">
-            {noResults ? (
-              <div className="ts-search-no-results">
-                <p>No results found for: "{query}"</p>
-              </div>
-            ) : (
-              Object.entries(searchResults).map(([category, items]) => (
-                <div key={category} className="ts-search-category">
-                  <h4>{category.charAt(0).toUpperCase() + category.slice(1)}</h4>
-                  <ul>
-                    {items.map((item, index) => (
-                      <li 
-                        key={index} 
-                        onClick={() => handleSearchItemClick(item)}
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))
-            )}
-          </div>
+        {!isAuthPage && (
+          <>
+            {pets.map((pet, index) => (
+              <button
+                key={index}
+                className="profile-link"
+                onClick={() =>
+                  setActivePet({
+                    ...pet,
+                    onHealthUpdate: (field, value) => {
+                      const updated = pets.map((p) =>
+                        p.name === pet.name ? { ...p, [field]: value } : p
+                      );
+                      setPets(updated);
+                      setActivePet((prev) => ({ ...prev, [field]: value }));
+                    },
+                  })
+                }
+              >
+                <img src={pet.image} alt={pet.name} className="ts-profile-image" />
+              </button>
+            ))}
+
+            <div className="ts-plus-icon" onClick={() => setIsPopupOpen(true)}>
+              <FiPlusCircle size={36} />
+            </div>
+          </>
         )}
       </div>
+      
+      {!isAuthPage && (
+        <div className="ts-search-container" ref={searchRef}>
+          <div className="ts-search-wrapper">
+            <FiSearch className="ts-search-icon" />
+            <input
+              type="text"
+              placeholder="Search pets, products, services..."
+              className="ts-search-input"
+              value={query}
+              onChange={handleInputChange}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearch();
+                }
+              }}
+              onFocus={() => query.length > 2 && handleSearch()}
+            />
+          </div>
+          
+          {showDropdown && (
+            <div className="ts-search-dropdown">
+              {noResults ? (
+                <div className="ts-search-no-results">
+                  <p>No results found for: "{query}"</p>
+                </div>
+              ) : (
+                Object.entries(searchResults).map(([category, items]) => (
+                  <div key={category} className="ts-search-category">
+                    <h4>{category.charAt(0).toUpperCase() + category.slice(1)}</h4>
+                    <ul>
+                      {items.map((item, index) => (
+                        <li 
+                          key={index} 
+                          onClick={() => handleSearchItemClick(item)}
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       {isPopupOpen && (
         <AddPetModal
@@ -181,7 +185,6 @@ export default TopBar;
 /* Embedded CSS */
 const style = document.createElement('style');
 style.innerHTML =  `
-
 .profile-link {
   background: none;
   border: none;
@@ -561,6 +564,36 @@ html, body {
   left: 0;
   width: 100%;
   z-index: 1000;
+}
+
+/* Special styling for auth pages */
+.ts-topbar.auth-page {
+  justify-content: flex-start;
+}
+
+.ts-topbar.auth-page .ts-left-content {
+  justify-content: flex-start;
+  width: auto;
+}
+
+.ts-topbar.auth-page .ts-logo {
+  text-align: left;
+  padding-right: 15px;
+}
+
+.ts-sidebar.auth-page {
+  background-color: #9DD8EA;
+  width: 70px;
+  height: calc(100vh - 60px);
+  position: fixed;
+  top: 60px;
+  left: 0;
+  z-index: 999;
+}
+
+/* Content adjustment for auth pages */
+.auth-page ~ .content {
+  margin-left: 70px;
 }
 
 .ts-left-content {

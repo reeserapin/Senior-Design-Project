@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import TopBar from './pages/Topbar';
 import Sidebar from './pages/Sidebar';
 import HomePage from './pages/Homepage';
@@ -76,15 +76,23 @@ function App() {
             setEditable(false);
           }}
         />
+        <Sidebar />
 
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={
+            <div className="auth-content">
+              <LoginPage />
+            </div>
+          } />
+          <Route path="/signup" element={
+            <div className="auth-content">
+              <SignupPage />
+            </div>
+          } />
           <Route
             path="*"
             element={
               <div className="main-content">
-                <Sidebar />
                 <div className="content">
                   <Routes>
                     <Route path="/" element={<HomePage />} />
@@ -153,6 +161,22 @@ function App() {
           />
         )}
       </div>
+
+      {/* Add CSS for auth pages */}
+      <style>
+        {`
+          .auth-content {
+            margin-left: 70px;
+            margin-top: 60px;
+            padding: 20px;
+            min-height: calc(100vh - 60px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #E8FAFF;
+          }
+        `}
+      </style>
     </Router>
   );
 }

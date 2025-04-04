@@ -11,7 +11,7 @@ function Sidebar() {
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
   const isSignupPage = location.pathname === '/signup';
-  const hideSidebar = isLoginPage || isSignupPage;
+  const isAuthPage = isLoginPage || isSignupPage;
   const { profileImage } = useUser();
 
   const handleLogout = () => {
@@ -19,8 +19,8 @@ function Sidebar() {
   };
 
   return (
-    <div className="ts-sidebar">
-      {!hideSidebar && (
+    <div className={`ts-sidebar ${isAuthPage ? 'auth-page' : ''}`}>
+      {!isAuthPage && (
         <>
           <Link to="/profile">
             <img
