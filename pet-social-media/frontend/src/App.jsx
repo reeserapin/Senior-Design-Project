@@ -8,6 +8,7 @@ import PetShopPage from './pages/PetShoppage';
 import ProfilePage from './pages/Profilepage';
 import SettingsPage from './pages/Settingspage';
 import PetProfileModal from './pages/PetProfileModal';
+import ChatPage from './pages/ChatBox';
 
 const captions = [
   "Caught mid-zoomies! 🐾", "New trick unlocked ✨", "This face = instant treat 🎯",
@@ -93,6 +94,7 @@ function App() {
               <Route path="/pedigree" element={<PedigreePage />} />
               <Route path="/petshop" element={<PetShopPage />} />
               <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/chat" element={<ChatPage />} /> 
             </Routes>
           </div>
         </div>
