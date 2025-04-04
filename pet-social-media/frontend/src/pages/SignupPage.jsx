@@ -48,71 +48,73 @@ function SignupPage() {
           <div className="lg-dog-illustration"></div>
         </div>
         <div className="lg-login-form">
-          <h2>Sign up</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="lg-form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="lg-form-group">
-              <label htmlFor="username">Username</label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="lg-form-group">
-              <label htmlFor="password">Password</label>
-              <div className="lg-password-input">
+          <div className="lg-form-container">
+            <h2>Sign up</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="lg-form-group">
+                <label htmlFor="email">Email</label>
                 <input
-                  type={showPassword ? "text" : "password"}
-                  id="password"
-                  name="password"
-                  value={formData.password}
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
                   required
                 />
-                <label className="lg-show-password">
+              </div>
+              <div className="lg-form-group">
+                <label htmlFor="username">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="lg-form-group">
+                <label htmlFor="password">Password</label>
+                <div className="lg-password-input">
                   <input
-                    type="checkbox"
-                    checked={showPassword}
-                    onChange={() => setShowPassword(!showPassword)}
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
                   />
-                  Show Password
-                </label>
+                  <label className="lg-show-password">
+                    <input
+                      type="checkbox"
+                      checked={showPassword}
+                      onChange={() => setShowPassword(!showPassword)}
+                    />
+                    Show Password
+                  </label>
+                </div>
               </div>
-            </div>
-            <div className="lg-form-group">
-              <label htmlFor="retypePassword">Retype Password</label>
-              <div className="lg-password-input">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  id="retypePassword"
-                  name="retypePassword"
-                  value={formData.retypePassword}
-                  onChange={handleChange}
-                  required
-                />
+              <div className="lg-form-group">
+                <label htmlFor="retypePassword">Retype Password</label>
+                <div className="lg-password-input">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="retypePassword"
+                    name="retypePassword"
+                    value={formData.retypePassword}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <button type="submit" className="lg-signup-button">
-              Sign up →
-            </button>
-            <p style={{ textAlign: 'center', marginTop: '15px' }}>
-              Already have an account? <Link to="/login">Sign in</Link>
-            </p>
-          </form>
+              <button type="submit" className="lg-signup-button">
+                Sign up →
+              </button>
+              <p style={{ textAlign: 'center', marginTop: '15px' }}>
+                Already have an account? <Link to="/login">Login</Link>
+              </p>
+            </form>
+          </div>
         </div>
       </div>
     </div>
