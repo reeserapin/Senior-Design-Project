@@ -60,7 +60,7 @@ export default function ChatPage() {
   return (
     <Box sx={{ padding: '1rem', fontFamily: 'Segoe UI', backgroundColor: '#fff4ce', height: '90vh', display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}>
       {/* Header */}
-      <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#ffe682', padding: '0 1rem', borderRadius: 2, mb: 2, mx: 2 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#ffe682', padding: '1rem 1rem', borderRadius: 2, mb: 2, mx: 2 }}>
         <Typography variant="h4" fontWeight="bold">PawChat</Typography>
       </Box>
 
