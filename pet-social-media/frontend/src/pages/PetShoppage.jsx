@@ -1,8 +1,22 @@
-// src/pages/PetShoppage.jsx
+// src/pages/PetShopPage.jsx
 import React, { useState } from "react";
 import { FaPlus, FaMapMarkerAlt } from "react-icons/fa";
+import {
+  Box,
+  Button,
+  Typography,
+  TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Card,
+  CardMedia,
+  CardContent,
+  Grid,
+} from "@mui/material";
 import PetModal from "./PetModal";
-import ListPetModal from "./ListPetModal"; // import at top
+import ListPetModal from "./ListPetModal";
 
 const pets = [
   {
@@ -82,263 +96,254 @@ const pets = [
 const PetShopPage = () => {
   const [search, setSearch] = useState("");
   const [selectedPet, setSelectedPet] = useState(null);
-  const [showListModal, setShowListModal] = useState(false); // state
+  const [showListModal, setShowListModal] = useState(false);
+  const [species, setSpecies] = useState("All");
+  const [size, setSize] = useState("All");
+  const [gender, setGender] = useState("All");
+  const [sortBy, setSortBy] = useState("Newest Posted");
+  const [breed, setBreed] = useState("");
+  const [age, setAge] = useState("");
+  const [location, setLocation] = useState("");
 
 
   return (
-    <div className="petshop-page">
-      <div className="header-bar">
-        <h2>PetShelter</h2>
-        <button className="list-pet-button" onClick={() => setShowListModal(true)}>
-          <FaPlus /> List a Pet
-        </button>
-      </div>
+    <Box sx={{ p: 3, backgroundColor: "#f0fff0", minHeight: "100vh", marginRight: 1, }}>
+      {/* Header */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          backgroundColor: "#d5f8c7",
+          p: 2,
+          borderRadius: 3,
+          marginRight: 1,
+          mb: 3,
+        }}
+      >
+        <Typography variant="h4" fontWeight="bold" sx={{ marginLeft: 1,}}>
+          PetShelter
+        </Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<FaPlus />}
+          onClick={() => setShowListModal(true)}
+          sx={{ backgroundColor: "#000", 
+            borderRadius: 1,
+            marginRight: 1,
+            "&:hover": { backgroundColor: "#333" } }}
+        >
+          List a Pet
+        </Button>
+      </Box>
 
-      <div className="main-content-area">
-        <div className="filters-section">
-
-          <div className="filter-group">
-          <input
-            className="filter-search"
-            type="text"
+      {/* Main Content */}
+      <Box sx={{ display: "grid", gridTemplateColumns: "250px 1fr", gap: 4, marginRight: 1, }}>
+        {/* Filters */}
+        <Box
+          sx={{
+            backgroundColor: "#f5fff5",
+            borderRadius: 3,
+            p: 2,
+            boxShadow: 1,
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+          }}
+        >
+          <TextField
+            label="Search pets..."
+            variant="outlined"
+            size="small"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search pets..."
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '8px',
+              },
+            }}
           />
-          </div>
 
-          <h3>Filters</h3>
-          <div className="filter-group">
-            <label>Species</label>
-            <select><option>All</option><option>Cat</option><option>Dog</option></select>
-          </div>
-          <div className="filter-group">
-            <label>Breed</label>
-            <input type="text" placeholder="e.g. Poodle" />
-          </div>
-          <div className="filter-group">
-            <label>Age</label>
-            <input type="number" placeholder="e.g. 2" />
-          </div>
-          <div className="filter-group">
-            <label>Size</label>
-            <select><option>All</option><option>Small</option><option>Medium</option><option>Large</option></select>
-          </div>
-          <div className="filter-group">
-            <label>Gender</label>
-            <select><option>All</option><option>Male</option><option>Female</option></select>
-          </div>
-          <div className="filter-group">
-            <label>Location</label>
-            <input type="text" placeholder="e.g. Cincinnati" />
-          </div>
-          <div className="filter-group">
-            <label>Sort By</label>
-            <select>
-              <option>Newest Posted</option>
-              <option>Oldest</option>
-              <option>Age Ascending</option>
-              <option>Age Descending</option>
-            </select>
-          </div>
-        </div>
+          <Typography variant="h6">Filters</Typography>
 
-        <div className="results-section">
-          <div className="cards-grid">
-            {pets.map((pet) => (
-              <div key={pet.id} className="pet-card" onClick={() => setSelectedPet(pet)}>
-                <img src={pet.image} alt={pet.name} className="pet-image" />
-                <div className="card-info">
-                  <div className="top-row">
-                    <span className="pet-name">{pet.name}</span>
-                    <span className="pet-type-tag">{pet.type}</span>
-                  </div>
-                  <div className="middle-row">
-                    {pet.age} years old • {pet.breed}
-                  </div>
-                  <div className="bottom-row">
-                    <FaMapMarkerAlt className="location-icon" /> {pet.distance}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        {selectedPet && (
-          <PetModal pet={selectedPet} onClose={() => setSelectedPet(null)} />
-        )}
-        {showListModal && <ListPetModal onClose={() => setShowListModal(false)} />}
-      </div>
-    </div>
+          <FormControl fullWidth size="small" sx={{ '& .MuiOutlinedInput-root': { borderRadius: '8px' } }}>
+            <InputLabel>Species</InputLabel>
+            <Select value={species} label="Species" onChange={(e) => setSpecies(e.target.value)}>
+              {["All", "Cat", "Dog"].map((option) => (
+                <MenuItem key={option} value={option}>{option}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl fullWidth size="small" sx={{ '& .MuiOutlinedInput-root': { borderRadius: '8px' } }}>
+            <InputLabel>Size</InputLabel>
+            <Select value={size} label="Size" onChange={(e) => setSize(e.target.value)}>
+              {["All", "Small", "Medium", "Large"].map((option) => (
+                <MenuItem key={option} value={option}>{option}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl fullWidth size="small" sx={{ '& .MuiOutlinedInput-root': { borderRadius: '8px' } }}>
+            <InputLabel>Gender</InputLabel>
+            <Select value={gender} label="Gender" onChange={(e) => setGender(e.target.value)}>
+              {["All", "Male", "Female"].map((option) => (
+                <MenuItem key={option} value={option}>{option}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl fullWidth size="small" sx={{ '& .MuiOutlinedInput-root': { borderRadius: '8px' } }}>
+            <InputLabel>Sort By</InputLabel>
+            <Select value={sortBy} label="Sort By" onChange={(e) => setSortBy(e.target.value)}>
+              {["Newest Posted", "Oldest", "Age Ascending", "Age Descending"].map((option) => (
+                <MenuItem key={option} value={option}>{option}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <TextField
+            label="Breed"
+            value={breed}
+            onChange={(e) => setBreed(e.target.value)}
+            variant="outlined"
+            size="small"
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '8px',
+              },
+            }}
+          />
+
+          <TextField
+            label="Age"
+            type="number"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            variant="outlined"
+            size="small"
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '8px',
+              },
+            }}
+          />
+
+          <TextField
+            label="Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            variant="outlined"
+            size="small"
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '8px',
+              },
+            }}
+          />
+
+          {/* ✅ Reset Button */}
+          <Button
+            variant="outlined"
+            onClick={() => {
+              setSpecies("All");
+              setSize("All");
+              setGender("All");
+              setSortBy("Newest Posted");
+              setBreed("");
+              setAge("");
+              setLocation("");
+              setSearch("");
+            }}
+            sx={{
+              mt: 1,
+              borderRadius: "8px",
+              textTransform: "none",
+              color: "#fff",
+              backgroundColor: "#000",
+              borderColor: "#000",
+              '&:hover': {
+                backgroundColor: "#333",
+                borderColor: "#000",
+              },
+            }}
+          >
+            Reset Filters
+          </Button>
+
+        </Box>
+
+        {/* Results */}
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+            gap: 4,
+          }}
+        >
+          {pets.map((pet) => (
+            <Card
+              key={pet.id}
+              onClick={() => setSelectedPet(pet)}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                borderRadius: '12px',
+                height: "100%",
+                maxHeight: 500,
+                cursor: "pointer",
+                transition: "transform 0.2s ease",
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                },
+              }}
+            >
+              <CardMedia
+                component="img"
+                image={pet.image}
+                alt={pet.name}
+                sx={{
+                  height: 200,
+                  width: "100%",
+                  objectFit: "cover",
+                }}
+              />
+              <CardContent>
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                  <Typography variant="h6">{pet.name}</Typography>
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      backgroundColor: "#e0e0e0",
+                      px: 1,
+                      borderRadius: "10px",
+                      fontWeight: 500,
+                    }}
+                  >
+                    {pet.type}
+                  </Typography>
+                </Box>
+                <Typography variant="body2" color="text.secondary">
+                  {pet.age} years old • {pet.breed}
+                </Typography>
+                <Box mt={1} display="flex" alignItems="center" color="text.secondary">
+                  <FaMapMarkerAlt style={{ marginRight: "5px" }} /> {pet.distance}
+                </Box>
+              </CardContent>
+            </Card>
+          ))}
+        </Box>
+
+      </Box>
+
+      {selectedPet && <PetModal pet={selectedPet} onClose={() => setSelectedPet(null)} />}
+      {showListModal && <ListPetModal onClose={() => setShowListModal(false)} />}
+    </Box>
   );
 };
 
 export default PetShopPage;
 
 
-/* Embedded CSS */
-const style = document.createElement('style');
-style.innerHTML = `
-.petshop-page {
-  background-color: #f0fff0;
-  padding: 1rem;
-  font-family: 'Segoe UI', sans-serif;
-}
 
-.header-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.01rem 2rem;
-  background-color: #d5f8c7;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-}
-
-.header-bar h2 {
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
-.list-pet-button {
-  background-color: #000;
-  color: #fff;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.main-content-area {
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  gap: 2rem;
-  background-color: #eaffda; /* ✅ light green fill */
-  min-height: calc(100vh - 90px); /* ✅ fills full screen minus header height */
-  padding-bottom: 2rem;
-}
-
-
-.filters-section {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.filter-search {
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-sizing: border-box;
-  margin-bottom: 0.5rem;
-}
-
-.filters-section h3 {
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-}
-
-.filter-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.filter-group label {
-  font-size: 0.9rem;
-  margin-bottom: 0.3rem;
-}
-
-.filter-group input,
-.filter-group select {
-  padding: 0.5rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 0.9rem;
-}
-
-.results-section {
-  width: 100%;
-}
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* ✅ dynamic column count */
-  gap: 3rem; /* ✅ space between cards in both directions */
-  padding: 2rem; /* ✅ space around the whole grid */
-}
-
-
-.pet-card {
-  background-color: white;
-  border-radius: 10px 10px 10px 10px;
-  overflow: hidden;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s;
-  padding: 0px;
-  height: 480px;
-  width:100%;
-}
-
-.pet-card:hover {
-  transform: translateY(-4px);
-}
-
-.pet-image {
-  width: 100%;
-  height: 70%;
-  object-fit: cover;
-  border-radius: 10px 10px 0 0;
-  padding: 0px;
-  box-shadow: none;
-}
-
-.card-info {
-  padding: 0.8rem 1rem;
-}
-
-.top-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-.pet-type-tag {
-  font-size: 0.75rem;
-  background-color: #e0e0e0;
-  color: #333;
-  padding: 0.2rem 0.5rem;
-  border-radius: 10px;
-  font-weight: 500;
-}
-
-.middle-row {
-  font-size: 0.9rem;
-  color: #555;
-  margin-top: 0.3rem;
-}
-
-.bottom-row {
-  margin-top: 0.4rem;
-  font-size: 0.85rem;
-  color: #666;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-
-.location-icon {
-  color: #333;
-}
-`;
-document.head.appendChild(style);

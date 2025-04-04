@@ -43,7 +43,7 @@ function Sidebar() {
               </Link>
             </li>
             <li>
-              <Link to="/messages" className="ts-nav-link">
+              <Link to="/chat" className="ts-nav-link">
                 <FaComments className="ts-nav-icon" />
                 <span>Messages</span>
               </Link>
