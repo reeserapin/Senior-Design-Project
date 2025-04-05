@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaHome, FaCheckCircle, FaComments, FaShoppingBag, FaCog, FaUser, FaSignOutAlt } from 'react-icons/fa';
 import { TbBinaryTree } from 'react-icons/tb';    
+import { useUser } from './UserContext';
 import './styles/TopAndSide.css';
 
 function Sidebar() {
@@ -10,6 +11,7 @@ function Sidebar() {
   const isLoginPage = location.pathname === '/login';
   const isSignupPage = location.pathname === '/signup';
   const hideSidebar = isLoginPage || isSignupPage;
+  const { profileImage } = useUser();
 
   const handleLogout = () => {
     navigate('/login');
@@ -21,7 +23,7 @@ function Sidebar() {
         <>
           <Link to="/profile">
             <img
-              src="/public/linkedGirl.jpg"
+              src={profileImage}
               alt="Profile"
               className="ts-profile-image"
             />
