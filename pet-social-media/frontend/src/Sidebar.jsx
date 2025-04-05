@@ -2,12 +2,16 @@ import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaHome, FaCheckCircle, FaComments, FaShoppingBag, FaCog, FaUser, FaSignOutAlt } from 'react-icons/fa';
 import { TbBinaryTree } from 'react-icons/tb';    
+import { useUser } from './UserContext';
 import './styles/TopAndSide.css';
 
 function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
+  const isSignupPage = location.pathname === '/signup';
+  const hideSidebar = isLoginPage || isSignupPage;
+  const { profileImage } = useUser();
 
   const handleLogout = () => {
     navigate('/login');
@@ -15,11 +19,11 @@ function Sidebar() {
 
   return (
     <div className="ts-sidebar">
-      {!isLoginPage && (
+      {!hideSidebar && (
         <>
           <Link to="/profile">
             <img
-              src="/public/linkedGirl.jpg"
+              src={profileImage}
               alt="Profile"
               className="ts-profile-image"
             />
@@ -38,7 +42,7 @@ function Sidebar() {
               </Link>
             </li>
             <li>
-              <Link to="/messsages" className="ts-nav-link ts-chat-link">
+              <Link to="/chat" className="ts-nav-link ts-chat-link">
                 <FaComments className="ts-nav-icon ts-chat-icon" />
                 <span>Messages</span>
               </Link>
