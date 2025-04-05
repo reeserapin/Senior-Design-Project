@@ -11,7 +11,7 @@ function TopBar({ pets, setPets, setActivePet }) {
   const [noResults, setNoResults] = useState(false);
   const searchRef = useRef(null);
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login';
+  const isLoginPage = location.pathname === '/';
   const isSignupPage = location.pathname === '/signup';
   const isAuthPage = isLoginPage || isSignupPage;
 

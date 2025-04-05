@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/LoginPage.css';
 
+const API_BASE = "http://localhost:5000";
+
 function SignupPage() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -14,30 +16,45 @@ function SignupPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (formData.password !== formData.retypePassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    const payload = {
+      email: formData.email,
+      username: formData.username,
+      password1: formData.password,
+      password2: formData.retypePassword,
+      user_type: "User", // optional toggle later
+    };
+
     try {
-      const response = await fetch('/api/signup', {
+      const response = await fetch(`${API_BASE}/auth/sign-up`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
-        navigate('/'); // Navigate to home page after successful signup
+        const result = await response.json();
+        console.log("Signup successful:", result);
+        navigate('/home');
       } else {
-        console.error('Signup failed');
+        const err = await response.json();
+        console.error("Signup failed:", err);
+        alert(err?.error || "Signup failed. Please try again.");
       }
-    } catch (error) {
-      console.error('Error during signup:', error);
+    } catch (err) {
+      console.error("Signup error:", err);
+      alert("An error occurred during signup.");
     }
   };
 
@@ -55,8 +72,8 @@ function SignupPage() {
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
-                  id="email"
                   name="email"
+                  id="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
@@ -66,8 +83,8 @@ function SignupPage() {
                 <label htmlFor="username">Username</label>
                 <input
                   type="text"
-                  id="username"
                   name="username"
+                  id="username"
                   value={formData.username}
                   onChange={handleChange}
                   required
@@ -78,8 +95,8 @@ function SignupPage() {
                 <div className="lg-password-input">
                   <input
                     type={showPassword ? "text" : "password"}
-                    id="password"
                     name="password"
+                    id="password"
                     value={formData.password}
                     onChange={handleChange}
                     required
@@ -96,22 +113,20 @@ function SignupPage() {
               </div>
               <div className="lg-form-group">
                 <label htmlFor="retypePassword">Retype Password</label>
-                <div className="lg-password-input">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    id="retypePassword"
-                    name="retypePassword"
-                    value={formData.retypePassword}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="retypePassword"
+                  id="retypePassword"
+                  value={formData.retypePassword}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <button type="submit" className="lg-signup-button">
                 Sign up →
               </button>
               <p style={{ textAlign: 'center', marginTop: '15px' }}>
-                Already have an account? <Link to="/login">Login</Link>
+                Already have an account? <Link to="/">Login</Link>
               </p>
             </form>
           </div>
@@ -121,4 +136,4 @@ function SignupPage() {
   );
 }
 
-export default SignupPage; 
+export default SignupPage;
