@@ -3,8 +3,7 @@ import AddPetModal from './AddPetModal';
 import { FiPlusCircle } from 'react-icons/fi';
 import PostButton from './PostButton';
 
-
-function TopBar({ pets, setPets, setActivePet }) {
+function TopBar({ pets, followedPets, setPets, setActivePet }) {
   const [query, setQuery] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -49,7 +48,8 @@ function TopBar({ pets, setPets, setActivePet }) {
 
       {/* Center section: Post button */}
       <div className="topbar-center">
-        <PostButton />
+      <PostButton pets={pets} followedPets={followedPets} />
+
       </div>
 
       {/* Right section: Search */}
@@ -77,7 +77,6 @@ function TopBar({ pets, setPets, setActivePet }) {
 }
 
 export default TopBar;
-
 
 
 /* Embedded CSS */

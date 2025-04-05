@@ -242,23 +242,7 @@ function ProfilePage({ pets, setPets }) {
     setPets([...pets, { ...newPet, description: "Newly added pet!" }]);
     setShowAddModal(false);
   };
-
-  // Callback passed to PetProfileModal to update the followedPets state
-  const handleToggleFollow = (pet, newFollowState) => {
-    if (!newFollowState) {
-      setFollowedPets((prev) => prev.filter((p) => p.name !== pet.name));
-      toast.info(`You unfollowed ${pet.name}`);
-    } else {
-      setFollowedPets((prev) => {
-        if (!prev.some((p) => p.name === pet.name)) {
-          toast.success(`You're now following ${pet.name}`);
-          return [...prev, pet];
-        }
-        return prev;
-      });
-    }
-  };
-  
+ 
 
   return (
     <div className="profile-container">
