@@ -6,6 +6,36 @@ import PostButton from './PostButton';
 function TopBar({ pets, followedPets, setPets, setActivePet }) {
   const [query, setQuery] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+  const [noResults, setNoResults] = useState(false);
+  const searchRef = useRef(null);
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/';
+  const isSignupPage = location.pathname === '/signup';
+  const isAuthPage = isLoginPage || isSignupPage;
+
+  // Sample search categories and items for the dropdown
+  const sampleSearchItems = {
+    pets: ['Cats', 'Dogs', 'Birds', 'Rabbits'],
+    products: ['Food', 'Toys', 'Accessories', 'Grooming'],
+    services: ['Veterinarians', 'Grooming Services', 'Pet Sitters', 'Trainers']
+  };
+
+  useEffect(() => {
+    // Close dropdown when clicking outside
+    function handleClickOutside(event) {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowDropdown(false);
+        setNoResults(false);
+      }
+    }
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleSearch = () => {
     alert(`Searching for: ${query}`);

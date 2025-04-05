@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flasgger import Swagger  # Import Swagger
 from flask_migrate import Migrate
+from flask_cors import CORS
 migrate = Migrate()
 
 db = SQLAlchemy()
@@ -10,6 +11,7 @@ DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__)
+    CORS(app, supports_credentials=True)
     app.config['SECRET_KEY'] = 'your_secret_key'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
