@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { FaPaw, FaComment } from "react-icons/fa";
 import { TbSend } from "react-icons/tb";
 import "../styles/Posts.css"; // make sure this contains both grid and carousel styles
+import BackgroundCanvas from "./BackgroundCanvas";
 
 const generatePostDate = (index) => {
   const daysAgo = index * 3 + Math.floor(Math.random() * 2); // Custom date logic
@@ -98,3 +99,4 @@ function Posts({ postImages = [], captions = [], isCarousel = false }) {
 }
 
 export default Posts;
+ 

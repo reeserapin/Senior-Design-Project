@@ -6,6 +6,7 @@ import SidePanels from "../components/SidePanels";
 import postsData from "../pages/posts.json";
 import { useUser } from "../UserContext";
 import "../styles/Homepage.css";
+import BackgroundCanvas from "./BackgroundCanvas";
 
 const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
   const [activePanel, setActivePanel] = useState(null); // null, 'comments', 'share', or 'report'
@@ -57,6 +58,7 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
   ];
 
   return (
+    
     <div className={`homepage-pet-card ${bgColor === 'bg-blue' ? 'homepage-bg-blue' : bgColor === 'bg-green' ? 'homepage-bg-green' : 'homepage-bg-yellow'} relative`}>
       <div className="homepage-pet-header">
         <img src={avatar} alt={user} className="homepage-pet-avatar" />
@@ -138,15 +140,19 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
 
 const PetPosts = () => {
   return (
-    <div className="homepage-container">
-      <div className="homepage-posts-container">
+    <div className="homepage-container" style={{ position: "relative" }}>
+      <BackgroundCanvas /> {/* ⬅️ This renders your animated canvas background */}
+
+      <div className="homepage-posts-container" style={{ position: "relative", zIndex: 1 }}>
         {postsData.map((post, index) => (
           <PetPost key={index} {...post} />
         ))}
       </div>
+
       <SidePanels />
     </div>
   );
 };
+
 
 export default PetPosts;
