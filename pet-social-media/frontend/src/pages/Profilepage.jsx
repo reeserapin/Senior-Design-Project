@@ -11,6 +11,7 @@ import { useUser } from "../UserContext";
 import { GiCrossedBones } from "react-icons/gi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from "react";
 
 
 // Helper function for generating post dates
@@ -212,10 +213,12 @@ function ProfilePage({ pets, setPets }) {
   const [username, setUsername] = useState("Joe Schmoe");
   const [isEditingName, setIsEditingName] = useState(false);
   const [editable, setEditable] = useState(false);
+  const { followedPets, setFollowedPets } = useUser();
 
-  // State for followed pets
-  const [followedPets, setFollowedPets] = useState(initialFollowedPets);
-
+  useEffect(() => {
+    setFollowedPets(initialFollowedPets);
+  }, []);
+  
   const scrollLeft = () => {
     scrollRef.current.scrollBy({ left: -150, behavior: "smooth" });
   };

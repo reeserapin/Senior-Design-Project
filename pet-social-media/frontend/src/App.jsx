@@ -12,7 +12,7 @@ import SignupPage from './pages/SignupPage';
 import PetProfileModal from './pages/PetProfileModal';
 import ChatPage from './pages/ChatBox';
 import './index.css';
-
+import { UserProvider } from './UserContext';
 
 const captions = [
   "Caught mid-zoomies! 🐾", "New trick unlocked ✨", "This face = instant treat 🎯",
@@ -277,7 +277,7 @@ function App() {
           }
         `}
       </style>
-    </Router>
+      </Router>
   );
 }
 

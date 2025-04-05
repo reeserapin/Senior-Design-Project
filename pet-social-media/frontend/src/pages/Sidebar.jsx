@@ -7,7 +7,7 @@ import { useUser } from '../UserContext';
 import PostButton from './PostButton';
 import '../styles/TopAndSide.css';
 
-function Sidebar({ pets, followedPets, handleAddPost }) {
+function Sidebar({ pets, handleAddPost }) {
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,7 +50,8 @@ function Sidebar({ pets, followedPets, handleAddPost }) {
             />
           </Link>
           <li>
-          <PostButton pets={pets} followedPets={followedPets} onPost={handleAddPost} />
+          <PostButton pets={pets} onPost={handleAddPost} />
+
 
           </li>
           <ul>
