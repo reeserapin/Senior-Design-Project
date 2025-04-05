@@ -4,9 +4,10 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaHome, FaCheckCircle, FaComments, FaShoppingBag, FaCog, FaUser, FaSignOutAlt } from 'react-icons/fa';
 import { TbBinaryTree } from 'react-icons/tb';
 import { useUser } from '../UserContext';
+import PostButton from './PostButton';
 import '../styles/TopAndSide.css';
 
-function Sidebar() {
+function Sidebar({ pets, followedPets }) {
   const navigate = useNavigate();
   const location = useLocation();
   const isLoginPage = location.pathname === '/';
@@ -47,6 +48,9 @@ function Sidebar() {
               className="ts-profile-image"
             />
           </Link>
+          <li>
+            <PostButton pets={pets} followedPets={followedPets} />
+          </li>
           <ul>
             <li>
               <Link to="/home" className="ts-nav-link">
@@ -66,6 +70,7 @@ function Sidebar() {
                 <span>Messages</span>
               </Link>
             </li>
+            
             <li>
               <Link to="/petshop" className="ts-nav-link">
                 <FaShoppingBag className="ts-nav-icon" />

@@ -262,7 +262,7 @@ function ProfilePage({ pets, setPets }) {
 
   return (
     <div className="profile-container">
-      <Sidebar />
+      <Sidebar pets={pets} followedPets={followedPets} />
       <ToastContainer position="top-center" autoClose={2000} />
       <main className="profile-main">
         <div className="profile-banner-container">

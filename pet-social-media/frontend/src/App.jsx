@@ -58,6 +58,7 @@ function App() {
 
   const [activePet, setActivePet] = useState(null);
   const [editable, setEditable] = useState(false);
+  const [followedPets, setFollowedPets] = useState([]);
 
   const posts = postImages.map((images, index) => ({
     images,
@@ -76,7 +77,7 @@ function App() {
             setEditable(false);
           }}
         />
-        <Sidebar />
+        <Sidebar pets={pets} followedPets={followedPets} />
 
         <Routes>
           <Route path="/" element={
