@@ -66,7 +66,24 @@ function App() {
     images,
     caption: captions[index % captions.length],
     date: generatePostDate(index),
+    taggedPets: [
+      {
+        name: "Snowy",
+        image: "https://www.thesprucepets.com/thmb/hJ40hdpK4KZ5AehlMmVEdJr8zPI%3D/1999x1459/filters%3Afill(auto,1)/twenty20_e47b3798-dd9b-40b1-91ef-1d820337966e-5aa3f798642dca00363b0df1.jpg",
+      },
+    ],
+    taggedFollowedPets: [
+      {
+        name: "Buddy",
+        image: "https://placedog.net/300/300?id=98",
+      },
+      {
+        name: "Luna",
+        image: "https://placedog.net/300/300?id=99",
+      },
+    ]
   }));
+  
 
   return (
     <Router>

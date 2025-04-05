@@ -174,12 +174,27 @@ const initialFollowedPets = [
 
 function ProfilePage({ pets, setPets }) {
   const [userPosts, setUserPosts] = useState(
-    postImages.map((images, index) => ({
-      images,
-      caption: captions[index % captions.length],
-      date: generatePostDate(index),
-    }))
+    postImages.map((images, index) => {
+      // Always include one random own pet
+      const randomOwnPet = pets[Math.floor(Math.random() * pets.length)];
+  
+      // Randomly pick 0–2 followed pets
+      const shuffledFollowed = [...initialFollowedPets].sort(() => 0.5 - Math.random());
+      const followedCount = Math.random() < 0.6 ? Math.floor(Math.random() * 3) : 0; // 60% chance of tagging followed pets
+      const followedSelections = shuffledFollowed.slice(0, followedCount);
+  
+      return {
+        images,
+        caption: captions[index % captions.length],
+        date: generatePostDate(index),
+        taggedPets: [randomOwnPet],
+        taggedFollowedPets: followedSelections,
+      };
+    })
   );
+  
+  
+
   
   const [banner, setBanner] = useState(null);
   const [cropping, setCropping] = useState(false);

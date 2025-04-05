@@ -33,70 +33,28 @@ function Posts({ posts = [], isCarousel = false }) {
         <div className="posts-carousel">
           {posts.map((post, index) => (
             <div key={index} className="post-card carousel">
-              <Slider {...sliderSettings}>
-                {post.images.map((imgUrl, i) => (
-                  <img
-                    key={i}
-                    className="post-image"
-                    src={imgUrl}
-                    alt={`Slide ${i}`}
-                  />
-                ))}
-              </Slider>
+              {post.images.length === 1 ? (
+  <img
+    className="post-image"
+    src={post.images[0]}
+    alt="Single post"
+  />
+) : (
+  <Slider {...sliderSettings}>
+    {post.images.map((imgUrl, i) => (
+      <img
+        key={i}
+        className="post-image"
+        src={imgUrl}
+        alt={`Slide ${i}`}
+      />
+    ))}
+  </Slider>
+)}
 
-              <div className="post-info">
-                <div className="post-text-icon-row">
-                  <div className="post-icons">
-                    <button className="icon-button"><FaPaw /></button>
-                    <button className="icon-button"><FaComment /></button>
-                    <button className="icon-button"><TbSend /></button>
-                  </div>
-                  <div className="post-text">
-                    <p><strong>{post.caption}</strong></p>
-                    <p className="timestamp">{post.date || generatePostDate(index)}</p>
-                  </div>
-                </div>
+  
 
-                <div className="tagged-pets">
-                  {post.taggedPets?.map((pet, i) => (
-                    <img
-                      key={`own-${i}`}
-                      src={pet.image}
-                      alt={pet.name}
-                      className="post-profile"
-                      style={{
-                        width: 36,
-                        height: 36,
-                        borderRadius: '50%',
-                        objectFit: 'cover',
-                        border: '2px solid white',
-                        marginLeft: i > 0 ? -10 : 0,
-                        zIndex: post.taggedPets.length - i,
-                        position: 'relative',
-                      }}
-                    />
-                  ))}
-
-                  {post.taggedFollowedPets?.map((pet, i) => (
-                    <img
-                      key={`followed-${i}`}
-                      src={pet.image}
-                      alt={pet.name}
-                      className="post-profile"
-                      style={{
-                        width: 32,
-                        height: 32,
-                        borderRadius: '50%',
-                        objectFit: 'cover',
-                        border: '2px dashed #948be1',
-                        marginLeft: i > 0 ? -8 : 0,
-                        zIndex: post.taggedFollowedPets.length - i,
-                        position: 'relative',
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
+              <PostInfo post={post} index={index} />
             </div>
           ))}
         </div>
@@ -104,70 +62,33 @@ function Posts({ posts = [], isCarousel = false }) {
         <div className="posts-grid">
           {posts.map((post, index) => (
             <div key={index} className="post-card">
-              <Slider {...sliderSettings}>
-                {post.images.map((imgUrl, i) => (
-                  <img
-                    key={i}
-                    className="post-image"
-                    src={imgUrl}
-                    alt={`Slide ${i}`}
-                  />
-                ))}
-              </Slider>
-
-              <div className="post-info">
-                <div className="post-text-icon-row">
-                  <div className="post-icons">
-                    <button className="icon-button"><FaPaw /></button>
-                    <button className="icon-button"><FaComment /></button>
-                    <button className="icon-button"><TbSend /></button>
-                  </div>
-                  <div className="post-text">
-                    <p><strong>{post.caption}</strong></p>
-                    <p className="timestamp">{post.date || generatePostDate(index)}</p>
-                  </div>
-                </div>
-
-                <div className="tagged-pets">
-                  {post.taggedPets?.map((pet, i) => (
+              {post.images.length === 1 ? (
+                <img
+                src={post.images[0]}
+                alt="Post"
+                className="post-image"
+              />
+              
+              ) : (
+                <Slider {...sliderSettings}>
+                  {post.images.map((imgUrl, i) => (
                     <img
-                      key={`own-${i}`}
-                      src={pet.image}
-                      alt={pet.name}
-                      className="post-profile"
+                      key={i}
+                      className="post-image"
+                      src={imgUrl}
+                      alt={`Slide ${i}`}
                       style={{
-                        width: 36,
-                        height: 36,
-                        borderRadius: '50%',
-                        objectFit: 'cover',
-                        border: '2px solid white',
-                        marginLeft: i > 0 ? -10 : 0,
-                        zIndex: post.taggedPets.length - i,
-                        position: 'relative',
+                        width: "100%",
+                        height: "auto",
+                        objectFit: "cover",
+                        borderRadius: "12px",
                       }}
                     />
                   ))}
+                </Slider>
+              )}
 
-                  {post.taggedFollowedPets?.map((pet, i) => (
-                    <img
-                      key={`followed-${i}`}
-                      src={pet.image}
-                      alt={pet.name}
-                      className="post-profile"
-                      style={{
-                        width: 32,
-                        height: 32,
-                        borderRadius: '50%',
-                        objectFit: 'cover',
-                        border: '2px dashed #948be1',
-                        marginLeft: i > 0 ? -8 : 0,
-                        zIndex: post.taggedFollowedPets.length - i,
-                        position: 'relative',
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
+              <PostInfo post={post} index={index} />
             </div>
           ))}
         </div>
@@ -175,5 +96,43 @@ function Posts({ posts = [], isCarousel = false }) {
     </>
   );
 }
+
+function PostInfo({ post, index }) {
+  return (
+    <div className="post-info">
+      <div className="post-text-icon-row">
+        <div className="post-icons">
+          <button className="icon-button"><FaPaw /></button>
+          <button className="icon-button"><FaComment /></button>
+          <button className="icon-button"><TbSend /></button>
+        </div>
+        <div className="post-text">
+          <p><strong>{post.caption}</strong></p>
+          <p className="timestamp">{post.date || generatePostDate(index)}</p>
+        </div>
+      </div>
+
+      <div className="tagged-pets-row">
+  {[...(post.taggedPets || []), ...(post.taggedFollowedPets || [])].map((pet, idx) => (
+    <img
+      key={idx}
+      src={pet.image}
+      alt={pet.name}
+      className="tagged-pet-icon"
+      style={{
+        zIndex: 10 - idx, // ensures correct stacking
+        marginLeft: idx === 0 ? 0 : -10,
+        border: post.taggedFollowedPets?.some(p => p.name === pet.name)
+          ? "2px dashed #948be1"
+          : "2px solid white",
+      }}
+    />
+  ))}
+</div>
+
+    </div>
+  );
+}
+
 
 export default Posts;
