@@ -1186,11 +1186,11 @@ style.innerHTML =  `
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 10px;
   display: flex;
   align-items: center;
-  margin-left: -170px;   /* horizontal spacing */
-  margin-top: -135px;    /* vertical spacing */
+  margin-left: -200px;   /* horizontal spacing */
+  margin-top: -140px;    /* vertical spacing */
 }
 
 
