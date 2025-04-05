@@ -1,236 +1,237 @@
 import React, { useEffect } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Box,
+  Typography,
+  Avatar,
+  Button,
+  IconButton,
+  Chip,
+  Grid,
+  Divider,
+  Paper,
+} from "@mui/material";
 import { FaPhoneAlt, FaEnvelope, FaHeart, FaTimes } from "react-icons/fa";
 
 const PetModal = ({ pet, onClose }) => {
   if (!pet) return null;
 
-  // Optional: Lock background scroll
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = "auto"; };
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, []);
 
-  const handleBackdropClick = (e) => {
-    if (e.target.classList.contains("petmodal-overlay")) {
-      onClose();
-    }
-  };
-
   return (
-    <>
-      <style>{`
-        .petmodal-overlay {
-          position: fixed;
-          top: 0; left: 0;
-          width: 100%; height: 100%;
-          background: rgba(0, 0, 0, 0.45);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 1000;
-        }
+    <Dialog
+      open={!!pet}
+      onClose={onClose}
+      maxWidth="md"
+      fullWidth
+      PaperProps={{
+        sx: { borderRadius: "24px", p: 1.5 },
+      }}
+    >
+      <DialogTitle
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          pb: 0,
+        }}
+      >
+        <Typography variant="h5" fontWeight="bold">
+          {pet.name} - {pet.title || `Playful ${pet.breed}`}
+        </Typography>
+        <IconButton onClick={onClose}>
+          <FaTimes />
+        </IconButton>
+      </DialogTitle>
 
-        .petmodal-content {
-          background: #fff;
-          padding: 2rem;
-          border-radius: 16px;
-          max-width: 1000px;
-          width: 90%;
-          position: relative;
-          box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-        }
+      <DialogContent>
+        <Box
+          display="flex"
+          flexDirection={{ xs: "column", md: "row" }}
+          gap={4}
+          mt={1}
+        >
+          {/* LEFT: Image + thumbnails */}
+          <Box
+            flex={1}
+            sx={{
+              backgroundColor: "#eee",
+              borderRadius: 2,
+              padding: 2,
+            }}
+          >
+            <Box
+              component="img"
+              src={pet.image}
+              alt={pet.name}
+              sx={{
+                width: "100%",
+                borderRadius: 2,
+                border: "2px solid #ccc",
+              }}
+            />
+            <Box mt={2} display="flex" gap={1} flexWrap="wrap">
+              {pet.gallery?.map((img, i) => (
+                <Box
+                  key={i}
+                  component="img"
+                  src={img}
+                  alt={`Gallery ${i}`}
+                  sx={{
+                    width: 60,
+                    height: 60,
+                    objectFit: "cover",
+                    borderRadius: 1,
+                    border: "1px solid #ccc",
+                  }}
+                />
+              ))}
+              <Box
+                sx={{
+                  width: 60,
+                  height: 60,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "#ddd",
+                  borderRadius: 1,
+                  fontSize: "1.5rem",
+                  fontWeight: "bold",
+                }}
+              >
+                +
+              </Box>
+            </Box>
+          </Box>
 
-        .petmodal-close {
-          position: absolute;
-          top: 1rem;
-          right: 1rem;
-          font-size: 1.4rem;
-          background: none;
-          border: none;
-          cursor: pointer;
-        }
+          {/* RIGHT: Info */}
+          <Box flex={1} display="flex" flexDirection="column" gap={3}>
+            {/* Chips */}
+            <Box display="flex" gap={1} flexWrap="wrap">
+              <Chip label={`${pet.age} Years Old`} />
+              <Chip label={pet.gender || "Female"} />
+              <Chip label={pet.status || "Vaccinated"} />
+            </Box>
 
-        .petmodal-header h2 {
-          margin-bottom: 1rem;
-        }
+            {/* About */}
+            <Box>
+              <Typography variant="subtitle1" fontWeight="bold">
+                About {pet.name}
+              </Typography>
+              <Typography variant="body2" mt={0.5}>
+                {pet.description ||
+                  "This is a lovely and playful pet waiting for a forever home!"}
+              </Typography>
+            </Box>
 
-        .petmodal-body {
-          display: flex;
-          gap: 2rem;
-          margin-top: 1rem;
-          flex-wrap: wrap;
-        }
+            <Divider />
 
-        .petmodal-image-section {
-          flex: 1;
-          background: #f0f0f0;
-          padding: 1rem;
-          border-radius: 12px;
-        }
+            {/* Shelter Info */}
+            <Box display="flex" alignItems="center" gap={2}>
+              <Avatar
+                src={pet.shelterImg || "/public/linkedGIRl.jpg"}
+                alt="Shelter"
+                sx={{ width: 48, height: 48 }}
+              />
+              <Box>
+                <Typography fontWeight="bold">
+                  {pet.shelter || "Happy Paws Shelter"}
+                </Typography>
+                <Typography variant="body2">
+                  {pet.address || "123 Pet Street, New York"}
+                </Typography>
+              </Box>
+            </Box>
 
-        .petmodal-main-image {
-          width: 100%;
-          border-radius: 8px;
-          border: 2px solid #ccc;
-        }
+            {/* Buttons with more spacing */}
+            <Box display="flex" flexDirection="column" gap={1.2}>
+              <Button
+                variant="contained"
+                fullWidth
+                startIcon={<FaPhoneAlt />}
+                sx={{
+                  backgroundColor: "#000",
+                  color: "#fff",
+                  "&:hover": { backgroundColor: "#222" },
+                }}
+              >
+                Contact Shelter
+              </Button>
 
-        .petmodal-thumbnail-row {
-          display: flex;
-          gap: 0.5rem;
-          margin-top: 1rem;
-        }
+              <Button
+                variant="outlined"
+                fullWidth
+                startIcon={<FaEnvelope />}
+                sx={{
+                  backgroundColor: "#fff",
+                  borderColor: "#000",
+                  color: "#000",
+                  "&:hover": { backgroundColor: "#f9f9f9" },
+                }}
+              >
+                Send Message
+              </Button>
 
-        .petmodal-thumbnail {
-          width: 60px;
-          height: 60px;
-          object-fit: cover;
-          border-radius: 6px;
-          border: 1px solid #ccc;
-        }
+              <Button
+                variant="outlined"
+                fullWidth
+                startIcon={<FaHeart />}
+                sx={{
+                  backgroundColor: "#fff",
+                  borderColor: "#000",
+                  color: "#000",
+                  "&:hover": { backgroundColor: "#f9f9f9" },
+                }}
+              >
+                Save to Favorites
+              </Button>
+            </Box>
 
-        .petmodal-add-more {
-          width: 60px;
-          height: 60px;
-          background: #ddd;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.5rem;
-          border-radius: 6px;
-        }
+            {/* Additional Details: Breed & Size first row, Weight & Color second */}
+            <Box>
+            <Divider sx={{ my: 3 }} />
+            <Typography variant="subtitle1" fontWeight="bold">
+              Additional Details
+            </Typography>
+            <Grid container spacing={2} mt={1}>
+              <Grid item xs={6}>
+                <Typography variant="body2" color="text.secondary">
+                  Breed
+                </Typography>
+                <Typography variant="body2">{pet.breed}</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="body2" color="text.secondary">
+                  Size
+                </Typography>
+                <Typography variant="body2">{pet.size || "Medium"}</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="body2" color="text.secondary">
+                  Weight
+                </Typography>
+                <Typography variant="body2">{pet.weight || "50 lbs"}</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="body2" color="text.secondary">
+                  Color
+                </Typography>
+                <Typography variant="body2">{pet.color || "Golden"}</Typography>
+              </Grid>
+            </Grid>
+          </Box>
 
-        .petmodal-info-section {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          gap: 1.2rem;
-        }
-
-        .petmodal-badges {
-          display: flex;
-          gap: 0.5rem;
-          flex-wrap: wrap;
-        }
-
-        .petmodal-badge {
-          background: #eee;
-          padding: 0.3rem 0.7rem;
-          border-radius: 1rem;
-          font-size: 0.8rem;
-        }
-
-        .petmodal-about p {
-          margin-top: 0.4rem;
-          line-height: 1.4;
-        }
-
-        .petmodal-shelter-info {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-        }
-
-        .petmodal-shelter-avatar {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-        }
-
-        .petmodal-shelter-name {
-          font-weight: bold;
-        }
-
-        .petmodal-action {
-          padding: 0.6rem 1rem;
-          font-size: 0.9rem;
-          border-radius: 6px;
-          border: 1px solid #ccc;
-          background: white;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-        }
-
-        .petmodal-action.petmodal-primary {
-          background: black;
-          color: white;
-          border: none;
-        }
-
-        .petmodal-additional-details h4 {
-          margin-top: 1rem;
-        }
-
-        .petmodal-details-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1rem;
-          font-size: 0.9rem;
-        }
-      `}</style>
-
-      <div className="petmodal-overlay" onClick={handleBackdropClick}>
-        <div className="petmodal-content">
-          <button className="petmodal-close" onClick={onClose}><FaTimes /></button>
-
-          <div className="petmodal-header">
-            <h2>{pet.name} - {pet.title || "Playful " + pet.breed}</h2>
-          </div>
-
-          <div className="petmodal-body">
-            {/* Left side: image & thumbnails */}
-            <div className="petmodal-image-section">
-              <img className="petmodal-main-image" src={pet.image} alt={pet.name} />
-              <div className="petmodal-thumbnail-row">
-                {pet.gallery?.map((img, i) => (
-                  <img key={i} className="petmodal-thumbnail" src={img} alt={`Gallery ${i}`} />
-                ))}
-                <div className="petmodal-add-more">+</div>
-              </div>
-            </div>
-
-            {/* Right side: badges, info, shelter, buttons */}
-            <div className="petmodal-info-section">
-              <div className="petmodal-badges">
-                <span className="petmodal-badge">{pet.age} Years Old</span>
-                <span className="petmodal-badge">{pet.gender || "Female"}</span>
-                <span className="petmodal-badge">{pet.status || "Vaccinated"}</span>
-              </div>
-
-              <div className="petmodal-about">
-                <h4>About {pet.name}</h4>
-                <p>{pet.description || "This is a lovely and playful pet waiting for a forever home!"}</p>
-              </div>
-
-              <hr />
-
-              <div className="petmodal-shelter-info">
-                <img src={pet.shelterImg || "/public/linkedGIRl.jpg"} alt="Shelter" className="petmodal-shelter-avatar" />
-                <div>
-                  <p className="petmodal-shelter-name">{pet.shelter || "Happy Paws Shelter"}</p>
-                  <p className="petmodal-shelter-location">{pet.address || "123 Pet Street, New York"}</p>
-                </div>
-              </div>
-
-              <button className="petmodal-action petmodal-primary"><FaPhoneAlt /> Contact Shelter</button>
-              <button className="petmodal-action"><FaEnvelope /> Send Message</button>
-              <button className="petmodal-action"><FaHeart /> Save to Favorites</button>
-
-              <div className="petmodal-additional-details">
-                <h4>Additional Details</h4>
-                <div className="petmodal-details-grid">
-                  <div><strong>Breed</strong><p>{pet.breed}</p></div>
-                  <div><strong>Size</strong><p>{pet.size || "Medium"}</p></div>
-                  <div><strong>Weight</strong><p>{pet.weight || "50 lbs"}</p></div>
-                  <div><strong>Color</strong><p>{pet.color || "Golden"}</p></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+          </Box>
+        </Box>
+      </DialogContent>
+    </Dialog>
   );
 };
 

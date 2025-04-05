@@ -1,20 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import AddPetModal from './AddPetModal';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
-import PostButton from './PostButton';
-import { Link, useLocation } from 'react-router-dom';
 
-function TopBar({ pets, followedPets, setPets, setActivePet }) {
+function TopBar({ pets, setPets, setActivePet }) {
   const [query, setQuery] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-  const [noResults, setNoResults] = useState(false);
   const searchRef = useRef(null);
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
   const isSignupPage = location.pathname === '/signup';
-  const isAuthPage = isLoginPage || isSignupPage;
+  const hideTopbar = isLoginPage || isSignupPage;
 
   // Sample search categories and items for the dropdown
   const sampleSearchItems = {
@@ -28,7 +26,6 @@ function TopBar({ pets, followedPets, setPets, setActivePet }) {
     function handleClickOutside(event) {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setShowDropdown(false);
-        setNoResults(false);
       }
     }
     
@@ -53,22 +50,18 @@ function TopBar({ pets, followedPets, setPets, setActivePet }) {
     });
     
     setSearchResults(results);
-    
-    // If no results, show no results message in dropdown
-    if (Object.keys(results).length === 0) {
-      setNoResults(true);
-    } else {
-      setNoResults(false);
-    }
-    
     setShowDropdown(true);
+    
+    // If no results or on submit, show alert
+    if (Object.keys(results).length === 0) {
+      alert(`No results found for: "${query}"`);
+    }
   };
 
   const handleSearchItemClick = (item) => {
     setQuery(item);
     setShowDropdown(false);
-    // Navigate or perform action with the selected item
-    // (removed alert, would normally navigate to a page or perform an action)
+    alert(`You selected: ${item}`);
   };
 
   const handleInputChange = (e) => {
@@ -79,7 +72,6 @@ function TopBar({ pets, followedPets, setPets, setActivePet }) {
       handleSearch();
     } else {
       setShowDropdown(false);
-      setNoResults(false);
     }
   };
 
@@ -88,87 +80,77 @@ function TopBar({ pets, followedPets, setPets, setActivePet }) {
     setIsPopupOpen(false);
   };
 
+  if (hideTopbar) {
+    return null;
+  }
+
   return (
-    <div className={`ts-topbar ${isAuthPage ? 'auth-page' : ''}`}>
+    <div className="ts-topbar">
       <div className="ts-left-content">
         <h1 className="ts-logo">Pet-igree</h1>
-        
-        {!isAuthPage && (
-          <>
-            {pets.map((pet, index) => (
-              <button
-                key={index}
-                className="profile-link"
-                onClick={() =>
-                  setActivePet({
-                    ...pet,
-                    onHealthUpdate: (field, value) => {
-                      const updated = pets.map((p) =>
-                        p.name === pet.name ? { ...p, [field]: value } : p
-                      );
-                      setPets(updated);
-                      setActivePet((prev) => ({ ...prev, [field]: value }));
-                    },
-                  })
-                }
-              >
-                <img src={pet.image} alt={pet.name} className="ts-profile-image" />
-              </button>
-            ))}
+        {pets.map((pet, index) => (
+          <button
+            key={index}
+            className="profile-link"
+            onClick={() =>
+              setActivePet({
+                ...pet,
+                onHealthUpdate: (field, value) => {
+                  const updated = pets.map((p) =>
+                    p.name === pet.name ? { ...p, [field]: value } : p
+                  );
+                  setPets(updated);
+                  setActivePet((prev) => ({ ...prev, [field]: value }));
+                },
+              })
+            }
+          >
+            <img src={pet.image} alt={pet.name} className="ts-profile-image" />
+          </button>
+        ))}
 
-            <div className="ts-plus-icon" onClick={() => setIsPopupOpen(true)}>
-              <FiPlusCircle size={36} />
-            </div>
-          </>
+        <div className="ts-plus-icon" onClick={() => setIsPopupOpen(true)}>
+          <FiPlusCircle size={36} />
+        </div>
+      </div>
+      <div className="ts-search-container" ref={searchRef}>
+        <div className="ts-search-wrapper">
+          <FiSearch className="ts-search-icon" />
+          <input
+            type="text"
+            placeholder="Search pets, products, services..."
+            className="ts-search-input"
+            value={query}
+            onChange={handleInputChange}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleSearch();
+              }
+            }}
+            onFocus={() => query.length > 2 && setShowDropdown(true)}
+          />
+        </div>
+        
+        {showDropdown && Object.keys(searchResults).length > 0 && (
+          <div className="ts-search-dropdown">
+            {Object.entries(searchResults).map(([category, items]) => (
+              <div key={category} className="ts-search-category">
+                <h4>{category.charAt(0).toUpperCase() + category.slice(1)}</h4>
+                <ul>
+                  {items.map((item, index) => (
+                    <li 
+                      key={index} 
+                      onClick={() => handleSearchItemClick(item)}
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         )}
       </div>
-      
-      {!isAuthPage && (
-        <div className="ts-search-container" ref={searchRef}>
-          <div className="ts-search-wrapper">
-            <FiSearch className="ts-search-icon" />
-            <input
-              type="text"
-              placeholder="Search pets, products, services..."
-              className="ts-search-input"
-              value={query}
-              onChange={handleInputChange}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  handleSearch();
-                }
-              }}
-              onFocus={() => query.length > 2 && handleSearch()}
-            />
-          </div>
-          
-          {showDropdown && (
-            <div className="ts-search-dropdown">
-              {noResults ? (
-                <div className="ts-search-no-results">
-                  <p>No results found for: "{query}"</p>
-                </div>
-              ) : (
-                Object.entries(searchResults).map(([category, items]) => (
-                  <div key={category} className="ts-search-category">
-                    <h4>{category.charAt(0).toUpperCase() + category.slice(1)}</h4>
-                    <ul>
-                      {items.map((item, index) => (
-                        <li 
-                          key={index} 
-                          onClick={() => handleSearchItemClick(item)}
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))
-              )}
-            </div>
-          )}
-        </div>
-      )}
 
       {isPopupOpen && (
         <AddPetModal
@@ -186,38 +168,6 @@ export default TopBar;
 /* Embedded CSS */
 const style = document.createElement('style');
 style.innerHTML =  `
-
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 24px;
-  background-color: #099EC8;
-  height: 60px;
-  position: fixed;
-  width: 100%;
-  z-index: 1000;
-}
-
-.topbar-left,
-.topbar-center,
-.topbar-right {
-  display: flex;
-  align-items: center;
-}
-
-.topbar-left {
-  gap: 10px;
-}
-
-.topbar-center {
-  justify-content: center;
-  flex: 1;
-}
-
-.topbar-right {
-  gap: 10px;
-}
 
 .profile-link {
   background: none;
@@ -577,13 +527,6 @@ html, body {
   background-color: #f0f8ff;
 }
 
-.ts-search-no-results {
-  padding: 12px 16px;
-  color: #777;
-  font-size: 14px;
-  text-align: center;
-}
-
 .ts-topbar {
   background-color: #099EC8;
   color: white;
@@ -598,36 +541,6 @@ html, body {
   left: 0;
   width: 100%;
   z-index: 1000;
-}
-
-/* Special styling for auth pages */
-.ts-topbar.auth-page {
-  justify-content: flex-start;
-}
-
-.ts-topbar.auth-page .ts-left-content {
-  justify-content: flex-start;
-  width: auto;
-}
-
-.ts-topbar.auth-page .ts-logo {
-  text-align: left;
-  padding-right: 15px;
-}
-
-.ts-sidebar.auth-page {
-  background-color: #9DD8EA;
-  width: 70px;
-  height: calc(100vh - 60px);
-  position: fixed;
-  top: 60px;
-  left: 0;
-  z-index: 999;
-}
-
-/* Content adjustment for auth pages */
-.auth-page ~ .content {
-  margin-left: 70px;
 }
 
 .ts-left-content {
@@ -680,4 +593,3 @@ html, body {
 
 `;
 document.head.appendChild(style); 
-

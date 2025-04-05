@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import TopBar from './pages/Topbar';
 import Sidebar from './pages/Sidebar';
 import HomePage from './pages/Homepage';
@@ -8,7 +8,9 @@ import PetShopPage from './pages/PetShoppage';
 import ProfilePage from './pages/Profilepage';
 import SettingsPage from './pages/Settingspage';
 import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import PetProfileModal from './pages/PetProfileModal';
+import ChatPage from './pages/ChatBox';
 
 const captions = [
   "Caught mid-zoomies! 🐾", "New trick unlocked ✨", "This face = instant treat 🎯",
@@ -74,29 +76,46 @@ function App() {
             setEditable(false);
           }}
         />
+        <Sidebar />
 
-        <div className="main-content">
-          <Sidebar />
-          <div className="content">
-            <Routes>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/" element={<HomePage />} />
-              <Route
-                path="/profile"
-                element={
-                  <ProfilePage
-                    pets={pets}
-                    setPets={setPets}
-                    setActivePet={setActivePet}
-                  />
-                }
-              />
-              <Route path="/pedigree" element={<PedigreePage />} />
-              <Route path="/petshop" element={<PetShopPage />} />
-              <Route path="/settings" element={<SettingsPage />} />
-            </Routes>
-          </div>
-        </div>
+        <Routes>
+          <Route path="/login" element={
+            <div className="auth-content">
+              <LoginPage />
+            </div>
+          } />
+          <Route path="/signup" element={
+            <div className="auth-content">
+              <SignupPage />
+            </div>
+          } />
+          <Route
+            path="*"
+            element={
+              <div className="main-content">
+                <div className="content">
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route
+                      path="/profile"
+                      element={
+                        <ProfilePage
+                          pets={pets}
+                          setPets={setPets}
+                          setActivePet={setActivePet}
+                        />
+                      }
+                    />
+                    <Route path="/pedigree" element={<PedigreePage />} />
+                    <Route path="/petshop" element={<PetShopPage />} />
+                    <Route path="/settings" element={<SettingsPage />} />
+                    <Route path="/chat" element={<ChatPage />} />
+                  </Routes>
+                </div>
+              </div>
+            }
+          />
+        </Routes>
 
         {activePet && (
           <PetProfileModal
@@ -142,6 +161,102 @@ function App() {
           />
         )}
       </div>
+
+      {/* Add CSS for auth pages */}
+      <style>
+        {`
+          .auth-content {
+            margin-left: 70px;
+            margin-top: 60px;
+            padding: 0;
+            height: calc(100vh - 60px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #E8FAFF;
+            overflow: hidden;
+          }
+          
+          /* Override any scrolling in the login/signup forms */
+          .auth-content .lg-login-page {
+            padding: 0;
+            overflow: hidden;
+            min-height: calc(100vh - 60px);
+            height: calc(100vh - 60px);
+            width: 100%;
+          }
+          
+          /* Make containers bigger */
+          .auth-content .lg-login-container {
+            width: 900px;
+            height: 600px;
+            max-height: 80vh;
+            margin: 0 auto;
+            position: relative;
+            top: 0; /* Remove negative top position */
+          }
+          
+          /* Style for the form container */
+          .auth-content .lg-form-container {
+            margin: auto 0;
+            display: flex;
+            flex-direction: column;
+          }
+          
+          /* Ensure the form has enough space for all elements */
+          .auth-content .lg-login-form {
+            padding: 20px 50px;
+            min-width: 450px;
+            justify-content: center;
+            display: flex;
+          }
+          
+          /* Make text inputs larger and reduce space between them */
+          .auth-content .lg-form-group {
+            margin-bottom: 12px;
+          }
+          
+          .auth-content .lg-form-group input {
+            padding: 10px;
+            font-size: 1.1rem;
+          }
+          
+          /* Move button up */
+          .auth-content .lg-signup-button {
+            padding: 10px;
+            font-size: 1.1rem;
+            margin-top: 15px;
+          }
+          
+          /* Move text below button up */
+          .auth-content .lg-login-form p {
+            margin-top: 10px !important;
+          }
+          
+          /* Fix illustration size */
+          .auth-content .lg-dog-illustration {
+            width: 200px;
+            height: 200px;
+          }
+          
+          /* Adjust form spacing and move title up */
+          .auth-content h2 {
+            font-size: 2rem !important;
+            margin-bottom: 20px !important;
+            margin-top: 0 !important;
+          }
+          
+          /* Reduce space between label and input */
+          .auth-content .lg-form-group label {
+            margin-bottom: 4px;
+          }
+          
+          /* Reduce space for password checkbox */
+          .auth-content .lg-show-password {
+            margin-top: 4px;
+          }
+        `}
+      </style>
     </Router>
   );
 }
