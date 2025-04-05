@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { IoIosTennisball } from 'react-icons/io';
 import { MdAddAPhoto } from "react-icons/md";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
+import ReactDOM from 'react-dom';
+
 
 const PostButton = ({ pets = [], followedPets = [] }) => {
     console.log("Followed pets inside PostButton:", followedPets);
@@ -12,6 +14,21 @@ const PostButton = ({ pets = [], followedPets = [] }) => {
   const [taggedPets, setTaggedPets] = useState([]);
   const [taggedFollowedPets, setTaggedFollowedPets] = useState([]); // FIXED: defined in correct place
   const [isHoveringUpload, setIsHoveringUpload] = useState(false);
+
+    // Prevent scrolling when modal is open
+    React.useEffect(() => {
+        if (isOpen) {
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "auto";
+        }
+    
+        // Cleanup in case the component unmounts while open
+        return () => {
+          document.body.style.overflow = "auto";
+        };
+      }, [isOpen]);
+    
 
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
@@ -60,7 +77,7 @@ Tagged Followed Pets: ${taggedFollowedPets.map(p => p.name).join(', ')}
       </button>
 
       {/* Popup Modal */}
-      {isOpen && (
+      {isOpen && ReactDOM.createPortal (
         <div style={styles.overlay} onClick={() => setIsOpen(false)}>
           <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
             <h2 style={{ marginBottom: "12px" }}>Create Post</h2>
@@ -136,7 +153,8 @@ Tagged Followed Pets: ${taggedFollowedPets.map(p => p.name).join(', ')}
               <button onClick={handleSubmit} style={styles.post}>Post</button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.getElementById('modal-root')
       )}
     </div>
   );
