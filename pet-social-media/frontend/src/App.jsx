@@ -11,6 +11,8 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import PetProfileModal from './pages/PetProfileModal';
 import ChatPage from './pages/ChatBox';
+import './index.css';
+
 
 const captions = [
   "Caught mid-zoomies! 🐾", "New trick unlocked ✨", "This face = instant treat 🎯",

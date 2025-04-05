@@ -14,6 +14,10 @@ const PostButton = ({ pets = [], followedPets = [], onPost }) => {
   const [taggedPets, setTaggedPets] = useState([]);
   const [taggedFollowedPets, setTaggedFollowedPets] = useState([]); // FIXED: defined in correct place
   const [isHoveringUpload, setIsHoveringUpload] = useState(false);
+  const [isHoveringTennisBall, setIsHoveringTennisBall] = useState(false);
+
+
+
 
     // Prevent scrolling when modal is open
     React.useEffect(() => {
@@ -80,12 +84,26 @@ const PostButton = ({ pets = [], followedPets = [], onPost }) => {
     <div>
       {/* Tennis Ball Button */}
       <button
-        onClick={() => setIsOpen(true)}
-        style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '32px', color: '#2ecc71' }}
-        title="New Post"
-      >
-        <IoIosTennisball />
-      </button>
+  onClick={() => setIsOpen(true)}
+  style={{
+    background: 'none',
+    border: 'none',
+    padding: '10px',
+    cursor: 'pointer',
+    borderRadius: '50%',
+  }}
+  title="New Post"
+>
+  <IoIosTennisball
+  className="bounce-hover"
+  style={{
+    fontSize: '48px',
+    color: '#2ecc71',
+  }}
+/>
+
+</button>
+
 
       {/* Popup Modal */}
       {isOpen &&
@@ -200,124 +218,156 @@ const PostButton = ({ pets = [], followedPets = [], onPost }) => {
 export default PostButton;
 // Styles
 const styles = {
-    followedPetCarousel: {
-        display: "flex",
-        gap: "10px",
-        overflowX: "auto",
-        whiteSpace: "nowrap",
-        paddingBottom: "5px",
-        maxWidth: "100%",
-        height: "80px", // ✅ force the height to keep it visible
+    tennisBallButton: {
+        fontSize: '48px',
+        color: '#2ecc71',
+        border: 'none',
+        background: 'none',
+        padding: '10px',
+        cursor: 'pointer',
+        borderRadius: '50%',
+        transition: 'transform 0.2s',
       },
-       
-  overlay: {
-    position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-    backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex',
-    alignItems: 'center', justifyContent: 'center', zIndex: 1000,
-  },
-  modal: {
-    backgroundColor: "#948be1",
-    padding: "20px",
-    borderRadius: "12px",
-    width: "600px", // you already had this
-    maxWidth: "90vw", // ✅ ensure it doesn't break on small screens
-    maxHeight: "90vh",
-    overflowY: "auto",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    color: "white",
-  },
-  
-  
-  imageGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gap: "10px",
-    width: "100%",
-    marginBottom: "10px",
-  },
-  imageWrapper: {
-    position: "relative",
-    width: "100%",
-    height: "120px",
-    overflow: "hidden",
-    borderRadius: "8px",
-  },
-  previewImage: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    borderRadius: "8px",
-  },
-  deleteIcon: {
-    position: "absolute",
-    top: "5px",
-    right: "5px",
-    cursor: "pointer",
-    backgroundColor: "white",
-    borderRadius: "50%",
-  },
-  uploadBox: {
-    width: "100%",
-    height: "180px",
-    border: "2px dashed #ccc",
-    borderRadius: "12px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "pointer",
-    transition: "background-color 0.3s ease",
-    marginBottom: "10px",
-  },
-  textarea: {
-    padding: "10px",
-    minHeight: "80px",
-    borderRadius: "8px",
-    border: "1px solid #ccc",
-    resize: "vertical",
-    width: "100%",
-    marginBottom: "10px",
-  },
-  input: {
-    padding: "10px",
-    borderRadius: "8px",
-    border: "1px solid #ccc",
-    width: "100%",
-    marginBottom: "10px",
-  },
-  buttonRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "100%",
-    marginTop: "10px",
-  },
-  cancel: {
-    backgroundColor: "#ccc",
-    padding: "8px 16px",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
-  },
-  post: {
-    backgroundColor: "#2ecc71",
-    color: "white",
-    padding: "8px 16px",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
-  },
-  petRow: {
-    display: "flex",
-    gap: "10px",
-    overflowX: "auto",
-    paddingBottom: "5px",
-  },
-  petImage: {
-    width: "60px",
-    height: "60px",
-    borderRadius: "50%",
-    objectFit: "cover",
-    cursor: "pointer",
-  },
-};
+      
+      tennisBallHover: {
+        animation: 'pulse 1s infinite',
+      },
+      
+        followedPetCarousel: {
+          display: "flex",
+          gap: "10px",
+          overflowX: "auto",
+          whiteSpace: "nowrap",
+          paddingBottom: "5px",
+          maxWidth: "100%",
+          height: "80px",
+        },
+      
+        overlay: {
+          position: 'fixed',
+          top: 0, left: 0,
+          width: '100vw', height: '100vh',
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+        },
+      
+        modal: {
+          backgroundColor: "#948be1",
+          padding: "20px",
+          borderRadius: "12px",
+          width: "600px",
+          maxWidth: "90vw",
+          maxHeight: "90vh",
+          overflowY: "auto",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          color: "white",
+        },
+      
+        imageGrid: {
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "10px",
+          width: "100%",
+          marginBottom: "10px",
+        },
+        imageWrapper: {
+          position: "relative",
+          width: "100%",
+          height: "120px",
+          overflow: "hidden",
+          borderRadius: "8px",
+        },
+        previewImage: {
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          borderRadius: "8px",
+        },
+        deleteIcon: {
+          position: "absolute",
+          top: "5px",
+          right: "5px",
+          cursor: "pointer",
+          backgroundColor: "white",
+          borderRadius: "50%",
+        },
+        uploadBox: {
+          width: "100%",
+          height: "180px",
+          border: "2px dashed #ccc",
+          borderRadius: "12px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          transition: "background-color 0.3s ease",
+          marginBottom: "10px",
+        },
+        textarea: {
+          padding: "10px",
+          minHeight: "80px",
+          borderRadius: "8px",
+          border: "1px solid #ccc",
+          resize: "vertical",
+          width: "100%",
+          marginBottom: "10px",
+        },
+        input: {
+          padding: "10px",
+          borderRadius: "8px",
+          border: "1px solid #ccc",
+          width: "100%",
+          marginBottom: "10px",
+        },
+        buttonRow: {
+          display: "flex",
+          justifyContent: "space-between",
+          width: "100%",
+          marginTop: "10px",
+        },
+        cancel: {
+          backgroundColor: "#ccc",
+          padding: "8px 16px",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+        },
+        post: {
+          backgroundColor: "#2ecc71",
+          color: "white",
+          padding: "8px 16px",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+        },
+        petRow: {
+          display: "flex",
+          gap: "10px",
+          overflowX: "auto",
+          paddingBottom: "5px",
+        },
+        petImage: {
+          width: "60px",
+          height: "60px",
+          borderRadius: "50%",
+          objectFit: "cover",
+          cursor: "pointer",
+        },
+      
+        // ✅ NEW POST BUTTON STYLE WITH HOVER + ANIMATION
+        newPostButton: {
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          fontSize: "48px",
+          color: "#2ecc71",
+          transition: "transform 0.2s ease-in-out",
+          animation: "pulse 2s infinite",
+        }
+      };
+      
