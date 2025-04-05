@@ -9,14 +9,32 @@ import '../styles/TopAndSide.css';
 function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login';
+  const isLoginPage = location.pathname === '/';
   const isSignupPage = location.pathname === '/signup';
   const isAuthPage = isLoginPage || isSignupPage;
   const { profileImage } = useUser();
 
-  const handleLogout = () => {
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/logout', {
+        method: 'POST',
+        credentials: 'include', // sends cookies
+      });
+  
+      if (response.ok) {
+        console.log('Logged out');
+        navigate('/');
+      } else {
+        const error = await response.json();
+        console.error('Logout failed:', error);
+        alert('Failed to logout. Try again.');
+      }
+    } catch (err) {
+      console.error('Logout error:', err);
+      alert('Error logging out.');
+    }
   };
+  
 
   return (
     <div className={`ts-sidebar ${isAuthPage ? 'auth-page' : ''}`}>

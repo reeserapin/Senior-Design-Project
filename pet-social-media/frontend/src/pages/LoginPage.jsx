@@ -5,7 +5,7 @@ import '../styles/LoginPage.css';
 function LoginPage() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: '',
+    identifier: '',
     password: '',
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -21,21 +21,27 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('http://localhost:5000/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include', // Keep session cookies
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        navigate('/'); // Navigate to home page after successful login
+        const result = await response.json();
+        console.log('Login success:', result);
+        navigate('/home'); // Redirect after login
       } else {
-        console.error('Login failed');
+        const error = await response.json();
+        console.error('Login failed:', error);
+        alert(error?.error || 'Invalid email or password.');
       }
     } catch (error) {
       console.error('Error during login:', error);
+      alert('Error during login. Please try again.');
     }
   };
 
@@ -50,12 +56,12 @@ function LoginPage() {
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
               <div className="lg-form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="identifier">Email or Username</label>
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  type="text"
+                  id="identifier"
+                  name="identifier"
+                  value={formData.identifier}
                   onChange={handleChange}
                   required
                 />
@@ -95,4 +101,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage; 
+export default LoginPage;
