@@ -49,7 +49,7 @@ function Sidebar() {
           </Link>
           <ul>
             <li>
-              <Link to="/" className="ts-nav-link">
+              <Link to="/home" className="ts-nav-link">
                 <FaHome className="ts-nav-icon" />
                 <span>Home</span>
               </Link>
