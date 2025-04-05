@@ -261,10 +261,12 @@ function ProfilePage({ pets, setPets }) {
           day: "numeric",
           year: "numeric",
         }),
+        taggedPets: newPost.taggedPets, // ⬅️ Add this!
       },
       ...prevPosts,
     ]);
   };
+  
   
 
   // Callback passed to PetProfileModal to update the followedPets state
@@ -450,7 +452,7 @@ function ProfilePage({ pets, setPets }) {
 
         <div className="your-posts-section">
           <h2>Your Posts</h2>
-          <Posts postImages={userPosts.map(p => p.images)} captions={userPosts.map(p => p.caption)} dates={userPosts.map(p => p.date)} />
+          <Posts posts={userPosts} />
         </div>
 
         {activePet && (

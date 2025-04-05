@@ -38,14 +38,21 @@ const PostButton = ({ pets = [], followedPets = [], onPost }) => {
 
   const handleSubmit = () => {
     if (photos.length > 0 || caption.trim()) {
-        onPost?.({ images: photos, caption });
-        setIsOpen(false);
-        setPhotos([]);
-        setCaption('');
-        setTaggedPets([]);
-        setTaggedFollowedPets([]);       
-}
+      onPost?.({
+        images: photos,
+        caption,
+        taggedPets, // 👈 Pass this!
+      });
+  
+      // reset
+      setIsOpen(false);
+      setPhotos([]);
+      setCaption('');
+      setTaggedPets([]);
+      setTaggedFollowedPets([]);
+    }
   };
+  
 
   const toggleTagPet = (pet) => {
     setTaggedPets(prev =>

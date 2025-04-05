@@ -26,15 +26,15 @@ const sliderSettings = {
   arrows: false
 };
 
-function Posts({ postImages = [], captions = [], isCarousel = false }) {
+function Posts({ posts = [], isCarousel = false }) {
   return (
     <>
       {isCarousel ? (
         <div className="posts-carousel">
-          {postImages.map((imageSet, index) => (
+          {posts.map((post, index) => (
             <div key={index} className="post-card carousel">
               <Slider {...sliderSettings}>
-                {imageSet.map((imgUrl, i) => (
+                {post.images.map((imgUrl, i) => (
                   <img
                     key={i}
                     className="post-image"
@@ -52,8 +52,8 @@ function Posts({ postImages = [], captions = [], isCarousel = false }) {
                     <button className="icon-button"><TbSend /></button>
                   </div>
                   <div className="post-text">
-                    <p><strong>{captions[index % captions.length]}</strong></p>
-                    <p className="timestamp">{generatePostDate(index)}</p>
+                    <p><strong>{post.caption}</strong></p>
+                    <p className="timestamp">{post.date || generatePostDate(index)}</p>
                   </div>
                 </div>
               </div>
@@ -62,10 +62,10 @@ function Posts({ postImages = [], captions = [], isCarousel = false }) {
         </div>
       ) : (
         <div className="posts-grid">
-          {postImages.map((imageSet, index) => (
+          {posts.map((post, index) => (
             <div key={index} className="post-card">
               <Slider {...sliderSettings}>
-                {imageSet.map((imgUrl, i) => (
+                {post.images.map((imgUrl, i) => (
                   <img
                     key={i}
                     className="post-image"
@@ -83,11 +83,34 @@ function Posts({ postImages = [], captions = [], isCarousel = false }) {
                     <button className="icon-button"><TbSend /></button>
                   </div>
                   <div className="post-text">
-                    <p><strong>{captions[index % captions.length]}</strong></p>
-                    <p className="timestamp">{generatePostDate(index)}</p>
+                    <p><strong>{post.caption}</strong></p>
+                    <p className="timestamp">{post.date || generatePostDate(index)}</p>
                   </div>
                 </div>
-                <img className="post-profile" src="/user.jpg" alt="User" />
+
+                {/* ✅ This works now because you're mapping over posts */}
+                {post.taggedPets?.length > 0 && (
+                  <div className="tagged-pets" style={{ display: 'flex', marginTop: 10 }}>
+                    {post.taggedPets.map((pet, i) => (
+                      <img
+                        key={i}
+                        src={pet.image}
+                        alt={pet.name}
+                        className="post-profile"
+                        style={{
+                          width: 36,
+                          height: 36,
+                          borderRadius: '50%',
+                          objectFit: 'cover',
+                          border: '2px solid white',
+                          marginLeft: i > 0 ? -10 : 0,
+                          zIndex: post.taggedPets.length - i,
+                          position: 'relative',
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))}
