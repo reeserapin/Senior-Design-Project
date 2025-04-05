@@ -9,6 +9,9 @@ import Posts from "./Posts";
 import { MdAddAPhoto } from "react-icons/md";
 import { useUser } from "../UserContext";
 import { GiCrossedBones } from "react-icons/gi";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 // Helper function for generating post dates
 const generatePostDate = (index) => {
@@ -243,22 +246,24 @@ function ProfilePage({ pets, setPets }) {
   // Callback passed to PetProfileModal to update the followedPets state
   const handleToggleFollow = (pet, newFollowState) => {
     if (!newFollowState) {
-      // Remove pet if unfollowed
       setFollowedPets((prev) => prev.filter((p) => p.name !== pet.name));
+      toast.info(`You unfollowed ${pet.name}`);
     } else {
-      // Optionally add pet if followed back
       setFollowedPets((prev) => {
         if (!prev.some((p) => p.name === pet.name)) {
+          toast.success(`You're now following ${pet.name}`);
           return [...prev, pet];
         }
         return prev;
       });
     }
   };
+  
 
   return (
     <div className="profile-container">
       <Sidebar />
+      <ToastContainer position="top-center" autoClose={2000} />
       <main className="profile-main">
         <div className="profile-banner-container">
           <div className="profile-banner">
@@ -468,6 +473,7 @@ function ProfilePage({ pets, setPets }) {
               caption: captions[index % captions.length],
               date: generatePostDate(index),
             }))}
+            isOwnPet={true}
           />
         )}
 
@@ -796,7 +802,7 @@ style.innerHTML =  `
 }
 
 .bio-text {
-  font-size: 16px;
+  font-size: 20px;
   color: #2c2828;
   transition: background 0.2s;
 }
