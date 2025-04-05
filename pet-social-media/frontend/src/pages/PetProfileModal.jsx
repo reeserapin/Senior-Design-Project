@@ -100,23 +100,24 @@ const PetProfileModal = ({
           <div className="pet-image-column">
           <div className="pet-image-wrapper">   
 
-          {!isOwnPet && typeof isFollowed === 'boolean' && (
-            <div
-              className="following-badge"
-              onClick={(e) => {
-                e.stopPropagation(); // ✅ Prevent modal close
-                toggleFollow();      // ✅ Toggle follow state only
-              }}
-            >
-              {followed ? (
-                <>
-                  <RiUserFollowLine /> Following
-                </>
-              ) : (
-                "Follow"
-              )}
-            </div>
-          )}
+          {!pet?.isOwnPet && onToggleFollow && (
+  <div
+    className="following-badge"
+    onClick={(e) => {
+      e.stopPropagation();
+      toggleFollow();
+    }}
+  >
+    {followed ? (
+      <>
+        <RiUserFollowLine /> Following
+      </>
+    ) : (
+      "Follow"
+    )}
+  </div>
+)}
+
 
 
 
