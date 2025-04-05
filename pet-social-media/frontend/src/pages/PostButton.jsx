@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { IoIosTennisball } from 'react-icons/io';
 import { MdAddAPhoto } from "react-icons/md";
+import { IoIosRemoveCircleOutline } from "react-icons/io";
 
 const PostButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,10 @@ const PostButton = () => {
     setPhotos(prev => [...prev, ...urls]);
   };
 
+  const handleRemovePhoto = (indexToRemove) => {
+    setPhotos((prev) => prev.filter((_, i) => i !== indexToRemove));
+  };
+
   const handleSubmit = () => {
     alert(`Posted!\nPhotos: ${photos.length}\nCaption: ${caption}\nTagged Pets: ${taggedPets}\nTagged Users: ${taggedUsers}`);
     setIsOpen(false);
@@ -27,7 +32,6 @@ const PostButton = () => {
 
   return (
     <div>
-      {/* Tennis ball button */}
       <button
         onClick={() => setIsOpen(true)}
         style={{
@@ -42,20 +46,29 @@ const PostButton = () => {
         <IoIosTennisball />
       </button>
 
-      {/* Popup Modal */}
       {isOpen && (
         <div style={styles.overlay} onClick={() => setIsOpen(false)}>
           <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
             <h2 style={{ marginBottom: "12px" }}>Create Post</h2>
 
-            {/* Uploaded Images */}
-            {photos.length > 0 && (
-              <div style={styles.previewGrid}>
-                {photos.map((src, index) => (
-                  <img key={index} src={src} alt={`upload-${index}`} style={styles.image} />
-                ))}
-              </div>
-            )}
+            {/* Uploaded Photo Grid */}
+            <div style={styles.imageGrid}>
+              {photos.map((src, index) => (
+                <div key={index} style={styles.imageWrapper}>
+                  <img
+                    src={src}
+                    alt={`Uploaded ${index}`}
+                    style={styles.previewImage}
+                  />
+                  <IoIosRemoveCircleOutline
+                    size={24}
+                    color="red"
+                    style={styles.deleteIcon}
+                    onClick={() => handleRemovePhoto(index)}
+                  />
+                </div>
+              ))}
+            </div>
 
             {/* Upload Box */}
             <div
@@ -92,7 +105,7 @@ const PostButton = () => {
               style={styles.textarea}
             />
 
-            {/* Tag pets */}
+            {/* Tag fields */}
             <input
               type="text"
               placeholder="Tag your pet (e.g., Milo, Luna)"
@@ -100,8 +113,6 @@ const PostButton = () => {
               onChange={(e) => setTaggedPets(e.target.value)}
               style={styles.input}
             />
-
-            {/* Tag users */}
             <input
               type="text"
               placeholder="Tag other accounts (e.g., @joeschmoe)"
@@ -110,7 +121,7 @@ const PostButton = () => {
               style={styles.input}
             />
 
-            {/* Post + Cancel */}
+            {/* Buttons */}
             <div style={styles.buttonRow}>
               <button onClick={() => setIsOpen(false)} style={styles.cancel}>Cancel</button>
               <button onClick={handleSubmit} style={styles.post}>Post</button>
@@ -124,7 +135,6 @@ const PostButton = () => {
 
 export default PostButton;
 
-// 💅 Inline styles
 const styles = {
   overlay: {
     position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
@@ -144,7 +154,6 @@ const styles = {
     color: "white",
     transition: "height 0.3s ease",
   },
-  
   uploadBox: {
     width: "100%",
     height: "180px",
@@ -160,21 +169,33 @@ const styles = {
   uploadIcon: {
     transition: "color 0.3s ease",
   },
-  previewGrid: {
+  imageGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
+    gridTemplateColumns: "repeat(3, 1fr)",
     gap: "10px",
     width: "100%",
     marginBottom: "10px",
   },
-  image: {
-    width: '100%',
-    height: '180px',
-    borderRadius: '12px',
-    objectFit: 'cover',
-    marginBottom: '10px',
+  imageWrapper: {
+    position: "relative",
+    width: "100%",
+    height: "120px",
+    overflow: "hidden",
+    borderRadius: "8px",
   },
-  
+  previewImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: '8px',
+  },
+  deleteIcon: {
+    position: "absolute",
+    top: "5px",
+    right: "5px",
+    cursor: "pointer",
+    borderRadius: "50%",
+  },
   textarea: {
     padding: '10px',
     minHeight: '80px',
