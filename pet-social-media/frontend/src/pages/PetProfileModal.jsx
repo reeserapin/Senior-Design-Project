@@ -21,7 +21,7 @@ const PetProfileModal = ({
   onToggleEdit,
   isFollowed = false,
   onToggleFollow,
-  isOwnPet = false // ✅ add this here!
+ // ✅ add this here!
 }) => {
 
   if (!pet) return null;
@@ -61,6 +61,9 @@ const PetProfileModal = ({
     onHealthUpdate = () => {},
     onPersonalityUpdate = () => {},
   } = pet;
+
+  const isOwnPet = pet?.isOwnPet;
+
 
   const handleSliderChange = (field, value) => {
     onPersonalityUpdate(field, parseInt(value));

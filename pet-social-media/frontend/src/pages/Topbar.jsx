@@ -95,25 +95,27 @@ function TopBar({ pets, setPets, setActivePet }) {
         {!isAuthPage && (
           <>
             {pets.map((pet, index) => (
-              <button
-                key={index}
-                className="profile-link"
-                onClick={() =>
-                  setActivePet({
-                    ...pet,
-                    onHealthUpdate: (field, value) => {
-                      const updated = pets.map((p) =>
-                        p.name === pet.name ? { ...p, [field]: value } : p
-                      );
-                      setPets(updated);
-                      setActivePet((prev) => ({ ...prev, [field]: value }));
-                    },
-                  })
-                }
-              >
-                <img src={pet.image} alt={pet.name} className="ts-profile-image" />
-              </button>
-            ))}
+  <button
+    key={index}
+    className="profile-link"
+    onClick={() =>
+      setActivePet({
+        ...pet,
+        isOwnPet: true, // ✅ Add this line
+        onHealthUpdate: (field, value) => {
+          const updated = pets.map((p) =>
+            p.name === pet.name ? { ...p, [field]: value } : p
+          );
+          setPets(updated);
+          setActivePet((prev) => ({ ...prev, [field]: value }));
+        },
+      })
+    }
+  >
+    <img src={pet.image} alt={pet.name} className="ts-profile-image" />
+  </button>
+))}
+
 
             <div className="ts-plus-icon" onClick={() => setIsPopupOpen(true)}>
               <FiPlusCircle size={36} />
