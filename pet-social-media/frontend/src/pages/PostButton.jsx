@@ -38,11 +38,13 @@ const PostButton = ({ pets = [], followedPets = [], onPost }) => {
 
   const handleSubmit = () => {
     if (photos.length > 0 || caption.trim()) {
-      onPost?.({
-        images: photos,
-        caption,
-        taggedPets, // 👈 Pass this!
-      });
+        onPost?.({ 
+            images: photos, 
+            caption, 
+            taggedPets, 
+            taggedFollowedPets 
+          });
+          
   
       // reset
       setIsOpen(false);
@@ -157,6 +159,29 @@ const PostButton = ({ pets = [], followedPets = [], onPost }) => {
             ))}
           </div>
         </div>
+
+                {/* Tag Followed Pets */}
+        <div style={{ width: '100%', marginBottom: '10px' }}>
+        <p style={{ marginBottom: '5px' }}>Tag followed pets:</p>
+        <div style={styles.petRow}>
+            {followedPets.map((pet, i) => (
+            <img
+                key={`followed-${i}`}
+                src={pet.image}
+                alt={pet.name}
+                title={pet.name}
+                style={{
+                ...styles.petImage,
+                border: taggedFollowedPets.some(p => p.name === pet.name)
+                    ? '3px dashed #fff'
+                    : '2px solid white'
+                }}
+                onClick={() => toggleTagFollowedPet(pet)}
+            />
+            ))}
+        </div>
+        </div>
+
 
         {/* Buttons */}
         <div style={styles.buttonRow}>

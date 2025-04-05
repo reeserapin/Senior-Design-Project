@@ -256,16 +256,18 @@ function ProfilePage({ pets, setPets }) {
       {
         images: newPost.images,
         caption: newPost.caption,
+        taggedPets: newPost.taggedPets || [],
+        taggedFollowedPets: newPost.taggedFollowedPets || [],
         date: new Date().toLocaleDateString("en-US", {
           month: "short",
           day: "numeric",
           year: "numeric",
         }),
-        taggedPets: newPost.taggedPets, // ⬅️ Add this!
       },
       ...prevPosts,
     ]);
   };
+  
   
   
 
