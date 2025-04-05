@@ -19,9 +19,11 @@ const PetProfileModal = ({
   posts = [],
   showEditButton = false,
   onToggleEdit,
-  isFollowed = false, // initial follow state from parent
-  onToggleFollow // callback: (pet, newFollowState) => {}
+  isFollowed = false,
+  onToggleFollow,
+  isOwnPet = false // ✅ add this here!
 }) => {
+
   if (!pet) return null;
 
   // Local state to manage follow status
@@ -95,7 +97,7 @@ const PetProfileModal = ({
           <div className="pet-image-column">
           <div className="pet-image-wrapper">   
 
-          {typeof isFollowed === 'boolean' && (
+          {!isOwnPet && typeof isFollowed === 'boolean' && (
             <div
               className="following-badge"
               onClick={(e) => {

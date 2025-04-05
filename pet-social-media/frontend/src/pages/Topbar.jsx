@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 import AddPetModal from './AddPetModal';
-import { FiPlusCircle, FiSearch } from 'react-icons/fi';
+import { FiPlusCircle } from 'react-icons/fi';
+import PostButton from './PostButton';
 
-function TopBar({ pets, setPets, setActivePet }) {
+function TopBar({ pets, followedPets, setPets, setActivePet }) {
   const [query, setQuery] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -38,48 +38,7 @@ function TopBar({ pets, setPets, setActivePet }) {
   }, []);
 
   const handleSearch = () => {
-    if (!query.trim()) return;
-    
-    // Filter search results based on query
-    const results = {};
-    Object.entries(sampleSearchItems).forEach(([category, items]) => {
-      const filtered = items.filter(item => 
-        item.toLowerCase().includes(query.toLowerCase())
-      );
-      if (filtered.length > 0) {
-        results[category] = filtered;
-      }
-    });
-    
-    setSearchResults(results);
-    
-    // If no results, show no results message in dropdown
-    if (Object.keys(results).length === 0) {
-      setNoResults(true);
-    } else {
-      setNoResults(false);
-    }
-    
-    setShowDropdown(true);
-  };
-
-  const handleSearchItemClick = (item) => {
-    setQuery(item);
-    setShowDropdown(false);
-    // Navigate or perform action with the selected item
-    // (removed alert, would normally navigate to a page or perform an action)
-  };
-
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setQuery(value);
-    
-    if (value.length > 2) {
-      handleSearch();
-    } else {
-      setShowDropdown(false);
-      setNoResults(false);
-    }
+    alert(`Searching for: ${query}`);
   };
 
   const handleAddPet = (newPet) => {
@@ -88,86 +47,54 @@ function TopBar({ pets, setPets, setActivePet }) {
   };
 
   return (
-    <div className={`ts-topbar ${isAuthPage ? 'auth-page' : ''}`}>
-      <div className="ts-left-content">
+    <div className="topbar">
+      {/* Left section: Logo + Pets */}
+      <div className="topbar-left">
         <h1 className="ts-logo">Pet-igree</h1>
-        
-        {!isAuthPage && (
-          <>
-            {pets.map((pet, index) => (
-              <button
-                key={index}
-                className="profile-link"
-                onClick={() =>
-                  setActivePet({
-                    ...pet,
-                    onHealthUpdate: (field, value) => {
-                      const updated = pets.map((p) =>
-                        p.name === pet.name ? { ...p, [field]: value } : p
-                      );
-                      setPets(updated);
-                      setActivePet((prev) => ({ ...prev, [field]: value }));
-                    },
-                  })
-                }
-              >
-                <img src={pet.image} alt={pet.name} className="ts-profile-image" />
-              </button>
-            ))}
-
-            <div className="ts-plus-icon" onClick={() => setIsPopupOpen(true)}>
-              <FiPlusCircle size={36} />
-            </div>
-          </>
-        )}
-      </div>
-      
-      {!isAuthPage && (
-        <div className="ts-search-container" ref={searchRef}>
-          <div className="ts-search-wrapper">
-            <FiSearch className="ts-search-icon" />
-            <input
-              type="text"
-              placeholder="Search pets, products, services..."
-              className="ts-search-input"
-              value={query}
-              onChange={handleInputChange}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  handleSearch();
-                }
-              }}
-              onFocus={() => query.length > 2 && handleSearch()}
-            />
-          </div>
-          
-          {showDropdown && (
-            <div className="ts-search-dropdown">
-              {noResults ? (
-                <div className="ts-search-no-results">
-                  <p>No results found for: "{query}"</p>
-                </div>
-              ) : (
-                Object.entries(searchResults).map(([category, items]) => (
-                  <div key={category} className="ts-search-category">
-                    <h4>{category.charAt(0).toUpperCase() + category.slice(1)}</h4>
-                    <ul>
-                      {items.map((item, index) => (
-                        <li 
-                          key={index} 
-                          onClick={() => handleSearchItemClick(item)}
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))
-              )}
-            </div>
-          )}
+        {pets.map((pet, index) => (
+          <button
+            key={index}
+            className="profile-link"
+            onClick={() =>
+              setActivePet({
+                ...pet,
+                onHealthUpdate: (field, value) => {
+                  const updated = pets.map((p) =>
+                    p.name === pet.name ? { ...p, [field]: value } : p
+                  );
+                  setPets(updated);
+                  setActivePet((prev) => ({ ...prev, [field]: value }));
+                },
+              })
+            }
+          >
+            <img src={pet.image} alt={pet.name} className="ts-profile-image" />
+          </button>
+        ))}
+        <div className="ts-plus-icon" onClick={() => setIsPopupOpen(true)}>
+          <FiPlusCircle size={36} />
         </div>
-      )}
+      </div>
+
+      {/* Center section: Post button */}
+      <div className="topbar-center">
+      <PostButton pets={pets} followedPets={followedPets} />
+
+      </div>
+
+      {/* Right section: Search */}
+      <div className="topbar-right">
+        <input
+          type="text"
+          placeholder="Search..."
+          className="ts-search-bar"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button className="ts-search-button" onClick={handleSearch}>
+          <img src="/search.png" alt="Search" className="ts-search-icon" />
+        </button>
+      </div>
 
       {isPopupOpen && (
         <AddPetModal
@@ -185,6 +112,39 @@ export default TopBar;
 /* Embedded CSS */
 const style = document.createElement('style');
 style.innerHTML =  `
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background-color: #099EC8;
+  height: 60px;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+.topbar-left,
+.topbar-center,
+.topbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.topbar-left {
+  gap: 10px;
+}
+
+.topbar-center {
+  justify-content: center;
+  flex: 1;
+}
+
+.topbar-right {
+  gap: 10px;
+}
+
 .profile-link {
   background: none;
   border: none;
@@ -450,198 +410,6 @@ html, body {
         padding: 10px;
         height: 50px; 
     }
-}
-
-/* New Search Bar Styles */
-.ts-search-container {
-  position: relative;
-  margin-left: auto;
-  margin-right: 40px;
-  width: 300px;
-}
-
-.ts-search-wrapper {
-  display: flex;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 8px 16px;
-  transition: all 0.3s ease;
-}
-
-.ts-search-wrapper:hover, .ts-search-wrapper:focus-within {
-  background-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-}
-
-.ts-search-icon {
-  color: white;
-  margin-right: 8px;
-  font-size: 18px;
-}
-
-.ts-search-input {
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 14px;
-  outline: none;
-  width: 100%;
-  padding: 0;
-}
-
-.ts-search-input::placeholder {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* Search Dropdown Styles */
-.ts-search-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  margin-top: 8px;
-  max-height: 400px;
-  overflow-y: auto;
-  z-index: 1000;
-}
-
-.ts-search-category {
-  padding: 12px 16px;
-  border-bottom: 1px solid #eee;
-}
-
-.ts-search-category:last-child {
-  border-bottom: none;
-}
-
-.ts-search-category h4 {
-  color: #099EC8;
-  margin: 0 0 8px 0;
-  font-size: 14px;
-}
-
-.ts-search-category ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.ts-search-category li {
-  padding: 6px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  font-size: 14px;
-  color: #333;
-}
-
-.ts-search-category li:hover {
-  background-color: #f0f8ff;
-}
-
-.ts-search-no-results {
-  padding: 12px 16px;
-  color: #777;
-  font-size: 14px;
-  text-align: center;
-}
-
-.ts-topbar {
-  background-color: #099EC8;
-  color: white;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-/* Special styling for auth pages */
-.ts-topbar.auth-page {
-  justify-content: flex-start;
-}
-
-.ts-topbar.auth-page .ts-left-content {
-  justify-content: flex-start;
-  width: auto;
-}
-
-.ts-topbar.auth-page .ts-logo {
-  text-align: left;
-  padding-right: 15px;
-}
-
-.ts-sidebar.auth-page {
-  background-color: #9DD8EA;
-  width: 70px;
-  height: calc(100vh - 60px);
-  position: fixed;
-  top: 60px;
-  left: 0;
-  z-index: 999;
-}
-
-/* Content adjustment for auth pages */
-.auth-page ~ .content {
-  margin-left: 70px;
-}
-
-.ts-left-content {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.ts-logo {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 0;
-  padding-right: 15px;
-}
-
-.ts-profile-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid white;
-  transition: all 0.3s ease;
-}
-
-.ts-plus-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: white;
-}
-
-/* Animation for pet images */
-.profile-link:hover .ts-profile-image {
-  transform: scale(1.15);
-  border-color: #ffd700;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-/* Additional animation effect */
-@keyframes pulse {
-  0% { border-color: white; }
-  50% { border-color: #ffd700; }
-  100% { border-color: white; }
-}
-
-.profile-link:active .ts-profile-image {
-  animation: pulse 0.5s;
 }
 
 `;
