@@ -79,7 +79,7 @@ function App() {
         <Sidebar />
 
         <Routes>
-          <Route path="/login" element={
+          <Route path="/" element={
             <div className="auth-content">
               <LoginPage />
             </div>
@@ -95,7 +95,7 @@ function App() {
               <div className="main-content">
                 <div className="content">
                   <Routes>
-                    <Route path="/" element={<HomePage />} />
+                    <Route path="/home" element={<HomePage />} />
                     <Route
                       path="/profile"
                       element={
