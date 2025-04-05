@@ -173,6 +173,14 @@ const initialFollowedPets = [
 ];
 
 function ProfilePage({ pets, setPets }) {
+  const [userPosts, setUserPosts] = useState(
+    postImages.map((images, index) => ({
+      images,
+      caption: captions[index % captions.length],
+      date: generatePostDate(index),
+    }))
+  );
+  
   const [banner, setBanner] = useState(null);
   const [cropping, setCropping] = useState(false);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -243,6 +251,22 @@ function ProfilePage({ pets, setPets }) {
     setShowAddModal(false);
   };
 
+  const handleAddPost = (newPost) => {
+    setUserPosts((prevPosts) => [
+      {
+        images: newPost.images,
+        caption: newPost.caption,
+        date: new Date().toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        }),
+      },
+      ...prevPosts,
+    ]);
+  };
+  
+
   // Callback passed to PetProfileModal to update the followedPets state
   const handleToggleFollow = (pet, newFollowState) => {
     if (!newFollowState) {
@@ -262,7 +286,8 @@ function ProfilePage({ pets, setPets }) {
 
   return (
     <div className="profile-container">
-      <Sidebar pets={pets} followedPets={followedPets} />
+      <Sidebar pets={pets} followedPets={followedPets} handleAddPost={handleAddPost} />
+
       <ToastContainer position="top-center" autoClose={2000} />
       <main className="profile-main">
         <div className="profile-banner-container">
@@ -425,7 +450,7 @@ function ProfilePage({ pets, setPets }) {
 
         <div className="your-posts-section">
           <h2>Your Posts</h2>
-          <Posts postImages={postImages} captions={captions} />
+          <Posts postImages={userPosts.map(p => p.images)} captions={userPosts.map(p => p.caption)} dates={userPosts.map(p => p.date)} />
         </div>
 
         {activePet && (

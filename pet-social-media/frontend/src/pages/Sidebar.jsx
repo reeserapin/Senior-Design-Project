@@ -7,7 +7,8 @@ import { useUser } from '../UserContext';
 import PostButton from './PostButton';
 import '../styles/TopAndSide.css';
 
-function Sidebar({ pets, followedPets }) {
+function Sidebar({ pets, followedPets, handleAddPost }) {
+
   const navigate = useNavigate();
   const location = useLocation();
   const isLoginPage = location.pathname === '/';
@@ -49,7 +50,8 @@ function Sidebar({ pets, followedPets }) {
             />
           </Link>
           <li>
-            <PostButton pets={pets} followedPets={followedPets} />
+          <PostButton pets={pets} followedPets={followedPets} onPost={handleAddPost} />
+
           </li>
           <ul>
             <li>

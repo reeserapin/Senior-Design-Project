@@ -5,7 +5,7 @@ import { IoIosRemoveCircleOutline } from "react-icons/io";
 import ReactDOM from 'react-dom';
 
 
-const PostButton = ({ pets = [], followedPets = [] }) => {
+const PostButton = ({ pets = [], followedPets = [], onPost }) => {
     console.log("Followed pets inside PostButton:", followedPets);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -37,12 +37,14 @@ const PostButton = ({ pets = [], followedPets = [] }) => {
   };
 
   const handleSubmit = () => {
-    alert(`Posted!
-Photos: ${photos.length}
-Caption: ${caption}
-Tagged Pets: ${taggedPets.map(p => p.name).join(', ')}
-Tagged Followed Pets: ${taggedFollowedPets.map(p => p.name).join(', ')}
-`);
+    if (photos.length > 0 || caption.trim()) {
+        onPost?.({ images: photos, caption });
+        setIsOpen(false);
+        setPhotos([]);
+        setCaption('');
+        setTaggedPets([]);
+        setTaggedFollowedPets([]);       
+}
   };
 
   const toggleTagPet = (pet) => {
@@ -77,88 +79,91 @@ Tagged Followed Pets: ${taggedFollowedPets.map(p => p.name).join(', ')}
       </button>
 
       {/* Popup Modal */}
-      {isOpen && ReactDOM.createPortal (
-        <div style={styles.overlay} onClick={() => setIsOpen(false)}>
-          <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <h2 style={{ marginBottom: "12px" }}>Create Post</h2>
+      {isOpen &&
+  ReactDOM.createPortal(
+    <div style={styles.overlay} onClick={() => setIsOpen(false)}>
+      <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <h2 style={{ marginBottom: "12px" }}>Create Post</h2>
 
-            {/* Uploaded Images Preview */}
-            <div style={styles.imageGrid}>
-              {photos.map((src, index) => (
-                <div key={index} style={styles.imageWrapper}>
-                  <img src={src} alt={`upload-${index}`} style={styles.previewImage} />
-                  <IoIosRemoveCircleOutline
-                    size={24}
-                    color="red"
-                    style={styles.deleteIcon}
-                    onClick={() => handleRemovePhoto(index)}
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Upload Box */}
-            <div
-              style={{
-                ...styles.uploadBox,
-                backgroundColor: isHoveringUpload ? "#e0e0e0" : "#f9f9f9",
-              }}
-              onMouseEnter={() => setIsHoveringUpload(true)}
-              onMouseLeave={() => setIsHoveringUpload(false)}
-              onClick={() => document.getElementById('photo-upload').click()}
-            >
-              <MdAddAPhoto size={48} style={{ color: isHoveringUpload ? "#333" : "#555" }} />
-              <input
-                id="photo-upload"
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={handleImageUpload}
-                style={{ display: "none" }}
+        {/* Uploaded Images Preview */}
+        <div style={styles.imageGrid}>
+          {photos.map((src, index) => (
+            <div key={index} style={styles.imageWrapper}>
+              <img src={src} alt={`upload-${index}`} style={styles.previewImage} />
+              <IoIosRemoveCircleOutline
+                size={24}
+                color="red"
+                style={styles.deleteIcon}
+                onClick={() => handleRemovePhoto(index)}
               />
             </div>
+          ))}
+        </div>
 
-            {/* Caption */}
-            <textarea
-              placeholder="Write a caption..."
-              value={caption}
-              onChange={(e) => setCaption(e.target.value)}
-              style={styles.textarea}
-            />
+        {/* Upload Box */}
+        <div
+          style={{
+            ...styles.uploadBox,
+            backgroundColor: isHoveringUpload ? "#e0e0e0" : "#f9f9f9",
+          }}
+          onMouseEnter={() => setIsHoveringUpload(true)}
+          onMouseLeave={() => setIsHoveringUpload(false)}
+          onClick={() => document.getElementById('photo-upload').click()}
+        >
+          <MdAddAPhoto size={48} style={{ color: isHoveringUpload ? "#333" : "#555" }} />
+          <input
+            id="photo-upload"
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleImageUpload}
+            style={{ display: "none" }}
+          />
+        </div>
 
-            {/* Tag Your Pets - clickable images */}
-<div style={{ width: '100%', marginBottom: '10px' }}>
-  <p style={{ marginBottom: '5px' }}>Tag your pet(s):</p>
-  <div style={styles.petRow}>
-    {pets.map((pet, i) => (
-      <img
-        key={i}
-        src={pet.image}
-        alt={pet.name}
-        title={pet.name}
-        style={{
-          ...styles.petImage,
-          border: taggedPets.some(p => p.name === pet.name)
-            ? '3px solid #2ecc71'
-            : '2px solid white'
-        }}
-        onClick={() => toggleTagPet(pet)}
-      />
-    ))}
-  </div>
-</div>
-            {/* Post and Cancel Buttons */}
-            <div style={styles.buttonRow}>
-              <button onClick={() => setIsOpen(false)} style={styles.cancel}>Cancel</button>
-              <button onClick={handleSubmit} style={styles.post}>Post</button>
-            </div>
+        {/* Caption */}
+        <textarea
+          placeholder="Write a caption..."
+          value={caption}
+          onChange={(e) => setCaption(e.target.value)}
+          style={styles.textarea}
+        />
+
+        {/* Tag Your Pets - clickable images */}
+        <div style={{ width: '100%', marginBottom: '10px' }}>
+          <p style={{ marginBottom: '5px' }}>Tag your pet(s):</p>
+          <div style={styles.petRow}>
+            {pets.map((pet, i) => (
+              <img
+                key={i}
+                src={pet.image}
+                alt={pet.name}
+                title={pet.name}
+                style={{
+                  ...styles.petImage,
+                  border: taggedPets.some(p => p.name === pet.name)
+                    ? '3px solid #2ecc71'
+                    : '2px solid white'
+                }}
+                onClick={() => toggleTagPet(pet)}
+              />
+            ))}
           </div>
-        </div>,
-        document.getElementById('modal-root')
-      )}
-    </div>
+        </div>
+
+        {/* Buttons */}
+        <div style={styles.buttonRow}>
+          <button onClick={() => setIsOpen(false)} style={styles.cancel}>Cancel</button>
+          <button onClick={handleSubmit} style={styles.post}>Post</button>
+        </div>
+      </div>
+    </div>,
+    document.getElementById('modal-root')
+  )}
+</div>
   );
-};
+}; // <
+
 
 export default PostButton;
 // Styles
