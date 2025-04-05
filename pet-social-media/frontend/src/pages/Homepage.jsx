@@ -4,6 +4,7 @@ import SharePopup from "./Sharedmenu";
 import ReportMenu from "./Reportmenu";
 import SidePanels from "../components/SidePanels";
 import postsData from "../pages/posts.json";
+import { useUser } from "../UserContext";
 import "../styles/Homepage.css";
 
 const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
@@ -12,6 +13,7 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
   const [newComment, setNewComment] = useState("");
   const [liked, setLiked] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { profileImage } = useUser();
 
   const toggleComments = () => {
     setActivePanel(activePanel === 'comments' ? null : 'comments');
@@ -32,7 +34,7 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
     if (newComment.trim() !== "") {
       const newCommentObj = {
         username: "Molly McKay",
-        pfp: "/linkedGIRL.jpg",
+        pfp: profileImage,
         text: newComment
       };
       setCommentList([...commentList, newCommentObj]);
@@ -106,7 +108,7 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
       {activePanel === 'comments' && (
         <div className="homepage-comment-section">
           <form onSubmit={handleCommentSubmit} className="homepage-comment-form">
-            <img src="/linkedGIRL.jpg" alt="User" className="homepage-comment-pfp" />
+            <img src={profileImage} alt="User" className="homepage-comment-pfp" />
             <input
               type="text"
               value={newComment}
