@@ -144,7 +144,7 @@ const PetigreePage = () => {
                     onClick={() => setPetType("buddy")}
                     style={{ 
                         padding: "8px 16px", 
-                        backgroundColor: petType === "buddy" ? "#4CAF50" : "#f0f0f0",
+                        backgroundColor: petType === "buddy" ? "#FF8C00" : "#f0f0f0",
                         border: "none",
                         borderRadius: "4px",
                         cursor: "pointer"
@@ -156,7 +156,7 @@ const PetigreePage = () => {
                     onClick={() => setPetType("spot")}
                     style={{ 
                         padding: "8px 16px", 
-                        backgroundColor: petType === "spot" ? "#4CAF50" : "#f0f0f0",
+                        backgroundColor: petType === "spot" ? "#FF8C00" : "#f0f0f0",
                         border: "none",
                         borderRadius: "4px",
                         cursor: "pointer"
@@ -168,7 +168,7 @@ const PetigreePage = () => {
                     onClick={() => setPetType("snowy")}
                     style={{ 
                         padding: "8px 16px", 
-                        backgroundColor: petType === "snowy" ? "#4CAF50" : "#f0f0f0",
+                        backgroundColor: petType === "snowy" ? "#FF8C00" : "#f0f0f0",
                         border: "none",
                         borderRadius: "4px",
                         cursor: "pointer"
