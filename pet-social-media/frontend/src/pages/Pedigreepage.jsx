@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 const PetigreePage = () => {
     const treeRef = useRef(null);
-    const [petType, setPetType] = useState("dog"); // "dog" or "cat"
+    const [petType, setPetType] = useState("buddy"); // "buddy", "spot" or "snowy"
 
     useEffect(() => {
         if (!treeRef.current || !window.FamilyTree) return;
@@ -24,12 +24,20 @@ const PetigreePage = () => {
         });
 
         // Choose which data to load based on pet type
-        const data = petType === "dog" ? getDogPedigreeData() : getCatPedigreeData();
+        let data;
+        if (petType === "buddy") {
+            data = getBuddyPedigreeData();
+        } else if (petType === "spot") {
+            data = getSpotPedigreeData();
+        } else {
+            data = getSnowyPedigreeData();
+        }
+        
         chart.load(data);
               
     }, [petType]);
 
-    function getDogPedigreeData() {
+    function getBuddyPedigreeData() {
         return [
             // 🐶 Generation 0 (Great-Grandparents)
             { id: 100, pids: [101], name: "Rex", title: "Great-Grandfather", img: "/pedigree/grandfather2.jpg", gender: "male", weight: '79 lbs', Age: 'Died at 13 years old', Vaccinations: 'Yes', Medical_History: 'None' },
@@ -76,7 +84,7 @@ const PetigreePage = () => {
         ];
     }
 
-    function getCatPedigreeData() {
+    function getSpotPedigreeData() {
         return [
             // 😺 Generation 0 (Grandparents)
             { id: 1, pids: [2], name: "Shadow", title: "Grandfather", img: "/pedigree/cat1.jpg", gender: "male", weight: '12 lbs', Age: 'Died at 15 years old', Vaccinations: 'Yes', Medical_History: 'None' },
@@ -90,10 +98,30 @@ const PetigreePage = () => {
             { id: 6, mid: 4, fid: 3, pids: [5], name: "Luna", title: "Mother", img: "/pedigree/cat6.jpg", gender: "female", weight: '11 lbs', Age: '7 years old', Vaccinations: 'Yes', Medical_History: 'None' },
             
             // 😺 Generation 2 (Kittens)
-            { id: 7, mid: 6, fid: 5, name: "Milo", title: "Kitten", img: "/pedigree/cat7.jpg", gender: "male", weight: '5 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 7, mid: 6, fid: 5, name: "Spot", title: "Kitten", img: "/pedigree/cat7.jpg", gender: "male", weight: '5 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
             { id: 8, mid: 6, fid: 5, name: "Cleo", title: "Kitten", img: "/pedigree/cat8.jpg", gender: "female", weight: '4 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
             { id: 9, mid: 6, fid: 5, name: "Simba", title: "Kitten", img: "/pedigree/cat9.jpg", gender: "male", weight: '5.5 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
             { id: 10, mid: 6, fid: 5, name: "Nala", title: "Kitten", img: "/pedigree/cat10.jpg", gender: "female", weight: '4.5 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+        ];
+    }
+
+    function getSnowyPedigreeData() {
+        return [
+            // Generation 0 (Grandparents)
+            { id: 1, pids: [2], name: "Frosty", title: "Grandfather", img: "/pedigree/grandfather2.jpg", gender: "male", weight: '65 lbs', Age: 'Died at 12 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 2, pids: [1], name: "Crystal", title: "Grandmother", img: "/pedigree/Grandmother1.jpeg", gender: "female", weight: '55 lbs', Age: 'Died at 13 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            
+            { id: 3, pids: [4], name: "Glacier", title: "Grandfather", img: "/pedigree/Grandfather1.jpg", gender: "male", weight: '70 lbs', Age: 'Died at 14 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 4, pids: [3], name: "Aurora", title: "Grandmother", img: "/pedigree/Lady2.jpeg", gender: "female", weight: '58 lbs', Age: 'Died at 15 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            
+            // Generation 1 (Parents)
+            { id: 5, mid: 2, fid: 1, pids: [6], name: "Blizzard", title: "Father", img: "/pedigree/Dad1.png", gender: "male", weight: '68 lbs', Age: '7 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 6, mid: 4, fid: 3, pids: [5], name: "Snowflake", title: "Mother", img: "/pedigree/Mom1.jpeg", gender: "female", weight: '60 lbs', Age: '6 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            
+            // Generation 2 (Puppies)
+            { id: 7, mid: 6, fid: 5, name: "Snowy", title: "Puppy", img: "/pedigree/puppy1.jpg", gender: "male", weight: '15 lbs', Age: '4 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 8, mid: 6, fid: 5, name: "Frost", title: "Sibling", img: "/pedigree/puppy2.avif", gender: "female", weight: '13 lbs', Age: '4 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 9, mid: 6, fid: 5, name: "Ice", title: "Sibling", img: "/pedigree/puppy3.jpg", gender: "male", weight: '14 lbs', Age: '4 months old', Vaccinations: 'Yes', Medical_History: 'None' },
         ];
     }
 
@@ -113,28 +141,40 @@ const PetigreePage = () => {
         <div>
             <div style={{ padding: "10px", display: "flex", justifyContent: "center", gap: "20px" }}>
                 <button 
-                    onClick={() => setPetType("dog")}
+                    onClick={() => setPetType("buddy")}
                     style={{ 
                         padding: "8px 16px", 
-                        backgroundColor: petType === "dog" ? "#4CAF50" : "#f0f0f0",
+                        backgroundColor: petType === "buddy" ? "#4CAF50" : "#f0f0f0",
                         border: "none",
                         borderRadius: "4px",
                         cursor: "pointer"
                     }}
                 >
-                    Dog Pedigree
+                    Buddy Pedigree
                 </button>
                 <button 
-                    onClick={() => setPetType("cat")}
+                    onClick={() => setPetType("spot")}
                     style={{ 
                         padding: "8px 16px", 
-                        backgroundColor: petType === "cat" ? "#4CAF50" : "#f0f0f0",
+                        backgroundColor: petType === "spot" ? "#4CAF50" : "#f0f0f0",
                         border: "none",
                         borderRadius: "4px",
                         cursor: "pointer"
                     }}
                 >
-                    Cat Pedigree
+                    Spot Pedigree
+                </button>
+                <button 
+                    onClick={() => setPetType("snowy")}
+                    style={{ 
+                        padding: "8px 16px", 
+                        backgroundColor: petType === "snowy" ? "#4CAF50" : "#f0f0f0",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: "pointer"
+                    }}
+                >
+                    Snowy Pedigree
                 </button>
             </div>
             <div id="tree" ref={treeRef} style={{ width: "100%", height: "90vh" }}></div>
