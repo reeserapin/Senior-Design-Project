@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const PetigreePage = () => {
     const treeRef = useRef(null);
+    const [petType, setPetType] = useState("dog"); // "dog" or "cat"
 
     useEffect(() => {
         if (!treeRef.current || !window.FamilyTree) return;
@@ -22,7 +23,14 @@ const PetigreePage = () => {
             nodeSize: { width: 180, height: 180 }, 
         });
 
-        chart.load([
+        // Choose which data to load based on pet type
+        const data = petType === "dog" ? getDogPedigreeData() : getCatPedigreeData();
+        chart.load(data);
+              
+    }, [petType]);
+
+    function getDogPedigreeData() {
+        return [
             // 🐶 Generation 0 (Great-Grandparents)
             { id: 100, pids: [101], name: "Rex", title: "Great-Grandfather", img: "/pedigree/grandfather2.jpg", gender: "male", weight: '79 lbs', Age: 'Died at 13 years old', Vaccinations: 'Yes', Medical_History: 'None' },
             { id: 101, pids: [100], name: "Lady", title: "Great-Grandmother", img: "/pedigree/Lady2.jpeg", gender: "female", weight: '65 lbs', Age: 'Died at 12 years old', Vaccinations: 'Yes', Medical_History: 'None' },
@@ -65,11 +73,29 @@ const PetigreePage = () => {
             { id: 43, mid: 11, fid: 10, name: "Ollie", title: "Cousin", img: "/pedigree/Ollie.jpg", gender: "male", weight: '10 lbs', Age: '6 months old (08/15/2024)', Vaccinations: 'Yes', Medical_History: 'None' },
             { id: 44, mid: 11, fid: 10, name: "Lily", title: "Cousin", img: "/pedigree/Lily.avif", gender: "female", weight: '12 lbs', Age: '6 months old (08/15/2024)', Vaccinations: 'Yes', Medical_History: 'None' },
             { id: 45, mid: 11, fid: 10, name: "Bentley", title: "Cousin", img: "/pedigree/Ruby.jpg", gender: "male", weight: '15 lbs', Age: '6 months old (08/15/2024)', Vaccinations: 'Yes', Medical_History: 'Diabetes' },
-        ]);
-        
-              
+        ];
+    }
 
-    }, []);
+    function getCatPedigreeData() {
+        return [
+            // 😺 Generation 0 (Grandparents)
+            { id: 1, pids: [2], name: "Shadow", title: "Grandfather", img: "/pedigree/cat1.jpg", gender: "male", weight: '12 lbs', Age: 'Died at 15 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 2, pids: [1], name: "Misty", title: "Grandmother", img: "/pedigree/cat2.jpg", gender: "female", weight: '9 lbs', Age: 'Died at 16 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            
+            { id: 3, pids: [4], name: "Oliver", title: "Grandfather", img: "/pedigree/cat3.jpg", gender: "male", weight: '14 lbs', Age: 'Died at 14 years old', Vaccinations: 'Yes', Medical_History: 'Diabetes' },
+            { id: 4, pids: [3], name: "Bella", title: "Grandmother", img: "/pedigree/cat4.jpg", gender: "female", weight: '10 lbs', Age: 'Died at 17 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            
+            // 😺 Generation 1 (Parents)
+            { id: 5, mid: 2, fid: 1, pids: [6], name: "Leo", title: "Father", img: "/pedigree/cat5.jpg", gender: "male", weight: '13 lbs', Age: '8 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 6, mid: 4, fid: 3, pids: [5], name: "Luna", title: "Mother", img: "/pedigree/cat6.jpg", gender: "female", weight: '11 lbs', Age: '7 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            
+            // 😺 Generation 2 (Kittens)
+            { id: 7, mid: 6, fid: 5, name: "Milo", title: "Kitten", img: "/pedigree/cat7.jpg", gender: "male", weight: '5 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 8, mid: 6, fid: 5, name: "Cleo", title: "Kitten", img: "/pedigree/cat8.jpg", gender: "female", weight: '4 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 9, mid: 6, fid: 5, name: "Simba", title: "Kitten", img: "/pedigree/cat9.jpg", gender: "male", weight: '5.5 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 10, mid: 6, fid: 5, name: "Nala", title: "Kitten", img: "/pedigree/cat10.jpg", gender: "female", weight: '4.5 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+        ];
+    }
 
     function getOptions() {
         const searchParams = new URLSearchParams(window.location.search);
@@ -84,7 +110,35 @@ const PetigreePage = () => {
     }
 
     return (
-        <div id="tree" ref={treeRef} style={{ width: "100%", height: "100vh" }}></div>
+        <div>
+            <div style={{ padding: "10px", display: "flex", justifyContent: "center", gap: "20px" }}>
+                <button 
+                    onClick={() => setPetType("dog")}
+                    style={{ 
+                        padding: "8px 16px", 
+                        backgroundColor: petType === "dog" ? "#4CAF50" : "#f0f0f0",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: "pointer"
+                    }}
+                >
+                    Dog Pedigree
+                </button>
+                <button 
+                    onClick={() => setPetType("cat")}
+                    style={{ 
+                        padding: "8px 16px", 
+                        backgroundColor: petType === "cat" ? "#4CAF50" : "#f0f0f0",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: "pointer"
+                    }}
+                >
+                    Cat Pedigree
+                </button>
+            </div>
+            <div id="tree" ref={treeRef} style={{ width: "100%", height: "90vh" }}></div>
+        </div>
     );
 };
 
