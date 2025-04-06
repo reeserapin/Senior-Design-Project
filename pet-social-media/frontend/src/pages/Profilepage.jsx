@@ -11,6 +11,7 @@ import { useUser } from "../UserContext";
 import { GiCrossedBones } from "react-icons/gi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from "react";
 
 
 // Helper function for generating post dates
@@ -173,6 +174,29 @@ const initialFollowedPets = [
 ];
 
 function ProfilePage({ pets, setPets }) {
+  const [userPosts, setUserPosts] = useState(
+    postImages.map((images, index) => {
+      // Always include one random own pet
+      const randomOwnPet = pets[Math.floor(Math.random() * pets.length)];
+  
+      // Randomly pick 0–2 followed pets
+      const shuffledFollowed = [...initialFollowedPets].sort(() => 0.5 - Math.random());
+      const followedCount = Math.random() < 0.6 ? Math.floor(Math.random() * 3) : 0; // 60% chance of tagging followed pets
+      const followedSelections = shuffledFollowed.slice(0, followedCount);
+  
+      return {
+        images,
+        caption: captions[index % captions.length],
+        date: generatePostDate(index),
+        taggedPets: [randomOwnPet],
+        taggedFollowedPets: followedSelections,
+      };
+    })
+  );
+  
+  
+
+  
   const [banner, setBanner] = useState(null);
   const [cropping, setCropping] = useState(false);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -189,10 +213,12 @@ function ProfilePage({ pets, setPets }) {
   const [username, setUsername] = useState("Joe Schmoe");
   const [isEditingName, setIsEditingName] = useState(false);
   const [editable, setEditable] = useState(false);
+  const { followedPets, setFollowedPets } = useUser();
 
-  // State for followed pets
-  const [followedPets, setFollowedPets] = useState(initialFollowedPets);
-
+  useEffect(() => {
+    setFollowedPets(initialFollowedPets);
+  }, []);
+  
   const scrollLeft = () => {
     scrollRef.current.scrollBy({ left: -150, behavior: "smooth" });
   };
@@ -243,6 +269,26 @@ function ProfilePage({ pets, setPets }) {
     setShowAddModal(false);
   };
 
+  const handleAddPost = (newPost) => {
+    setUserPosts((prevPosts) => [
+      {
+        images: newPost.images,
+        caption: newPost.caption,
+        taggedPets: newPost.taggedPets || [],
+        taggedFollowedPets: newPost.taggedFollowedPets || [],
+        date: new Date().toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        }),
+      },
+      ...prevPosts,
+    ]);
+  };
+  
+  
+  
+
   // Callback passed to PetProfileModal to update the followedPets state
   const handleToggleFollow = (pet, newFollowState) => {
     if (!newFollowState) {
@@ -262,7 +308,8 @@ function ProfilePage({ pets, setPets }) {
 
   return (
     <div className="profile-container">
-      <Sidebar />
+      <Sidebar pets={pets} followedPets={followedPets} handleAddPost={handleAddPost} />
+
       <ToastContainer position="top-center" autoClose={2000} />
       <main className="profile-main">
         <div className="profile-banner-container">
@@ -425,7 +472,7 @@ function ProfilePage({ pets, setPets }) {
 
         <div className="your-posts-section">
           <h2>Your Posts</h2>
-          <Posts postImages={postImages} captions={captions} />
+          <Posts posts={userPosts} />
         </div>
 
         {activePet && (
@@ -1157,11 +1204,11 @@ style.innerHTML =  `
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 10px;
   display: flex;
   align-items: center;
-  margin-left: -170px;   /* horizontal spacing */
-  margin-top: -135px;    /* vertical spacing */
+  margin-left: -200px;   /* horizontal spacing */
+  margin-top: -140px;    /* vertical spacing */
 }
 
 

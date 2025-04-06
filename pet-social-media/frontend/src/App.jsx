@@ -11,6 +11,8 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import PetProfileModal from './pages/PetProfileModal';
 import ChatPage from './pages/ChatBox';
+import './index.css';
+import { UserProvider } from './UserContext';
 
 const captions = [
   "Caught mid-zoomies! 🐾", "New trick unlocked ✨", "This face = instant treat 🎯",
@@ -43,12 +45,12 @@ const generatePostDate = (index) => {
 function App() {
   const [pets, setPets] = useState([
     {
-      name: "Sparky",
-      image: "https://www.carecredit.com/sites/cc/image/chihuahua-slider_2.jpg"
+      name: "Buddy",
+      image: "/pedigree/puppy1.jpg"
     },
     {
       name: "Spot",
-      image: "https://hips.hearstapps.com/ghk.h-cdn.co/assets/17/30/bernese-mountain-dog.jpg?crop=1.00xw:0.667xh;0,0.213xh&resize=980:*"
+      image: "https://dogtime.com/wp-content/uploads/sites/12/2023/11/GettyImages-157603001-e1701106766955.jpg?w=1024"
     },
     {
       name: "Snowy",
@@ -58,12 +60,30 @@ function App() {
 
   const [activePet, setActivePet] = useState(null);
   const [editable, setEditable] = useState(false);
+  const [followedPets, setFollowedPets] = useState([]);
 
   const posts = postImages.map((images, index) => ({
     images,
     caption: captions[index % captions.length],
     date: generatePostDate(index),
+    taggedPets: [
+      {
+        name: "Snowy",
+        image: "https://www.thesprucepets.com/thmb/hJ40hdpK4KZ5AehlMmVEdJr8zPI%3D/1999x1459/filters%3Afill(auto,1)/twenty20_e47b3798-dd9b-40b1-91ef-1d820337966e-5aa3f798642dca00363b0df1.jpg",
+      },
+    ],
+    taggedFollowedPets: [
+      {
+        name: "Buddy",
+        image: "https://placedog.net/300/300?id=98",
+      },
+      {
+        name: "Luna",
+        image: "https://placedog.net/300/300?id=99",
+      },
+    ]
   }));
+  
 
   return (
     <Router>
@@ -76,7 +96,7 @@ function App() {
             setEditable(false);
           }}
         />
-        <Sidebar />
+        <Sidebar pets={pets} followedPets={followedPets} />
 
         <Routes>
           <Route path="/" element={
@@ -257,7 +277,7 @@ function App() {
           }
         `}
       </style>
-    </Router>
+      </Router>
   );
 }
 
