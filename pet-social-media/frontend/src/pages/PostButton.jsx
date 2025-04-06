@@ -94,7 +94,7 @@ const PostButton = ({ pets = [], onPost }) => {
   className={isHoveringTennisBall ? 'bounce-hover' : ''} // Use the correct class
   style={{
     fontSize: '48px',
-    color: '#2ecc71',
+    color: '#ccff00',
   }}
 />
 
