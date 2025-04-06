@@ -1,14 +1,13 @@
-
-
 /* Global font styles */
-/* Global font */
 body {
   font-family: 'McLaren', sans-serif;
 }
+
 .logo {
   font-family: 'McLaren', cursive;
 }
 
+/* Bounce animation for hover */
 @keyframes bounceForever {
   0%, 100% {
     transform: translateY(0);
@@ -31,8 +30,7 @@ body {
   }
 }
 
-
-
+/* Trigger bounce on hover */
 .bounce-hover:hover {
   animation: bounceForever 0.8s ease-in-out infinite;
 }

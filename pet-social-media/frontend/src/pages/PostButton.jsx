@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import { IoIosTennisball } from 'react-icons/io';
 import { MdAddAPhoto } from "react-icons/md";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
-import ReactDOM from 'react-dom';
 import { useUser } from '../UserContext';
 
 const PostButton = ({ pets = [], onPost }) => {
   const { followedPets } = useUser();  // Access followed pets from context
-  console.log("Followed pets inside PostButton:", followedPets);
 
   const [isOpen, setIsOpen] = useState(false);
   const [photos, setPhotos] = useState([]);
   const [caption, setCaption] = useState('');
   const [taggedPets, setTaggedPets] = useState([]);
   const [taggedFollowedPets, setTaggedFollowedPets] = useState([]); 
-  const [isHoveringUpload, setIsHoveringUpload] = useState(false);  // State for hover effect
+  const [isHoveringUpload, setIsHoveringUpload] = useState(false);
   const [isHoveringTennisBall, setIsHoveringTennisBall] = useState(false);
 
   // Prevent scrolling when modal is open
@@ -25,7 +24,6 @@ const PostButton = ({ pets = [], onPost }) => {
       document.body.style.overflow = "auto";
     }
 
-    // Cleanup in case the component unmounts while open
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -86,131 +84,130 @@ const PostButton = ({ pets = [], onPost }) => {
           padding: '10px',
           cursor: 'pointer',
           borderRadius: '50%',
+          transition: 'background-color 0.3s ease, transform 0.3s ease',  // Added transition
         }}
         title="New Post"
+        onMouseEnter={() => setIsHoveringTennisBall(true)} // Trigger hover state
+        onMouseLeave={() => setIsHoveringTennisBall(false)} // Remove hover state
       >
         <IoIosTennisball
-          className="pulse-hover"
-          style={{
-            fontSize: '48px',
-            color: '#2ecc71',
-          }}
-        />
+  className={isHoveringTennisBall ? 'bounce-hover' : ''} // Use the correct class
+  style={{
+    fontSize: '48px',
+    color: '#2ecc71',
+  }}
+/>
+
       </button>
 
       {/* Popup Modal */}
-      {isOpen &&
-        ReactDOM.createPortal(
-          <div style={styles.overlay} onClick={() => setIsOpen(false)}>
-            <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
-              <h2 style={{ marginBottom: "12px" }}>Create Post</h2>
+      {isOpen && ReactDOM.createPortal(
+        <div style={styles.overlay} onClick={() => setIsOpen(false)}>
+          <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <h2 style={{ marginBottom: "12px" }}>Create Post</h2>
 
-              {/* Uploaded Images Preview */}
-              <div style={styles.imageGrid}>
-                {photos.map((src, index) => (
-                  <div key={index} style={styles.imageWrapper}>
-                    <img src={src} alt={`upload-${index}`} style={styles.previewImage} />
-                    <IoIosRemoveCircleOutline
-                      size={24}
-                      color="red"
-                      style={styles.deleteIcon}
-                      onClick={() => handleRemovePhoto(index)}
-                    />
-                  </div>
+            {/* Uploaded Images Preview */}
+            <div style={styles.imageGrid}>
+              {photos.map((src, index) => (
+                <div key={index} style={styles.imageWrapper}>
+                  <img src={src} alt={`upload-${index}`} style={styles.previewImage} />
+                  <IoIosRemoveCircleOutline
+                    size={24}
+                    color="red"
+                    style={styles.deleteIcon}
+                    onClick={() => handleRemovePhoto(index)}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Upload Box */}
+            <div
+              style={{
+                ...styles.uploadBox,
+                backgroundColor: isHoveringUpload ? "#e0e0e0" : "#f9f9f9",
+              }}
+              onMouseEnter={() => setIsHoveringUpload(true)}
+              onMouseLeave={() => setIsHoveringUpload(false)}
+              onClick={() => document.getElementById('photo-upload').click()}
+            >
+              <MdAddAPhoto size={48} style={{ color: isHoveringUpload ? "#333" : "#555" }} />
+              <input
+                id="photo-upload"
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={handleImageUpload}
+                style={{ display: "none" }}
+              />
+            </div>
+
+            {/* Caption */}
+            <textarea
+              placeholder="Write a caption..."
+              value={caption}
+              onChange={(e) => setCaption(e.target.value)}
+              style={styles.textarea}
+            />
+
+            {/* Tag Your Pets - clickable images */}
+            <div style={{ width: '100%', marginBottom: '10px' }}>
+              <p style={{ marginBottom: '5px' }}>Tag your pet(s):</p>
+              <div style={styles.petRow}>
+                {pets.map((pet, i) => (
+                  <img
+                    key={i}
+                    src={pet.image}
+                    alt={pet.name}
+                    title={pet.name}
+                    style={{
+                      ...styles.petImage,
+                      border: taggedPets.some(p => p.name === pet.name)
+                        ? '3px solid #2ecc71'
+                        : '2px solid white'
+                    }}
+                    onClick={() => toggleTagPet(pet)}
+                  />
                 ))}
               </div>
+            </div>
 
-              {/* Upload Box */}
-              <div
-                style={{
-                  ...styles.uploadBox,
-                  backgroundColor: isHoveringUpload ? "#e0e0e0" : "#f9f9f9",
-                }}
-                onMouseEnter={() => setIsHoveringUpload(true)}
-                onMouseLeave={() => setIsHoveringUpload(false)}
-                onClick={() => document.getElementById('photo-upload').click()}
-              >
-                <MdAddAPhoto size={48} style={{ color: isHoveringUpload ? "#333" : "#555" }} />
-                <input
-                  id="photo-upload"
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={handleImageUpload}
-                  style={{ display: "none" }}
-                />
-              </div>
-
-              {/* Caption */}
-              <textarea
-                placeholder="Write a caption..."
-                value={caption}
-                onChange={(e) => setCaption(e.target.value)}
-                style={styles.textarea}
-              />
-
-              {/* Tag Your Pets - clickable images */}
-              <div style={{ width: '100%', marginBottom: '10px' }}>
-                <p style={{ marginBottom: '5px' }}>Tag your pet(s):</p>
-                <div style={styles.petRow}>
-                  {pets.map((pet, i) => (
-                    <img
-                      key={i}
-                      src={pet.image}
-                      alt={pet.name}
-                      title={pet.name}
-                      style={{
-                        ...styles.petImage,
-                        border: taggedPets.some(p => p.name === pet.name)
-                          ? '3px solid #2ecc71'
-                          : '2px solid white'
-                      }}
-                      onClick={() => toggleTagPet(pet)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Tag Followed Pets */}
-              <div style={{ width: '100%', marginBottom: '10px' }}>
-                <p style={{ marginBottom: '5px' }}>Tag followed pets:</p>
-                <div style={styles.petRow}>
-                  {followedPets.map((pet, i) => (
-                    <img
-                      key={`followed-${i}`}
-                      src={pet.image}
-                      alt={pet.name}
-                      title={pet.name}
-                      style={{
-                        ...styles.petImage,
-                        border: taggedFollowedPets.some(p => p.name === pet.name)
-                          ? '3px dashed #fff'
-                          : '2px solid white'
-                      }}
-                      onClick={() => toggleTagFollowedPet(pet)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Buttons */}
-              <div style={styles.buttonRow}>
-                <button onClick={() => setIsOpen(false)} style={styles.cancel}>Cancel</button>
-                <button onClick={handleSubmit} style={styles.post}>Post</button>
+            {/* Tag Followed Pets */}
+            <div style={{ width: '100%', marginBottom: '10px' }}>
+              <p style={{ marginBottom: '5px' }}>Tag followed pets:</p>
+              <div style={styles.petRow}>
+                {followedPets.map((pet, i) => (
+                  <img
+                    key={`followed-${i}`}
+                    src={pet.image}
+                    alt={pet.name}
+                    title={pet.name}
+                    style={{
+                      ...styles.petImage,
+                      border: taggedFollowedPets.some(p => p.name === pet.name)
+                        ? '3px dashed #fff'
+                        : '2px solid white'
+                    }}
+                    onClick={() => toggleTagFollowedPet(pet)}
+                  />
+                ))}
               </div>
             </div>
-          </div>,
-          document.getElementById('modal-root')
-        )
-      }
+
+            {/* Buttons */}
+            <div style={styles.buttonRow}>
+              <button onClick={() => setIsOpen(false)} style={styles.cancel}>Cancel</button>
+              <button onClick={handleSubmit} style={styles.post}>Post</button>
+            </div>
+          </div>
+        </div>, document.getElementById('modal-root')
+      )}
     </div>
   );
 };
 
-export default PostButton;
-
-// Styles
-const styles = {
+// Move styles here and use named export
+export const styles = {
   overlay: {
     position: 'fixed',
     top: 0, left: 0,
@@ -317,4 +314,16 @@ const styles = {
     objectFit: "cover",
     cursor: "pointer",
   },
+  tennisBallButton: {
+    background: 'none',
+    border: 'none',
+    padding: '10px',
+    cursor: 'pointer',
+    borderRadius: '50%',
+  },
+  bounceAnimation: {
+    animation: 'bounce 0.6s ease-in-out',
+  },
 };
+
+export default PostButton;

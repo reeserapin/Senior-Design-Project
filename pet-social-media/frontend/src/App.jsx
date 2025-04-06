@@ -45,12 +45,12 @@ const generatePostDate = (index) => {
 function App() {
   const [pets, setPets] = useState([
     {
-      name: "Sparky",
-      image: "https://www.carecredit.com/sites/cc/image/chihuahua-slider_2.jpg"
+      name: "Buddy",
+      image: "/pedigree/puppy1.jpg"
     },
     {
       name: "Spot",
-      image: "https://hips.hearstapps.com/ghk.h-cdn.co/assets/17/30/bernese-mountain-dog.jpg?crop=1.00xw:0.667xh;0,0.213xh&resize=980:*"
+      image: "https://dogtime.com/wp-content/uploads/sites/12/2023/11/GettyImages-157603001-e1701106766955.jpg?w=1024"
     },
     {
       name: "Snowy",
