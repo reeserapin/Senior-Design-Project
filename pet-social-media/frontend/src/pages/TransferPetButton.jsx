@@ -13,6 +13,7 @@ const TransferPetButton = ({ pet }) => {
   const [loading, setLoading] = useState(false);
   const [people, setPeople] = useState([]);  // State to hold fetched people data
   const [selectedPerson, setSelectedPerson] = useState(null);  // State for selected person
+  const [selectedPersonName, setSelectedPersonName] = useState(null);  // State for full name
 
   const generateOTP = () => {
     return Math.floor(100000 + Math.random() * 900000);
@@ -65,6 +66,7 @@ const TransferPetButton = ({ pet }) => {
 
   const handleImageClick = (index) => {
     setSelectedPerson(index);  // Set the selected person when image is clicked
+    setSelectedPersonName(people[index].name.first + ' ' + people[index].name.last);  // Set the full name
   };
 
   return (
@@ -112,11 +114,18 @@ const TransferPetButton = ({ pet }) => {
                       className={`carousel-image ${selectedPerson === index ? 'selected' : ''}`}
                       onClick={() => handleImageClick(index)}  // Handle image click
                     />
-                    <p className="person-name">{person.name.first} {person.name.last}</p>
+                    <p className="person-name">{person.name.first}</p>
                   </div>
                 ))}
               </Slider>
             </div>
+
+            {/* Display selected person’s name */}
+            {selectedPersonName && (
+              <p className="selected-person-text">
+                You will transfer to {selectedPersonName}
+              </p>
+            )}
 
             <button className="close-btn" onClick={handleCloseOTP}>Close</button>
           </div>
@@ -147,11 +156,9 @@ style.innerHTML =  `
 .carousel-image {
    width: 80px;
   height: 80px;
-  border-radius: 50%;  /* Circular images */
+  border-radius: 50%;
   object-fit: cover;
   margin-bottom: 10px;
-  cursor: pointer;
-  transition: transform 0.3s ease, border 0.3s ease;
 }
 
 /* Highlight the selected image */
@@ -174,22 +181,30 @@ style.innerHTML =  `
   max-width: 80px;
 }
 
-/* OTP Popup Styling (Ensuring OTP styling is scoped) */
-.otp-popup .otp-number {
+/* Styling for the selected person's name */
+.selected-person-text {
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 15px;
+  color: #333;
+}
+
+/* Existing OTP Styling */
+.otp-number {
   color: rgb(167, 40, 40); /* Darker red */
-  font-size: 50px; /* Larger size for OTP number */
+  font-size: 50px; /* Ensure font size is set */
   font-weight: bold;
   margin: 10px 0;
 }
 
-.otp-popup .otp-text {
+.otp-text {
   color: #333;
   font-size: 30px;
 }
 
-.otp-popup .otp-instructions {
+.otp-instructions {
   color: #333;
-  font-size: 20px;
+  font-size: 10px;
   margin: 10px 0;
 }
 
@@ -315,6 +330,45 @@ style.innerHTML =  `
   margin-right: 8px;
 }
 
+/* OTP Popup Styling */
+.otp-popup {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  text-align: center;
+  padding: 20px;
+}
+
+.otp-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+}
+
+.otp-popup-content p {
+  color: #333;
+  font-size: 30px; /* Increased size for OTP */
+  margin: 10px 0;
+}
+
+.otp-popup-content p.otp-number {
+  color: #a72828; /* Darker red */
+  font-size: 50px; /* Larger size for OTP number */
+  font-weight: bold;
+  margin: 10px 0;
+}
+
 /* Close Button for OTP Popup */
 .otp-popup-content .close-btn {
   margin-top: 20px;
@@ -330,8 +384,28 @@ style.innerHTML =  `
   background-color: #cc3333;
 }
 
+/* Loading Popup Styling */
+.loading-popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001; /* Ensure it's above the other popups */
+}
 
+.loading-content {
+  font-size: 20px;
+  color: #333;
+}
 
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #28a745; /* Green color */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-top: 10px;
+}
 
 `;
 document.head.appendChild(style); 
