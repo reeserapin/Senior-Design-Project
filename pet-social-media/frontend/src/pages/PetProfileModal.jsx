@@ -248,6 +248,7 @@ const PetProfileModal = ({
                   </button>
                 )}
               </div>
+              
             ))}
             {editable && (
               <div className="upload-photo-wrapper">

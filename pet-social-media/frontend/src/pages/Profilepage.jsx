@@ -342,7 +342,7 @@ function ProfilePage({ pets, setPets }) {
               <div className="stat-label">Following</div>
             </div>
             <div className="stat-circle">
-              <div className="stat-number">308</div>
+              <div className="stat-number">13</div>
               <div className="stat-label">Posts</div>
             </div>
           </div>

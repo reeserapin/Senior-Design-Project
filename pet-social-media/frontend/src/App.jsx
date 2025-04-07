@@ -149,6 +149,7 @@ const [pets, setPets] = useState([
     likesDislikes: "Likes belly rubs, dislikes thunderstorms",
     vetInfo: "Annual checkups, allergy medication in the spring",
     lostStatus: false,
+    
   },
     {
       name: "Snowy",
