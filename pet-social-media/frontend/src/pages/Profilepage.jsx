@@ -411,7 +411,7 @@ function ProfilePage({ pets, setPets }) {
           <div className="your-pets-header">
             <h2>Your Pets</h2>
             <button className="add-pet-inline" onClick={() => setShowAddModal(true)}>
-              <GiCrossedBones size={28} style={{ transform: "rotate(90deg)" }} />
+              <GiCrossedBones size={28} style={{ transform: "rotate(45deg)" }} />
             </button>
           </div>
 
@@ -581,7 +581,7 @@ style.innerHTML =  `
 .profile-container {
   display: flex;
   height: 100vh;
-  background-color: #f5faff;
+  background-color: #e2f1ff;
 }
 
 .profile-main {
@@ -630,18 +630,17 @@ style.innerHTML =  `
 
 .profile-banner-container {
   position: relative;
-  margin: 50px auto 0;
-  width: calc(100% - 100px);
-  max-width: 2000px;
+  margin: 0px 0px ;
+  width: calc(100% - 80px);
+  max-width: 20000px;
 }
 
 /* Rounded blue banner */
 .profile-banner {
-  height: 200px;
-  background-color: #d6f4ff;
+  height: 250px;
+  background-color:rgb(188, 220, 254);
   border-radius: 40px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
   position: relative;
   display: flex;
   align-items: center;
@@ -671,11 +670,11 @@ style.innerHTML =  `
 /* 👇 Circle profile image */
 .profile-photo-container {
   position: absolute;
-  top: 160px; /* adjust as needed */
+  top: 200px; /* adjust as needed */
   left: 60px;
   z-index: 5;
-  width: 130px;
-  height: 130px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   overflow: hidden;
   border: 4px solid white;
@@ -816,8 +815,8 @@ style.innerHTML =  `
 }
 
 .stat-circle {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   background-color: #948be1; /* or any accent color */
   display: flex;
@@ -829,12 +828,12 @@ style.innerHTML =  `
 }
 
 .stat-number {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
 }
 
 .stat-label {
-  font-size: 14px;
+  font-size: 18px;
   margin-top: 4px;
 }
 
@@ -1001,7 +1000,7 @@ style.innerHTML =  `
 }
 
 .pets-bubble-container {
-  background-color: #85cbe9;
+  background-color: #90c6ff;
   border-radius: 100px;
   padding: 20px 40px;
   display: flex;
@@ -1025,7 +1024,7 @@ style.innerHTML =  `
 }
 
 .pets-following-section {
-  background-color: #85cbe9;
+  background-color: #90c6ff;
   border-radius: 100px;
   padding: 20px 40px;
   max-width: 900px;
@@ -1191,7 +1190,7 @@ style.innerHTML =  `
   align-items: center;
   gap: 10px;
   margin-left: 5px;
-  margin-top: -40px;
+  margin-top: -50px;
 }
 
 .profile-name {
@@ -1233,7 +1232,7 @@ style.innerHTML =  `
   right: 20px;
   width: 48px;
   height: 48px;
-  background-color: #f97068; /* red/pinkish tone */
+  background-color:rgb(250, 143, 138); /* red/pinkish tone */
   border: none;
   border-radius: 50%;
   display: flex;

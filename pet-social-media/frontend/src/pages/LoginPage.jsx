@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/LoginPage.css';
 
-function LoginPage() {
+function LoginPage({ setIsLoggedIn }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     identifier: '',
@@ -20,37 +20,40 @@ function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:5000/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include', // Keep session cookies
-        body: JSON.stringify(formData),
-      });
+    setIsLoggedIn(true);         // ✅ simulate login
+    navigate('/home');           // ✅ go to homepage
+    // try {
+    //   const response = await fetch('http://localhost:5000/auth/login', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     credentials: 'include', // Keep session cookies
+    //     body: JSON.stringify(formData),
+    //   });
 
-      if (response.ok) {
-        const result = await response.json();
-        console.log('Login success:', result);
-        navigate('/home'); // Redirect after login
-      } else {
-        const error = await response.json();
-        console.error('Login failed:', error);
-        alert(error?.error || 'Invalid email or password.');
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-      alert('Error during login. Please try again.');
-    }
+    //   if (response.ok) {
+    //     const result = await response.json();
+    //     console.log('Login success:', result);
+    //     navigate('/home'); // Redirect after login
+    //   } else {
+    //     const error = await response.json();
+    //     console.error('Login failed:', error);
+    //     alert(error?.error || 'Invalid email or password.');
+    //   }
+    // } catch (error) {
+    //   console.error('Error during login:', error);
+    //   alert('Error during login. Please try again.');
+    // }
   };
 
   return (
     <div className="lg-login-page">
       <div className="lg-login-container">
-        <div className="lg-grass-background">
-          <div className="lg-dog-illustration"></div>
-        </div>
+      <div className="lg-grass-background">
+        <img src="/loginDog.png" alt="Cute dog" className="lg-grass-image" />
+      </div>
+
         <div className="lg-login-form">
           <div className="lg-form-container">
             <h2>Login</h2>

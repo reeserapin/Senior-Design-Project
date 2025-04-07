@@ -402,7 +402,7 @@ style.innerHTML =  `
 }
 
 
-.content {
+.ts-content {
     flex-grow: 1;
     padding: 80px 20px 20px; /* Increased top padding to avoid overlap */
     background-color: #E8FAFF;
@@ -426,7 +426,7 @@ html, body {
         width: 40px;
         height: 40px;
     }
-    .content {
+    .s-content {
         padding: 80px 20px;
         margin-left: 80px; 
     }

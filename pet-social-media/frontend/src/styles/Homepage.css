@@ -96,17 +96,24 @@ body, html {
 }
   
 .homepage-bg-blue {
-    background: #099EC8;
+    background: #9CA3D6;
+}
+  
+.homepage-bg-purple {
+    background: #CFC1E8;
+}
+  
+.homepage-bg-pink {
+    background: #F2D5EF;
+}
+.homepage-bg-yellow {
+    background: #F7EFDA;
 }
   
 .homepage-bg-green {
-    background: #84BC41;
+    background: #B3DDC4;
 }
   
-.homepage-bg-yellow {
-    background: #F9C416;
-}
-
 .homepage-container {
     display: flex;
     min-height: 100vh;
