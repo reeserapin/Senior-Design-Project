@@ -107,7 +107,7 @@ const PetShopPage = () => {
 
 
   return (
-    <Box sx={{ p: 3, backgroundColor: "#f0fff0", minHeight: "100vh", marginRight: 1, }}>
+    <Box sx={{ p: 3, backgroundColor: "#fafffa", minHeight: "100vh", marginRight: 1, }}>
       {/* Header */}
       <Box
         sx={{
@@ -119,6 +119,7 @@ const PetShopPage = () => {
           borderRadius: 3,
           marginRight: 1,
           mb: 3,
+          boxShadow: '2px 4px 10px rgba(0, 0, 0, 0.1)',
         }}
       >
         <Typography variant="h4" fontWeight="bold" sx={{ marginLeft: 1,}}>
@@ -143,7 +144,7 @@ const PetShopPage = () => {
         {/* Filters */}
         <Box
           sx={{
-            backgroundColor: "#f5fff5",
+            backgroundColor: "#fff",
             borderRadius: 3,
             p: 2,
             boxShadow: 1,
