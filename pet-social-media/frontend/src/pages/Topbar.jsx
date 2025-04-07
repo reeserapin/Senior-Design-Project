@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import AddPetModal from './AddPetModal';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
+import { TextField, InputAdornment, Paper, Box } from '@mui/material';
 
 function TopBar({ pets, setPets, setActivePet }) {
   const [query, setQuery] = useState('');
@@ -126,22 +127,58 @@ function TopBar({ pets, setPets, setActivePet }) {
       
       {!isAuthPage && (
         <div className="ts-search-container" ref={searchRef}>
-          <div className="ts-search-wrapper">
-            <FiSearch className="ts-search-icon" />
-            <input
-              type="text"
-              placeholder="Search pets, products, services..."
-              className="ts-search-input"
-              value={query}
-              onChange={handleInputChange}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  handleSearch();
-                }
-              }}
-              onFocus={() => query.length > 2 && handleSearch()}
-            />
-          </div>
+<Paper
+  sx={{
+    backgroundColor: 'rgba(255, 255, 255, 0.5)', // more visible
+    borderRadius: '30px',
+    padding: '6px 20px 6px 10px',
+    display: 'flex',
+    mr: 4, 
+    alignItems: 'center',
+    width: '100%',
+    boxShadow: '0 0 8px rgba(0,0,0,0.2)', // adds a subtle glow
+  }}
+  elevation={3}
+>
+  <TextField
+    fullWidth
+    variant="standard"
+    placeholder="Search pets, products, services..."
+    value={query}
+    onChange={handleInputChange}
+    onKeyPress={(e) => {
+      if (e.key === 'Enter') handleSearch();
+    }}
+    onFocus={() => query.length > 2 && handleSearch()}
+    InputProps={{
+      disableUnderline: true,
+      startAdornment: (
+        <InputAdornment position="start">
+          <FiSearch style={{ color: 'black', fontSize: '20px' }} />
+        </InputAdornment>
+      ),
+      style: {
+        color: 'black',
+        fontSize: '16px',
+        fontWeight: 500,
+      },
+    }}
+    inputProps={{
+      style: {
+        padding: '8px 0',
+      },
+    }}
+    sx={{
+      '& .MuiInputBase-input::placeholder': {
+        color: 'black',
+        opacity: 1,
+        fontSize: '16px',
+      },
+    }}
+  />
+</Paper>
+
+
           
           {showDropdown && (
             <div className="ts-search-dropdown">
@@ -458,7 +495,7 @@ html, body {
 .ts-search-container {
   position: relative;
   margin-left: auto;
-  margin-right: 40px;
+  margin-right: 80px;
   width: 300px;
 }
 
