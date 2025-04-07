@@ -11,6 +11,7 @@ import { FaSmile } from "react-icons/fa";
 import { FaTree } from "react-icons/fa6";
 import { BsHouseHeartFill } from "react-icons/bs";
 import { RiUserFollowLine } from "react-icons/ri";
+import TransferPetButton from './TransferPetButton';
 
 const PetProfileModal = ({
   pet,
@@ -261,16 +262,6 @@ const PetProfileModal = ({
           </div>
         </div>
 
-        {posts.length > 0 && (
-          <div className="pet-profile-subsection">
-            <h4>{`Posts Featuring ${name}`}</h4>
-            <Posts
-              postImages={posts.map((p) => p.images)}
-              captions={posts.map((p) => p.caption)}
-              isCarousel={true}
-            />
-          </div>
-        )}
 
 <div className="adoption-status-box">
   <strong>Adoption Status:</strong>
@@ -565,7 +556,7 @@ const PetProfileModal = ({
             </div>
           </div>
         </div>
-
+        <TransferPetButton pet={pet} />
         <button className="close-button" onClick={onClose}>
           Close
         </button>
