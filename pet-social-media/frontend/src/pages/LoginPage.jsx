@@ -51,9 +51,8 @@ function LoginPage({ setIsLoggedIn }) {
     <div className="lg-login-page">
       <div className="lg-login-container">
       <div className="lg-grass-background">
-        <img src="/loginDog.png" alt="Cute dog" className="lg-grass-image" />
-      </div>
-
+          <div className="lg-dog-illustration"></div>
+        </div>
         <div className="lg-login-form">
           <div className="lg-form-container">
             <h2>Login</h2>

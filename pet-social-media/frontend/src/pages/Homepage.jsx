@@ -57,7 +57,7 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
   ];
 
   return (
-    <div className={`homepage-pet-card ${bgColor === 'bg-blue' ? 'homepage-bg-blue' : bgColor === 'bg-green' ? 'homepage-bg-green' : 'homepage-bg-yellow'} relative`}>
+    <div className={`homepage-pet-card ${bgColor === 'bg-blue' ? 'homepage-bg-blue' : bgColor === 'bg-green' ? 'homepage-bg-green' : bgColor === 'bg-yellow' ? 'homepage-bg-yellow' : bgColor === 'bg-purple' ? 'homepage-bg-purple' : 'homepage-bg-pink'} relative`}>
       <div className="homepage-pet-header">
         <img src={avatar} alt={user} className="homepage-pet-avatar" />
         <p className="homepage-pet-title">{user}</p>
