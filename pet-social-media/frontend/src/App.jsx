@@ -42,8 +42,27 @@ const generatePostDate = (index) => {
   });
 };
 
-function App() {
-  const [pets, setPets] = useState([
+
+function AppContent() {
+  const location = useLocation();
+  const pathname = location.pathname;
+
+  const isChatPage = pathname === '/chat';
+  const isPetShopPage = pathname === '/petshop';
+  const isSettingsPage = pathname === '/settings';
+  const isPedigreePage = pathname === '/pedigree';
+
+  const pageThemeClass = isChatPage
+    ? 'theme-chat'
+    : isPetShopPage
+    ? 'theme-petshop'
+    : isPedigreePage
+    ? 'theme-pedigree'
+    : isSettingsPage
+    ? 'theme-settings'
+    : 'theme-default';
+
+const [pets, setPets] = useState([
     {
       name: "Buddy",
       image: "/pedigree/puppy1.jpg"
@@ -57,7 +76,7 @@ function App() {
       image: "https://www.thesprucepets.com/thmb/hJ40hdpK4KZ5AehlMmVEdJr8zPI%3D/1999x1459/filters%3Afill%28auto%2C1%29/twenty20_e47b3798-dd9b-40b1-91ef-1d820337966e-5aa3f798642dca00363b0df1.jpg"
     }
   ]);
-
+    
   const [activePet, setActivePet] = useState(null);
   const [editable, setEditable] = useState(false);
   const [followedPets, setFollowedPets] = useState([]);
@@ -86,9 +105,9 @@ function App() {
   
 
   return (
-    <Router>
-      <div className="app">
-        <TopBar
+
+    <div className={`app ${pageThemeClass}`}>
+      <TopBar
           pets={pets}
           setPets={setPets}
           setActivePet={(pet) => {
@@ -98,89 +117,86 @@ function App() {
         />
         <Sidebar pets={pets} followedPets={followedPets} />
 
-        <Routes>
-          <Route path="/" element={
-            <div className="auth-content">
-              <LoginPage />
+      <Routes>
+        <Route path="/" element={
+          <div className="auth-content">
+            <LoginPage />
             </div>
           } />
-          <Route path="/signup" element={
-            <div className="auth-content">
-              <SignupPage />
+        <Route path="/signup" element={
+          <div className="auth-content">
+            <SignupPage />
             </div>
           } />
-          <Route
-            path="*"
-            element={
-              <div className="main-content">
-                <div className="content">
-                  <Routes>
-                    <Route path="/home" element={<HomePage />} />
-                    <Route
-                      path="/profile"
-                      element={
-                        <ProfilePage
-                          pets={pets}
-                          setPets={setPets}
-                          setActivePet={setActivePet}
-                        />
-                      }
-                    />
-                    <Route path="/pedigree" element={<PedigreePage />} />
-                    <Route path="/petshop" element={<PetShopPage />} />
-                    <Route path="/settings" element={<SettingsPage />} />
-                    <Route path="/chat" element={<ChatPage />} />
-                  </Routes>
-                </div>
-              </div>
-            }
-          />
-        </Routes>
+        <Route
+        path="*"
+        element={
+          <div className="main-content">
+              <Routes>
+                <Route path="/home" element={<HomePage />} />
+                <Route
+                path="/profile"
+                element={
+                <ProfilePage
+                  pets={pets}
+                  setPets={setPets}
+                  setActivePet={setActivePet}
+                   />
+                  }
+                   />
+                <Route path="/pedigree" element={<PedigreePage />} />
+                <Route path="/petshop" element={<PetShopPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/chat" element={<ChatPage />} />
+              </Routes>
+          </div>
+        } 
+        />
+      </Routes>
 
-        {activePet && (
-          <PetProfileModal
-            pet={{
-              ...activePet,
-              onHealthUpdate: (field, value) => {
-                const updated = pets.map((p) =>
-                  p.name === activePet.name ? { ...p, [field]: value } : p
-                );
-                setPets(updated);
-                setActivePet((prev) => ({ ...prev, [field]: value }));
-              },
-              onPersonalityUpdate: (field, value) => {
-                const updated = pets.map((p) =>
-                  p.name === activePet.name
-                    ? {
-                        ...p,
-                        personality: {
-                          ...p.personality,
-                          [field]: value,
-                        },
-                      }
-                    : p
-                );
-                setPets(updated);
-                setActivePet((prev) => ({
-                  ...prev,
-                  personality: {
-                    ...prev.personality,
-                    [field]: value,
-                  },
-                }));
-              },
-            }}
-            onClose={() => {
-              setActivePet(null);
-              setEditable(false);
-            }}
-            editable={editable}
-            showEditButton={true}
-            onToggleEdit={() => setEditable((prev) => !prev)}
-            posts={posts}
-          />
-        )}
-      </div>
+      {activePet && (
+        <PetProfileModal
+          pet={{
+            ...activePet,
+            onHealthUpdate: (field, value) => {
+              const updated = pets.map((p) =>
+                p.name === activePet.name ? { ...p, [field]: value } : p
+              );
+              setPets(updated);
+              setActivePet((prev) => ({ ...prev, [field]: value }));
+            },
+            onPersonalityUpdate: (field, value) => {
+              const updated = pets.map((p) =>
+                p.name === activePet.name
+                  ? {
+                      ...p,
+                      personality: {
+                        ...p.personality,
+                        [field]: value,
+                      },
+                    }
+                  : p
+              );
+              setPets(updated);
+              setActivePet((prev) => ({
+                ...prev,
+                personality: {
+                  ...prev.personality,
+                  [field]: value,
+                },
+              }));
+            },
+          }}
+          onClose={() => {
+            setActivePet(null);
+            setEditable(false);
+          }}
+          editable={editable}
+          showEditButton={true}
+          onToggleEdit={() => setEditable((prev) => !prev)}
+          posts={posts}
+        />
+      )}
 
       {/* Add CSS for auth pages */}
       <style>
@@ -277,7 +293,16 @@ function App() {
           }
         `}
       </style>
-      </Router>
+    </div>
+  );
+}
+
+// ✅ This must be OUTSIDE of AppContent
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
 

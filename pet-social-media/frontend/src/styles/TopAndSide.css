@@ -86,7 +86,7 @@
     background-color: #9DD8EA;
     color: black;
     padding: 40px 10px 20px;
-    width: 70px;
+    width: 300px;
     height: calc(100vh - 60px);
     display: flex;
     position: fixed;
@@ -105,7 +105,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     flex: 1;
 }
 
@@ -113,38 +113,71 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin: 0;
+    justify-content: flex-start;
+    width:100%
 }
 
-.ts-nav-link {
+/* Full width clickable item with hover effect */
+.ts-nav-item {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    padding: 12px 20px;
+    gap: 20px;
+    width: 80%;
     color: black;
-    font-weight: 500;
-    font-size: 12px;
-    text-align: center;
+    font-size: 18px;
     text-decoration: none;
-    gap: 10px;
-    transition: all 0.3s ease;
-}
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+  }
+  
+  .ts-nav-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .ts-nav-item.active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 
-.ts-nav-icon {
-    width: 30px;
-    height: 30px;
-    transition: all 0.3s ease;
-}
 
-.ts-nav-link:hover {
-    color: #646cff;
-    transform: translateY(-2px);
-}
-
-.ts-nav-link:hover .ts-nav-icon {
-    transform: scale(1.1);
-}
+  .ts-nav-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  /* Sidebar label text */
+  .ts-nav-label {
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: 23px;
+  }
+  
+  /* Larger profile icon */
+  .ts-profile-image-large {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid black;
+    object-fit: cover;
+  }
+  
+  /* Logout matches nav items */
+  .ts-logout-button {
+    background: none;
+    border: none;
+    font-family: 'McLaren', cursive;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+  }
+  
+  .ts-logout-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: rgb(255, 60, 63);
+  }
 
 .ts-sidebar-footer {
     margin-top: auto;
@@ -312,3 +345,66 @@ html, body {
     transform: scale(1.1);
     color: #646cff;
 }
+
+/* Default theme */
+.theme-default .ts-sidebar{
+    background-color: #a1ccfa; /* soft blue */
+  }
+  
+.theme-default .ts-topbar{
+    background-color: #7abaff; /* soft blue */
+  }
+.theme-default .main-content {
+  background-color: #e2f1ff; /* soft blue */
+}
+
+/* Chat page theme */
+.theme-chat .ts-sidebar {
+  background-color: #ffebab;
+}
+.theme-chat .ts-logo {
+    color: #000000;
+  }
+.theme-chat .ts-topbar {
+  background-color: #FFDC6A;
+}
+.theme-chat .main-content {
+  background-color: #fff4ce;
+}
+
+/* Pet Shop theme */
+.theme-petshop .ts-sidebar {
+  background-color: #D8F5B9;
+}
+.theme-petshop .ts-topbar {
+  background-color: #B9E08F;
+}
+.theme-petshop .ts-logo {
+    color: #000000;
+  }
+.theme-petshop .main-content{
+  background-color: #EFFFDD;
+}
+
+/* Settings theme */
+.theme-settings .ts-sidebar {
+  background-color: #e0ecff;
+}
+.theme-settings .ts-topbar {
+  background-color: #5e9eff;
+}
+.theme-settings .main-content{
+  background-color: #f0f6ff;
+}
+
+/* Settings theme */
+.theme-pedigree .ts-sidebar {
+    background-color: #ffc9a2;
+  }
+  .theme-pedigree .ts-topbar {
+    background-color: #FFA071;
+  }
+  .theme-pedigree .main-content{
+    background-color: #ffdcb7;
+  }
+  
