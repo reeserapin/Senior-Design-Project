@@ -81,7 +81,7 @@ const PostButton = ({ pets = [], onPost }) => {
         style={{
           background: 'none',
           border: 'none',
-          padding: '10px',
+          padding: '0px',
           cursor: 'pointer',
           borderRadius: '50%',
           transition: 'background-color 0.3s ease, transform 0.3s ease',  // Added transition
@@ -94,7 +94,7 @@ const PostButton = ({ pets = [], onPost }) => {
   className={isHoveringTennisBall ? 'bounce-hover' : ''} // Use the correct class
   style={{
     fontSize: '48px',
-    color: '#ccff00',
+    color: 'black',
   }}
 />
 
@@ -317,7 +317,7 @@ export const styles = {
   tennisBallButton: {
     background: 'none',
     border: 'none',
-    padding: '10px',
+    padding: '0px',
     cursor: 'pointer',
     borderRadius: '50%',
   },
