@@ -88,41 +88,41 @@ const PetigreePage = () => {
     function getSpotPedigreeData() {
         return [
             // 😺 Generation 0 (Grandparents)
-            { id: 1, pids: [2], name: "Shadow", title: "Grandfather", img: "/pedigree/cat1.jpg", gender: "male", weight: '12 lbs', Age: 'Died at 15 years old', Vaccinations: 'Yes', Medical_History: 'None' },
-            { id: 2, pids: [1], name: "Misty", title: "Grandmother", img: "/pedigree/cat2.jpg", gender: "female", weight: '9 lbs', Age: 'Died at 16 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 1, pids: [2], name: "Shadow", title: "Grandfather", img: "/pedigree/Oliver_dog.jpg", gender: "male", weight: '12 lbs', Age: 'Died at 15 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 2, pids: [1], name: "Misty", title: "Grandmother", img: "/pedigree/Bella_dog.jpg", gender: "female", weight: '9 lbs', Age: 'Died at 16 years old', Vaccinations: 'Yes', Medical_History: 'None' },
             
-            { id: 3, pids: [4], name: "Oliver", title: "Grandfather", img: "/pedigree/cat3.jpg", gender: "male", weight: '14 lbs', Age: 'Died at 14 years old', Vaccinations: 'Yes', Medical_History: 'Diabetes' },
-            { id: 4, pids: [3], name: "Bella", title: "Grandmother", img: "/pedigree/cat4.jpg", gender: "female", weight: '10 lbs', Age: 'Died at 17 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 3, pids: [4], name: "Oliver", title: "Grandfather", img: "/pedigree/Shadow_dog.jpeg", gender: "male", weight: '14 lbs', Age: 'Died at 14 years old', Vaccinations: 'Yes', Medical_History: 'Diabetes' },
+            { id: 4, pids: [3], name: "Bella", title: "Grandmother", img: "/pedigree/Misty_dog.jpg", gender: "female", weight: '10 lbs', Age: 'Died at 17 years old', Vaccinations: 'Yes', Medical_History: 'None' },
             
             // 😺 Generation 1 (Parents)
-            { id: 5, mid: 2, fid: 1, pids: [6], name: "Leo", title: "Father", img: "/pedigree/cat5.jpg", gender: "male", weight: '13 lbs', Age: '8 years old', Vaccinations: 'Yes', Medical_History: 'None' },
-            { id: 6, mid: 4, fid: 3, pids: [5], name: "Luna", title: "Mother", img: "/pedigree/cat6.jpg", gender: "female", weight: '11 lbs', Age: '7 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 5, mid: 2, fid: 1, pids: [6], name: "Leo", title: "Father", img: "/pedigree/dog_leo.webp", gender: "male", weight: '13 lbs', Age: '8 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 6, mid: 4, fid: 3, pids: [5], name: "Luna", title: "Mother", img: "/pedigree/Luna_dog.jpeg", gender: "female", weight: '11 lbs', Age: '7 years old', Vaccinations: 'Yes', Medical_History: 'None' },
             
             // 😺 Generation 2 (Kittens)
-            { id: 7, mid: 6, fid: 5, name: "Spot", title: "Kitten", img: "https://dogtime.com/wp-content/uploads/sites/12/2023/11/GettyImages-157603001-e1701106766955.jpg?w=1024", gender: "male", weight: '5 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
-            { id: 8, mid: 6, fid: 5, name: "Cleo", title: "Kitten", img: "/pedigree/cat8.jpg", gender: "female", weight: '4 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
-            { id: 9, mid: 6, fid: 5, name: "Simba", title: "Kitten", img: "/pedigree/cat9.jpg", gender: "male", weight: '5.5 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
-            { id: 10, mid: 6, fid: 5, name: "Nala", title: "Kitten", img: "/pedigree/cat10.jpg", gender: "female", weight: '4.5 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 7, mid: 6, fid: 5, name: "Spot", title: "Dog", img: "https://dogtime.com/wp-content/uploads/sites/12/2023/11/GettyImages-157603001-e1701106766955.jpg?w=1024", gender: "male", weight: '5 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 8, mid: 6, fid: 5, name: "Cleo", title: "Sibling", img: "/pedigree/Cleo.jpg", gender: "female", weight: '4 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 9, mid: 6, fid: 5, name: "Simba", title: "Sibling", img: "/pedigree/Simba.jpeg", gender: "male", weight: '5.5 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 10, mid: 6, fid: 5, name: "Nala", title: "Sibling", img: "/pedigree/Nala.jpg", gender: "female", weight: '4.5 lbs', Age: '6 months old', Vaccinations: 'Yes', Medical_History: 'None' },
         ];
     }
 
     function getSnowyPedigreeData() {
         return [
             // Generation 0 (Grandparents)
-            { id: 1, pids: [2], name: "Frosty", title: "Grandfather", img: "/pedigree/grandfather2.jpg", gender: "male", weight: '65 lbs', Age: 'Died at 12 years old', Vaccinations: 'Yes', Medical_History: 'None' },
-            { id: 2, pids: [1], name: "Crystal", title: "Grandmother", img: "/pedigree/Grandmother1.jpeg", gender: "female", weight: '55 lbs', Age: 'Died at 13 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 1, pids: [2], name: "Frosty", title: "Grandfather", img: "/pedigree/Frosty.jpg", gender: "male", weight: '65 lbs', Age: 'Died at 12 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 2, pids: [1], name: "Crystal", title: "Grandmother", img: "/pedigree/Crystal.jpeg", gender: "female", weight: '55 lbs', Age: 'Died at 13 years old', Vaccinations: 'Yes', Medical_History: 'None' },
             
-            { id: 3, pids: [4], name: "Glacier", title: "Grandfather", img: "/pedigree/Grandfather1.jpg", gender: "male", weight: '70 lbs', Age: 'Died at 14 years old', Vaccinations: 'Yes', Medical_History: 'None' },
-            { id: 4, pids: [3], name: "Aurora", title: "Grandmother", img: "/pedigree/Lady2.jpeg", gender: "female", weight: '58 lbs', Age: 'Died at 15 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 3, pids: [4], name: "Glacier", title: "Grandfather", img: "/pedigree/Glacier.webp", gender: "male", weight: '70 lbs', Age: 'Died at 14 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 4, pids: [3], name: "Aurora", title: "Grandmother", img: "/pedigree/Aurora.jpg", gender: "female", weight: '58 lbs', Age: 'Died at 15 years old', Vaccinations: 'Yes', Medical_History: 'None' },
             
             // Generation 1 (Parents)
-            { id: 5, mid: 2, fid: 1, pids: [6], name: "Blizzard", title: "Father", img: "/pedigree/Dad1.png", gender: "male", weight: '68 lbs', Age: '7 years old', Vaccinations: 'Yes', Medical_History: 'None' },
-            { id: 6, mid: 4, fid: 3, pids: [5], name: "Snowflake", title: "Mother", img: "/pedigree/Mom1.jpeg", gender: "female", weight: '60 lbs', Age: '6 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 5, mid: 2, fid: 1, pids: [6], name: "Blizzard", title: "Father", img: "/pedigree/Blizzard.jpeg", gender: "male", weight: '68 lbs', Age: '7 years old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 6, mid: 4, fid: 3, pids: [5], name: "Snowflake", title: "Mother", img: "/pedigree/Snowflake.webp", gender: "female", weight: '60 lbs', Age: '6 years old', Vaccinations: 'Yes', Medical_History: 'None' },
             
             // Generation 2 (Puppies)
-            { id: 7, mid: 6, fid: 5, name: "Snowy", title: "Puppy", img: "https://www.thesprucepets.com/thmb/hJ40hdpK4KZ5AehlMmVEdJr8zPI%3D/1999x1459/filters%3Afill(auto,1)/twenty20_e47b3798-dd9b-40b1-91ef-1d820337966e-5aa3f798642dca00363b0df1.jpg", gender: "male", weight: '15 lbs', Age: '4 months old', Vaccinations: 'Yes', Medical_History: 'None' },
-            { id: 8, mid: 6, fid: 5, name: "Frost", title: "Sibling", img: "/pedigree/puppy2.avif", gender: "female", weight: '13 lbs', Age: '4 months old', Vaccinations: 'Yes', Medical_History: 'None' },
-            { id: 9, mid: 6, fid: 5, name: "Ice", title: "Sibling", img: "/pedigree/puppy3.jpg", gender: "male", weight: '14 lbs', Age: '4 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 7, mid: 6, fid: 5, name: "Snowy", title: "Cat", img: "https://www.thesprucepets.com/thmb/hJ40hdpK4KZ5AehlMmVEdJr8zPI%3D/1999x1459/filters%3Afill(auto,1)/twenty20_e47b3798-dd9b-40b1-91ef-1d820337966e-5aa3f798642dca00363b0df1.jpg", gender: "male", weight: '15 lbs', Age: '4 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 8, mid: 6, fid: 5, name: "Frost", title: "Sibling", img: "/pedigree/Frost.jpeg", gender: "female", weight: '13 lbs', Age: '4 months old', Vaccinations: 'Yes', Medical_History: 'None' },
+            { id: 9, mid: 6, fid: 5, name: "Ice", title: "Sibling", img: "/pedigree/Ice.webp", gender: "male", weight: '14 lbs', Age: '4 months old', Vaccinations: 'Yes', Medical_History: 'None' },
         ];
     }
 
