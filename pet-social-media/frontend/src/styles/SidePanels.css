@@ -1,262 +1,165 @@
 .sp-side-panels {
   position: fixed;
-  right: 2%;
   top: 10vh;
-  width: min(300px, 25vw);
+  right: 2vw;
+  width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 2vh;
+  gap: 1.5rem;
   z-index: 10;
-  padding-top: 2vh;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .sp-panel {
-  background: white;
-  border-radius: 12px;
-  padding: 2%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .sp-panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem;
   cursor: pointer;
-  padding-bottom: 5px;
-  user-select: none;
-}
-
-.sp-panel-header:hover {
-  opacity: 0.8;
+  background: #acd4ff;
+  border-radius: 16px 16px 0 0;
+  font-weight: 600;
+  color: #134386;
 }
 
 .sp-panel-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-
-.sp-toggle-icon {
-  color: #666;
-  transition: transform 0.3s ease;
+  gap: 0.5rem;
+  font-size: 1rem;
 }
 
 .sp-icon {
-  font-size: 20px;
+  color: #0d4989;
+}
+
+.sp-toggle-icon {
+  color: #30445a;
+  font-size: 1rem;
 }
 
 .sp-panel-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease-out;
   opacity: 0;
+  transition: all 0.3s ease-out;
+  background: #fff;
+  padding: 0 1rem;
 }
 
 .sp-panel-content.expanded {
   max-height: 1000px;
   opacity: 1;
-  transition: max-height 0.3s ease-in, opacity 0.3s ease-in;
+  padding-bottom: 1rem;
+  transition: all 0.4s ease-in;
 }
 
-/* Pet News Styles */
-.sp-news-card {
-  background: #f8f9fa;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-top: 2vh;
-  max-height: 30vh;
-  overflow-y: auto;
-}
-
-.sp-news-image {
-  width: 100%;
-  height: 15vh;
-  object-fit: cover;
-}
-
-.sp-news-content {
-  padding: 2%;
-}
-
-.sp-news-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.sp-news-date {
-  font-size: 12px;
-  color: #666;
-  margin-bottom: 8px;
-}
-
-.sp-news-description {
-  font-size: 14px;
-  line-height: 1.4;
-  color: #333;
-}
-
-/* Missing Pets Styles */
+.sp-news-card,
 .sp-missing-pet-card {
-  background: #fff4f4;
-  border-radius: 8px;
-  overflow: visible;
-  margin-top: 2vh;
-  height: auto;
+  background: #7abaff;
+  border-radius: 12px;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  border: 1px solid #7abaff;
 }
 
-.sp-missing-pet-image {
-  width: 100%;
-  height: 18vh;
-  object-fit: cover;
-}
-
-.sp-missing-pet-info {
-  padding: 2%;
-  display: flex;
-  flex-direction: column;
-  gap: 1vh;
-  height: auto;
-}
-
+.sp-news-title,
 .sp-missing-pet-name {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #d32f2f;
+  font-weight: 600;
+  color: #7abaff;
 }
 
-.sp-missing-pet-since {
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: #333;
+.sp-news-description,
+.sp-missing-pet-since,
+.sp-missing-pet-reward {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.25rem;
 }
 
 .sp-missing-pet-reward {
-  font-size: 14px;
-  color: #d32f2f;
+  color: #7abaff;
   font-weight: bold;
 }
 
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  .sp-side-panels {
-    width: min(280px, 30vw);
-    right: 1.5%;
-  }
-  
-  .sp-panel-content.expanded {
-    max-height: 100vh;
-  }
-  
-  .sp-news-card {
-    max-height: 28vh;
-  }
-  
-  .sp-news-image {
-    height: 14vh;
-  }
-  
-  .sp-missing-pet-image {
-    height: 16vh;
-  }
-  
-  .sp-news-content,
-  .sp-missing-pet-info {
-    padding: 10px;
-  }
+.sp-news-card,
+.sp-missing-pet-card {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #d3e8ff;
+  border-radius: 12px;
+  border: 1px solid #7abaff;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .sp-side-panels {
-    width: min(250px, 35vw);
-    right: 1%;
-    top: 8vh;
-  }
-  
-  .sp-panel {
-    padding: 1.5%;
-  }
-  
-  .sp-panel-content.expanded {
-    max-height: 120vh;
-  }
-  
-  .sp-news-image {
-    height: 12vh;
-  }
-  
-  .sp-missing-pet-image {
-    height: 14vh;
-  }
-  
-  .sp-news-card {
-    max-height: 25vh;
-  }
-  
-  .sp-news-content,
-  .sp-missing-pet-info {
-    padding: 8px;
-  }
-  
-  .sp-news-title,
-  .sp-missing-pet-name {
-    font-size: 15px;
-  }
-  
-  .sp-news-description,
-  .sp-missing-pet-since,
-  .sp-missing-pet-reward {
-    font-size: 13px;
-  }
+.sp-news-image,
+.sp-missing-pet-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: all 0.3s ease;
 }
 
-@media (max-width: 480px) {
-  .sp-side-panels {
-    position: relative;
-    width: 100%;
-    right: 0;
-    top: 0;
-    padding: 1%;
-  }
-  
-  .sp-panel {
-    margin-bottom: 2vh;
-  }
-  
-  .sp-panel-content.expanded {
-    max-height: none;
-  }
-  
-  .sp-news-card {
-    max-height: none;
-  }
-  
-  .sp-news-image {
-    height: 20vh;
-  }
-  
-  .sp-missing-pet-image {
-    height: 22vh;
-  }
-  
-  .sp-news-content,
-  .sp-missing-pet-info {
-    padding: 12px;
-  }
-  
-  .sp-news-title,
-  .sp-missing-pet-name {
-    font-size: 16px;
-  }
-  
-  .sp-news-description,
-  .sp-missing-pet-since,
-  .sp-missing-pet-reward {
-    font-size: 14px;
-  }
-} 
+.sp-news-image.large,
+.sp-missing-pet-image.large {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+}
+
+.sp-news-content,
+.sp-missing-pet-info {
+  flex-grow: 1;
+}
+
+.sp-news-title,
+.sp-missing-pet-name {
+  font-weight: bold;
+  color: #0a407a;
+  font-size: 15px;
+}
+
+.sp-news-description,
+.sp-missing-pet-since,
+.sp-missing-pet-reward {
+  font-size: 13px;
+  color: #555;
+  margin-top: 0.25rem;
+}
+
+.sp-news-extra,
+.sp-missing-extra {
+  margin-top: 0.5rem;
+  font-size: 13px;
+  color: #444;
+  position: relative;
+  padding-right: 1.5rem;
+}
+
+.sp-close-icon {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  font-size: 14px;
+  color: #999;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.sp-close-icon:hover {
+  color: #e74c3c;
+  transform: scale(1.2);
+}
