@@ -58,25 +58,26 @@ export default function ChatPage() {
   const chat = allConversations[selectedCategory][selectedPerson] || [];
 
   return (
-    <Box sx={{ padding: '1rem', fontFamily: 'Segoe UI', backgroundColor: '#fff4ce', height: '90vh', display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}>
+    <Box sx={{ padding: '1rem', fontFamily: 'McLaren', backgroundColor: '#fff9e7', height: '100vh', display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}>
       {/* Header */}
-      <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#ffe682', padding: '1rem 1rem', borderRadius: 2, mb: 2, mx: 2 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#ffea97', padding: '1rem 1rem 1rem 1rem', borderRadius: 2, mb: 4,mt: 2, mx: 3, boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',  }}>
         <Typography variant="h4" fontWeight="bold">PawChat</Typography>
       </Box>
 
       {/* Body */}
-      <Box sx={{ display: 'flex', flex: 1, gap: '1.5rem', mx: 2, overflow: 'hidden' }}>
+      <Box sx={{ display: 'flex', flex: 1, gap: '2rem', mx: 3,  }}>
         {/* Sidebar */}
-        <Box sx={{ backgroundColor: '#fffef2', padding: 2, borderRadius: 3, width: 400, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <Box sx={{ backgroundColor: '#fff', padding: 2, height: '80vh', borderRadius: 3, width: 400, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '1px 2px 10px rgba(0, 0, 0, 0.1)',  }}>
           <TextField
             placeholder="Search conversations..."
             size="small"
             fullWidth
+            fontSize='30px'
             variant="outlined"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <Search sx={{ color: '#aaa' }} />
+                  <Search sx={{ color: '#aaa',  }} />
                 </InputAdornment>
               ),
               sx: {
@@ -91,14 +92,14 @@ export default function ChatPage() {
             <Button
               fullWidth
               onClick={() => { setSelectedCategory('shelters'); setSelectedPerson(Object.keys(allConversations.shelters)[0]); }}
-              sx={{ flex: 1, borderRadius: 2, fontWeight: 'bold', backgroundColor: selectedCategory === 'shelters' ? '#fde68a' : '#fff', color: '#000' }}
+              sx={{ flex: 1, borderRadius: 2, fontWeight: '600',fontSize:'20px', backgroundColor: selectedCategory === 'shelters' ? '#fde68a' : '#fff', color: '#000' }}
             >
               Shelter
             </Button>
             <Button
               fullWidth
               onClick={() => { setSelectedCategory('users'); setSelectedPerson(Object.keys(allConversations.users)[0]); }}
-              sx={{ flex: 1, borderRadius: 2, fontWeight: 'bold', backgroundColor: selectedCategory === 'users' ? '#fde68a' : '#fff', color: '#000' }}
+              sx={{ flex: 1, borderRadius: 2, fontWeight: '600',fontSize:'20px', backgroundColor: selectedCategory === 'users' ? '#fde68a' : '#fff', color: '#000' }}
             >
               Users
             </Button>
@@ -108,10 +109,10 @@ export default function ChatPage() {
             {people.map((person) => (
               <Box key={person} onClick={() => setSelectedPerson(person)}
                 sx={{ display: 'flex', alignItems: 'center', p: 1.2, borderRadius: 2, cursor: 'pointer', backgroundColor: person === selectedPerson ? '#fde68a' : '#fffef2' }}>
-                <Avatar sx={{ backgroundColor: '#fcd34d', width: 56, height: 56, fontWeight: 'bold', mr: 1 }}>{person.charAt(0)}</Avatar>
+                <Avatar sx={{ backgroundColor: '#fcd34d', width: 60, height: 60, fontWeight: 'bold', mr: 1 }}>{person.charAt(0)}</Avatar>
                 <Box>
-                  <Typography fontWeight={600} fontSize={14}>{person}</Typography>
-                  <Typography fontSize={12} color="#555">
+                  <Typography fontWeight={400} fontSize={22}>{person}</Typography>
+                  <Typography fontSize={16} color="#555">
                     {allConversations[selectedCategory][person][0]?.message.slice(0, 30)}...
                   </Typography>
                 </Box>
@@ -121,12 +122,12 @@ export default function ChatPage() {
         </Box>
 
         {/* Main Chat */}
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: '#fffef2', padding: 2, borderRadius: 3, overflow: 'hidden' }}>
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column',  height: '80vh',backgroundColor: '#fff', padding: 2, borderRadius: 3, overflow: 'hidden' , boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)', }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
-            <Avatar sx={{ backgroundColor: '#fcd34d', width: 75, height: 75, fontSize: 18 }}>{selectedPerson.charAt(0)}</Avatar>
+            <Avatar sx={{ backgroundColor: '#fcd34d', width: 80, height: 80, fontSize: 18 }}>{selectedPerson.charAt(0)}</Avatar>
             <Box>
               <Typography fontWeight={500} fontSize={30}>{selectedPerson}</Typography>
-              <Typography fontSize={17} color="#666">Active now</Typography>
+              <Typography fontSize={20} color="#666">Active now</Typography>
             </Box>
           </Box>
 
@@ -134,10 +135,10 @@ export default function ChatPage() {
 
           <Box sx={{ flex: 1, minHeight: 0, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 1.5, py: 1.5, pr: 1, scrollbarWidth: 'thin', '&::-webkit-scrollbar': { width: '6px' }, '&::-webkit-scrollbar-thumb': { backgroundColor: '#ccc', borderRadius: '4px' } }}>
             {chat.map((msg, idx) => (
-              <Box key={idx} sx={{ alignSelf: msg.sender === 'Me' ? 'flex-end' : 'flex-start', backgroundColor: msg.sender === 'Me' ? '#f2f2f2' : '#fef3c7', px: 2, py: 1.5, borderRadius: 2, maxWidth: '60%', fontSize: 20 }}>
-                <Typography>{msg.message}</Typography>
+              <Box key={idx} sx={{ alignSelf: msg.sender === 'Me' ? 'flex-end' : 'flex-start', backgroundColor: msg.sender === 'Me' ? '#f2f2f2' : '#fef3c7', px: 2, py: 1.5, borderRadius: 10, maxWidth: '60%', fontSize: 25 , padding: 3}}>
+                <Typography sx={{ fontSize: 20, }}>{msg.message}</Typography>
                 {msg.image && <img src={msg.image} alt="chat" style={{ marginTop: 6, maxWidth: 200, borderRadius: 8 }} />}
-                <Typography sx={{ fontSize: 10, color: '#888', mt: 0.5, textAlign: 'right' }}>{msg.time}</Typography>
+                <Typography sx={{ fontSize: 15, color: '#888', mt: 0.5, textAlign: 'right' }}>{msg.time}</Typography>
               </Box>
             ))}
           </Box>

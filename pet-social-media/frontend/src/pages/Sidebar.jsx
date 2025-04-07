@@ -38,56 +38,77 @@ function Sidebar() {
 
   return (
     <div className={`ts-sidebar ${isAuthPage ? 'auth-page' : ''}`}>
-      {!isAuthPage && (
-        <>
-          <Link to="/profile">
-            <img
-              src={profileImage}
-              alt="Profile"
-              className="ts-profile-image"
-            />
+  {!isAuthPage && (
+    <>
+      <Link to="/profile" className="ts-nav-item">
+        <img
+          src={profileImage}
+          alt="Profile"
+          className="ts-profile-image-large"
+        />
+        <span className="ts-nav-label">Profile</span>
+      </Link>
+
+      <ul>
+        <li>
+        <Link
+          to="/home"
+          className={`ts-nav-item ${location.pathname === '/home' ? 'active' : ''}`}
+        >
+          <FaHome className="ts-nav-icon" />
+          <span className="ts-nav-label">Home</span>
+        </Link>
+
+        </li>
+        <li>
+          <Link
+            to="/pedigree"
+            className={`ts-nav-item ${location.pathname === '/pedigree' ? 'active' : ''}`}
+          >
+            <TbBinaryTree className="ts-nav-icon" />
+            <span className="ts-nav-label">Pedigree</span>
           </Link>
-          <ul>
-            <li>
-              <Link to="/home" className="ts-nav-link">
-                <FaHome className="ts-nav-icon" />
-                <span>Home</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/pedigree" className="ts-nav-link">
-                <TbBinaryTree className="ts-nav-icon" />
-                <span>Pedigree</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/chat" className="ts-nav-link">
-                <FaComments className="ts-nav-icon" />
-                <span>Messages</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/petshop" className="ts-nav-link">
-                <FaShoppingBag className="ts-nav-icon" />
-                <span>Pet Shop</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/settings" className="ts-nav-link">
-                <FaCog className="ts-nav-icon" />
-                <span>Settings</span>
-              </Link>
-            </li>
-          </ul>
-          <div className="ts-sidebar-footer">
-            <button onClick={handleLogout} className="ts-nav-link ts-logout-link">
-              <FaSignOutAlt className="ts-nav-icon" />
-              <span>Logout</span>
-            </button>
-          </div>
-        </>
-      )}
-    </div>
+        </li>
+        <li>
+          <Link
+            to="/chat"
+            className={`ts-nav-item ${location.pathname === '/chat' ? 'active' : ''}`}
+          >
+            <FaComments className="ts-nav-icon" />
+            <span className="ts-nav-label">Messages</span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/petshop"
+            className={`ts-nav-item ${location.pathname === '/petshop' ? 'active' : ''}`}
+          >
+            <FaShoppingBag className="ts-nav-icon" />
+            <span className="ts-nav-label">Pet Shop</span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/settings"
+            className={`ts-nav-item ${location.pathname === '/settings' ? 'active' : ''}`}
+          >
+            <FaCog className="ts-nav-icon" />
+            <span className="ts-nav-label">Settings</span>
+          </Link>
+        </li>
+
+      </ul>
+
+      <div className="ts-sidebar-footer">
+        <button onClick={handleLogout} className="ts-nav-item ts-logout-button">
+          <FaSignOutAlt className="ts-nav-icon" />
+          <span className="ts-nav-label">Logout</span>
+        </button>
+      </div>
+    </>
+  )}
+</div>
+
   );
 }
 

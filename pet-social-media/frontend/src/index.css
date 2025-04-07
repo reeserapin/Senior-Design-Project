@@ -75,3 +75,18 @@ body {
 .logo {
   font-family: 'McLaren', cursive;
 }
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+.main-content {
+  margin-top: 60px;         /* leave space below the topbar */
+  margin-left: 300px;       /* leave space to the right of the sidebar */
+  height: calc(100vh - 60px); /* fill the remaining vertical space */
+  overflow-y: auto;
+  background-color: #e8faff; /* optional: match your theme */
+  padding: 20px;
+  box-sizing: border-box;
+  width:100%
+}

@@ -20,7 +20,7 @@
       "images": ["/spca/Spca_post.webp", "/spca/white-pitbull2.jpg"],
       "petNames": ["Rocky"],
       "title": "Rocky",
-      "bgColor": "bg-green",
+      "bgColor": "bg-purple",
       "comments": [
         { "username": "Polly Wyatt", "pfp": "/users/Polly_Wyatt.jpeg", "text": "Rocky deserves a loving home! 🐶" },
         { "username": "Omar Manfredo", "pfp": "/users/Omar_Manfredo.webp", "text": "Where is he located? I’d love to adopt!" }
@@ -33,7 +33,7 @@
         "images": ["/kitten_breeder/three_kittens.jpg", "/kitten_breeder/three_kittens2.jpg", "/kitten_breeder/three_kittens3.jpg"],
         "petNames": ["Kittens"],
         "title": "Kittens",
-        "bgColor": "bg-yellow",
+        "bgColor": "bg-pink",
         "comments": [
           { "username": "Subira Awa", "pfp": "/users/Subira_Awa.jpg", "text": "They are so adorable!! 💖 The one in the middle looks like my sisters cat." },
           { "username": "John Rivers", "pfp": "/users/John_Rivers.png", "text": "I am interested in getting a kitten 👀 will be reaching out soon." }
@@ -46,7 +46,7 @@
         "images": ["/furry_friends_united/black_dog_3.jpeg", "/furry_friends_united/black_dog_2.jpeg", "/furry_friends_united/black_dog_1.jpeg", "/furry_friends_united/black_dog_4.jpeg"],
         "petNames": ["Enzo"],
         "title": "Enzo",
-        "bgColor": "bg-green",
+        "bgColor": "bg-yellow",
         "comments": [
           { "username": "Polly Wyatt", "pfp": "/users/Polly_Wyatt.jpeg", "text": "Enzo looks so playful 🧸🥺" },
           { "username": "Omar Manfredo", "pfp": "/users/Omar_Manfredo.webp", "text": "Hope he finds a loving home 🏠" }
@@ -59,7 +59,7 @@
         "images": ["/doge/cute_doge.jpg", "/doge/rip_doge.jpg", "/doge/sweater_doge.jpg"],
         "petNames": ["かぼすママ"],
         "title": "かぼすママ (Kabosu Mama) Doge",
-        "bgColor": "bg-blue",
+        "bgColor": "bg-green",
         "comments": [
           { "username": "John Rivers", "pfp": "/users/John_Rivers.png", "text": "🌸 BEAUTIFUL 🌸" },
           { "username": "Laila Jackson", "pfp": "/users/Laila_Jackson.jpg", "text": "🤩🤩🤩🤩🤩🤩🤩🤩" },
