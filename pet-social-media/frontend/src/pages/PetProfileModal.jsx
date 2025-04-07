@@ -164,7 +164,7 @@ const PetProfileModal = ({
 
               <div className="pet-info-box">
                 <p>
-                  <strong>Breed:</strong>{" "}
+                  <strong>Breed: <br></br></strong>{" "}
                   {editable ? (
                     <input
                       className="pet-edit-input"
@@ -178,7 +178,7 @@ const PetProfileModal = ({
                 </p>
 
                 <p>
-                  <strong>Age:</strong>{" "}
+                  <strong>Age: <br></br></strong>{" "}
                   {editable ? (
                     <input
                       className="pet-edit-input"
@@ -192,7 +192,7 @@ const PetProfileModal = ({
                 </p>
 
                 <p>
-                  <strong>Gender:</strong>{" "}
+                  <strong>Gender: <br></br></strong>{" "}
                   {editable ? (
                     <input
                       className="pet-edit-input"
@@ -206,7 +206,7 @@ const PetProfileModal = ({
                 </p>
 
                 <p>
-                  <strong>Weight:</strong>{" "}
+                  <strong>Weight: <br></br></strong>{" "}
                   {editable ? (
                     <input
                       className="pet-edit-input"
@@ -271,7 +271,7 @@ const PetProfileModal = ({
           </div>
         )}
 
-<div className="info-item">
+<div className="adoption-status-box">
   <strong>Adoption Status:</strong>
   {editable ? (
     <select
@@ -284,9 +284,11 @@ const PetProfileModal = ({
       <option value="Fostering">Fostering</option>
     </select>
   ) : (
-    <p>{pet.adoptionStatus || "N/A"}</p>
+    <p>{pet.adoptionStatus || "Still thinking about it...."}</p>
   )}
 </div>
+
+
 
 
         <div className="pet-health-box">
@@ -486,34 +488,21 @@ const PetProfileModal = ({
                   <p>{pet.birthday || "N/A"}</p>
                 )}
               </div>
+  
               <div className="info-item">
-                <strong>Adoption Status:</strong>
-                {editable ? (
-                  <select
-                    className="pet-edit-input"
-                    defaultValue={pet.adoption_status || ""}
-                    onBlur={(e) => onHealthUpdate("adoption_status", e.target.value)}
-                  >
-                    <option value="">Select Status</option>
-                    <option value="Fostering">Fostering</option>
-                    <option value="Up for Adoption">Up for Adoption</option>
-                    <option value="A Part of My Family">A Part of My Family</option>
-                  </select>
-                ) : (
-                  <p>{pet.adoption_status || "N/A"}</p>
-                )}
-              </div>
-              <div className="info-item">
-                <strong>Dietary Preferences:</strong>
-                {editable ? (
-                  <textarea
-                    className="pet-edit-input"
-                    defaultValue={pet.dietary_preferences}
-                    onBlur={(e) => onHealthUpdate("dietary_preferences", e.target.value)}
-                  />
-                ) : (
-                  <p>{pet.dietary_preferences || "N/A"}</p>
-                )}
+  <strong>Dietary Preferences:</strong>
+  {editable ? (
+    // PetProfileModal.jsx
+<textarea
+  className="pet-edit-input"
+  value={pet.dietary_preferences || ""}  // Use `value` here, instead of `defaultValue`
+  onBlur={(e) => onHealthUpdate("dietary_preferences", e.target.value)}
+/>
+
+  ) : (
+    <p>{pet.dietary_preferences || "N/A"}</p>
+  )}
+
               </div>
               <div className="info-item">
                 <strong>Hobbies:</strong>
@@ -569,7 +558,7 @@ const PetProfileModal = ({
                     </button>
                   </div>
                 ) : (
-                  <p>{pet.lost_status === true ? "Yes" : pet.lost_status === false ? "No" : "N/A"}</p>
+                  <p>{pet.lost_status === true ? "Yes" : pet.lost_status === false ? "No" : "No"}</p>
                 )}
               </div>
             </div>
@@ -599,6 +588,16 @@ style.innerHTML =  `
 /* If you want the buttons specifically centered in the row: */
 .lost-item .toggle-options {
   justify-content: center;
+}
+
+.adoption-status-box {
+  background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px auto;
+    max-width: 90%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 
@@ -752,11 +751,27 @@ style.innerHTML =  `
     font-weight: 700;
     margin-bottom: 10px;
   }
+
+.pet-profile-modal h4, .pet-profile-modal strong {
+  font-size: 20px;  /* Match the size of the headers in other sections */
+  font-weight: 700;
+}
+
+.pet-profile-modal p, .pet-profile-modal select {
+  font-size: 16px;  /* Make sure the text inside also matches the rest of the content */
+}
+  .pet-profile-modal select {
+  font-family: 'McLaren', sans-serif;
+  border: 1px solid #ccc;
+  padding: 8px;
+  width: 90%;
+  border-radius: 8px;
+}
   
   .pet-profile-modal {
     background: #d7f4ff;
     border-radius: 40px;
-    width: 90%;
+    width: 100%;
     max-width: 900px;
     max-height: 75vh;
     overflow-y: auto;
@@ -764,7 +779,7 @@ style.innerHTML =  `
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     position: relative;
-    font-family: "Arial", sans-serif;
+    font-family: 'McLaren', sans-serif;
     z-index: 1100;
   }
   
