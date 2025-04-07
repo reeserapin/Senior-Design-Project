@@ -51,6 +51,8 @@ function AppContent() {
   const isPetShopPage = pathname === '/petshop';
   const isSettingsPage = pathname === '/settings';
   const isPedigreePage = pathname === '/pedigree';
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
   const pageThemeClass = isChatPage
     ? 'theme-chat'
@@ -115,14 +117,14 @@ const [pets, setPets] = useState([
             setEditable(false);
           }}
         />
-        <Sidebar pets={pets} followedPets={followedPets} />
+        <Sidebar pets={pets} followedPets={followedPets} setIsLoggedIn={setIsLoggedIn} />
 
       <Routes>
-        <Route path="/" element={
-          <div className="auth-content">
-            <LoginPage />
-            </div>
-          } />
+      <Route path="/" element={
+        <div className="auth-content">
+          <LoginPage setIsLoggedIn={setIsLoggedIn} />
+        </div>
+      } />
         <Route path="/signup" element={
           <div className="auth-content">
             <SignupPage />
@@ -202,16 +204,18 @@ const [pets, setPets] = useState([
       <style>
         {`
           .auth-content {
-            margin-left: 70px;
-            margin-top: 60px;
-            padding: 0;
-            height: calc(100vh - 60px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             background-color: #E8FAFF;
-            overflow: hidden;
+            z-index: 10;
           }
+
           
           /* Override any scrolling in the login/signup forms */
           .auth-content .lg-login-page {

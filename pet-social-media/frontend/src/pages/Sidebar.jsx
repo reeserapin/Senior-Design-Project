@@ -7,7 +7,7 @@ import { useUser } from '../UserContext';
 import PostButton from './PostButton';
 import '../styles/TopAndSide.css';
 
-function Sidebar({ pets, handleAddPost }) {
+function Sidebar({ pets, handleAddPost, followedPets, setIsLoggedIn }) {
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,24 +17,28 @@ function Sidebar({ pets, handleAddPost }) {
   const { profileImage } = useUser();
 
   const handleLogout = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/logout', {
-        method: 'POST',
-        credentials: 'include', // sends cookies
-      });
+
+    setIsLoggedIn(false);   // ✅ logout on frontend
+    navigate('/');          // ✅ return to login page
+
+    // try {
+    //   const response = await fetch('http://localhost:5000/logout', {
+    //     method: 'POST',
+    //     credentials: 'include', // sends cookies
+    //   });
   
-      if (response.ok) {
-        console.log('Logged out');
-        navigate('/');
-      } else {
-        const error = await response.json();
-        console.error('Logout failed:', error);
-        alert('Failed to logout. Try again.');
-      }
-    } catch (err) {
-      console.error('Logout error:', err);
-      alert('Error logging out.');
-    }
+    //   if (response.ok) {
+    //     console.log('Logged out');
+    //     navigate('/');
+    //   } else {
+    //     const error = await response.json();
+    //     console.error('Logout failed:', error);
+    //     alert('Failed to logout. Try again.');
+    //   }
+    // } catch (err) {
+    //   console.error('Logout error:', err);
+    //   alert('Error logging out.');
+    // }
   };
   
 
