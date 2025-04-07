@@ -46,11 +46,52 @@ function App() {
   const [pets, setPets] = useState([
     {
       name: "Buddy",
-      image: "/pedigree/puppy1.jpg"
+      image: "/pedigree/puppy1.jpg",
+      breed: "Labrador Retriever",
+      age: "5 Months Old",
+      gender: "Male",
+      weight: "12 kg",
+      vaccinated: true,
+      spayedNeutered: true,
+      medicalConditions: "None! Just being too cute!",
+      personality: {
+        temperament: 4,
+        energyLevel: 5,
+      },
+      lifestyle: {
+        goodWithKids: true,
+        goodWithPets: true,
+        indoorOutdoor: false,
+        pottyTrained: true,
+      },
+      favoriteActivities: "Fetching, Running",
+      bio: "Buddy is an energetic and friendly Labrador Retriever who loves to run and fetch. At just 5 months old, he's already an active and playful companion, always eager to spend time with his family. Whether he's chasing after a ball or cuddling up for a nap, Buddy brings joy to everyone around him. Adopted from a shelter, Buddy quickly became a beloved member of the family, known for his affectionate nature and love for treats. With his playful spirit and loving heart, Buddy is a true companion.",
+      galleryImages: [
+        "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/1-young-labrador-retriever-jean-louis-klein--marie-luce-hubert.jpg",
+        "https://cdn.shopify.com/s/files/1/0525/2500/7030/files/Happy_Lab_187e918c-86e2-4410-aa92-3bc573842651_1024x1024.jpg?v=1712229764",
+        "https://media.ceva.com/transform/9956d7a0-12e4-4ed4-916e-e051f3e98225/shutterstock_119485363_cropped-min",
+        "https://res.cloudinary.com/lancaster-puppies-laravel/image/upload/v1742706526/default/wslgb6xsdgdr3p5qnocp.jpg",
+        "https://img.freepik.com/premium-photo/young-purebred-puppy-labrador-retriever-sleeping-bed_508659-1573.jpg",
+        "https://barakennels.com/uploads/3/4/8/9/34899735/20240221-175845.jpg",
+        "https://i.pinimg.com/564x/ea/40/be/ea40becadbae9cd9820e70eddab37181.jpg",
+        "https://images.cdn-files-a.com/uploads/3052680/2000_5e3f1139ac4d4.jpg",
+        "https://www.snowypineswhitelabs.com/wp-content/uploads/2019/10/Crystal_5-1-1024x683.jpg",
+
+      ],
+      adoptionStory: "Buddy’s adoption story is one filled with love and hope. Found in a local shelter at just 3 months old, Buddy was a playful little puppy with a big heart, but he needed a family to call his own. When his new family walked into the shelter, it was love at first sight. Despite the uncertainty of his past, Buddy immediately bonded with them, wagging his tail and giving them all the puppy kisses they could handle. It didn’t take long for them to know that Buddy was the perfect addition to their family. He now enjoys a life full of play, adventure, and lots of love. Buddy is more than just a pet; he’s a cherished member of the family who brings joy and happiness to everyone he meets. From shelter to family, Buddy’s journey is a reminder of the transformative power of adoption.",
+      birthday: "09/01/2024",
+      adoptionStatus: "A Part of My Family",
+      dietaryPreferences: "No specific preferences",
+      hobbies: "Playing fetch",
+      likesDislikes: "Likes treats, dislikes water",
+      vetInfo: "Regular checkups every year",
+      lostStatus: false,
     },
+    // Repeat for other pets
+  
     {
       name: "Spot",
-      image: "https://dogtime.com/wp-content/uploads/sites/12/2023/11/GettyImages-157603001-e1701106766955.jpg?w=1024"
+      image: "https://www.innovetpet.com/cdn/shop/articles/29511155786_2fa0890d-ea5e-43f2-aee6-a6fa61b7e146.jpg?v=1739827007"
     },
     {
       name: "Snowy",

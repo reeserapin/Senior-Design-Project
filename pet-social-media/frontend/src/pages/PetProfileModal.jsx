@@ -120,8 +120,6 @@ const PetProfileModal = ({
 
 
 
-
-
               <img className="pet-image" src={image} alt={name} />
               {editable && (
                 <div
@@ -273,14 +271,23 @@ const PetProfileModal = ({
           </div>
         )}
 
-        {adoptionStory && (
-          <div className="pet-profile-subsection">
-            <div className="pet-adoption-story">
-              <h4>Adoption Story:</h4>
-              <p>{adoptionStory}</p>
-            </div>
-          </div>
-        )}
+<div className="info-item">
+  <strong>Adoption Status:</strong>
+  {editable ? (
+    <select
+      className="pet-edit-input"
+      value={pet.adoptionStatus}  // Make sure the value is being set correctly
+      onBlur={(e) => onHealthUpdate("adoptionStatus", e.target.value)}
+    >
+      <option value="A Part of My Family">A Part of My Family</option>
+      <option value="Up for Adoption">Up for Adoption</option>
+      <option value="Fostering">Fostering</option>
+    </select>
+  ) : (
+    <p>{pet.adoptionStatus || "N/A"}</p>
+  )}
+</div>
+
 
         <div className="pet-health-box">
           <h3>Health History</h3>
@@ -521,17 +528,17 @@ const PetProfileModal = ({
                 )}
               </div>
               <div className="info-item">
-                <strong>Likes & Dislikes:</strong>
-                {editable ? (
-                  <textarea
-                    className="pet-edit-input"
-                    defaultValue={pet.likes_dislikes}
-                    onBlur={(e) => onHealthUpdate("likes_dislikes", e.target.value)}
-                  />
-                ) : (
-                  <p>{pet.likes_dislikes || "N/A"}</p>
-                )}
-              </div>
+  <strong>Likes & Dislikes:</strong>
+  {editable ? (
+    <textarea
+      className="pet-edit-input"
+      value={pet.likesDislikes}  // Ensure value is passed
+      onBlur={(e) => onHealthUpdate("likesDislikes", e.target.value)}
+    />
+  ) : (
+    <p>{pet.likesDislikes || "N/A"}</p>
+  )}
+</div>
               <div className="info-item">
                 <strong>Vet Info:</strong>
                 {editable ? (
