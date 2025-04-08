@@ -97,7 +97,7 @@ function Sidebar({ pets, handleAddPost, followedPets, setIsLoggedIn }) {
             className={`ts-nav-item ${location.pathname === '/petshop' ? 'active' : ''}`}
           >
             <FaShoppingBag className="ts-nav-icon" />
-            <span className="ts-nav-label">Pet Shelter</span>
+            <span className="ts-nav-label">Pet Place</span>
           </Link>
 
         </li>

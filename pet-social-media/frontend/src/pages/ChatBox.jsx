@@ -247,7 +247,7 @@ export default function ChatPage() {
               sx={{ flex: 1, borderRadius: 2, fontWeight: '600',fontSize:'20px', backgroundColor: selectedCategory === 'shelters' ? '#fde68a' : '#fff', color: '#000' }}
 
             >
-              Shelters/Breeders
+              Sellers
             </Button>
             <Button
               fullWidth
