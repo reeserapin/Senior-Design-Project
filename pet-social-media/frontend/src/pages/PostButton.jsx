@@ -7,7 +7,7 @@ import { useUser } from '../UserContext';
 import { TextField, Button, Box } from '@mui/material';
 
 
-const PostButton = ({ pets = [], onPost, className }) => {
+const PostButton = ({ pets = [], onPost }) => {
   const { followedPets } = useUser();  // Access followed pets from context
 
   const [isOpen, setIsOpen] = useState(false);
@@ -76,34 +76,31 @@ const PostButton = ({ pets = [], onPost, className }) => {
   };
 
   return (
-    <div className={className}>
+    <div>
       {/* Tennis Ball Button */}
-      <div
-        onClick={(e) => {
-          e.stopPropagation();
-          setIsOpen(true);
-        }}
-        onMouseEnter={() => setIsHoveringTennisBall(true)}
-        onMouseLeave={() => setIsHoveringTennisBall(false)}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '48px',
-          height: '48px',
+      <button
+         onClick={() => setIsOpen(true)}
+         style={{
+          background: 'none',
+          border: 'none',
+          padding: '0px',
           cursor: 'pointer',
           borderRadius: '50%',
           transition: 'background-color 0.3s ease, transform 0.3s ease'
         }}
+        title="New Post"
+         onMouseEnter={() => setIsHoveringTennisBall(true)} // Trigger hover state
+         onMouseLeave={() => setIsHoveringTennisBall(false)} // Remove hover state
       >
         <IoIosTennisball
-          className={isHoveringTennisBall ? 'bounce-hover' : ''}
+          className={isHoveringTennisBall ? 'bounce-hover' : ''} // Use the correct class
           style={{
             fontSize: '48px',
             color: 'black',
           }}
         />
-      </div>
+        
+              </button>
 
       {/* Popup Modal */}
       {isOpen && ReactDOM.createPortal(

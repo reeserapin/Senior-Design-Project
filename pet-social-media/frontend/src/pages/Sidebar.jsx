@@ -57,33 +57,8 @@ function Sidebar({ pets, handleAddPost, followedPets, setIsLoggedIn }) {
 
       <ul>
 <li>
-  <div 
-    className="ts-nav-item ts-post-button-wrapper"
-    onClick={() => {
-      const tennisballIcon = document.querySelector('.ts-post-button-wrapper .post-button-inner div');
-      if (tennisballIcon) {
-        tennisballIcon.click();
-      }
-    }}
-    onMouseEnter={() => {
-      const tennisballIcon = document.querySelector('.ts-post-button-wrapper .post-button-inner div');
-      if (tennisballIcon) {
-        tennisballIcon.dispatchEvent(new Event('mouseenter'));
-      }
-    }}
-    onMouseLeave={() => {
-      const tennisballIcon = document.querySelector('.ts-post-button-wrapper .post-button-inner div');
-      if (tennisballIcon) {
-        tennisballIcon.dispatchEvent(new Event('mouseleave'));
-      }
-    }}
-    style={{ cursor: 'pointer' }}
-  >
-    <PostButton 
-      pets={pets} 
-      onPost={handleAddPost} 
-      className="post-button-inner"
-    />
+<div className="ts-nav-item ts-post-button-wrapper">
+<PostButton pets={pets} onPost={handleAddPost} />
     <span className="ts-nav-label">New Post</span>
   </div>
 </li>
