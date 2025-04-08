@@ -51,54 +51,54 @@ const captions = [
 
 const postImages = [
   [
-    "./public/posts/2_beagles.avif",
-    "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg",
-    "https://placedog.net/500/300?id=101"
+    "./public/posts/Buddy_post.jpg",
+    "./public/posts/pup1.jpg",
+    "./public/posts/pup2.jpg"
   ],
   [
-    "https://cdn2.thecatapi.com/images/c3h.jpg",
-    "https://placedog.net/500/300?id=102",
-    "https://cdn2.thecatapi.com/images/bpc.jpg"
+    "/public/posts/2_beagles.avif",
+    "/public/posts/beg1.webp",
+    "/public/posts/beg2.jpg"
   ],
   [
-    "https://placedog.net/500/300?id=103",
-    "https://cdn2.thecatapi.com/images/4uv.jpg",
-    "https://placedog.net/500/300?id=104"
+    "/public/posts/Cat_post.avif",
+    "/public/posts/purr1.webp",
+    "/public/posts/purr2.avif"
   ],
   [
-    "./public/posts/2_beagles.avif",
-    "https://placedog.net/500/300?id=105",
-    "https://cdn2.thecatapi.com/images/2oo.jpg"
+    "./public/posts/beagle_more.webp",
+    "/public/posts/beg3.jpg",
+    "/public/posts/beg4.webp"
   ],
   [
-    "https://placedog.net/500/300?id=106",
-    "https://cdn2.thecatapi.com/images/bbi.jpg",
-    "https://placedog.net/500/300?id=107"
+    "/public/posts/Buddy_post2.jpg",
+    "./public/posts/pup3.jpg",
+    "./public/posts/pup4.avif"
   ],
   [
-    "https://cdn2.thecatapi.com/images/4ui.jpg",
-    "https://placedog.net/500/300?id=108",
-    "https://cdn2.thecatapi.com/images/dqh.jpg"
+    "/public/posts/Cat_Post2.jpeg",
+    "/public/posts/purr3.jpg",
+    "/public/posts/purr4.jpeg"
   ],
   [
-    "https://placedog.net/500/300?id=109",
-    "https://cdn2.thecatapi.com/images/c8s.jpg",
-    "https://placedog.net/500/300?id=110"
+    "/public/posts/BuddyMom.jpeg",
+    "./public/posts/pup5.jpeg",
+    "./public/posts/pup6.jpg"
   ],
   [
-    "https://cdn2.thecatapi.com/images/8as.jpg",
-    "https://placedog.net/500/300?id=111",
-    "https://cdn2.thecatapi.com/images/9j5.jpg"
+    "/public/posts/Beagle_Friend2.webp",
+    "/public/posts/beg5.jpg",
+    "/public/posts/beg6.avif"
   ],
   [
-    "https://placedog.net/500/300?id=112",
-    "https://cdn2.thecatapi.com/images/MTU5MTM5Nw.jpg",
-    "https://placedog.net/500/300?id=113"
+    "/public/posts/beagleFriend.webp",
+    "/public/posts/beg1.webp",
+    "/public/posts/beg2.jpg"
   ],
   [
-    "https://cdn2.thecatapi.com/images/e36.jpg",
-    "https://placedog.net/500/300?id=114",
-    "https://cdn2.thecatapi.com/images/9fl.jpg"
+    "/public/posts/cat_dog.jpg",
+    "/public/posts/purr1.webp",
+    "/public/posts/purr2.avif"
   ]
 ];
 
