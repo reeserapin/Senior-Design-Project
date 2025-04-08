@@ -32,10 +32,10 @@ const captions = [
   "This face = instant treat 🎯",
   "Snuggle mode: activated 😴",
   "Who wore it best? 🎉",
-  "Say “cheese!” 📸",
-  "Just vibin’ in the sun ☀️",
-  "Someone’s ready for walkies 🐕",
-  "That look when it’s treat time 👀",
+  "Say cheese! 📸",
+  "Just vibin' in the sun ☀️",
+  "Someone's ready for walkies 🐕",
+  "That look when it's treat time 👀",
   "Besties forever 🐶🐱",
   "Meow or never 😼",
   "Weekend energy 💥",
@@ -51,7 +51,7 @@ const captions = [
 
 const postImages = [
   [
-    "https://placedog.net/500/300?id=100",
+    "./public/posts/2_beagles.avif",
     "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg",
     "https://placedog.net/500/300?id=101"
   ],
@@ -66,7 +66,7 @@ const postImages = [
     "https://placedog.net/500/300?id=104"
   ],
   [
-    "https://cdn2.thecatapi.com/images/MTg0NjE3OQ.jpg",
+    "./public/posts/2_beagles.avif",
     "https://placedog.net/500/300?id=105",
     "https://cdn2.thecatapi.com/images/2oo.jpg"
   ],

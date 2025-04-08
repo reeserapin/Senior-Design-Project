@@ -64,11 +64,11 @@ const SidePanels = () => {
 
   const missingPets = [
     {
-      name: "🚨 Milo (Golden Retriever)",
+      name: "🚨 Leo (Golden Retriever)",
       location: "Last seen near Hyde Park",
       reward: "Reward: $100",
-      details: "Milo is very friendly and was last wearing a blue collar. Please contact if seen!",
-      image: "/public/side-retriever.png"
+      details: "Leo is very friendly and was last wearing a blue collar. Please contact if seen!",
+      image: "/public/pedigree/grandmother2.jpg"
     },
     {
       name: "📢 Bella (Grey Tabby)",
