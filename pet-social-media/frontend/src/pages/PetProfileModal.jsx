@@ -65,6 +65,14 @@ const PetProfileModal = ({
 
   const isOwnPet = pet?.isOwnPet;
 
+  const handleTransfer = () => {
+    // Show confirmation modal
+    if (window.confirm("Are you sure you want to transfer this pet?")) {
+      // If Yes, show OTP
+      alert("OTP: 123456"); // Example OTP, replace with dynamic value
+    }
+  };
+  
 
   const handleSliderChange = (field, value) => {
     onPersonalityUpdate(field, parseInt(value));
@@ -556,7 +564,9 @@ const PetProfileModal = ({
             </div>
           </div>
         </div>
-        <TransferPetButton pet={pet} />
+        <TransferPetButton pet={pet} /> 
+
+
         <button className="close-button" onClick={onClose}>
           Close
         </button>
@@ -568,10 +578,10 @@ export default PetProfileModal;
 
 
 
-
 /* Embedded CSS */
 const style = document.createElement('style');
 style.innerHTML =  `
+
 /* Center the entire block for the lost-item */
 .lost-item {
   text-align: center; 

@@ -1,37 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';  // Importing Axios
-import { FaCheck } from 'react-icons/fa';  // For Yes button
-import { GiCrossedBones } from 'react-icons/gi';  // For No button
-import Slider from 'react-slick';  // Importing react-slick
-import 'slick-carousel/slick/slick.css';  // Slick Carousel styles
-import 'slick-carousel/slick/slick-theme.css';  // Slick Carousel theme styles
+import axios from 'axios';
+import { FaCheck } from 'react-icons/fa';
+import { GiCrossedBones } from 'react-icons/gi';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { TbTransferIn } from "react-icons/tb";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TransferPetButton = ({ pet }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showOTP, setShowOTP] = useState(false);
   const [otp, setOtp] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [people, setPeople] = useState([]);  // State to hold fetched people data
-  const [selectedPerson, setSelectedPerson] = useState(null);  // State for selected person
-  const [selectedPersonName, setSelectedPersonName] = useState(null);  // State for full name
+  const [people, setPeople] = useState([]);
+  const [selectedPerson, setSelectedPerson] = useState(null);
+  const [selectedPersonName, setSelectedPersonName] = useState(null);
+  const [hasTransferred, setHasTransferred] = useState(false);  // Track if the pet has been transferred
 
   const generateOTP = () => {
     return Math.floor(100000 + Math.random() * 900000);
   };
 
   useEffect(() => {
-    // Fetch 20 random users from the Random User Generator API
     axios.get('https://randomuser.me/api/?results=20')
       .then((response) => {
-        setPeople(response.data.results);  // Store the fetched data in the state
+        setPeople(response.data.results);
       })
       .catch((error) => {
         console.error('Error fetching user data:', error);
       });
-  }, []);  // Empty dependency array to fetch data only once on component mount
+  }, []);
 
   const handleTransferClick = () => {
-    setShowPopup(true);
+    if (!hasTransferred) {  // Only show the popup if the transfer hasn't been done
+      setShowPopup(true);
+    }
   };
 
   const handleYesClick = () => {
@@ -48,30 +53,37 @@ const TransferPetButton = ({ pet }) => {
   };
 
   const handleCloseOTP = () => {
-    setShowOTP(false);
+    setShowOTP(false);  // Close the OTP popup
+    
+    // Display success toast notification
+    if (selectedPersonName) {
+      toast.success(`You transferred your pet to ${selectedPersonName}!`);
+    }
+
+    // Mark the pet as transferred and prevent the transfer popup from appearing again
+    setHasTransferred(true);
+    setShowPopup(false);  // Close the transfer popup as well
   };
 
-  // Settings for the carousel
   const settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 5,
     focusOnSelect: true,
-    draggable: true,  // Enable mouse dragging
-    swipe: true,      // Enable swipe gestures (for touch and mouse)
-    swipeToSlide: true,  // Allow sliding to the next image by mouse scroll
+    draggable: true,
+    swipe: true,
+    swipeToSlide: true,
   };
-  
 
   const handleImageClick = (index) => {
-    setSelectedPerson(index);  // Set the selected person when image is clicked
-    setSelectedPersonName(people[index].name.first + ' ' + people[index].name.last);  // Set the full name
+    setSelectedPerson(index);
+    setSelectedPersonName(people[index].name.first + ' ' + people[index].name.last);
   };
 
   return (
     <div>
-      <button onClick={handleTransferClick}>Transfer Pet</button>
+      <button className="transfer-button" onClick={handleTransferClick}>Transfer Pet</button>
 
       {showPopup && !showOTP && (
         <div className="popup">
@@ -101,9 +113,8 @@ const TransferPetButton = ({ pet }) => {
           <div className="otp-popup-content">
             <p className="otp-text">Your OTP:</p>
             <p className="otp-number">{otp}</p>
-            <p className="otp-instructions">Send this One time Password to the account you want to send this pet to!</p>
+            <p className="otp-instructions">Send this One Time Password to the account you want to send this pet to!</p>
 
-            {/* Carousel Section for Human Names and Images */}
             <div className="carousel-section">
               <Slider {...settings}>
                 {people.map((person, index) => (
@@ -112,7 +123,7 @@ const TransferPetButton = ({ pet }) => {
                       src={person.picture.large}
                       alt={person.name.first}
                       className={`carousel-image ${selectedPerson === index ? 'selected' : ''}`}
-                      onClick={() => handleImageClick(index)}  // Handle image click
+                      onClick={() => handleImageClick(index)}
                     />
                     <p className="person-name">{person.name.first}</p>
                   </div>
@@ -120,23 +131,24 @@ const TransferPetButton = ({ pet }) => {
               </Slider>
             </div>
 
-            {/* Display selected person’s name */}
             {selectedPersonName && (
               <p className="selected-person-text">
                 You will transfer to {selectedPersonName}
               </p>
             )}
 
-            <button className="close-btn" onClick={handleCloseOTP}>Close</button>
+            <button className="close-btn" onClick={handleCloseOTP}><TbTransferIn /> Transfer!</button>
           </div>
         </div>
       )}
+
+      {/* ToastContainer to show the toast notifications */}
+      <ToastContainer position="top-center" />
     </div>
   );
 };
 
 export default TransferPetButton;
-
 
 
 
@@ -147,6 +159,21 @@ style.innerHTML =  `
   margin-top: 20px;
   width: 100%;
 }
+ .transfer-button {
+  background-color: #28a745; /* Green color */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.transfer-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
 
 .carousel-item {
   text-align: center;
@@ -156,7 +183,7 @@ style.innerHTML =  `
 .carousel-image {
    width: 80px;
   height: 80px;
-  border-radius: 50%;
+  border-radius: 50% !important;
   object-fit: cover;
   margin-bottom: 10px;
 }
@@ -172,7 +199,7 @@ style.innerHTML =  `
 }
 
 .person-name {
-  font-size: 10px;  /* Ensure the names are sized correctly */
+  font-size: 15px !important;  /* Ensure the names are sized correctly */
   font-weight: bold;
   color: #333;
   margin-top: 5px;
@@ -183,7 +210,7 @@ style.innerHTML =  `
 
 /* Styling for the selected person's name */
 .selected-person-text {
-  font-size: 13px;
+  font-size: 20px !important;
   font-weight: bold;
   margin-top: 15px;
   color: #333;
@@ -192,19 +219,19 @@ style.innerHTML =  `
 /* Existing OTP Styling */
 .otp-number {
   color: rgb(167, 40, 40); /* Darker red */
-  font-size: 50px; /* Ensure font size is set */
+  font-size: 50px !important; /* Ensure font size is set */
   font-weight: bold;
   margin: 10px 0;
 }
 
 .otp-text {
   color: #333;
-  font-size: 30px;
+  font-size: 30px !important;
 }
 
 .otp-instructions {
   color: #333;
-  font-size: 10px;
+  font-size: 20px !important;
   margin: 10px 0;
 }
 
@@ -232,7 +259,7 @@ style.innerHTML =  `
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 110%;
 }
 
 .loading-content {
