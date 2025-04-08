@@ -136,7 +136,7 @@ const PetModal = ({ pet, onClose }) => {
             {/* Shelter Info */}
             <Box display="flex" alignItems="center" gap={2}>
               <Avatar
-                src={pet.shelterImg || "/public/linkedGIRl.jpg"}
+                src={"/public/Shelter.png"}
                 alt="Shelter"
                 sx={{ width: 48, height: 48 }}
               />
