@@ -11,6 +11,7 @@ import { FaSmile } from "react-icons/fa";
 import { FaTree } from "react-icons/fa6";
 import { BsHouseHeartFill } from "react-icons/bs";
 import { RiUserFollowLine } from "react-icons/ri";
+import TransferPetButton from './TransferPetButton';
 
 const PetProfileModal = ({
   pet,
@@ -64,6 +65,14 @@ const PetProfileModal = ({
 
   const isOwnPet = pet?.isOwnPet;
 
+  const handleTransfer = () => {
+    // Show confirmation modal
+    if (window.confirm("Are you sure you want to transfer this pet?")) {
+      // If Yes, show OTP
+      alert("OTP: 123456"); // Example OTP, replace with dynamic value
+    }
+  };
+  
 
   const handleSliderChange = (field, value) => {
     onPersonalityUpdate(field, parseInt(value));
@@ -120,8 +129,6 @@ const PetProfileModal = ({
 
 
 
-
-
               <img className="pet-image" src={image} alt={name} />
               {editable && (
                 <div
@@ -166,7 +173,7 @@ const PetProfileModal = ({
 
               <div className="pet-info-box">
                 <p>
-                  <strong>Breed:</strong>{" "}
+                  <strong>Breed: <br></br></strong>{" "}
                   {editable ? (
                     <input
                       className="pet-edit-input"
@@ -180,7 +187,7 @@ const PetProfileModal = ({
                 </p>
 
                 <p>
-                  <strong>Age:</strong>{" "}
+                  <strong>Age: <br></br></strong>{" "}
                   {editable ? (
                     <input
                       className="pet-edit-input"
@@ -194,7 +201,7 @@ const PetProfileModal = ({
                 </p>
 
                 <p>
-                  <strong>Gender:</strong>{" "}
+                  <strong>Gender: <br></br></strong>{" "}
                   {editable ? (
                     <input
                       className="pet-edit-input"
@@ -208,7 +215,7 @@ const PetProfileModal = ({
                 </p>
 
                 <p>
-                  <strong>Weight:</strong>{" "}
+                  <strong>Weight: <br></br></strong>{" "}
                   {editable ? (
                     <input
                       className="pet-edit-input"
@@ -250,6 +257,7 @@ const PetProfileModal = ({
                   </button>
                 )}
               </div>
+              
             ))}
             {editable && (
               <div className="upload-photo-wrapper">
@@ -262,25 +270,26 @@ const PetProfileModal = ({
           </div>
         </div>
 
-        {posts.length > 0 && (
-          <div className="pet-profile-subsection">
-            <h4>{`Posts Featuring ${name}`}</h4>
-            <Posts
-              postImages={posts.map((p) => p.images)}
-              captions={posts.map((p) => p.caption)}
-              isCarousel={true}
-            />
-          </div>
-        )}
 
-        {adoptionStory && (
-          <div className="pet-profile-subsection">
-            <div className="pet-adoption-story">
-              <h4>Adoption Story:</h4>
-              <p>{adoptionStory}</p>
-            </div>
-          </div>
-        )}
+<div className="adoption-status-box">
+  <strong>Adoption Status:</strong>
+  {editable ? (
+    <select
+      className="pet-edit-input"
+      value={pet.adoptionStatus}  // Make sure the value is being set correctly
+      onBlur={(e) => onHealthUpdate("adoptionStatus", e.target.value)}
+    >
+      <option value="A Part of My Family">A Part of My Family</option>
+      <option value="Up for Adoption">Up for Adoption</option>
+      <option value="Fostering">Fostering</option>
+    </select>
+  ) : (
+    <p>{pet.adoptionStatus || "Still thinking about it...."}</p>
+  )}
+</div>
+
+
+
 
         <div className="pet-health-box">
           <h3>Health History</h3>
@@ -479,34 +488,21 @@ const PetProfileModal = ({
                   <p>{pet.birthday || "N/A"}</p>
                 )}
               </div>
+  
               <div className="info-item">
-                <strong>Adoption Status:</strong>
-                {editable ? (
-                  <select
-                    className="pet-edit-input"
-                    defaultValue={pet.adoption_status || ""}
-                    onBlur={(e) => onHealthUpdate("adoption_status", e.target.value)}
-                  >
-                    <option value="">Select Status</option>
-                    <option value="Fostering">Fostering</option>
-                    <option value="Up for Adoption">Up for Adoption</option>
-                    <option value="A Part of My Family">A Part of My Family</option>
-                  </select>
-                ) : (
-                  <p>{pet.adoption_status || "N/A"}</p>
-                )}
-              </div>
-              <div className="info-item">
-                <strong>Dietary Preferences:</strong>
-                {editable ? (
-                  <textarea
-                    className="pet-edit-input"
-                    defaultValue={pet.dietary_preferences}
-                    onBlur={(e) => onHealthUpdate("dietary_preferences", e.target.value)}
-                  />
-                ) : (
-                  <p>{pet.dietary_preferences || "N/A"}</p>
-                )}
+  <strong>Dietary Preferences:</strong>
+  {editable ? (
+    // PetProfileModal.jsx
+<textarea
+  className="pet-edit-input"
+  value={pet.dietary_preferences || ""}  // Use `value` here, instead of `defaultValue`
+  onBlur={(e) => onHealthUpdate("dietary_preferences", e.target.value)}
+/>
+
+  ) : (
+    <p>{pet.dietary_preferences || "N/A"}</p>
+  )}
+
               </div>
               <div className="info-item">
                 <strong>Hobbies:</strong>
@@ -521,17 +517,17 @@ const PetProfileModal = ({
                 )}
               </div>
               <div className="info-item">
-                <strong>Likes & Dislikes:</strong>
-                {editable ? (
-                  <textarea
-                    className="pet-edit-input"
-                    defaultValue={pet.likes_dislikes}
-                    onBlur={(e) => onHealthUpdate("likes_dislikes", e.target.value)}
-                  />
-                ) : (
-                  <p>{pet.likes_dislikes || "N/A"}</p>
-                )}
-              </div>
+  <strong>Likes & Dislikes:</strong>
+  {editable ? (
+    <textarea
+      className="pet-edit-input"
+      value={pet.likesDislikes}  // Ensure value is passed
+      onBlur={(e) => onHealthUpdate("likesDislikes", e.target.value)}
+    />
+  ) : (
+    <p>{pet.likesDislikes || "N/A"}</p>
+  )}
+</div>
               <div className="info-item">
                 <strong>Vet Info:</strong>
                 {editable ? (
@@ -562,12 +558,14 @@ const PetProfileModal = ({
                     </button>
                   </div>
                 ) : (
-                  <p>{pet.lost_status === true ? "Yes" : pet.lost_status === false ? "No" : "N/A"}</p>
+                  <p>{pet.lost_status === true ? "Yes" : pet.lost_status === false ? "No" : "No"}</p>
                 )}
               </div>
             </div>
           </div>
         </div>
+        <TransferPetButton pet={pet} /> 
+
 
         <button className="close-button" onClick={onClose}>
           Close
@@ -580,10 +578,10 @@ export default PetProfileModal;
 
 
 
-
 /* Embedded CSS */
 const style = document.createElement('style');
 style.innerHTML =  `
+
 /* Center the entire block for the lost-item */
 .lost-item {
   text-align: center; 
@@ -592,6 +590,16 @@ style.innerHTML =  `
 /* If you want the buttons specifically centered in the row: */
 .lost-item .toggle-options {
   justify-content: center;
+}
+
+.adoption-status-box {
+  background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px auto;
+    max-width: 90%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 
@@ -745,11 +753,27 @@ style.innerHTML =  `
     font-weight: 700;
     margin-bottom: 10px;
   }
+
+.pet-profile-modal h4, .pet-profile-modal strong {
+  font-size: 20px;  /* Match the size of the headers in other sections */
+  font-weight: 700;
+}
+
+.pet-profile-modal p, .pet-profile-modal select {
+  font-size: 16px;  /* Make sure the text inside also matches the rest of the content */
+}
+  .pet-profile-modal select {
+  font-family: 'McLaren', sans-serif;
+  border: 1px solid #ccc;
+  padding: 8px;
+  width: 90%;
+  border-radius: 8px;
+}
   
   .pet-profile-modal {
     background: #d7f4ff;
     border-radius: 40px;
-    width: 90%;
+    width: 100%;
     max-width: 900px;
     max-height: 75vh;
     overflow-y: auto;
@@ -757,7 +781,7 @@ style.innerHTML =  `
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     position: relative;
-    font-family: "Arial", sans-serif;
+    font-family: 'McLaren', sans-serif;
     z-index: 1100;
   }
   

@@ -22,7 +22,8 @@
 
 .lg-grass-background {
     flex: 1;
-    background: linear-gradient(to bottom, #9DD8EA 0%, #84BC41 100%);
+    background-image: url('/loginDog.png');
+    background-size: cover;
     position: relative;
     overflow: hidden;
 }
