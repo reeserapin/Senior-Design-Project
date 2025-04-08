@@ -166,104 +166,26 @@
     "userType": "user"
   },
   {
-    "user": "Emily Carter",
-    "avatar": "/emily/avatar.jpg",
-    "mainPetPfp": "/emily/luna.jpg",
+    "user": "Reese Rapin",
+    "avatar": "/posts/ReeseRapin.jpg",
+    "pfp": "/posts/Tinkpfp.jpg",
     "taggedPetPfps": [],
     "images": [
-      "/emily/luna_1.jpg",
-      "/emily/luna_2.jpg"
+      "/posts/Tink3.jpg",
+      "/posts/Tinker1.jpg",
+      "/posts/Tinker2.jpg"
     ],
     "petNames": [
-      "Luna"
+      "Tinker"
     ],
-    "title": "Lazy Luna ☀️",
+    "title": "Stinky Tinky 🐾",
     "bgColor": "bg-3",
     "userType": "user",
     "comments": [
       {
         "username": "Polly Wyatt",
         "pfp": "/users/Polly_Wyatt.jpeg",
-        "text": "She’s glowing!"
-      }
-    ]
-  },
-  {
-    "user": "Pet Haven Shelter",
-    "avatar": "/pethaven/logo.png",
-    "mainPetPfp": "/pethaven/pet1.jpg",
-    "taggedPetPfps": [],
-    "images": [
-      "/pethaven/post1.jpg"
-    ],
-    "petNames": [
-      "Charlie"
-    ],
-    "title": "Charlie needs a home 🏡",
-    "bgColor": "bg-1",
-    "userType": "shelter",
-    "comments": []
-  },
-  {
-    "user": "Oliver Patel",
-    "avatar": "/oliver/avatar.jpg",
-    "mainPetPfp": "/oliver/cat1.jpg",
-    "taggedPetPfps": [
-      "/oliver/cat2.jpg"
-    ],
-    "images": [
-      "/oliver/post1.jpg"
-    ],
-    "petNames": [
-      "Mochi",
-      "Boba"
-    ],
-    "title": "Mochi & Boba playing 🐱",
-    "bgColor": "bg-2",
-    "userType": "user",
-    "comments": []
-  },
-  {
-    "user": "Meow Breeders",
-    "avatar": "/meowbreeders/logo.jpg",
-    "mainPetPfp": "/meowbreeders/persian.jpg",
-    "taggedPetPfps": [
-      "/meowbreeders/tabby.jpg",
-      "/meowbreeders/calico.jpg"
-    ],
-    "images": [
-      "/meowbreeders/post1.jpg",
-      "/meowbreeders/post2.jpg"
-    ],
-    "petNames": [
-      "Snickers",
-      "Jellybean",
-      "Muffin"
-    ],
-    "title": "Persian Litter Available ✨",
-    "bgColor": "bg-3",
-    "userType": "breeder",
-    "comments": []
-  },
-  {
-    "user": "Whiskers Rescue",
-    "avatar": "/whiskers/logo.png",
-    "mainPetPfp": "/whiskers/buddy.jpg",
-    "taggedPetPfps": [],
-    "images": [
-      "/whiskers/post1.jpg"
-    ],
-    "petNames": [
-      "Buddy"
-    ],
-    "title": "Adopt Buddy ❤️",
-    "bgColor": "bg-2",
-    "userType": "shelter",
-    "comments": [
-      {
-        "username": "Laila Jackson",
-        "pfp": "/users/Laila_Jackson.jpg",
-        "text": "He looks so sweet!"
+        "text": "She’s funny!"
       }
     ]
   }
