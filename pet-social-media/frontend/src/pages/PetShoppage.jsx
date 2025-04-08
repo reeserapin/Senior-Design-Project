@@ -40,33 +40,28 @@ const PetShopPage = () => {
   const [petList, setPetList] = useState(pets);
 
   useEffect(() => {
-    const fetchImages = async () => {
-      const updatedPets = await Promise.all(pets.map(async (pet) => {
-        try {
-          const apiUrl =
-            pet.type === "Cat"
-              ? `https://api.thecatapi.com/v1/images/search?api_key=${CAT_API_KEY}`
-              : `https://api.thedogapi.com/v1/images/search?api_key=${DOG_API_KEY}`;
+    const updatedPets = pets.map((pet, i) => {
+      const folder = pet.type.toLowerCase() === "cat" ? "cats" : "dogs";
+      const index = i + 1; // or start from 31 for dogs if needed
   
-          const res = await axios.get(apiUrl);
-          const imageUrl = res.data[0].url;
+      const base = `/adoptPets/${folder}/${index}.jpg`;
+      const gallery = [
+        base,
+        `/adoptPets/${folder}/${index}_pic1.jpg`,
+        `/adoptPets/${folder}/${index}_pic2.jpg`,
+        `/adoptPets/${folder}/${index}_pic3.jpg`,
+      ];
   
-          return {
-            ...pet,
-            image: imageUrl,
-            gallery: [imageUrl, imageUrl, imageUrl] // you can fetch more if needed
-          };
-        } catch (err) {
-          console.error(`Failed to fetch image for ${pet.name}:`, err);
-          return pet;
-        }
-      }));
+      return {
+        ...pet,
+        image: base,
+        gallery,
+      };
+    });
   
-      setPetList(updatedPets);
-    };
-  
-    fetchImages();
+    setPetList(updatedPets);
   }, []);
+  
 
   const filteredPets = petList
   .filter((pet) => {
