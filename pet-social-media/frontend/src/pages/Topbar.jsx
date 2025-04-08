@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import AddPetModal from './AddPetModal';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
+import { TextField, InputAdornment, Paper, Box } from '@mui/material';
+import { GiCrossedBones } from 'react-icons/gi';
+
 
 function TopBar({ pets, setPets, setActivePet }) {
   const [query, setQuery] = useState('');
@@ -117,31 +120,70 @@ function TopBar({ pets, setPets, setActivePet }) {
 ))}
 
 
-            <div className="ts-plus-icon" onClick={() => setIsPopupOpen(true)}>
-              <FiPlusCircle size={36} />
-            </div>
+<div className="ts-plus-icon-wrapper" onClick={() => setIsPopupOpen(true)}>
+  <GiCrossedBones size={26} style={{ transform: "rotate(45deg)" }} />
+</div>
+
+
+            
           </>
         )}
       </div>
       
       {!isAuthPage && (
         <div className="ts-search-container" ref={searchRef}>
-          <div className="ts-search-wrapper">
-            <FiSearch className="ts-search-icon" />
-            <input
-              type="text"
-              placeholder="Search pets, products, services..."
-              className="ts-search-input"
-              value={query}
-              onChange={handleInputChange}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  handleSearch();
-                }
-              }}
-              onFocus={() => query.length > 2 && handleSearch()}
-            />
-          </div>
+<Paper
+  sx={{
+    backgroundColor: 'rgba(255, 255, 255, 0.5)', // more visible
+    borderRadius: '30px',
+    padding: '6px 20px 6px 10px',
+    display: 'flex',
+    mr: 4, 
+    alignItems: 'center',
+    width: '100%',
+    boxShadow: '0 0 8px rgba(0,0,0,0.2)', // adds a subtle glow
+  }}
+  elevation={3}
+>
+  <TextField
+    fullWidth
+    variant="standard"
+    placeholder="Search pets, products, services..."
+    value={query}
+    onChange={handleInputChange}
+    onKeyPress={(e) => {
+      if (e.key === 'Enter') handleSearch();
+    }}
+    onFocus={() => query.length > 2 && handleSearch()}
+    InputProps={{
+      disableUnderline: true,
+      startAdornment: (
+        <InputAdornment position="start">
+          <FiSearch style={{ color: 'black', fontSize: '20px' }} />
+        </InputAdornment>
+      ),
+      style: {
+        color: 'black',
+        fontSize: '16px',
+        fontWeight: 500,
+      },
+    }}
+    inputProps={{
+      style: {
+        padding: '8px 0',
+      },
+    }}
+    sx={{
+      '& .MuiInputBase-input::placeholder': {
+        color: 'black',
+        opacity: 1,
+        fontSize: '16px',
+      },
+    }}
+  />
+</Paper>
+
+
           
           {showDropdown && (
             <div className="ts-search-dropdown">
@@ -458,7 +500,7 @@ html, body {
 .ts-search-container {
   position: relative;
   margin-left: auto;
-  margin-right: 40px;
+  margin-right: 80px;
   width: 300px;
 }
 
@@ -618,6 +660,7 @@ html, body {
   object-fit: cover;
   border: 2px solid white;
   transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .ts-plus-icon {
@@ -627,6 +670,38 @@ html, body {
   cursor: pointer;
   color: white;
 }
+
+.ts-plus-icon:hover {
+  transform: scale(1.2);
+}
+
+.ts-plus-icon-wrapper {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8); /* semi-transparent white */
+  border: 1px solid white; /* match pet image border */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+  margin: 0 6px; /* match spacing used in .profile-link */
+}
+
+.ts-plus-icon-wrapper:hover {
+  transform: scale(1.1);
+  border: 2px solid yellow;
+}
+
+.ts-plus-icon-wrapper svg {
+  color: black;
+  width: 20px;
+  height: 20px;
+}
+
+
 
 /* Animation for pet images */
 .profile-link:hover .ts-profile-image {

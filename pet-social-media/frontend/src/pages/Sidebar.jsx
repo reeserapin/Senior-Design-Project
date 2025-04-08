@@ -56,11 +56,13 @@ function Sidebar({ pets, handleAddPost, followedPets, setIsLoggedIn }) {
       </Link>
 
       <ul>
-      <li>
-          <PostButton pets={pets} onPost={handleAddPost} />
+<li>
+  <div className="ts-nav-item ts-post-button-wrapper">
+    <PostButton pets={pets} onPost={handleAddPost} />
+    <span className="ts-nav-label">New Post</span>
+  </div>
+</li>
 
-
-          </li>
         <li>
         <Link
           to="/home"
@@ -95,7 +97,7 @@ function Sidebar({ pets, handleAddPost, followedPets, setIsLoggedIn }) {
             className={`ts-nav-item ${location.pathname === '/petshop' ? 'active' : ''}`}
           >
             <FaShoppingBag className="ts-nav-icon" />
-            <span className="ts-nav-label">Pet Shop</span>
+            <span className="ts-nav-label">Pet Shelter</span>
           </Link>
 
         </li>
