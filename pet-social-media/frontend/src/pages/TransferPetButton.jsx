@@ -181,8 +181,8 @@ style.innerHTML =  `
 }
 
 .carousel-image {
-   width: 80px;
-  height: 80px;
+   max-width: 80px;
+  max-height: 80px;
   border-radius: 50% !important;
   object-fit: cover;
   margin-bottom: 10px;

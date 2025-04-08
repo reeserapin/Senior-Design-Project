@@ -4,6 +4,8 @@ import { IoIosTennisball } from 'react-icons/io';
 import { MdAddAPhoto } from "react-icons/md";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { useUser } from '../UserContext';
+import { TextField, Button, Box } from '@mui/material';
+
 
 const PostButton = ({ pets = [], onPost }) => {
   const { followedPets } = useUser();  // Access followed pets from context
@@ -106,48 +108,55 @@ const PostButton = ({ pets = [], onPost }) => {
           <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
             <h2 style={{ marginBottom: "12px" }}>Create Post</h2>
 
-            {/* Uploaded Images Preview */}
-            <div style={styles.imageGrid}>
-              {photos.map((src, index) => (
-                <div key={index} style={styles.imageWrapper}>
-                  <img src={src} alt={`upload-${index}`} style={styles.previewImage} />
-                  <IoIosRemoveCircleOutline
-                    size={24}
-                    color="red"
-                    style={styles.deleteIcon}
-                    onClick={() => handleRemovePhoto(index)}
-                  />
-                </div>
-              ))}
-            </div>
+           {/* Upload Box */}
+          <div
+            style={{
+              ...styles.uploadBox,
+              backgroundColor: isHoveringUpload ? "#e0e0e0" : "#f9f9f9",
+            }}
+            onMouseEnter={() => setIsHoveringUpload(true)}
+            onMouseLeave={() => setIsHoveringUpload(false)}
+            onClick={() => document.getElementById('photo-upload').click()}
+          >
+            <MdAddAPhoto size={48} style={{ color: isHoveringUpload ? "#333" : "#555" }} />
+            <input
+              id="photo-upload"
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleImageUpload}
+              style={{ display: "none" }}
+            />
+          </div>
 
-            {/* Upload Box */}
-            <div
-              style={{
-                ...styles.uploadBox,
-                backgroundColor: isHoveringUpload ? "#e0e0e0" : "#f9f9f9",
-              }}
-              onMouseEnter={() => setIsHoveringUpload(true)}
-              onMouseLeave={() => setIsHoveringUpload(false)}
-              onClick={() => document.getElementById('photo-upload').click()}
-            >
-              <MdAddAPhoto size={48} style={{ color: isHoveringUpload ? "#333" : "#555" }} />
-              <input
-                id="photo-upload"
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={handleImageUpload}
-                style={{ display: "none" }}
-              />
-            </div>
+          {/* Uploaded Images Preview - move this BELOW uploadBox */}
+          <div style={styles.imageGrid}>
+            {photos.map((src, index) => (
+              <div key={index} style={styles.imageWrapper}>
+                <img src={src} alt={`upload-${index}`} style={styles.previewImage} />
+                <IoIosRemoveCircleOutline
+                  size={24}
+                  color="red"
+                  style={styles.deleteIcon}
+                  onClick={() => handleRemovePhoto(index)}
+                />
+              </div>
+            ))}
+          </div>
 
             {/* Caption */}
-            <textarea
-              placeholder="Write a caption..."
+            <TextField
+              label="Write a caption..."
+              multiline
+              fullWidth
+              rows={1}
               value={caption}
               onChange={(e) => setCaption(e.target.value)}
-              style={styles.textarea}
+              variant="outlined"
+              sx={{ borderRadius: 4, backgroundColor: "white", mb: 1 }}
+              InputProps={{
+                sx: { borderRadius: 4 },
+              }}
             />
 
             {/* Tag Your Pets - clickable images */}
@@ -195,10 +204,24 @@ const PostButton = ({ pets = [], onPost }) => {
             </div>
 
             {/* Buttons */}
-            <div style={styles.buttonRow}>
-              <button onClick={() => setIsOpen(false)} style={styles.cancel}>Cancel</button>
-              <button onClick={handleSubmit} style={styles.post}>Post</button>
-            </div>
+            <Box display="flex" justifyContent="space-between" width="100%" mt={2}>
+            <Button
+                variant="contained"
+                onClick={handleSubmit}
+                sx={{ borderRadius: 3, backgroundColor: "#636363", '&:hover': { backgroundColor: "#303030" } }}
+              >
+                Cancel
+              </Button>
+
+              <Button
+                variant="contained"
+                onClick={handleSubmit}
+                sx={{ borderRadius: 3, backgroundColor: "#2ecc71", '&:hover': { backgroundColor: "#27ae60" } }}
+              >
+                Post
+              </Button>
+            </Box>
+
           </div>
         </div>, document.getElementById('modal-root')
       )}
@@ -219,13 +242,13 @@ export const styles = {
     zIndex: 1000,
   },
   modal: {
-    backgroundColor: "#948be1",
-    padding: "20px",
+    backgroundColor: "#adbdff",
+    padding: "50px",
     borderRadius: "12px",
     width: "600px",
     maxWidth: "90vw",
     maxHeight: "90vh",
-    overflowY: "auto",
+    overflow: "hidden",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -273,7 +296,7 @@ export const styles = {
   },
   textarea: {
     padding: "10px",
-    minHeight: "80px",
+    minHeight: "50px",
     borderRadius: "8px",
     border: "1px solid #ccc",
     resize: "vertical",

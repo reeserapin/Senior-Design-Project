@@ -647,20 +647,20 @@ html, body {
 }
 
 .ts-logo {
-  font-size: 24px;
+  font-size: 29px;
   font-weight: bold;
   margin: 0;
   padding-right: 15px;
 }
 
 .ts-profile-image {
-  width: 40px;
-  height: 40px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid white;
+  border: 2px #716563;
   transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .ts-plus-icon {

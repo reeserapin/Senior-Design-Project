@@ -198,6 +198,7 @@ function ProfilePage({ pets, setPets }) {
 
   
   const [banner, setBanner] = useState(null);
+  const [originalBanner, setOriginalBanner] = useState(null);
   const [cropping, setCropping] = useState(false);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -205,7 +206,9 @@ function ProfilePage({ pets, setPets }) {
   const fileInputRef = useRef(null);
   const { profileImage, setProfileImage: setGlobalProfileImage } = useUser();
   const profileFileInputRef = useRef(null);
-  const [bio, setBio] = useState("Update Bio.");
+  const [bio, setBio] = useState(
+    "Hi, I'm Joe! I'm passionate about sharing the everyday adventures of my three fur babies — Buddy (the curious lab), Spot (the goofball beagle), and Snowy (our majestic fluffball). Whether it's a morning walk, a funny moment, or a heart-melting nap, I post it all. Join us as we explore parks, chase tennis balls, and cozy up with catnip.\n\n📍 Based in sunny California\n🎥 Creating wholesome pet content\n💬 DM for pet collabs, adoption stories, or tips!"
+  );
   const [isEditingBio, setIsEditingBio] = useState(false);
   const [activePet, setActivePet] = useState(null);
   const scrollRef = useRef(null);
@@ -231,11 +234,15 @@ function ProfilePage({ pets, setPets }) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => setBanner(reader.result);
+      reader.onload = () => {
+        setOriginalBanner(banner); // Save current banner before overwrite
+        setBanner(reader.result);
+        setCropping(true);
+      };
       reader.readAsDataURL(file);
-      setCropping(true);
     }
   };
+  
 
   const handleCropComplete = (_, croppedPixels) => {
     setCroppedAreaPixels(croppedPixels);
@@ -287,7 +294,45 @@ function ProfilePage({ pets, setPets }) {
   };
   
   
-  
+  // Add this above your ProfilePage component
+const getCroppedImg = (imageSrc, croppedAreaPixels) => {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.src = imageSrc;
+    image.crossOrigin = 'anonymous';
+
+    image.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = croppedAreaPixels.width;
+      canvas.height = croppedAreaPixels.height;
+      const ctx = canvas.getContext("2d");
+
+      ctx.drawImage(
+        image,
+        croppedAreaPixels.x,
+        croppedAreaPixels.y,
+        croppedAreaPixels.width,
+        croppedAreaPixels.height,
+        0,
+        0,
+        croppedAreaPixels.width,
+        croppedAreaPixels.height
+      );
+
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          reject(new Error("Canvas is empty"));
+          return;
+        }
+        const croppedUrl = URL.createObjectURL(blob);
+        resolve(croppedUrl);
+      }, "image/jpeg");
+    };
+
+    image.onerror = (error) => reject(error);
+  });
+};
+
 
   // Callback passed to PetProfileModal to update the followedPets state
   const handleToggleFollow = (pet, newFollowState) => {
@@ -555,9 +600,16 @@ function ProfilePage({ pets, setPets }) {
                 />
               </div>
               <div className="cropper-buttons">
-                <button className="cancel-button" onClick={() => setCropping(false)}>
-                  Cancel
-                </button>
+              <button
+                className="cancel-button"
+                onClick={() => {
+                  setBanner(originalBanner); // Restore original
+                  setCropping(false);
+                }}
+              >
+                Cancel
+              </button>
+
                 <button className="apply-button" onClick={handleApplyCrop}>
                   Apply
                 </button>
