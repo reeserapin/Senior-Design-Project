@@ -35,7 +35,7 @@ const MissingPetCard = ({ pet }) => {
         {expanded && (
           <div className="sp-missing-extra">
             <p>{pet.details}</p>
-            <FaTimes className="sp-close-icon" onClick={(e) => { e.stopPropagation(); setExpanded(false); }} />
+            <FaTimes className="sp-close-iconM" onClick={(e) => { e.stopPropagation(); setExpanded(false); }} />
           </div>
         )}
       </div>

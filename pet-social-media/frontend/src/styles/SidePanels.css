@@ -2,18 +2,18 @@
   position: fixed;
   top: 10vh;
   right: 2vw;
-  width: 400px;
+  width: 580px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
   z-index: 10;
   font-family: 'Quicksand', sans-serif;
 }
 
 .sp-panel {
   background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
   overflow: hidden;
 }
@@ -22,28 +22,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 1.25rem 1.5rem;
   cursor: pointer;
   background: #acd4ff;
-  border-radius: 16px 16px 0 0;
-  font-weight: 600;
+  border-radius: 20px 20px 0 0;
+  font-weight: 700;
+  font-size: 1.3rem;
   color: #134386;
 }
 
 .sp-panel-title {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1rem;
+  gap: 1.5rem;
+  font-size: 2.4rem;
 }
 
 .sp-icon {
   color: #0d4989;
+  margin-left: 12px;
+  font-size: 1.8rem;
 }
 
 .sp-toggle-icon {
   color: #30445a;
-  font-size: 1rem;
+  font-size: 2.2rem;
 }
 
 .sp-panel-content {
@@ -52,53 +55,25 @@
   opacity: 0;
   transition: all 0.3s ease-out;
   background: #fff;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 }
 
 .sp-panel-content.expanded {
-  max-height: 1000px;
+  max-height: 1500px;
   opacity: 1;
-  padding-bottom: 1rem;
+  padding-bottom: 1.5rem;
   transition: all 0.4s ease-in;
 }
 
 .sp-news-card,
 .sp-missing-pet-card {
-  background: #7abaff;
-  border-radius: 12px;
-  padding: 0.75rem;
-  margin-top: 1rem;
-  border: 1px solid #7abaff;
-}
-
-.sp-news-title,
-.sp-missing-pet-name {
-  font-weight: 600;
-  color: #7abaff;
-}
-
-.sp-news-description,
-.sp-missing-pet-since,
-.sp-missing-pet-reward {
-  font-size: 0.9rem;
-  color: #555;
-  margin-top: 0.25rem;
-}
-
-.sp-missing-pet-reward {
-  color: #7abaff;
-  font-weight: bold;
-}
-
-.sp-news-card,
-.sp-missing-pet-card {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  padding: 0.75rem;
   background: #d3e8ff;
-  border-radius: 12px;
+  border-radius: 14px;
+  padding: 1rem;
+  margin-top: 1.25rem;
   border: 1px solid #7abaff;
+  display: flex;
+  gap: 1.25rem;
   cursor: pointer;
   position: relative;
   transition: all 0.3s ease;
@@ -106,18 +81,18 @@
 
 .sp-news-image,
 .sp-missing-pet-image {
-  width: 50px;
-  height: 50px;
-  border-radius: 8px;
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
   object-fit: cover;
   transition: all 0.3s ease;
 }
 
 .sp-news-image.large,
 .sp-missing-pet-image.large {
-  width: 120px;
-  height: 120px;
-  border-radius: 10px;
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
 }
 
 .sp-news-content,
@@ -129,35 +104,59 @@
 .sp-missing-pet-name {
   font-weight: bold;
   color: #0a407a;
-  font-size: 15px;
+  font-size: 1.3rem;
 }
 
 .sp-news-description,
 .sp-missing-pet-since,
 .sp-missing-pet-reward {
-  font-size: 13px;
-  color: #555;
-  margin-top: 0.25rem;
+  font-size: 1.05rem;
+  color: #444;
+  margin-top: 0.5rem;
+}
+
+.sp-missing-pet-reward {
+  color: #7abaff;
+  font-weight: 700;
 }
 
 .sp-news-extra,
 .sp-missing-extra {
   margin-top: 0.5rem;
-  font-size: 13px;
-  color: #444;
+  font-size: 1rem;
+  color: #333;
   position: relative;
   padding-right: 1.5rem;
 }
 
 .sp-close-icon {
   position: absolute;
-  top: 2px;
-  right: 0;
-  font-size: 14px;
+  top: -70px;     /* inside the card, top right corner */
+  right: 0px;
+  font-size: 1.2rem;
   color: #999;
   cursor: pointer;
   transition: transform 0.2s;
+  background: white;
+  border-radius: 50%;
+  padding: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
+
+.sp-close-iconM {
+  position: absolute;
+  top: -90px;     /* inside the card, top right corner */
+  right: 0px;
+  font-size: 1.2rem;
+  color: #999;
+  cursor: pointer;
+  transition: transform 0.2s;
+  background: white;
+  border-radius: 50%;
+  padding: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
 
 .sp-close-icon:hover {
   color: #e74c3c;
