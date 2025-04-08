@@ -141,42 +141,63 @@ const PetigreePage = () => {
 
     return (
         <div>
-            <div style={{ padding: "10px", display: "flex", justifyContent: "center", gap: "20px" }}>
+            <div style={{ padding: "20px", display: "flex", justifyContent: "center", gap: "30px" }}>
                 <button 
                     onClick={() => setPetType("buddy")}
                     style={{ 
-                        padding: "8px 16px", 
+                        padding: "15px 30px", 
                         backgroundColor: petType === "buddy" ? "#FF8C00" : "#f0f0f0",
                         border: "none",
-                        borderRadius: "4px",
-                        cursor: "pointer"
+                        borderRadius: "12px",
+                        cursor: "pointer",
+                        fontSize: "18px",
+                        fontWeight: "600",
+                        color: petType === "buddy" ? "white" : "#333",
+                        boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                        transition: "all 0.3s ease",
+                        minWidth: "250px",
+                        transform: petType === "buddy" ? "scale(1.05)" : "scale(1)"
                     }}
                 >
-                    Buddy Pedigree
+                    Buddy's Family
                 </button>
                 <button 
                     onClick={() => setPetType("spot")}
                     style={{ 
-                        padding: "8px 16px", 
+                        padding: "15px 30px", 
                         backgroundColor: petType === "spot" ? "#FF8C00" : "#f0f0f0",
                         border: "none",
-                        borderRadius: "4px",
-                        cursor: "pointer"
+                        borderRadius: "12px",
+                        cursor: "pointer",
+                        fontSize: "18px",
+                        fontWeight: "600",
+                        color: petType === "spot" ? "white" : "#333",
+                        boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                        transition: "all 0.3s ease",
+                        minWidth: "250px",
+                        transform: petType === "spot" ? "scale(1.05)" : "scale(1)"
                     }}
                 >
-                    Spot Pedigree
+                    Spot's Family
                 </button>
                 <button 
                     onClick={() => setPetType("snowy")}
                     style={{ 
-                        padding: "8px 16px", 
+                        padding: "15px 30px", 
                         backgroundColor: petType === "snowy" ? "#FF8C00" : "#f0f0f0",
                         border: "none",
-                        borderRadius: "4px",
-                        cursor: "pointer"
+                        borderRadius: "12px",
+                        cursor: "pointer",
+                        fontSize: "18px",
+                        fontWeight: "600",
+                        color: petType === "snowy" ? "white" : "#333",
+                        boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                        transition: "all 0.3s ease",
+                        minWidth: "250px",
+                        transform: petType === "snowy" ? "scale(1.05)" : "scale(1)"
                     }}
                 >
-                    Snowy Pedigree
+                    Snowy's Family
                 </button>
             </div>
             <div id="tree" ref={treeRef} style={{ width: "100%", height: "90vh" }}></div>
