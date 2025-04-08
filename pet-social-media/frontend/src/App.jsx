@@ -112,7 +112,7 @@ const [pets, setPets] = useState([
   
     {
       name: "Spot",
-      image: "https://www.innovetpet.com/cdn/shop/articles/29511155786_2fa0890d-ea5e-43f2-aee6-a6fa61b7e146.jpg?v=1739827007",
+      image: "https://dogtime.com/wp-content/uploads/sites/12/2023/11/GettyImages-157603001-e1701106766955.jpg?w=1024",
       breed: "Beagle",
     age: "3 Years Old",
     gender: "Female",

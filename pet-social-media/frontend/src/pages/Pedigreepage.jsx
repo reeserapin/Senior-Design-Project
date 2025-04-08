@@ -20,7 +20,6 @@ const PetigreePage = () => {
                 field_0: "name",
                 field_1: "title",
                 img_0: "img",
-                img_1: "circleImg"
             },
             nodeSize: { width: 180, height: 180 },
             enableHTMLContent: true,
