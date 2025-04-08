@@ -286,6 +286,33 @@
     margin-left: 70px;
 }
 
+/* Wrap PostButton to align like other icons */
+.ts-post-button-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  width: 80%;
+}
+
+/* Make sure the actual PostButton fits in */
+.ts-post-button-wrapper button {
+  background: none;
+  border: none;
+  padding: 0px;
+  margin: 0;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ts-nav-icon-post {
+  width: 40px;
+  height: 40px;
+}
+
 /* Responsiveness */
 @media (max-width: 768px) {
     .ts-sidebar {

@@ -1,262 +1,164 @@
 .sp-side-panels {
   position: fixed;
-  right: 2%;
   top: 10vh;
-  width: min(300px, 25vw);
+  right: 2vw;
+  width: 580px;
   display: flex;
   flex-direction: column;
-  gap: 2vh;
+  gap: 2rem;
   z-index: 10;
-  padding-top: 2vh;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .sp-panel {
-  background: white;
-  border-radius: 12px;
-  padding: 2%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .sp-panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1.25rem 1.5rem;
   cursor: pointer;
-  padding-bottom: 5px;
-  user-select: none;
-}
-
-.sp-panel-header:hover {
-  opacity: 0.8;
+  background: #acd4ff;
+  border-radius: 20px 20px 0 0;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #134386;
 }
 
 .sp-panel-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-
-.sp-toggle-icon {
-  color: #666;
-  transition: transform 0.3s ease;
+  gap: 1.5rem;
+  font-size: 2.4rem;
 }
 
 .sp-icon {
-  font-size: 20px;
+  color: #0d4989;
+  margin-left: 12px;
+  font-size: 1.8rem;
+}
+
+.sp-toggle-icon {
+  color: #30445a;
+  font-size: 2.2rem;
 }
 
 .sp-panel-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease-out;
   opacity: 0;
+  transition: all 0.3s ease-out;
+  background: #fff;
+  padding: 0 1.5rem;
 }
 
 .sp-panel-content.expanded {
-  max-height: 1000px;
+  max-height: 1500px;
   opacity: 1;
-  transition: max-height 0.3s ease-in, opacity 0.3s ease-in;
+  padding-bottom: 1.5rem;
+  transition: all 0.4s ease-in;
 }
 
-/* Pet News Styles */
-.sp-news-card {
-  background: #f8f9fa;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-top: 2vh;
-  max-height: 30vh;
-  overflow-y: auto;
-}
-
-.sp-news-image {
-  width: 100%;
-  height: 15vh;
-  object-fit: cover;
-}
-
-.sp-news-content {
-  padding: 2%;
-}
-
-.sp-news-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.sp-news-date {
-  font-size: 12px;
-  color: #666;
-  margin-bottom: 8px;
-}
-
-.sp-news-description {
-  font-size: 14px;
-  line-height: 1.4;
-  color: #333;
-}
-
-/* Missing Pets Styles */
+.sp-news-card,
 .sp-missing-pet-card {
-  background: #fff4f4;
-  border-radius: 8px;
-  overflow: visible;
-  margin-top: 2vh;
-  height: auto;
-}
-
-.sp-missing-pet-image {
-  width: 100%;
-  height: 18vh;
-  object-fit: cover;
-}
-
-.sp-missing-pet-info {
-  padding: 2%;
+  background: #d3e8ff;
+  border-radius: 14px;
+  padding: 1rem;
+  margin-top: 1.25rem;
+  border: 1px solid #7abaff;
   display: flex;
-  flex-direction: column;
-  gap: 1vh;
-  height: auto;
+  gap: 1.25rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
+.sp-news-image,
+.sp-missing-pet-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.sp-news-image.large,
+.sp-missing-pet-image.large {
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+}
+
+.sp-news-content,
+.sp-missing-pet-info {
+  flex-grow: 1;
+}
+
+.sp-news-title,
 .sp-missing-pet-name {
-  font-size: 16px;
   font-weight: bold;
-  margin-bottom: 8px;
-  color: #d32f2f;
+  color: #0a407a;
+  font-size: 1.3rem;
 }
 
-.sp-missing-pet-since {
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: #333;
+.sp-news-description,
+.sp-missing-pet-since,
+.sp-missing-pet-reward {
+  font-size: 1.05rem;
+  color: #444;
+  margin-top: 0.5rem;
 }
 
 .sp-missing-pet-reward {
-  font-size: 14px;
-  color: #d32f2f;
-  font-weight: bold;
+  color: #7abaff;
+  font-weight: 700;
 }
 
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  .sp-side-panels {
-    width: min(280px, 30vw);
-    right: 1.5%;
-  }
-  
-  .sp-panel-content.expanded {
-    max-height: 100vh;
-  }
-  
-  .sp-news-card {
-    max-height: 28vh;
-  }
-  
-  .sp-news-image {
-    height: 14vh;
-  }
-  
-  .sp-missing-pet-image {
-    height: 16vh;
-  }
-  
-  .sp-news-content,
-  .sp-missing-pet-info {
-    padding: 10px;
-  }
+.sp-news-extra,
+.sp-missing-extra {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+  position: relative;
+  padding-right: 1.5rem;
 }
 
-@media (max-width: 768px) {
-  .sp-side-panels {
-    width: min(250px, 35vw);
-    right: 1%;
-    top: 8vh;
-  }
-  
-  .sp-panel {
-    padding: 1.5%;
-  }
-  
-  .sp-panel-content.expanded {
-    max-height: 120vh;
-  }
-  
-  .sp-news-image {
-    height: 12vh;
-  }
-  
-  .sp-missing-pet-image {
-    height: 14vh;
-  }
-  
-  .sp-news-card {
-    max-height: 25vh;
-  }
-  
-  .sp-news-content,
-  .sp-missing-pet-info {
-    padding: 8px;
-  }
-  
-  .sp-news-title,
-  .sp-missing-pet-name {
-    font-size: 15px;
-  }
-  
-  .sp-news-description,
-  .sp-missing-pet-since,
-  .sp-missing-pet-reward {
-    font-size: 13px;
-  }
+.sp-close-icon {
+  position: absolute;
+  top: -70px;     /* inside the card, top right corner */
+  right: 0px;
+  font-size: 1.2rem;
+  color: #999;
+  cursor: pointer;
+  transition: transform 0.2s;
+  background: white;
+  border-radius: 50%;
+  padding: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-@media (max-width: 480px) {
-  .sp-side-panels {
-    position: relative;
-    width: 100%;
-    right: 0;
-    top: 0;
-    padding: 1%;
-  }
-  
-  .sp-panel {
-    margin-bottom: 2vh;
-  }
-  
-  .sp-panel-content.expanded {
-    max-height: none;
-  }
-  
-  .sp-news-card {
-    max-height: none;
-  }
-  
-  .sp-news-image {
-    height: 20vh;
-  }
-  
-  .sp-missing-pet-image {
-    height: 22vh;
-  }
-  
-  .sp-news-content,
-  .sp-missing-pet-info {
-    padding: 12px;
-  }
-  
-  .sp-news-title,
-  .sp-missing-pet-name {
-    font-size: 16px;
-  }
-  
-  .sp-news-description,
-  .sp-missing-pet-since,
-  .sp-missing-pet-reward {
-    font-size: 14px;
-  }
-} 
+.sp-close-iconM {
+  position: absolute;
+  top: -90px;     /* inside the card, top right corner */
+  right: 0px;
+  font-size: 1.2rem;
+  color: #999;
+  cursor: pointer;
+  transition: transform 0.2s;
+  background: white;
+  border-radius: 50%;
+  padding: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+
+.sp-close-icon:hover {
+  color: #e74c3c;
+  transform: scale(1.2);
+}

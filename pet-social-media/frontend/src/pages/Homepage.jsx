@@ -7,7 +7,7 @@ import postsData from "../pages/posts.json";
 import { useUser } from "../UserContext";
 import "../styles/Homepage.css";
 
-const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
+const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments, petNames }) => {
   const [activePanel, setActivePanel] = useState(null); // null, 'comments', 'share', or 'report'
   const [commentList, setCommentList] = useState(comments);
   const [newComment, setNewComment] = useState("");
@@ -57,54 +57,55 @@ const PetPost = ({ user, avatar, pfp, images, title, bgColor, comments }) => {
   ];
 
   return (
-    <div className={`homepage-pet-card ${bgColor === 'bg-blue' ? 'homepage-bg-blue' : bgColor === 'bg-green' ? 'homepage-bg-green' : bgColor === 'bg-yellow' ? 'homepage-bg-yellow' : bgColor === 'bg-purple' ? 'homepage-bg-purple' : 'homepage-bg-pink'} relative`}>
-      <div className="homepage-pet-header">
-        <img src={avatar} alt={user} className="homepage-pet-avatar" />
-        <p className="homepage-pet-title">{user}</p>
+    <div className={`homepage-pet-card ${bgColor === 'bg-1' ? 'homepage-bg-1' : bgColor === 'bg-2' ? 'homepage-bg-2' : bgColor === 'bg-3' ? 'homepage-bg-3' : 'homepage-bg-2'} relative`}>
+  
+      {/* TOP BANNER */}
+      <div className="homepage-post-banner">
+      <div className="homepage-post-banner-left">
+        <div className="homepage-avatar-stack">
+        <img src={Array.isArray(pfp) ? pfp[0] : pfp} className="homepage-post-main-pfp" />
+          <img src={avatar} alt="User" className="homepage-post-user-avatar" />
+        </div>
+        <div className="homepage-post-names">
+          <p className="homepage-post-petname">{petNames?.[0]}</p>
+          <p className="homepage-post-username">{user}</p>
+        </div>
       </div>
 
-      <div className="homepage-pet-content-box">
-        <div className="homepage-pet-info">
-          <div className="homepage-pet-pfp-container">
-            {Array.isArray(pfp) ? (
-              pfp.map((pic, index) => (
-                <img key={index} src={pic} alt={`pfp-${index}`} className="homepage-pet-pfp" />
-              ))
-            ) : (
-              <img src={pfp} alt={title} className="homepage-pet-pfp" />
-            )}
+  
+        {/* Additional Tagged Pets */}
+        {Array.isArray(pfp) && pfp.length > 1 && (
+          <div className="homepage-post-tagged-pets">
+            {pfp.slice(1).map((pic, index) => (
+              <img key={index} src={pic} className="homepage-post-tagged-pfp" alt="Tagged Pet" />
+            ))}
           </div>
-          <p className="homepage-pet-title">{title}</p>
-        </div>
-
-        <div className="homepage-image-container">
-          {images.length > 1 && <button className="homepage-image-nav left" onClick={prevImage}><FaArrowLeft /></button>}
-          <img src={images[currentImageIndex]} alt={title} className="homepage-pet-image" />
-          {images.length > 1 && <button className="homepage-image-nav right" onClick={nextImage}><FaArrowRight /></button>}
-        </div>
+        )}
       </div>
-
-      <div className="homepage-pet-actions">
-        <FaPaw className={`homepage-pet-icon ${liked ? "homepage-text-red-500" : "homepage-text-gray-500"}`} onClick={toggleLike} />
-        <FaComment className={`homepage-pet-icon ${activePanel === 'comments' ? 'homepage-text-blue-500' : ''}`} onClick={toggleComments} />
-        <FaPaperPlane className={`homepage-pet-icon ${activePanel === 'share' ? 'homepage-text-blue-500' : ''}`} onClick={toggleShare} />
+  
+      {/* IMAGE SECTION FULL WIDTH */}
+      <div className="homepage-image-full-container">
+        {images.length > 1 && <button className="homepage-image-nav left" onClick={prevImage}><FaArrowLeft /></button>}
+        <img src={images[currentImageIndex]} alt={title} className="homepage-full-image" />
+        {images.length > 1 && <button className="homepage-image-nav right" onClick={nextImage}><FaArrowRight /></button>}
+      </div>
+  
+      {/* BOTTOM BANNER */}
+      <div className="homepage-post-actions-bar">
+        <div className="homepage-post-left-icons">
+          <FaPaw className={`homepage-pet-icon ${liked ? "homepage-text-red-500" : "homepage-text-gray-500"}`} onClick={toggleLike} />
+          <FaComment className={`homepage-pet-icon ${activePanel === 'comments' ? 'homepage-text-blue-500' : ''}`} onClick={toggleComments} />
+          <FaPaperPlane className={`homepage-pet-icon ${activePanel === 'share' ? 'homepage-text-blue-500' : ''}`} onClick={toggleShare} />
+        </div>
+  
+        <p className="homepage-post-user-label">{title}</p>
+        <div className="homepage-post-right-icons">
         <FaFlag className={`homepage-pet-icon ${activePanel === 'report' ? 'homepage-text-blue-500' : 'homepage-text-gray-500'}`} onClick={toggleReport} />
-      </div>
-
-      {activePanel === 'share' && (
-        <SharePopup 
-          users={users} 
-          onShare={handleShare} 
-          onClose={() => setActivePanel(null)} 
-        />
-      )}
-
-      {activePanel === 'report' && (
-        <ReportMenu 
-          onClose={() => setActivePanel(null)} 
-        />
-      )}
-
+        </div></div>
+  
+      {/* Popups */}
+      {activePanel === 'share' && <SharePopup users={users} onShare={handleShare} onClose={() => setActivePanel(null)} />}
+      {activePanel === 'report' && <ReportMenu onClose={() => setActivePanel(null)} />}
       {activePanel === 'comments' && (
         <div className="homepage-comment-section">
           <form onSubmit={handleCommentSubmit} className="homepage-comment-form">
