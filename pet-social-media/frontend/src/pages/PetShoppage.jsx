@@ -14,84 +14,17 @@ import {
   CardMedia,
   CardContent,
   Grid,
+  Slider
 } from "@mui/material";
 import PetModal from "./PetModal";
 import ListPetModal from "./ListPetModal";
+import pets from "/public/adoptPets/adoptPets.json"; 
+import axios from "axios";
+import { useEffect } from "react";
 
-const pets = [
-  {
-    id: 1,
-    name: "Autumn",
-    breed: "British Shorthair",
-    age: 2,
-    type: "Cat",
-    distance: "2.5 miles away",
-    image: "/public/golden_retriever_pfp.jpg",
-  },
-  {
-    id: 2,
-    name: "Rufus",
-    breed: "Shitzu",
-    age: 5,
-    type: "Dog",
-    distance: "4 miles away",
-    image: "/public/pedigree/puppy1.jpg",
-  },
-  {
-    id: 3,
-    name: "Neo",
-    breed: "Turkish Angora",
-    age: 2,
-    type: "Cat",
-    distance: "5.5 miles away",
-    image: "/public/kitten_breeder/three_kittens3.jpg",
-  },
-  {
-    id: 4,
-    name: "Autumn",
-    breed: "British Shorthair",
-    age: 2,
-    type: "Cat",
-    distance: "2.5 miles away",
-    image: "/public/golden_retriever_pfp.jpg",
-  },
-  {
-    id: 5,
-    name: "Rufus",
-    breed: "Shitzu",
-    age: 5,
-    type: "Dog",
-    distance: "4 miles away",
-    image: "/public/kitten_breeder/three_kittens2.jpg",
-  },
-  {
-    id: 6,
-    name: "Neo",
-    breed: "Turkish Angora",
-    age: 2,
-    type: "Cat",
-    distance: "5.5 miles away",
-    image: "/public/kitten_breeder/three_kittens2.jpg",
-  },
-  {
-    id: 5,
-    name: "Rufus",
-    breed: "Shitzu",
-    age: 5,
-    type: "Dog",
-    distance: "4 miles away",
-    image: "/public/kitten_breeder/three_kittens2.jpg",
-  },
-  {
-    id: 6,
-    name: "Neo",
-    breed: "Turkish Angora",
-    age: 2,
-    type: "Cat",
-    distance: "5.5 miles away",
-    image: "/public/kitten_breeder/three_kittens2.jpg",
-  },
-];
+const CAT_API_KEY = "live_ZzOakiOgSDcO6JTtdgXG9TBTAuI9z2Q7QOXDDJkYuUcmfuIOlUR0DdbKEO30qui7";
+const DOG_API_KEY = "live_YZqOd7eQTWB8Xzy4rgbbODc6BdMABR33Tj3mv4ExyrFNJsOYXtbi5hFKILLl0mWR";
+
 
 const PetShopPage = () => {
   const [search, setSearch] = useState("");
@@ -103,7 +36,60 @@ const PetShopPage = () => {
   const [sortBy, setSortBy] = useState("Newest Posted");
   const [breed, setBreed] = useState("");
   const [age, setAge] = useState("");
-  const [location, setLocation] = useState("");
+  const [maxDistance, setMaxDistance] = useState(15); // max 10 miles default
+  const [petList, setPetList] = useState(pets);
+
+  useEffect(() => {
+    const updatedPets = pets.map((pet, i) => {
+      const folder = pet.type.toLowerCase() === "cat" ? "cats" : "dogs";
+      const index = i + 1; // or start from 31 for dogs if needed
+  
+      const base = `/adoptPets/${folder}/${index}.jpg`;
+      const gallery = [
+        base,
+        `/adoptPets/${folder}/${index}_pic1.jpg`,
+        `/adoptPets/${folder}/${index}_pic2.jpg`,
+        `/adoptPets/${folder}/${index}_pic3.jpg`,
+      ];
+  
+      return {
+        ...pet,
+        image: base,
+        gallery,
+      };
+    });
+  
+    setPetList(updatedPets);
+  }, []);
+  
+
+  const filteredPets = petList
+  .filter((pet) => {
+    return (
+      (species === "All" || pet.type === species) &&
+      (size === "All" || pet.size === size) &&
+      (gender === "All" || pet.gender === gender) &&
+      (breed === "" || pet.breed.toLowerCase().includes(breed.toLowerCase())) &&
+      (age === "" || pet.age === Number(age)) &&
+      parseFloat(pet.distance) <= maxDistance &&
+      (search === "" || pet.name.toLowerCase().includes(search.toLowerCase()))
+    );
+  })
+  .sort((a, b) => {
+    switch (sortBy) {
+      case "Age Ascending":
+        return a.age - b.age;
+      case "Age Descending":
+        return b.age - a.age;
+      case "Oldest":
+        return a.id - b.id;
+      case "Newest Posted":
+      default:
+        return b.id - a.id;
+    }
+  });
+
+
 
 
   return (
@@ -231,18 +217,18 @@ const PetShopPage = () => {
             }}
           />
 
-          <TextField
-            label="Location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            variant="outlined"
-            size="small"
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                borderRadius: '8px',
-              },
-            }}
-          />
+          <Typography gutterBottom>Max Distance: {maxDistance} miles</Typography>
+          <Box px={1}>
+            <Slider
+              value={maxDistance}
+              onChange={(e, val) => setMaxDistance(val)}
+              valueLabelDisplay="auto"
+              step={0.5}
+              min={0}
+              max={15}
+            />
+          </Box>
+
 
           {/* ✅ Reset Button */}
           <Button
@@ -254,7 +240,7 @@ const PetShopPage = () => {
               setSortBy("Newest Posted");
               setBreed("");
               setAge("");
-              setLocation("");
+              setMaxDistance(15);
               setSearch("");
             }}
             sx={{
@@ -283,7 +269,7 @@ const PetShopPage = () => {
             gap: 4,
           }}
         >
-          {pets.map((pet) => (
+          {filteredPets.map((pet) => (
             <Card
               key={pet.id}
               onClick={() => setSelectedPet(pet)}
@@ -339,7 +325,24 @@ const PetShopPage = () => {
       </Box>
 
       {selectedPet && <PetModal pet={selectedPet} onClose={() => setSelectedPet(null)} />}
-      {showListModal && <ListPetModal onClose={() => setShowListModal(false)} />}
+      {showListModal && (
+        <ListPetModal
+          onClose={() => setShowListModal(false)}
+          onSubmit={(newPet) => {
+            const newPetEntry = {
+              ...newPet,
+              id: Date.now(), // unique ID
+              distance: "0 miles away",
+              image: newPet.adoption_images?.[0] || "",
+              gallery: newPet.adoption_images || [],
+            };
+
+            setPetList((prev) => [newPetEntry, ...prev]);
+            setShowListModal(false);
+          }}
+        />
+      )}
+
     </Box>
   );
 };

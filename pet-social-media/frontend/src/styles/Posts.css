@@ -15,15 +15,25 @@
   .post-card.carousel {
     min-width: 300px;
     max-width: 300px;
+    height: 200px;            /* 🔒 consistent height */
     scroll-snap-align: start;
     flex-shrink: 0;
     border-radius: 18px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   
+  
   .post-card.carousel .post-image {
-    height: 200px;
-    object-fit: cover;
+  
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 12px;
+    
+    
   }
   
   .post-card.carousel .post-info {
@@ -44,3 +54,33 @@
     margin-top: 4px;
     color: gray;
   }
+  
+  .tagged-pets-row {
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+  }
+  
+  .tagged-pet-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    box-shadow: 0 0 0 2px white;
+  }
+  
+  
+  .tagged-pet-icon:first-child {
+    margin-left: 0;
+    z-index: 3;
+  }
+  
+  .tagged-pet-icon:nth-child(2) {
+    z-index: 2;
+  }
+  
+  .tagged-pet-icon:nth-child(3) {
+    z-index: 1;
+  }
+  

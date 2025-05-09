@@ -4,9 +4,11 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaHome, FaCheckCircle, FaComments, FaShoppingBag, FaCog, FaUser, FaSignOutAlt } from 'react-icons/fa';
 import { TbBinaryTree } from 'react-icons/tb';
 import { useUser } from '../UserContext';
+import PostButton from './PostButton';
 import '../styles/TopAndSide.css';
 
-function Sidebar() {
+function Sidebar({ pets, handleAddPost, followedPets, setIsLoggedIn }) {
+
   const navigate = useNavigate();
   const location = useLocation();
   const isLoginPage = location.pathname === '/';
@@ -15,24 +17,28 @@ function Sidebar() {
   const { profileImage } = useUser();
 
   const handleLogout = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/logout', {
-        method: 'POST',
-        credentials: 'include', // sends cookies
-      });
+
+    setIsLoggedIn(false);   // ✅ logout on frontend
+    navigate('/');          // ✅ return to login page
+
+    // try {
+    //   const response = await fetch('http://localhost:5000/logout', {
+    //     method: 'POST',
+    //     credentials: 'include', // sends cookies
+    //   });
   
-      if (response.ok) {
-        console.log('Logged out');
-        navigate('/');
-      } else {
-        const error = await response.json();
-        console.error('Logout failed:', error);
-        alert('Failed to logout. Try again.');
-      }
-    } catch (err) {
-      console.error('Logout error:', err);
-      alert('Error logging out.');
-    }
+    //   if (response.ok) {
+    //     console.log('Logged out');
+    //     navigate('/');
+    //   } else {
+    //     const error = await response.json();
+    //     console.error('Logout failed:', error);
+    //     alert('Failed to logout. Try again.');
+    //   }
+    // } catch (err) {
+    //   console.error('Logout error:', err);
+    //   alert('Error logging out.');
+    // }
   };
   
 
@@ -50,6 +56,13 @@ function Sidebar() {
       </Link>
 
       <ul>
+<li>
+<div className="ts-nav-item ts-post-button-wrapper">
+<PostButton pets={pets} onPost={handleAddPost} />
+    <span className="ts-nav-label">New Post</span>
+  </div>
+</li>
+
         <li>
         <Link
           to="/home"
@@ -84,8 +97,9 @@ function Sidebar() {
             className={`ts-nav-item ${location.pathname === '/petshop' ? 'active' : ''}`}
           >
             <FaShoppingBag className="ts-nav-icon" />
-            <span className="ts-nav-label">Pet Shop</span>
+            <span className="ts-nav-label">Pet Place</span>
           </Link>
+
         </li>
         <li>
           <Link

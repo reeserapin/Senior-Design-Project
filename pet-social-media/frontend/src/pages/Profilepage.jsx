@@ -11,6 +11,7 @@ import { useUser } from "../UserContext";
 import { GiCrossedBones } from "react-icons/gi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from "react";
 
 
 // Helper function for generating post dates
@@ -31,10 +32,10 @@ const captions = [
   "This face = instant treat 🎯",
   "Snuggle mode: activated 😴",
   "Who wore it best? 🎉",
-  "Say “cheese!” 📸",
-  "Just vibin’ in the sun ☀️",
-  "Someone’s ready for walkies 🐕",
-  "That look when it’s treat time 👀",
+  "Say cheese! 📸",
+  "Just vibin' in the sun ☀️",
+  "Someone's ready for walkies 🐕",
+  "That look when it's treat time 👀",
   "Besties forever 🐶🐱",
   "Meow or never 😼",
   "Weekend energy 💥",
@@ -50,54 +51,54 @@ const captions = [
 
 const postImages = [
   [
-    "https://placedog.net/500/300?id=100",
-    "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg",
-    "https://placedog.net/500/300?id=101"
+    "./public/posts/Buddy_post.jpg",
+    "./public/posts/pup1.jpg",
+    "./public/posts/pup2.jpg"
   ],
   [
-    "https://cdn2.thecatapi.com/images/c3h.jpg",
-    "https://placedog.net/500/300?id=102",
-    "https://cdn2.thecatapi.com/images/bpc.jpg"
+    "/public/posts/2_beagles.avif",
+    "/public/posts/beg1.webp",
+    "/public/posts/beg2.jpg"
   ],
   [
-    "https://placedog.net/500/300?id=103",
-    "https://cdn2.thecatapi.com/images/4uv.jpg",
-    "https://placedog.net/500/300?id=104"
+    "/public/posts/Cat_post.avif",
+    "/public/posts/purr1.webp",
+    "/public/posts/purr2.avif"
   ],
   [
-    "https://cdn2.thecatapi.com/images/MTg0NjE3OQ.jpg",
-    "https://placedog.net/500/300?id=105",
-    "https://cdn2.thecatapi.com/images/2oo.jpg"
+    "./public/posts/beagle_more.webp",
+    "/public/posts/beg3.jpg",
+    "/public/posts/beg4.webp"
   ],
   [
-    "https://placedog.net/500/300?id=106",
-    "https://cdn2.thecatapi.com/images/bbi.jpg",
-    "https://placedog.net/500/300?id=107"
+    "/public/posts/Buddy_post2.jpg",
+    "./public/posts/pup3.jpg",
+    "./public/posts/pup4.avif"
   ],
   [
-    "https://cdn2.thecatapi.com/images/4ui.jpg",
-    "https://placedog.net/500/300?id=108",
-    "https://cdn2.thecatapi.com/images/dqh.jpg"
+    "/public/posts/Cat_Post2.jpeg",
+    "/public/posts/purr3.jpg",
+    "/public/posts/purr4.jpeg"
   ],
   [
-    "https://placedog.net/500/300?id=109",
-    "https://cdn2.thecatapi.com/images/c8s.jpg",
-    "https://placedog.net/500/300?id=110"
+    "/public/posts/BuddyMom.jpeg",
+    "./public/posts/pup5.jpeg",
+    "./public/posts/pup6.jpg"
   ],
   [
-    "https://cdn2.thecatapi.com/images/8as.jpg",
-    "https://placedog.net/500/300?id=111",
-    "https://cdn2.thecatapi.com/images/9j5.jpg"
+    "/public/posts/Beagle_Friend2.webp",
+    "/public/posts/beg5.jpg",
+    "/public/posts/beg6.avif"
   ],
   [
-    "https://placedog.net/500/300?id=112",
-    "https://cdn2.thecatapi.com/images/MTU5MTM5Nw.jpg",
-    "https://placedog.net/500/300?id=113"
+    "/public/posts/beagleFriend.webp",
+    "/public/posts/beg1.webp",
+    "/public/posts/beg2.jpg"
   ],
   [
-    "https://cdn2.thecatapi.com/images/e36.jpg",
-    "https://placedog.net/500/300?id=114",
-    "https://cdn2.thecatapi.com/images/9fl.jpg"
+    "/public/posts/cat_dog.jpg",
+    "/public/posts/purr1.webp",
+    "/public/posts/purr2.avif"
   ]
 ];
 
@@ -173,7 +174,31 @@ const initialFollowedPets = [
 ];
 
 function ProfilePage({ pets, setPets }) {
+  const [userPosts, setUserPosts] = useState(
+    postImages.map((images, index) => {
+      // Always include one random own pet
+      const randomOwnPet = pets[Math.floor(Math.random() * pets.length)];
+  
+      // Randomly pick 0–2 followed pets
+      const shuffledFollowed = [...initialFollowedPets].sort(() => 0.5 - Math.random());
+      const followedCount = Math.random() < 0.6 ? Math.floor(Math.random() * 3) : 0; // 60% chance of tagging followed pets
+      const followedSelections = shuffledFollowed.slice(0, followedCount);
+  
+      return {
+        images,
+        caption: captions[index % captions.length],
+        date: generatePostDate(index),
+        taggedPets: [randomOwnPet],
+        taggedFollowedPets: followedSelections,
+      };
+    })
+  );
+  
+  
+
+  
   const [banner, setBanner] = useState(null);
+  const [originalBanner, setOriginalBanner] = useState(null);
   const [cropping, setCropping] = useState(false);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -181,7 +206,9 @@ function ProfilePage({ pets, setPets }) {
   const fileInputRef = useRef(null);
   const { profileImage, setProfileImage: setGlobalProfileImage } = useUser();
   const profileFileInputRef = useRef(null);
-  const [bio, setBio] = useState("Update Bio.");
+  const [bio, setBio] = useState(
+    "Hi, I'm Joe! I'm passionate about sharing the everyday adventures of my three fur babies — Buddy (the curious lab), Spot (the goofball beagle), and Snowy (our majestic fluffball). Whether it's a morning walk, a funny moment, or a heart-melting nap, I post it all. Join us as we explore parks, chase tennis balls, and cozy up with catnip.\n\n📍 Based in sunny California\n🎥 Creating wholesome pet content\n💬 DM for pet collabs, adoption stories, or tips!"
+  );
   const [isEditingBio, setIsEditingBio] = useState(false);
   const [activePet, setActivePet] = useState(null);
   const scrollRef = useRef(null);
@@ -189,10 +216,12 @@ function ProfilePage({ pets, setPets }) {
   const [username, setUsername] = useState("Joe Schmoe");
   const [isEditingName, setIsEditingName] = useState(false);
   const [editable, setEditable] = useState(false);
+  const { followedPets, setFollowedPets } = useUser();
 
-  // State for followed pets
-  const [followedPets, setFollowedPets] = useState(initialFollowedPets);
-
+  useEffect(() => {
+    setFollowedPets(initialFollowedPets);
+  }, []);
+  
   const scrollLeft = () => {
     scrollRef.current.scrollBy({ left: -150, behavior: "smooth" });
   };
@@ -205,11 +234,15 @@ function ProfilePage({ pets, setPets }) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => setBanner(reader.result);
+      reader.onload = () => {
+        setOriginalBanner(banner); // Save current banner before overwrite
+        setBanner(reader.result);
+        setCropping(true);
+      };
       reader.readAsDataURL(file);
-      setCropping(true);
     }
   };
+  
 
   const handleCropComplete = (_, croppedPixels) => {
     setCroppedAreaPixels(croppedPixels);
@@ -243,6 +276,64 @@ function ProfilePage({ pets, setPets }) {
     setShowAddModal(false);
   };
 
+  const handleAddPost = (newPost) => {
+    setUserPosts((prevPosts) => [
+      {
+        images: newPost.images,
+        caption: newPost.caption,
+        taggedPets: newPost.taggedPets || [],
+        taggedFollowedPets: newPost.taggedFollowedPets || [],
+        date: new Date().toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        }),
+      },
+      ...prevPosts,
+    ]);
+  };
+  
+  
+  // Add this above your ProfilePage component
+const getCroppedImg = (imageSrc, croppedAreaPixels) => {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.src = imageSrc;
+    image.crossOrigin = 'anonymous';
+
+    image.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = croppedAreaPixels.width;
+      canvas.height = croppedAreaPixels.height;
+      const ctx = canvas.getContext("2d");
+
+      ctx.drawImage(
+        image,
+        croppedAreaPixels.x,
+        croppedAreaPixels.y,
+        croppedAreaPixels.width,
+        croppedAreaPixels.height,
+        0,
+        0,
+        croppedAreaPixels.width,
+        croppedAreaPixels.height
+      );
+
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          reject(new Error("Canvas is empty"));
+          return;
+        }
+        const croppedUrl = URL.createObjectURL(blob);
+        resolve(croppedUrl);
+      }, "image/jpeg");
+    };
+
+    image.onerror = (error) => reject(error);
+  });
+};
+
+
   // Callback passed to PetProfileModal to update the followedPets state
   const handleToggleFollow = (pet, newFollowState) => {
     if (!newFollowState) {
@@ -262,7 +353,8 @@ function ProfilePage({ pets, setPets }) {
 
   return (
     <div className="profile-container">
-      <Sidebar />
+      <Sidebar pets={pets} followedPets={followedPets} handleAddPost={handleAddPost} />
+
       <ToastContainer position="top-center" autoClose={2000} />
       <main className="profile-main">
         <div className="profile-banner-container">
@@ -295,7 +387,7 @@ function ProfilePage({ pets, setPets }) {
               <div className="stat-label">Following</div>
             </div>
             <div className="stat-circle">
-              <div className="stat-number">308</div>
+              <div className="stat-number">13</div>
               <div className="stat-label">Posts</div>
             </div>
           </div>
@@ -425,7 +517,7 @@ function ProfilePage({ pets, setPets }) {
 
         <div className="your-posts-section">
           <h2>Your Posts</h2>
-          <Posts postImages={postImages} captions={captions} />
+          <Posts posts={userPosts} />
         </div>
 
         {activePet && (
@@ -508,9 +600,16 @@ function ProfilePage({ pets, setPets }) {
                 />
               </div>
               <div className="cropper-buttons">
-                <button className="cancel-button" onClick={() => setCropping(false)}>
-                  Cancel
-                </button>
+              <button
+                className="cancel-button"
+                onClick={() => {
+                  setBanner(originalBanner); // Restore original
+                  setCropping(false);
+                }}
+              >
+                Cancel
+              </button>
+
                 <button className="apply-button" onClick={handleApplyCrop}>
                   Apply
                 </button>

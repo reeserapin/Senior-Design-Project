@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { FaTimes, FaPlus } from "react-icons/fa";
 
-const ListPetModal = ({ onClose }) => {
+const ListPetModal = ({ onClose, onSubmit }) => {
   const [formData, setFormData] = useState({
     name: "",
     tag: "",
@@ -56,9 +56,15 @@ const ListPetModal = ({ onClose }) => {
   };
 
   const handleSubmit = () => {
-    console.log("Submitted:", formData);
+    if (!formData.name || !formData.type || !formData.age || !formData.breed) {
+      alert("Please fill out at least name, species, breed, and age.");
+      return;
+    }
+  
+    onSubmit(formData);
     onClose();
   };
+  
 
   return (
     <Modal open onClose={onClose}>
@@ -70,7 +76,7 @@ const ListPetModal = ({ onClose }) => {
           transform: "translate(-50%, -50%)",
           width: "95%",
           maxWidth: 1200,
-          bgcolor: "#fff",
+          bgcolor: "#f8fff1",
           borderRadius: 3,
           boxShadow: 24,
           p: 4,
@@ -86,60 +92,92 @@ const ListPetModal = ({ onClose }) => {
         <Box display="flex" gap={4} mt={2}>
           {/* LEFT COLUMN - IMAGE SECTION */}
           <Box width="30%">
-            <Box sx={{ backgroundColor: "#eee", borderRadius: 2, p: 2 }}>
+          <Box sx={{ backgroundColor: "#d5f8c7", borderRadius: 2, p: 2 }}>
+            <Box
+              sx={{
+                width: "100%",
+                aspectRatio: "1 / 1",
+                position: "relative",
+                borderRadius: 2,
+                border: mainImage ? "2px solid #ccc" : "2px dashed #aaa",
+                overflow: "hidden",
+                cursor: "pointer",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              onClick={() => document.getElementById("mainImageInput").click()}
+            >
               {mainImage ? (
                 <Box
                   component="img"
                   src={mainImage}
                   alt="Main"
-                  sx={{ width: "100%", aspectRatio: "1 / 1", borderRadius: 2, border: "2px solid #ccc" }}
+                  sx={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               ) : (
-                <Box
+                <FaPlus style={{ fontSize: "2rem", color: "#777" }} />
+              )}
+            </Box>
+
+            {/* 🔁 Triggered when clicking image or + icon */}
+            <input
+              id="mainImageInput"
+              type="file"
+              multiple
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleImageUpload}
+            />
+
+            {/* ➕ Add More Button */}
+            {mainImage && (
+              <Box mt={2} display="flex" justifyContent="center">
+                <IconButton
+                  onClick={() => document.getElementById("mainImageInput").click()}
                   sx={{
-                    width: "100%",
-                    aspectRatio: "1 / 1",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: 2,
-                    border: "2px dashed #aaa",
-                    fontSize: "2rem",
-                    color: "#777",
+                    backgroundColor: "#ddd",
+                    width: 40,
+                    height: 40,
+                    borderRadius: "50%",
+                    "&:hover": { backgroundColor: "#ccc" },
                   }}
                 >
                   <FaPlus />
-                </Box>
-              )}
-              <input type="file" multiple onChange={handleImageUpload} style={{ marginTop: 10 }} />
-              <Box mt={2} display="flex" gap={1} flexWrap="wrap">
-                {formData.adoption_images.map((img, i) => (
-                  <Box
-                    key={i}
-                    component="img"
-                    src={img}
-                    alt={`Gallery ${i}`}
-                    sx={{ width: 60, height: 60, objectFit: "cover", borderRadius: 1, border: "1px solid #ccc" }}
-                  />
-                ))}
+                </IconButton>
               </Box>
+            )}
+
+            {/* Gallery thumbnails */}
+            <Box mt={2} display="flex" gap={1} flexWrap="wrap">
+              {formData.adoption_images.map((img, i) => (
+                <Box
+                  key={i}
+                  component="img"
+                  src={img}
+                  alt={`Gallery ${i}`}
+                  sx={{ width: 60, height: 60, objectFit: "cover", borderRadius: 1, border: "1px solid #ccc" }}
+                />
+              ))}
             </Box>
           </Box>
+        </Box>
+
 
           {/* MIDDLE COLUMN - Text Fields */}
           <Box width="30%" display="flex" flexDirection="column" gap={2}>
-            <TextField label="Name" name="name" value={formData.name} onChange={handleChange} fullWidth />
-            <TextField label="Tag" name="tag" value={formData.tag} onChange={handleChange} fullWidth />
-            <FormControl fullWidth>
+            <TextField label="Name" name="name" value={formData.name} onChange={handleChange} fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}/>
+            <TextField label="Tag" name="tag" value={formData.tag} onChange={handleChange} fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}/>
+            <FormControl fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}>
               <InputLabel>Species</InputLabel>
               <Select name="type" value={formData.type} onChange={handleChange}>
                 <MenuItem value="Dog">Dog</MenuItem>
                 <MenuItem value="Cat">Cat</MenuItem>
               </Select>
             </FormControl>
-            <TextField label="Email" name="contact_email" value={formData.contact_email} onChange={handleChange} fullWidth />
-            <TextField label="Phone" name="contact_phone" value={formData.contact_phone} onChange={handleChange} fullWidth />
-            <TextField label="Location" name="location" value={formData.location} onChange={handleChange} fullWidth />
+            <TextField label="Email" name="contact_email" value={formData.contact_email} onChange={handleChange} fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}/>
+            <TextField label="Phone" name="contact_phone" value={formData.contact_phone} onChange={handleChange} fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}/>
+            <TextField label="Location" name="location" value={formData.location} onChange={handleChange} fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}/>
           </Box>
 
           {/* RIGHT COLUMN - About + Grid */}
@@ -152,12 +190,13 @@ const ListPetModal = ({ onClose }) => {
               fullWidth
               multiline
               rows={2}
+              sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}
             />
             <Grid container spacing={2}>
-              <Grid item xs={6}><TextField label="Age" name="age" value={formData.age} onChange={handleChange} fullWidth /></Grid>
-              <Grid item xs={6}><TextField label="Breed" name="breed" value={formData.breed} onChange={handleChange} fullWidth /></Grid>
+              <Grid item xs={6}><TextField label="Age" name="age" value={formData.age} onChange={handleChange} fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}/></Grid>
+              <Grid item xs={6}><TextField label="Breed" name="breed" value={formData.breed} onChange={handleChange} fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}/></Grid>
               <Grid item xs={6}>
-              <FormControl fullWidth>
+              <FormControl fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}>
                 <InputLabel>Gender</InputLabel>
                 <Select
                     name="gender"
@@ -173,7 +212,7 @@ const ListPetModal = ({ onClose }) => {
 
               </Grid>
               <Grid item xs={6}>
-              <FormControl fullWidth>
+              <FormControl fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}>
                 <InputLabel>Size</InputLabel>
                 <Select
                     name="size"
@@ -189,8 +228,8 @@ const ListPetModal = ({ onClose }) => {
 
 
               </Grid>
-              <Grid item xs={6}><TextField label="Color" name="color" value={formData.color} onChange={handleChange} fullWidth /></Grid>
-              <Grid item xs={6}><TextField label="Vaccination Status" name="status" value={formData.status} onChange={handleChange} fullWidth /></Grid>
+              <Grid item xs={6}><TextField label="Color" name="color" value={formData.color} onChange={handleChange} fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}/></Grid>
+              <Grid item xs={6}><TextField label="Vaccination Status" name="status" value={formData.status} onChange={handleChange} fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}/></Grid>
             </Grid>
             <Box mt={2}>
               <Button
@@ -199,7 +238,7 @@ const ListPetModal = ({ onClose }) => {
                 sx={{
                   backgroundColor: "#000",
                   color: "#fff",
-                  borderRadius: 2,
+                  borderRadius: 4,
                   fontWeight: "bold",
                   textTransform: "none",
                   '&:hover': { backgroundColor: "#333" },
